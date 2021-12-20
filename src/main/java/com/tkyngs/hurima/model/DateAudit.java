@@ -3,7 +3,6 @@ package com.tkyngs.hurima.model;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,17 +22,12 @@ import java.time.Instant;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@Data
 @JsonSerialize
 @JsonIgnoreProperties(
-        ignoreUnknown = false,
         allowGetters = true,
         value = {"created_at", "updated_at"})
 @JsonAutoDetect
-public abstract class BaseModel implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1145141919810L;
+public abstract class DateAudit implements Serializable {
 
     @CreatedDate
     @Column(name = "created_at")
@@ -42,5 +36,21 @@ public abstract class BaseModel implements Serializable {
     @LastModifiedDate
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
 }

@@ -28,6 +28,14 @@ public class DatabaseConfig {
         config.addDataSourceProperty("url", dataSourceProperties.getUrl());
         if (dataSourceProperties.getUsername() != null) {
             config.addDataSourceProperty("user", dataSourceProperties.getUsername());
+        } else {
+            config.addDataSourceProperty("user", "");
+        }
+
+        if (dataSourceProperties.getPassword() != null) {
+            config.addDataSourceProperty("password", dataSourceProperties.getPassword());
+        } else {
+            config.addDataSourceProperty("password", "");
         }
 
         return new HikariDataSource(config);

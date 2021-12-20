@@ -1,0 +1,3 @@
+## DTOs
+
+- No business logic!

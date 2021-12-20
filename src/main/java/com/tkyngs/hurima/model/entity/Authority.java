@@ -1,6 +1,8 @@
-package com.tkyngs.hurima.model.domain;
+package com.tkyngs.hurima.model.entity;
 
-import com.tkyngs.hurima.model.BaseModel;
+import com.tkyngs.hurima.model.DateAudit;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +19,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "authority")
-public class Authority extends BaseModel {
+@Getter
+@Setter
+public class Authority extends DateAudit {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,14 +30,6 @@ public class Authority extends BaseModel {
     @Id
     @Column(length = 20)
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public boolean equals(Object o) {
