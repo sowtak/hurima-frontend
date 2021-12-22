@@ -6,10 +6,9 @@ server:
 spring:
   datasource:
     name: hurimadb
-    url: jdbc:mysql://localhost:3306/hurimadb?allowPublicKeyRetrieval=true
-    username: root
+    url: jdbc:postgresql://localhost:5432/hurimadb?allowPublicKeyRetrieval=true
+    username: postgres
     password: password
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
     hikari:
       connection-timeout: 50000
@@ -18,14 +17,16 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 10
       pool-name: ConnPool
-      connection-test-query: select 1 from dual
 
   jpa:
     show-sql: true  #
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    locations: classpath:db/migration
 
   jmx:
     enabled: true
