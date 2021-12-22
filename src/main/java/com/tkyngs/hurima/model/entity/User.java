@@ -26,11 +26,15 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @SequenceGenerator(
+            name = "user_id_seq",
+            sequenceName = "user_id_seq",
+            initialValue = 4,
+            allocationSize = 3
+    )
+    private Long id;
 
-    @Email
     @Size(min = 8, max = 128)
     @Column(length = 30, unique = true, nullable = false)
     private String email;
