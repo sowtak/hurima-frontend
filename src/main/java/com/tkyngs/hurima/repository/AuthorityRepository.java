@@ -1,6 +1,6 @@
 package com.tkyngs.hurima.repository;
 
-import com.tkyngs.hurima.model.entity.Role;
+import com.tkyngs.hurima.model.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

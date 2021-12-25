@@ -1,19 +1,21 @@
 package com.tkyngs.hurima.controller;
 
-import com.tkyngs.hurima.model.domain.RoleName;
-import com.tkyngs.hurima.model.entity.Role;
+import com.tkyngs.hurima.model.domain.Role;
+import com.tkyngs.hurima.model.dto.payload.response.AuthResponse;
 import com.tkyngs.hurima.model.entity.User;
-import com.tkyngs.hurima.model.payload.request.LoginRequest;
-import com.tkyngs.hurima.model.payload.request.SignUpRequest;
-import com.tkyngs.hurima.model.payload.response.ApiResponse;
-import com.tkyngs.hurima.model.payload.response.JwtAuthResponse;
+import com.tkyngs.hurima.model.dto.payload.request.LoginRequest;
+import com.tkyngs.hurima.model.dto.payload.request.SignUpRequest;
+import com.tkyngs.hurima.model.dto.payload.response.ApiResponse;
+import com.tkyngs.hurima.model.dto.payload.response.JwtAuthResponse;
 import com.tkyngs.hurima.repository.AuthorityRepository;
 import com.tkyngs.hurima.repository.RoleRepository;
 import com.tkyngs.hurima.repository.UserRepository;
 import com.tkyngs.hurima.security.jwt.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,32 +38,22 @@ import java.util.Collections;
  */
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 @CrossOrigin
 public class AuthController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    AuthorityRepository authorityRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtTokenProvider tokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final AuthorityRepository authorityRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider tokenProvider;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest request) {
+    public ResponseEntity<AuthResponse> registerUser(@Valid @RequestBody SignUpRequest request) {
         if(userRepository.existsByUsername(request.getUsername())) {
             return new ResponseEntity(new ApiResponse(
                     false,
@@ -82,7 +74,7 @@ public class AuthController {
                 request.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        Role userRole = roleRepository.findByName(Role.ROLE_USER)
                 .orElseThrow(() -> new ApplicationContextException("User Role not set."));
         user.setRoles(Collections.singleton(userRole));
         User result = userRepository.save(user);

@@ -6,7 +6,7 @@ package com.tkyngs.hurima.model.domain;
  * @since 12/21/2021 9:31 PM
  */
 
-public enum RoleName {
+public enum Role {
     ROLE_USER,
     ROLE_ADMIN
 }

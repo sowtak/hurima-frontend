@@ -2,6 +2,7 @@ package com.tkyngs.hurima.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tkyngs.hurima.model.DateAudit;
+import com.tkyngs.hurima.model.domain.Role;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,16 @@ import java.util.Set;
  */
 
 @Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY,
+            generator = "user_id_seq"
+    )
     @SequenceGenerator(
             name = "user_id_seq",
             sequenceName = "user_id_seq",
@@ -35,37 +40,21 @@ public class User {
     )
     private Long id;
 
-    @Size(min = 8, max = 128)
-    @Column(length = 30, unique = true, nullable = false)
     private String email;
-
-    @Size(min = 1, max = 30)
-    @Column(name = "username", length = 30, nullable = false)
     private String username;
-
-    @JsonIgnore
-    @Size(min = 8, max = 64)
-    @Column(name = "password_hash", length = 60, nullable = false)
     private String password;
-
-    @Column(name = "is_hokudai_student", nullable = false)
-    private Boolean isHokudaiStudent;
-
+    private Boolean isHUstudent;
     private String imageUrl;
+    private String activationCode;
+    private String passwordResetCode;
+    private boolean isActive;
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
-    @BatchSize(size = 20)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
 }
