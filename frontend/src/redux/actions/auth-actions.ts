@@ -19,8 +19,6 @@ import {
     ShowLoaderActionType
 } from "../action-types/auth-action-types";
 import {AuthErrors} from "../../types/types";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 export const showLoader = (): ShowLoaderActionType => ({
     type: SHOW_LOADER

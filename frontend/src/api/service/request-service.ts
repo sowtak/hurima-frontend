@@ -3,7 +3,7 @@
  * @since   12/25/2021 7:57 PM
  * @version 1.0.0
  */
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, Method} from "axios";
+import axios, {AxiosRequestConfig, Method} from "axios";
 import {API_BASE_URL_DEV} from "../../utils/constants/url";
 
 class RequestService {

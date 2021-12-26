@@ -6,6 +6,7 @@
 
 import {User} from "../../types/types";
 import {LOADING_USER_INFO, UserActionTypes} from "../action-types/user-action-types";
+import {LOGOUT_SUCCESS} from "../action-types/auth-action-types";
 
 export type InitialStateType = {
     user: Partial<User>
@@ -21,10 +22,14 @@ const initialState: InitialStateType = {
     successMessage: ""
 };
 
-const userReducer = (state: InitialStateType, action: UserActionTypes): InitialStateType => {
+const userReducer = (state: InitialStateType = initialState, action: UserActionTypes): InitialStateType => {
+
     switch (action.type) {
         case LOADING_USER_INFO:
             return {...state, isLoaded: true}
+
+        case LOGOUT_SUCCESS:
+            return {...state, user: {}, isLoggedIn: false}
 
         default:
             return state;

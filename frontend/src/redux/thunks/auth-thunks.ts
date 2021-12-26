@@ -3,10 +3,27 @@
  * @since   12/25/2021 7:27 PM
  * @version 1.0.0
  */
-import {UserData} from "../../types/types";
+import {UserData, UserRegistration} from "../../types/types";
 import {Dispatch} from "redux";
-import {loginFailure, loginSuccess} from "../actions/auth-actions";
+import {
+    loginFailure,
+    loginSuccess,
+    logoutSuccess,
+    registerFailure,
+    registerSuccess,
+    showLoader
+} from "../actions/auth-actions";
 import RequestService from "../../api/service/request-service";
+
+export const registration = (userRegistrationData: UserRegistration) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(showLoader());
+        await RequestService.post("/registration", userRegistrationData);
+        dispatch(registerSuccess());
+    } catch (error: any) {
+        dispatch(registerFailure(error.response.data));
+    }
+};
 
 export const login = (userData: UserData, history: any) => async (dispatch: Dispatch) => {
     try {
@@ -20,4 +37,12 @@ export const login = (userData: UserData, history: any) => async (dispatch: Disp
     } catch (error: any) {
         dispatch(loginFailure(error.response.data));
     }
+};
+
+export const logout = () => async (dispatch: Dispatch) => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("isLoggedIn");
+    dispatch(logoutSuccess());
 };
