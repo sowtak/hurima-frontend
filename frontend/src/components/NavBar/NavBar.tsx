@@ -5,23 +5,26 @@
  */
 import {FC} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {faUser, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 
 import logo from '../../images/icons/logo.png';
 import {logout} from "../../redux/thunks/auth-thunks";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Container, Image, Nav, Navbar} from "react-bootstrap";
+import {Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
 
 export const NavBar: FC = () => {
     const dispatch = useDispatch();
     const isLoggedIn: boolean = useSelector((state: AppStateType) => state.user.isLoggedIn);
+    const user = useSelector((state: AppStateType) => {
+        if (isLoggedIn) {
+            return state.user.user;
+        }
+        return {};
+    });
 
     const handleLogout = () => {
         dispatch(logout());
     };
-
 
     return (
         <header>
@@ -38,35 +41,31 @@ export const NavBar: FC = () => {
                     <LinkContainer to='/'>
                         <Image width='160px'
                                height='auto'
-                               className='image-responsive'
+                               className='HUrima-logo'
                                src={logo} alt='logo'/>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls='basic-navbar-nav'/>
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='navbar-nav ml-auto'>
-                            {(isLoggedIn || localStorage.getItem("isLoggedIn")) ?
-                                <div>
+                            <LinkContainer to='watchlist'>
+                                <Nav.Link>
+                                    <i className='p-1 fas fa-eye'/>
+                                </Nav.Link>
+                            </LinkContainer>
+                            {user !== {} ? (
+                                <NavDropdown title={user.username} id='username'>
                                     <LinkContainer to="/account">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon className="mr-3" icon={faUser}/>アカウント
-                                        </Nav.Link>
+                                        <NavDropdown.Item>プロフィール</NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to="/" onClick={handleLogout}>
-                                        <FontAwesomeIcon className="mr-3" icon={faUser}/>アカウント
-                                    </LinkContainer>
-                                </div>
-                                :
-                                <>
-                                    <div>
-                                        <LinkContainer to="/login">
-                                            <i className="p-1 fas fa-user"/>ログイン
-                                        </LinkContainer>
-                                        <LinkContainer to="/registration">
-                                            <FontAwesomeIcon className="mr-3" icon={faUserPlus}/>新規登録
-                                        </LinkContainer>
-                                    </div>
-                                </>
-                            }
+                                    <NavDropdown.Item onClick={handleLogout}>ログアウト</NavDropdown.Item>
+                                </NavDropdown>
+                            ) : (
+                                <LinkContainer to="/login">
+                                    <Nav.Link href='/login'>
+                                        <i className='p-1 fas fa-user'/>ログイン
+                                    </Nav.Link>
+                                </LinkContainer>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -6,6 +6,7 @@
 
 export type User = {
     id: number
+    username: string
     email: string
     activationCode: string | null
     passwordResetCode: string | null
@@ -26,9 +27,7 @@ export type UserData = {
 
 export type UserRegistration = {
     email: string
-    firstName: string
-    lastName: string
+    username: string
     password: string
     password2: string
-    captcha: string | null
 };
