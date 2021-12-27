@@ -21,7 +21,7 @@ export type AuthErrors = {
 }
 
 export type UserData = {
-    email: string
+    usernameOrEmail: string
     password: string
 };
 

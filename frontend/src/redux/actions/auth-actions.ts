@@ -19,6 +19,7 @@ import {
     ShowLoaderActionType
 } from "../action-types/auth-action-types";
 import {AuthErrors} from "../../types/types";
+import {FORM_RESET, ResetActionType} from "./admin-action-type";
 
 export const showLoader = (): ShowLoaderActionType => ({
     type: SHOW_LOADER
@@ -56,4 +57,8 @@ export const activateAccountFailure = (error: string): ActivateAccountFailureAct
 export const activateAccountSuccess = (message: string): ActivateAccountSuccessActionType => ({
     type: "ACTIVATE_ACCOUNT_SUCCESS",
     payload: message
+});
+
+export const reset = (): ResetActionType => ({
+    type: FORM_RESET
 });

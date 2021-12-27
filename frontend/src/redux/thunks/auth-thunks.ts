@@ -6,11 +6,13 @@
 import {UserData, UserRegistration} from "../../types/types";
 import {Dispatch} from "redux";
 import {
+    activateAccountFailure,
+    activateAccountSuccess,
     loginFailure,
     loginSuccess,
     logoutSuccess,
     registerFailure,
-    registerSuccess,
+    registerSuccess, reset,
     showLoader
 } from "../actions/auth-actions";
 import RequestService from "../../api/service/request-service";
@@ -22,6 +24,15 @@ export const registration = (userRegistrationData: UserRegistration) => async (d
         dispatch(registerSuccess());
     } catch (error: any) {
         dispatch(registerFailure(error.response.data));
+    }
+};
+
+export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
+    try {
+        const response = await RequestService.get("/registration/activate/" + code);
+        dispatch(activateAccountSuccess(response.data));
+    } catch (error: any) {
+        dispatch(activateAccountFailure(error.response.data));
     }
 };
 
@@ -45,4 +56,8 @@ export const logout = () => async (dispatch: Dispatch) => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("isLoggedIn");
     dispatch(logoutSuccess());
+};
+
+export const formReset = () => async (dispatch: Dispatch) => {
+    dispatch(reset());
 };

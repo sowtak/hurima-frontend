@@ -6,11 +6,14 @@
 import {FC} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
+import {LinkContainer} from 'react-router-bootstrap';
 
 import logo from '../../images/icons/logo.png';
+import logo2 from '../../images/icons/HUrima-logo-purple.svg';
 import {logout} from "../../redux/thunks/auth-thunks";
-import {Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import {LinkContainer} from 'react-router-bootstrap';
+import {Button, Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
+
+import './NavBar.css';
 
 export const NavBar: FC = () => {
     const dispatch = useDispatch();
@@ -18,8 +21,7 @@ export const NavBar: FC = () => {
     const user = useSelector((state: AppStateType) => {
         if (isLoggedIn) {
             return state.user.user;
-        }
-        return {};
+        } else return {};
     });
 
     const handleLogout = () => {
@@ -39,20 +41,17 @@ export const NavBar: FC = () => {
             >
                 <Container>
                     <LinkContainer to='/'>
-                        <Image width='160px'
-                               height='auto'
-                               className='HUrima-logo'
-                               src={logo} alt='logo'/>
+                        <img src={logo2} alt=""/>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls='basic-navbar-nav'/>
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='navbar-nav ml-auto'>
-                            <LinkContainer to='watchlist'>
-                                <Nav.Link>
-                                    <i className='p-1 fas fa-eye'/>
+                            <LinkContainer to='/watchlist'>
+                                <Nav.Link className='watch-list'>
+                                    <i className='p-1 fas fa-eye'/><span>ウォッチ</span>
                                 </Nav.Link>
                             </LinkContainer>
-                            {user !== {} ? (
+                            { isLoggedIn || localStorage.getItem("isLoggedIn") ? (
                                 <NavDropdown title={user.username} id='username'>
                                     <LinkContainer to="/account">
                                         <NavDropdown.Item>プロフィール</NavDropdown.Item>
@@ -61,8 +60,8 @@ export const NavBar: FC = () => {
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
-                                    <Nav.Link href='/login'>
-                                        <i className='p-1 fas fa-user'/>ログイン
+                                    <Nav.Link className='login'>
+                                        <i className='p-1 fas fa-user'/><span>ログイン</span>
                                     </Nav.Link>
                                 </LinkContainer>
                             )}
@@ -72,4 +71,4 @@ export const NavBar: FC = () => {
             </Navbar>
         </header>
     );
-}
+};

@@ -1,7 +1,15 @@
-#navbar-main {
-    font-size: 18px;
+.HUrima-logo {
+    margin-right: 80px;
 }
 
 .HUrima-logo:hover {
     cursor: pointer;
+}
+
+.watch-list i {
+    display: flex;
+}
+
+.login i {
+    display: flex;
 }
