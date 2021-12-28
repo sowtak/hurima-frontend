@@ -29,20 +29,12 @@ export const Login: FC = () => {
   const location = useLocation();
   const match = useMatch(location.pathname);
 
-  const redirect = location.search ? location.search.substring(location.search.indexOf('=') + 1) : '/';
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      history(redirect);
-    }
-  }, []);
-
   useEffect(() => {
     dispatch(formReset());
     if (match?.params.code) {
       dispatch(activateAccount(match.params.code));
     }
-  }, [history, isLoggedIn, redirect]);
+  }, [history, isLoggedIn]);
 
   const handleSignIn = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -79,7 +71,7 @@ export const Login: FC = () => {
                   onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                 />
               </FormGroup>
-
+              <hr/>
               <Button type='submit' variant='primary'>
                 ログイン
               </Button>
@@ -87,7 +79,7 @@ export const Login: FC = () => {
 
             <Row className='py-3'>
               <Col>
-                新規登録は<Link to={redirect ? `/registration/redirect=${redirect}` : '/registration/'}>こちらから</Link>
+                新規登録は<Link to="/registration">こちらから</Link>
               </Col>
             </Row>
           </Col>

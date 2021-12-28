@@ -3,25 +3,28 @@
  * @since   12/28/2021 1:40 AM
  * @version 1.0.0
  */
-import {FC, PropsWithChildren, useEffect} from "react";
+import {FC, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
+import {useLocation} from "react-router";
+import {useNavigate} from "react-router-dom";
 
-export const Watchlist: FC = (props: PropsWithChildren<any>) => {
-    const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
+export const Watchlist: FC = () => {
+  const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
 
-    const redirect = props.location.pathname + props.location.search;
+  const location = useLocation();
+  const history = useNavigate();
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            props.history.push(`/login?redirect=${redirect}`);
-            return;
-        }
-    })
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history("/login");
+      return;
+    }
+  }, [isLoggedIn]);
 
-    return (
-        <div>
-            <h1>test</h1>
-        </div>
-    );
+  return (
+    <div>
+      <h1>test</h1>
+    </div>
+  );
 };

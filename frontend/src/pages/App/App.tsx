@@ -7,8 +7,6 @@ import {Login} from "../Login/Login";
 import {Watchlist} from "../Watchlist/Watchlist";
 import {Registration} from "../Registration/Registration";
 import {Items} from "../Items/Items";
-import {Hoge} from "../Hoge/Hoge";
-import {Fuga} from "../Hoge/Fuga";
 
 export const App: FC = () => {
 
@@ -17,7 +15,6 @@ export const App: FC = () => {
       <NavBar/>
       <main className='py-3'>
         <Routes>
-          <Route path="/fuga" element={<Fuga/>}/>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
