@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    margin: 0;
+}
+
+.h1 {
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+}

@@ -8,10 +8,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {LinkContainer} from 'react-router-bootstrap';
 
-import logo from '../../images/icons/logo.png';
 import logo2 from '../../images/icons/HUrima-logo-purple.svg';
 import {logout} from "../../redux/thunks/auth-thunks";
-import {Button, Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 import './NavBar.css';
 
@@ -47,8 +46,8 @@ export const NavBar: FC = () => {
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='navbar-nav ml-auto'>
                             <LinkContainer to='/watchlist'>
-                                <Nav.Link className='watch-list'>
-                                    <i className='p-1 fas fa-eye'/><span>ウォッチ</span>
+                                <Nav.Link className='watchlist'>
+                                    <i className='p-1 fas fa-eye'/><span id='watchlist-font'>ウォッチ</span>
                                 </Nav.Link>
                             </LinkContainer>
                             { isLoggedIn || localStorage.getItem("isLoggedIn") ? (

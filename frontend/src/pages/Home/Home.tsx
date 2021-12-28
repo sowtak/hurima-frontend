@@ -4,14 +4,13 @@
  * @version 1.0.0
  */
 import {FC} from "react";
+import {NavBar} from "../../components/NavBar/NavBar";
 //import {useDispatch} from "react-redux";
 
 export const Home: FC = () => {
     //const dispatch = useDispatch();
 
     return(
-        <div>
-            SAY SOMETHING!!
-        </div>
+            <h1>HUrima</h1>
     )
 }
