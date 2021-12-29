@@ -1,4 +1,4 @@
-package com.tkyngs.hurima.model.dto.payload.request;
+package com.tkyngs.hurima.model.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;

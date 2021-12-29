@@ -10,21 +10,21 @@ import {useLocation} from "react-router";
 import {useNavigate} from "react-router-dom";
 
 export const Watchlist: FC = () => {
-  const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
+    const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
 
-  const location = useLocation();
-  const history = useNavigate();
+    const location = useLocation();
+    const history = useNavigate();
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      history("/login");
-      return;
-    }
-  }, [isLoggedIn]);
+    useEffect(() => {
+        if (!isLoggedIn) {
+            history("/login");
+            return;
+        }
+    },[isLoggedIn]);
 
-  return (
-    <div>
-      <h1>test</h1>
-    </div>
-  );
+    return (
+        <div>
+            <h1>test</h1>
+        </div>
+    );
 };

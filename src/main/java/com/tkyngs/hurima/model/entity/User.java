@@ -1,18 +1,12 @@
 package com.tkyngs.hurima.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tkyngs.hurima.model.DateAudit;
 import com.tkyngs.hurima.model.domain.Role;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -21,7 +15,9 @@ import java.util.Set;
  * @since 12/18/2021 6:48 PM
  */
 
-@Data
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "user")
@@ -57,4 +53,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

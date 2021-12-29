@@ -1,10 +1,8 @@
-package com.tkyngs.hurima.model.dto.payload.request;
+package com.tkyngs.hurima.model.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**

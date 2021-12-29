@@ -1,12 +1,12 @@
 package com.tkyngs.hurima.controller;
 
 import com.tkyngs.hurima.model.domain.Role;
-import com.tkyngs.hurima.model.dto.payload.response.AuthResponse;
+import com.tkyngs.hurima.model.dto.auth.AuthResponse;
 import com.tkyngs.hurima.model.entity.User;
-import com.tkyngs.hurima.model.dto.payload.request.LoginRequest;
-import com.tkyngs.hurima.model.dto.payload.request.SignUpRequest;
-import com.tkyngs.hurima.model.dto.payload.response.ApiResponse;
-import com.tkyngs.hurima.model.dto.payload.response.JwtAuthResponse;
+import com.tkyngs.hurima.model.dto.auth.LoginRequest;
+import com.tkyngs.hurima.model.dto.auth.SignUpRequest;
+import com.tkyngs.hurima.model.dto.auth.ApiResponse;
+import com.tkyngs.hurima.model.dto.auth.JwtAuthResponse;
 import com.tkyngs.hurima.repository.AuthorityRepository;
 import com.tkyngs.hurima.repository.RoleRepository;
 import com.tkyngs.hurima.repository.UserRepository;
@@ -14,8 +14,6 @@ import com.tkyngs.hurima.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +39,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 @CrossOrigin
-public class AuthController {
+public class AuthenticationController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -69,9 +67,6 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST
             );
         }
-
-        User user = new User(request.getUsername(), request.getEmail(),
-                request.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByName(Role.ROLE_USER)

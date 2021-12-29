@@ -1,4 +1,4 @@
-package com.tkyngs.hurima.model.dto.payload.response;
+package com.tkyngs.hurima.model.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
