@@ -13,9 +13,9 @@ import java.util.Optional;
 
 public interface UserService {
 
-  Optional<User> findUserById(Long userId);
+  User findUserById(Long userId);
 
-  Optional<User> findUserByEmail(String email);
+  User findUserByEmail(String email);
 
   List<User> findAllUsers();
 

@@ -1,6 +1,5 @@
 package com.tkyngs.hurima.config;
 
-import com.tkyngs.hurima.security.CustomUserDetailsService;
 import com.tkyngs.hurima.security.jwt.JwtAuthenticationEntryPoint;
 import com.tkyngs.hurima.security.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         securedEnabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;

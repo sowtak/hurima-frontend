@@ -1,5 +1,8 @@
 package com.tkyngs.hurima.mapper;
 
+import com.tkyngs.hurima.model.dto.RegistrationRequest;
+import com.tkyngs.hurima.model.dto.user.UserRequest;
+import com.tkyngs.hurima.model.dto.user.UserResponse;
 import com.tkyngs.hurima.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,5 +22,17 @@ public class UserMapper {
 
   private final UserMapper userMapper;
 
-  private User convertToEntity(UserReq)
+  private User convertToEntity(UserRequest userRequest) {
+    return modelMapper.map(userRequest, User.class);
+  }
+
+  User convertToEntity(RegistrationRequest registrationRequest) {
+    return modelMapper.map(registrationRequest, User.class);
+  }
+
+  UserResponse convertToResponseDto(User user) {
+    return modelMapper.map(user, UserResponse.class);
+  }
+
+  
 }

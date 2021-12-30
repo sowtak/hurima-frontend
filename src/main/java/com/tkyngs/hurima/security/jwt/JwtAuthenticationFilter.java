@@ -1,6 +1,6 @@
 package com.tkyngs.hurima.security.jwt;
 
-import com.tkyngs.hurima.security.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,14 +24,11 @@ import java.io.IOException;
  * @since 12/21/2021 11:36 PM
  */
 
-
+@Component
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
@@ -61,12 +59,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-            // 8th~ token itself
-            return bearerToken.substring(7, bearerToken.length());
-        }
-        return null;
-    }
 }

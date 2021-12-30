@@ -25,11 +25,10 @@ public class MailSender {
   private final JavaMailSender mailSender;
   private final SpringTemplateEngine templateEngine;
 
-  @Value("${spring.mail.username")
+  @Value("${spring.mail.username}")
   private String username;
 
-  public void sendMessage(String to, String subject, String template, Map<String, Object> attributes)
-    throws MessagingException {
+  public void sendMessage(String to, String subject, String template, Map<String, Object> attributes) throws MessagingException {
     Context context = new Context();
     context.setVariables(attributes);
     String body = templateEngine.process(template, context);

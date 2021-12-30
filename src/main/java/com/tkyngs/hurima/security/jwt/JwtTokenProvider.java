@@ -23,33 +23,35 @@ public class JwtTokenProvider {
 
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
+    @Value("${app.jwtHeader}")
+    private String jwtHeader;
 
+    @Value("${app.jwtSecretKey}")
+    private String jwtSecretKey;
 
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
-    public String generateToken(Authentication authentication) {
+    public String generateToken(String email, String userRole) {
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-
+        Claims claims = Jwts.claims().setSubject(email);
+        claims.put("role", userRole);
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
-        byte[] secret = Base64.getDecoder().decode(jwtSecret);
+        byte[] jwtSecretLKey = Base64.getDecoder().decode(jwtSecretKey);
 
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
-                .setIssuedAt(new Date())
+                .setClaims(claims)
+                .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(Keys.hmacShaKeyFor(secret))
+                .signWith(Keys.hmacShaKeyFor(jwtSecretLKey))
                 .compact();
     }
 
     public Long getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(jwtSecretKey).build()
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -58,7 +60,10 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parserBuilder()
+              .setSigningKey(jwtSecretKey)
+              .build()
+              .parseClaimsJws(authToken);
             return true;
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");
@@ -73,4 +78,6 @@ public class JwtTokenProvider {
         }
         return false;
     }
+
+    public String
 }

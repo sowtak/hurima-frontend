@@ -1,5 +1,6 @@
 package com.tkyngs.hurima.model.dto.auth;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +10,10 @@ import lombok.Setter;
  * @since 12/20/2021 10:52 PM
  */
 
-@Getter
-@Setter
+@Data
 public class JwtAuthResponse {
 
     private String accessToken;
-
     private String tokenType = "Bearer";
 
-    public JwtAuthResponse(String accessToken) {
-        this.accessToken = accessToken;
-    }
 }

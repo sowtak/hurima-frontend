@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
 
   @Override
-  public Optional<User> findUserById(Long userId) {
+  public User findUserById(Long userId) {
     return userRepository.findById(userId);
   }
 
   @Override
-  public Optional<User> findUserByEmail(String email) {
+  public User findUserByEmail(String email) {
     return userRepository.findByEmail(email);
   }
 

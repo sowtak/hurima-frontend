@@ -1,5 +1,7 @@
 package com.tkyngs.hurima.controller;
 
+import com.tkyngs.hurima.exception.ApiRequestException;
+import com.tkyngs.hurima.mapper.AuthenticationMapper;
 import com.tkyngs.hurima.model.domain.Role;
 import com.tkyngs.hurima.model.dto.auth.AuthResponse;
 import com.tkyngs.hurima.model.entity.User;
@@ -20,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -44,55 +47,15 @@ public class AuthenticationController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final AuthorityRepository authorityRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider tokenProvider;
-
-    @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> registerUser(@Valid @RequestBody SignUpRequest request) {
-        if(userRepository.existsByUsername(request.getUsername())) {
-            return new ResponseEntity(new ApiResponse(
-                    false,
-                    "Username is already taken."),
-                    HttpStatus.BAD_REQUEST
-                    );
-        }
-
-        if(userRepository.existsByEmail(request.getEmail())) {
-            return new ResponseEntity(new ApiResponse(
-                    false,
-                    "Email is already taken."),
-                    HttpStatus.BAD_REQUEST
-            );
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role userRole = roleRepository.findByName(Role.ROLE_USER)
-                .orElseThrow(() -> new ApplicationContextException("User Role not set."));
-        user.setRoles(Collections.singleton(userRole));
-        User result = userRepository.save(user);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
-
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully."));
-    }
+    private final AuthenticationMapper authenticationMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = tokenProvider.generateToken(authentication);
-
-        return ResponseEntity.ok(new JwtAuthResponse(jwt));
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsernameOrEmail(), request.getPassword()));
+            return ResponseEntity.ok(authenticationMapper.login(request.getUsernameOrEmail()));
+        } catch (AuthenticationException e) {
+            throw new ApiRequestException("ユーザ名/メールアドレス、もしくはパスワードが間違っています", HttpStatus.FORBIDDEN);
+        }
     }
 }
