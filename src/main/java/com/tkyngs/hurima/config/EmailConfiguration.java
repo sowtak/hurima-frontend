@@ -64,7 +64,7 @@ public class EmailConfiguration {
     templateResolver.setPrefix("mail-templates/");
     templateResolver.setSuffix(".html");
     templateResolver.setTemplateMode("HTML");
-    templateResolver.setCharacterEncoding("SHIFT-JIS");
+    templateResolver.setCharacterEncoding("UTF-8");
     return templateResolver;
   }
 

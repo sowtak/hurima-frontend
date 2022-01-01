@@ -14,4 +14,4 @@ spring:
           starttls: true
     protocol: smtp
     test-connection: true
-    default-encoding: SHIFT_JIS
+    default-encoding: UTF-8
