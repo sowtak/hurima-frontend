@@ -7,6 +7,7 @@ import {Login} from "../Login/Login";
 import {Watchlist} from "../Watchlist/Watchlist";
 import {Registration} from "../Registration/Registration";
 import {Items} from "../Items/Items";
+import {Footer} from "../../components/Footer/Footer";
 
 export const App: FC = () => {
   return (
@@ -22,6 +23,7 @@ export const App: FC = () => {
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </main>
+      <Footer/>
     </>
   );
 };
