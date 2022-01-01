@@ -45,18 +45,20 @@ export const NavBar: FC = () => {
                     <Navbar.Toggle aria-controls='basic-navbar-nav'/>
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='navbar-nav ml-auto'>
-                            <LinkContainer to='/watchlist'>
-                                <Nav.Link className='watchlist'>
-                                    <i className='p-1 fas fa-eye'/><span id='watchlist-font'>Watch</span>
-                                </Nav.Link>
-                            </LinkContainer>
                             { isLoggedIn || localStorage.getItem("isLoggedIn") ? (
+                              <>
+                                <LinkContainer to='/watchlist'>
+                                    <Nav.Link className='watchlist'>
+                                        <i className='p-1 fas fa-eye'/><span id='watchlist-font'>Watch</span>
+                                    </Nav.Link>
+                                </LinkContainer>
                                 <NavDropdown title={user.username} id='username'>
                                     <LinkContainer to="/account">
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
                                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
+                              </>
                             ) : (
                                 <LinkContainer to="/login">
                                     <Nav.Link className='login'>

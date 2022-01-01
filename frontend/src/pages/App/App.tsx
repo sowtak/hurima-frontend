@@ -1,5 +1,5 @@
-import React, {createContext, FC} from 'react';
-import {Route, Routes, useLocation} from "react-router-dom";
+import React, {FC} from 'react';
+import {Route, Routes} from "react-router-dom";
 import {Home} from "../Home/Home";
 import {NavBar} from "../../components/NavBar/NavBar";
 import {NotFound} from "../NotFound/NotFound";
@@ -9,7 +9,6 @@ import {Registration} from "../Registration/Registration";
 import {Items} from "../Items/Items";
 
 export const App: FC = () => {
-
   return (
     <>
       <NavBar/>
@@ -18,9 +17,9 @@ export const App: FC = () => {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
+          <Route path="/watchlist" element={<Watchlist/>}/>
           <Route element={<NotFound/>}/>
           <Route path="/items/" element={<Items/>}>
-            <Route path="watchlist" element={<Watchlist/>}/>
           </Route>
         </Routes>
       </main>
