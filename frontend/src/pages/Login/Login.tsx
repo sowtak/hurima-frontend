@@ -13,6 +13,7 @@ import {UserData} from "../../types/types";
 import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
 import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
 import {useLocation, useMatch} from "react-router";
+import { FormContainer } from "../../components/FormContainer/FormContainer";
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
@@ -45,49 +46,46 @@ export const Login: FC = () => {
 
   return (
     <div>
-      <Container>
-        <Row>
-          <Col xs={12} md={4}>
-            <h1>Login</h1>
-            {error && <Message variant='alert alert-danger'>{JSON.stringify(error)}</Message>}
-            {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
+      <FormContainer>
+        <h1>Login to HUrima</h1>
+        <br/>
+        {error && <Message variant='alert alert-danger'>{JSON.stringify(error)}</Message>}
+        {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
 
-            <Form onSubmit={handleSignIn}>
-              <FormGroup id='usernameOrEmail'>
-                <FormLabel>Username or Email</FormLabel>
-                <FormControl
-                  placeholder='Username or Email'
-                  value={usernameOrEmail}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => setUsernameOrEmail(event.target.value)}
-                />
-              </FormGroup>
+        <Form onSubmit={handleSignIn}>
+          <FormGroup id='usernameOrEmail'>
+            <FormLabel>Username or Email</FormLabel>
+            <FormControl
+              placeholder='Username or Email'
+              value={usernameOrEmail}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setUsernameOrEmail(event.target.value)}
+            />
+          </FormGroup>
 
-              <FormGroup id='password'>
-                <FormLabel>Password</FormLabel>
-                <FormControl
-                  placeholder='Password'
-                  type='password'
-                  value={password}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-                />
-              </FormGroup>
-              <hr/>
+          <FormGroup id='password'>
+            <FormLabel>Password</FormLabel>
+            <FormControl
+              placeholder='Password'
+              type='password'
+              value={password}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+            />
+          </FormGroup>
+          <hr/>
 
-              <div className='d-grid gap-2'>
-                <Button type='submit' variant='primary'>
-                  Log in
-                </Button>
-              </div>
-            </Form>
+          <div className='d-grid gap-2'>
+            <Button type='submit' variant='primary'>
+              Log in
+            </Button>
+          </div>
+        </Form>
 
-            <Row className='py-3'>
-              <Col>
-                Don't have an account? <Link to="/registration">Sign up</Link>
-              </Col>
-            </Row>
+        <Row className='py-3'>
+          <Col>
+            Don't have an account? <Link to="/registration">Sign up</Link>
           </Col>
         </Row>
-      </Container>
+      </FormContainer>
       {
         loading && <FullPageLoader/>
       }

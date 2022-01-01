@@ -18,9 +18,8 @@ export const App: FC = () => {
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
           <Route path="/watchlist" element={<Watchlist/>}/>
-          <Route element={<NotFound/>}/>
-          <Route path="/items/" element={<Items/>}>
-          </Route>
+          <Route path="/items/" element={<Items/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </main>
     </>
