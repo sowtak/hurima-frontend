@@ -15,12 +15,22 @@ import {
     registerSuccess, reset,
     showLoader
 } from "../actions/auth-actions";
-import RequestService from "../../api/service/request-service";
+import axios from "axios";
+import {API_BASE_URL_DEV} from "../../utils/constants/url";
 
 export const registration = (userRegistrationData: UserRegistration) => async (dispatch: Dispatch) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
     try {
         dispatch(showLoader());
-        await RequestService.post("/registration", userRegistrationData);
+        //await RequestService.post("/registration", userRegistrationData);
+        await axios.post(
+          API_BASE_URL_DEV + '/registration',
+          JSON.stringify(userRegistrationData),
+          {headers}
+        );
         dispatch(registerSuccess());
     } catch (error: any) {
         dispatch(registerFailure(error.response.data));
@@ -29,7 +39,7 @@ export const registration = (userRegistrationData: UserRegistration) => async (d
 
 export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
     try {
-        const response = await RequestService.get("/registration/activate/" + code);
+        const response = await axios.get(API_BASE_URL_DEV + "/registration/activate/" + code);
         dispatch(activateAccountSuccess(response.data));
     } catch (error: any) {
         dispatch(activateAccountFailure(error.response.data));
@@ -38,7 +48,7 @@ export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
 
 export const login = (userData: UserData, history: any) => async (dispatch: Dispatch) => {
     try {
-        const response = await RequestService.post("/auth/login", userData);
+        const response = await axios.post(API_BASE_URL_DEV + "/auth/login", userData);
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userRole", response.data.userRole);

@@ -20,12 +20,12 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.IDENTITY,
+            strategy = GenerationType.SEQUENCE,
             generator = "user_id_seq"
     )
     @SequenceGenerator(
@@ -39,7 +39,7 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private Boolean isHUstudent;
+    private boolean isHUstudent;
     private String imageUrl;
     private String activationCode;
     private String passwordResetCode;
@@ -51,7 +51,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id")
     )
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {

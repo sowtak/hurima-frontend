@@ -3,17 +3,11 @@ package com.tkyngs.hurima.security.jwt;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,37 +20,30 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends GenericFilter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+  private final JwtTokenProvider jwtTokenProvider;
 
-    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+  private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
-    // Validate JWT
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        try {
-            String jwt = getJwtFromRequest(request);
+  @Override
+  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
+    String jwt = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
 
-            // if request has jwt and it's valid, extract auth info.
-            if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
-                Long userId = jwtTokenProvider.getUserIdFromJWT(jwt);
+    try {
+      if (jwt != null && jwtTokenProvider.validateToken(jwt)) {
+        Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
 
-                UserDetails userDetails = customUserDetailsService
-                        .loadUserById(userId);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        } catch (Exception ex) {
-            log.error("Could not set user authentication in security context", ex);
+        if (authentication != null) {
+          SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        filterChain.doFilter(request, response);
+      }
+    } catch (JwtAuthenticationException ex) {
+      SecurityContextHolder.clearContext();
+      ((HttpServletResponse) servletRequest).sendError(ex.getHttpStatus().value());
+      log.error("Error filtering jwt", ex);
+      throw new JwtAuthenticationException("Token invalid or has expired");
     }
-
+    filterChain.doFilter(servletRequest, servletResponse);
+  }
 }

@@ -1,16 +1,12 @@
 package com.tkyngs.hurima.security;
 
 import com.tkyngs.hurima.model.entity.User;
-import lombok.AllArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * @author Sowa Takayanagi
@@ -18,40 +14,32 @@ import java.util.stream.Collectors;
  * @since 12/21/2021 9:53 AM
  */
 
-@AllArgsConstructor
+@Data
 public class UserPrincipal implements UserDetails {
 
     private Long id;
-
-    private String username;
-
-    @JsonIgnore
     private String email;
-
-    @JsonIgnore
     private String password;
+    private Map<String, Object> attributes;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    /**
+     * Uses this app's role as GrantedAuthority
+     * @param user
+     * @return
+     */
+    public static UserPrincipal create(User user) {
+        String userRole = user.getRoles().iterator().next().toString();
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
+        return new UserPrincipal(authorities);
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
-    public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities =
-                user.getRoles().stream().map(role ->
-                        new SimpleGrantedAuthority(role.getName().name())
-                ).collect(Collectors.toList());
-
-        return new UserPrincipal(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
-    }
 
     public Long getId() {
         return id;
@@ -68,7 +56,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -89,18 +77,5 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserPrincipal that = (UserPrincipal) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

@@ -6,7 +6,6 @@ import com.tkyngs.hurima.exception.InputFieldException;
 import com.tkyngs.hurima.mapper.AuthenticationMapper;
 import com.tkyngs.hurima.model.dto.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
-import org.bouncycastle.openssl.PasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,6 +22,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost")
 @RequestMapping("/api/v1/registration")
 public class RegistrationController {
 
@@ -34,7 +34,7 @@ public class RegistrationController {
     String password = request.getPassword();
     String password2 = request.getPassword2();
     if (password != null && !password.equals(password2)) {
-      throw new RuntimeException("パスワードが一致しません");
+      throw new RuntimeException("Passwords don't match");
     }
 
     if (bindingResult.hasErrors()) {
@@ -42,18 +42,18 @@ public class RegistrationController {
     }
 
     if (!authenticationMapper.registerUser(request)) {
-      throw new EmailException("メールアドレスが既に使用されています");
+      throw new EmailException("Email already taken.");
     }
 
-    return ResponseEntity.ok("ユーザ登録に成功しました");
+    return ResponseEntity.ok("User registration successful.");
   }
 
   @GetMapping("/activate/{code}")
   public ResponseEntity<String> activateCode(@PathVariable String code) {
     if (!authenticationMapper.activateUser(code)) {
-      throw new ApiRequestException("有効化コードが見つかりません", HttpStatus.NOT_FOUND);
+      throw new ApiRequestException("Activation code not found.", HttpStatus.NOT_FOUND);
     } else {
-      return ResponseEntity.ok("ユーザが有効化されました");
+      return ResponseEntity.ok("User activated.");
     }
   }
 }

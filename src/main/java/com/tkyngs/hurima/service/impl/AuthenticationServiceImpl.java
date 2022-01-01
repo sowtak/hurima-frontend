@@ -51,7 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     userRepository.save(user);
 
     String subject = "Activation code";
-    String template = "registrwation-template";
+    String template = "registration-template";
     Map<String, Object> attributes = new HashMap<>();
     attributes.put("username", user.getUsername());
     attributes.put("registrationUrl", "http://" + hostname + "/activate/" + user.getActivationCode());

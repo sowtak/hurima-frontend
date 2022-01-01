@@ -7,7 +7,7 @@ import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {formReset, registration} from "../../redux/thunks/auth-thunks";
-import {UserRegistration} from "../../types/types";
+import {AuthErrors, UserRegistration} from "../../types/types";
 import {Message} from "../../components/Message/Message";
 import {Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
@@ -19,38 +19,30 @@ export const Registration: FC = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [message, setMessage] = useState('');
+  const isRegistered: boolean = useSelector((state: AppStateType) => state.auth.isRegistered);
+  const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
+  const errors: Partial<AuthErrors> = useSelector((state: AppStateType) => state.auth.errors);
+  const {emailError, passwordError, password2Error} = errors;
 
   const dispatch = useDispatch();
   const userData = useSelector((state: AppStateType) => state.auth);
-  let loading = userData.loading;
   let error = userData.error;
-  let userInfo = userData.user;
-
-  const history = useNavigate();
-  const location = useLocation();
-
 
   useEffect(() => {
     dispatch(formReset());
-  })
+  });
 
   useEffect(() => {
-    if (userInfo) {
-      history("/registration");
-    }
-  }, [history, userInfo]);
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setPassword2("");
+  }, [isRegistered]);
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
-    setMessage('');
     event.preventDefault();
-
-    if (password != password2) {
-      setMessage('パスワードが一致しません');
-      dispatch(formReset());
-    } else {
-      const userRegistrationData: UserRegistration = {email, username, password, password2};
-      dispatch(registration(userRegistrationData));
-    }
+    const userRegistrationData: UserRegistration = {username, email, password, password2};
+    dispatch(registration(userRegistrationData));
   }
 
   return (
@@ -94,17 +86,17 @@ export const Registration: FC = () => {
                 />
               </FormGroup>
 
-                <FormGroup id='password2'>
-                  <FormLabel>パスワード(確認)</FormLabel>
-                  <FormControl
-                    type='password'
-                    required
-                    placeholder='パスワード(確認)'
-                    value={password2}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
-                  />
+              <FormGroup id='password2'>
+                <FormLabel>パスワード(確認)</FormLabel>
+                <FormControl
+                  type='password'
+                  required
+                  placeholder='パスワード(確認)'
+                  value={password2}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
+                />
 
-                </FormGroup>
+              </FormGroup>
 
               <Form.Group controlId='email'/>
               <hr/>

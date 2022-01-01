@@ -14,17 +14,16 @@ import javax.validation.constraints.Size;
 @Data
 public class RegistrationRequest {
 
-  @NotBlank(message = "このフィールドは空にできません")
+  @NotBlank(message = "This field should not be blank")
   private String username;
 
-  @NotBlank(message = "メールアドレスが間違っています")
-  @NotBlank(message = "このフィールドは空にできません")
+  @NotBlank(message = "Wrong email.")
+  @NotBlank(message = "This field should not be blank")
   private String email;
 
-  @Size(min = 8, max = 32, message = "8文字以上32文字以下のパスワードを入力してください")
+  @Size(min = 8, max = 32, message = "Password should be 8 to 32 characters")
   private String password;
 
-  @Size(min = 8, max = 32, message = "8文字以上32文字以下の確認パスワードを入力してください")
+  @Size(min = 8, max = 32, message = "Password should be 8 to 32 characters")
   private String password2;
-
 }

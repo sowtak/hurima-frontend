@@ -20,8 +20,6 @@ public class UserMapper {
 
   private final ModelMapper modelMapper;
 
-  private final UserMapper userMapper;
-
   private User convertToEntity(UserRequest userRequest) {
     return modelMapper.map(userRequest, User.class);
   }
