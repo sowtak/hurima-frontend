@@ -1,14 +1,16 @@
 /**
- * @author  Sowa Takayanagi
+ * @author v Sowa Takayanagi
  * @since   12/28/2021 1:40 AM
  * @version 1.0.0
  */
 import {FC} from "react";
+import {useSelector} from "react-redux";
+import { Navigate } from "react-router-dom";
+import {AppStateType} from "../../redux/reducers/root-reducer";
 
 export const Watchlist: FC = () => {
+    const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
     return (
-        <div>
-            <h1>Logged In</h1>
-        </div>
+      isLoggedIn ? <h1>f</h1> : <Navigate to='/login'/>
     );
 };
