@@ -1,6 +1,5 @@
 spring:
   mail:
-    default-encoding: UTF-8
     host: localhost
     jndi-name:
     username: duke
@@ -15,3 +14,4 @@ spring:
           starttls: true
     protocol: smtp
     test-connection: true
+    default-encoding: SHIFT_JIS

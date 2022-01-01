@@ -58,6 +58,9 @@ spring:
     multipart:
       enabled: true
 
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
 
 management:
   endpoints:

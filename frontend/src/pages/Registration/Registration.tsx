@@ -50,48 +50,48 @@ export const Registration: FC = () => {
       <Container>
         <Row>
           <Col xs={12} md={6}>
-            <h1>新規登録</h1>
+            <h1>User Registration</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{JSON.stringify(error)}</Message>}
 
             <Form onSubmit={handleRegister}>
               <FormGroup id='username'>
-                <FormLabel>ユーザ名</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <FormControl
                   required
-                  placeholder='ユーザ名'
+                  placeholder='Username'
                   value={username}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                 />
               </FormGroup>
 
               <FormGroup id='email'>
-                <FormLabel>メールアドレス</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl
                   required
-                  placeholder='@hokudai.ac.jp で終わるメールアドレス'
+                  placeholder='Email'
                   value={email}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
               </FormGroup>
 
               <FormGroup id='password'>
-                <FormLabel>パスワード</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl
                   type='password'
                   required
-                  placeholder='パスワード'
+                  placeholder='Password'
                   value={password}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 />
               </FormGroup>
 
               <FormGroup id='password2'>
-                <FormLabel>パスワード(確認)</FormLabel>
+                <FormLabel>Password (Confirm)</FormLabel>
                 <FormControl
                   type='password'
                   required
-                  placeholder='パスワード(確認)'
+                  placeholder='Password (Confirm)'
                   value={password2}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
                 />
@@ -101,13 +101,13 @@ export const Registration: FC = () => {
               <Form.Group controlId='email'/>
               <hr/>
               <Button type='submit' variant='primary'>
-                登録
+                Sign up
               </Button>
             </Form>
 
             <Row className='py-3'>
               <Col>
-                既に登録済みの方は<Link to="/login">ログイン</Link>
+                Already have an account? <Link to="/login">Login</Link>
               </Col>
             </Row>
 

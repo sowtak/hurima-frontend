@@ -48,24 +48,24 @@ export const Login: FC = () => {
       <Container>
         <Row>
           <Col xs={12} md={6}>
-            <h1>ログイン</h1>
+            <h1>Login</h1>
             {error && <Message variant='alert alert-danger'>{JSON.stringify(error)}</Message>}
             {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
 
             <Form onSubmit={handleSignIn}>
               <FormGroup id='usernameOrEmail'>
-                <FormLabel>メールアドレス</FormLabel>
+                <FormLabel>Username or Email</FormLabel>
                 <FormControl
-                  placeholder='ユーザ名またはメールアドレス'
+                  placeholder='Username or Email'
                   value={usernameOrEmail}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => setUsernameOrEmail(event.target.value)}
                 />
               </FormGroup>
 
               <FormGroup id='password'>
-                <FormLabel/>パスワード
+                <FormLabel>Password</FormLabel>
                 <FormControl
-                  placeholder='パスワード'
+                  placeholder='Password'
                   type='password'
                   value={password}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
@@ -73,13 +73,13 @@ export const Login: FC = () => {
               </FormGroup>
               <hr/>
               <Button type='submit' variant='primary'>
-                ログイン
+                Login
               </Button>
             </Form>
 
             <Row className='py-3'>
               <Col>
-                新規登録は<Link to="/registration">こちらから</Link>
+                You don't have an account? <Link to="/registration">Register</Link>
               </Col>
             </Row>
           </Col>

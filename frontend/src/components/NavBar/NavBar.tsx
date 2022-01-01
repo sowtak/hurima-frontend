@@ -47,20 +47,20 @@ export const NavBar: FC = () => {
                         <Nav className='navbar-nav ml-auto'>
                             <LinkContainer to='/watchlist'>
                                 <Nav.Link className='watchlist'>
-                                    <i className='p-1 fas fa-eye'/><span id='watchlist-font'>ウォッチ</span>
+                                    <i className='p-1 fas fa-eye'/><span id='watchlist-font'>Watch</span>
                                 </Nav.Link>
                             </LinkContainer>
                             { isLoggedIn || localStorage.getItem("isLoggedIn") ? (
                                 <NavDropdown title={user.username} id='username'>
                                     <LinkContainer to="/account">
-                                        <NavDropdown.Item>プロフィール</NavDropdown.Item>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
-                                    <NavDropdown.Item onClick={handleLogout}>ログアウト</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
                                     <Nav.Link className='login'>
-                                        <i className='p-1 fas fa-user'/><span>ログイン</span>
+                                        <i className='p-1 fas fa-user'/><span>Login</span>
                                     </Nav.Link>
                                 </LinkContainer>
                             )}

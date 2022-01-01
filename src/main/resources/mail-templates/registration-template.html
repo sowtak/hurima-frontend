@@ -11,17 +11,17 @@
             border: 1px solid #cdd1d5;
         }
     </style>
-    <title>HUrimaアカウント登録のご案内</title>
+    <title>HUrima Account Registration</title>
 </head>
 
 <body>
 <table valign="center" class="table">
     <tr>
         <td style="background-color: #ffffff; padding: 40px 30px 40px 30px; text-align: center">
-            <h3>こんにちは。HUrimaアカウントの登録です。 <span th:text="${username}"></span></h3>
-            <p>ようこそ HUrima へ。</p>
-            <p>登録を完了するには、以下のリンクをクリックしてください</p>
-            <a th:href="@{${registrationUrl}}">アカウントを登録する</a>
+            <h3>Hello <span th:text="${username}"></span>!  This is HUrima Account registration mail.</h3>
+            <p>Welcome to HUrima!</p>
+            <p>Please click the link below and finish account registration.</p>
+            <a th:href="@{${registrationUrl}}">Register</a>
     </tr>
 </table>
 
