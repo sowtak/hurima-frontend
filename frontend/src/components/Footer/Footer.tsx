@@ -7,6 +7,8 @@ import {FC} from "react";
 import {Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
+import './Footer.css';
+
 export const Footer: FC = () => {
   return (
     <footer className="hurima-footer p-5 bg-black text-white">

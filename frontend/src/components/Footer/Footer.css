@@ -4,3 +4,12 @@
     width: 100%;
     z-index: -1;
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 400px;
+}
