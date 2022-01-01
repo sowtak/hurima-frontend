@@ -49,7 +49,7 @@ export const Registration: FC = () => {
     <div>
       <Container>
         <Row>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={4}>
             <h1>User Registration</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{JSON.stringify(error)}</Message>}
@@ -100,9 +100,12 @@ export const Registration: FC = () => {
 
               <Form.Group controlId='email'/>
               <hr/>
-              <Button type='submit' variant='primary'>
-                Sign up
-              </Button>
+
+              <div className='d-grid gap-2'>
+                <Button type='submit' variant='primary'>
+                  Sign up
+                </Button>
+              </div>
             </Form>
 
             <Row className='py-3'>

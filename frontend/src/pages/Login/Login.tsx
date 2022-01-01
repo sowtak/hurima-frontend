@@ -47,7 +47,7 @@ export const Login: FC = () => {
     <div>
       <Container>
         <Row>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={4}>
             <h1>Login</h1>
             {error && <Message variant='alert alert-danger'>{JSON.stringify(error)}</Message>}
             {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
@@ -72,20 +72,26 @@ export const Login: FC = () => {
                 />
               </FormGroup>
               <hr/>
-              <Button type='submit' variant='primary'>
-                Login
-              </Button>
+
+              <div className='d-grid gap-2'>
+                <Button type='submit' variant='primary'>
+                  Log in
+                </Button>
+              </div>
             </Form>
 
             <Row className='py-3'>
               <Col>
-                You don't have an account? <Link to="/registration">Register</Link>
+                Don't have an account? <Link to="/registration">Sign up</Link>
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
-      {loading && <FullPageLoader/>}
+      {
+        loading && <FullPageLoader/>
+      }
     </div>
-  );
+  )
+    ;
 };
