@@ -15,6 +15,8 @@ import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
 import {useLocation, useMatch} from "react-router";
 import { FormContainer } from "../../components/FormContainer/FormContainer";
 
+import './Login.css';
+
 export const Login: FC = () => {
   const dispatch = useDispatch();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
@@ -53,7 +55,7 @@ export const Login: FC = () => {
         {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
 
         <Form onSubmit={handleSignIn}>
-          <FormGroup id='usernameOrEmail'>
+          <FormGroup id='usernameOrEmail' className='form-group'>
             <FormLabel>Username or Email</FormLabel>
             <FormControl
               placeholder='Username or Email'
@@ -62,7 +64,7 @@ export const Login: FC = () => {
             />
           </FormGroup>
 
-          <FormGroup id='password'>
+          <FormGroup id='password' className='form-group'>
             <FormLabel>Password</FormLabel>
             <FormControl
               placeholder='Password'

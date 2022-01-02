@@ -1,20 +1,36 @@
-.HUrima-logo {
+.hurima-navbar {
+    font-weight: bold;
+    color: white;
+}
+
+.hurima-logo {
     margin-right: 80px;
 }
 
-.HUrima-logo:hover {
+.hurima-logo:hover {
     cursor: pointer;
+}
+
+.hurima-logo-text {
+    font-weight: bold;
+}
+
+.items i {
+    display: flex;
 }
 
 .watchlist i {
     display: flex;
 }
 
-.watchlist i #watchlist-font {
-    font-size: 0.5em;
+.login i {
+    display: flex;
 }
 
+.signup i {
+    display: flex;
+}
 
-.login i {
+.signout i {
     display: flex;
 }

@@ -8,11 +8,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {LinkContainer} from 'react-router-bootstrap';
 
-import logo2 from '../../images/icons/HUrima-logo-purple.svg';
+import logo from '../../images/icons/HUrima-logo-purple.svg';
 import {logout} from "../../redux/thunks/auth-thunks";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 
 import './NavBar.css';
+import {Link} from "react-router-dom";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
@@ -27,51 +28,75 @@ export const NavBar: FC = () => {
     dispatch(logout());
   };
 
+  let links;
+  let signOut;
+
+  if (localStorage.getItem("isLoggedIn") || isLoggedIn) {
+    links = (
+      <li className='nav-item'>
+        <Link to='account' className='nav-link'>
+          <span className='nav-link p-5'><i className='fas fa-sign-in-alt'/> </span>
+        </Link>
+      </li>
+    );
+    signOut = (
+      <Link to='/' onClick={handleLogout} className='nav-link ps-5 pe-3 signout'>
+        <i className='fa-sign-out-alt'/>Sign Out
+      </Link>
+    );
+  } else {
+    links = (
+      <>
+        <li className='nav-item'>
+          <Link to='/login' className='nav-link ps-5 pe-3 login'>
+            <i className='fas fa-sign-in-alt'/>Log in
+          </Link>
+        </li>
+        <li>
+          <Link to='/registration' className='nav-link signup'>
+            <i className='fa fa-user-plus'/><span>Sign up</span>
+          </Link>
+        </li>
+      </>
+    );
+    signOut = null;
+  }
+
+
   return (
-    <header>
-      <Navbar
-        style={{
-          background: 'rgba(0,0,0,1)',
-          border: '0',
-          color: '#00000'
-        }}
-        className='navbar navbar-expand-lg navbar-dark'
-        collapseOnSelect
-      >
-        <Container>
+    <>
+      <Navbar className='navbar navbar-expand-lg navbar-dark hurima-navbar' collapseOnSelect>
+        <Container className='container-fluid hurima-logo'>
           <LinkContainer to='/'>
-            <img src={logo2} alt=""/>
+            <img src={logo} className='pe-5' alt=""/>
           </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav'/>
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='navbar-nav ml-auto'>
-              {isLoggedIn || localStorage.getItem("isLoggedIn") ? (
-                <>
-                  <NavDropdown title={user.username} id='username'>
-                    <LinkContainer to="/account">
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                  </NavDropdown>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to='/watchlist'>
-                    <Nav.Link className='watchlist'>
-                      <i className='p-1 fas fa-eye'/><span id='watchlist-font'>Watch</span>
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <Nav.Link className='login'>
-                      <i className='p-1 fas fa-user'/><span>Login</span>
-                    </Nav.Link>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
+          <Nav className='navbar-nav ml-auto'>
+            <Navbar.Toggle aria-controls='basic-navbar-nav'/>
+            <Navbar.Collapse id='basic-navbar-nav'>
+              <>
+                <ul className='navbar-nav ml-auto'>
+                  <li className='nav-item'>
+                    <Link to='/items' className='nav-link items'>
+                      <i className='pe-5 fas fa-box m-lg-auto'/><span>Items</span>
+                    </Link>
+                  </li>
+                </ul>
+                <ul className='navbar-nav ml-auto'>
+                  <li className='nav-item'>
+                    <Link to='/watchlist' className='nav-link watchlist'>
+                      <i className='pe-5 fas fa-eye m-lg-auto'/><span>Watch</span>
+                    </Link>
+                  </li>
+                  {links}
+                </ul>
+                {signOut}
+              </>
+
+            </Navbar.Collapse>
+          </Nav>
         </Container>
       </Navbar>
-    </header>
-  );
+    </>
+  )
+    ;
 };

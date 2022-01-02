@@ -13,6 +13,8 @@ import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-b
 import {Link} from "react-router-dom";
 import {FormContainer} from "../../components/FormContainer/FormContainer";
 
+import './Registration.css';
+
 export const Registration: FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -54,7 +56,7 @@ export const Registration: FC = () => {
         {error && <Message variant='danger'>{JSON.stringify(error)}</Message>}
 
         <Form onSubmit={handleRegister}>
-          <FormGroup id='username'>
+          <FormGroup id='username' className='form-group'>
             <FormLabel>Username</FormLabel>
             <FormControl
               required
@@ -64,7 +66,7 @@ export const Registration: FC = () => {
             />
           </FormGroup>
 
-          <FormGroup id='email'>
+          <FormGroup id='email' className='form-group'>
             <FormLabel>Email</FormLabel>
             <FormControl
               required
@@ -74,7 +76,7 @@ export const Registration: FC = () => {
             />
           </FormGroup>
 
-          <FormGroup id='password'>
+          <FormGroup id='password' className='form-group'>
             <FormLabel>Password</FormLabel>
             <FormControl
               type='password'
@@ -85,7 +87,7 @@ export const Registration: FC = () => {
             />
           </FormGroup>
 
-          <FormGroup id='password2'>
+          <FormGroup id='password2' className='form-group'>
             <FormLabel>Password (Confirm)</FormLabel>
             <FormControl
               type='password'
