@@ -17,15 +17,16 @@ import {
 } from "../actions/auth-actions";
 import axios from "axios";
 import {API_BASE_URL_DEV} from "../../utils/constants/url";
+import {useNavigate} from "react-router-dom";
+
+const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+}
 
 export const registration = (userRegistrationData: UserRegistration) => async (dispatch: Dispatch) => {
-    const headers = {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    }
     try {
         dispatch(showLoader());
-        //await RequestService.post("/registration", userRegistrationData);
         await axios.post(
           API_BASE_URL_DEV + '/registration',
           JSON.stringify(userRegistrationData),
@@ -42,20 +43,23 @@ export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
         const response = await axios.get(API_BASE_URL_DEV + "/registration/activate/" + code);
         dispatch(activateAccountSuccess(response.data));
     } catch (error: any) {
+        console.log("FAILURE!!!!!!!!!!!!");
         dispatch(activateAccountFailure(error.response.data));
     }
 };
 
-export const login = (userData: UserData, history: any) => async (dispatch: Dispatch) => {
+export const login = (userData: UserData) => async (dispatch: Dispatch) => {
     try {
-        const response = await axios.post(API_BASE_URL_DEV + "/auth/login", userData);
+        const response = await axios.post(API_BASE_URL_DEV + "/auth/login", userData, {headers});
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userRole", response.data.userRole);
         localStorage.setItem("isLoggedIn", "true");
         dispatch(loginSuccess(response.data.userRole));
-        history.push("/account");
+        const navigate = useNavigate();
+        navigate("/account");
     } catch (error: any) {
+        console.log("FAILURE!!!!!!!!!!!!!!!!!!!!!!!");
         dispatch(loginFailure(error.response.data));
     }
 };

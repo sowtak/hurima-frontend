@@ -53,7 +53,7 @@ public class RegistrationController {
     if (!authenticationMapper.activateUser(code)) {
       throw new ApiRequestException("Activation code not found.", HttpStatus.NOT_FOUND);
     } else {
-      return ResponseEntity.ok("User activated.");
+      return ResponseEntity.ok("User successfully activated.");
     }
   }
 }

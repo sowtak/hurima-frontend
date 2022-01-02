@@ -8,10 +8,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {formReset, registration} from "../../redux/thunks/auth-thunks";
 import {AuthErrors, UserRegistration} from "../../types/types";
-import {Message} from "../../components/Message/Message";
 import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FormContainer} from "../../components/FormContainer/FormContainer";
+import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
 
 import './Registration.css';
 
@@ -47,72 +47,79 @@ export const Registration: FC = () => {
     dispatch(registration(userRegistrationData));
   }
 
+  let pageLoading;
+  if (loading) {
+    pageLoading = (<FullPageLoader/>);
+  }
+
   return (
-    <div>
-      <FormContainer>
-        <h1>User Registration</h1>
+    <FormContainer>
+      {pageLoading}
+      <h1>User Registration</h1>
+      <hr/>
+      {isRegistered ? <div className='alert alert-success col-lg' role='alert'>
+        Activation code has been sent to your email.
+      </div> : null}
+
+      <Form onSubmit={handleRegister}>
+        <FormGroup id='username' className='form-group'>
+          <FormLabel>Username</FormLabel>
+          <FormControl
+            required
+            type='text'
+            placeholder='Username'
+            value={username}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+          />
+        </FormGroup>
+
+        <FormGroup id='email' className='form-group'>
+          <FormLabel>Email</FormLabel>
+          <FormControl
+            required
+            type='email'
+            placeholder='Email'
+            value={email}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          />
+        </FormGroup>
+
+        <FormGroup id='password' className='form-group'>
+          <FormLabel>Password</FormLabel>
+          <FormControl
+            type='password'
+            required
+            placeholder='Password'
+            value={password}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          />
+        </FormGroup>
+
+        <FormGroup id='password2' className='form-group'>
+          <FormLabel>Password (Confirm)</FormLabel>
+          <FormControl
+            type='password'
+            required
+            placeholder='Password (Confirm)'
+            value={password2}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
+          />
+        </FormGroup>
+
         <br/>
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{JSON.stringify(error)}</Message>}
 
-        <Form onSubmit={handleRegister}>
-          <FormGroup id='username' className='form-group'>
-            <FormLabel>Username</FormLabel>
-            <FormControl
-              required
-              placeholder='Username'
-              value={username}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-            />
-          </FormGroup>
+        <div className='d-grid gap-2'>
+          <Button type='submit' variant='primary'>
+            Sign up
+          </Button>
+        </div>
+      </Form>
 
-          <FormGroup id='email' className='form-group'>
-            <FormLabel>Email</FormLabel>
-            <FormControl
-              required
-              placeholder='Email'
-              value={email}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-            />
-          </FormGroup>
-
-          <FormGroup id='password' className='form-group'>
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              type='password'
-              required
-              placeholder='Password'
-              value={password}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-            />
-          </FormGroup>
-
-          <FormGroup id='password2' className='form-group'>
-            <FormLabel>Password (Confirm)</FormLabel>
-            <FormControl
-              type='password'
-              required
-              placeholder='Password (Confirm)'
-              value={password2}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
-            />
-          </FormGroup>
-
-          <hr/>
-
-          <div className='d-grid gap-2'>
-            <Button type='submit' variant='primary'>
-              Sign up
-            </Button>
-          </div>
-        </Form>
-
-        <Row className='py-3'>
-          <Col>
-            Already have an account? <Link to="/login">Login</Link>
-          </Col>
-        </Row>
-      </FormContainer>
-    </div>
+      <Row className='py-3'>
+        <Col>
+          Already have an account? <Link to="/login">Login</Link>
+        </Col>
+      </Row>
+    </FormContainer>
   );
 };

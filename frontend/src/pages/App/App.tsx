@@ -8,6 +8,7 @@ import {Watchlist} from "../Watchlist/Watchlist";
 import {Registration} from "../Registration/Registration";
 import {Items} from "../Items/Items";
 import {Footer} from "../../components/Footer/Footer";
+import {Account} from "../Account/Account";
 
 export const App: FC = () => {
   return (
@@ -18,8 +19,10 @@ export const App: FC = () => {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
+          <Route path="/activate/:code" element={<Login/>}/>
           <Route path="/watchlist" element={<Watchlist/>}/>
           <Route path="/items/" element={<Items/>}/>
+          <Route path="/account" element={<Account/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </main>

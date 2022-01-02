@@ -5,14 +5,12 @@
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {AppStateType} from "../../redux/reducers/root-reducer";
-import {Message} from "../../components/Message/Message";
-import {Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
+import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {UserData} from "../../types/types";
 import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
-import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
-import {useLocation, useMatch} from "react-router";
+import {useLocation, useMatch, useParams} from "react-router";
 import {FormContainer} from "../../components/FormContainer/FormContainer";
 
 import './Login.css';
@@ -25,34 +23,31 @@ export const Login: FC = () => {
   const error = userInfo.error;
   const success = userInfo.success;
   const loading = userInfo.loading;
-  const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
 
-
-  const history = useNavigate();
-  const location = useLocation();
-  const match = useMatch(location.pathname);
+  const {code} = useParams();
 
   useEffect(() => {
     dispatch(formReset());
-    if (match?.params.code) {
-      dispatch(activateAccount(match.params.code));
+    if (code) {
+      console.log(code);
+      dispatch(activateAccount(code));
+    } else {
+      console.log("CODE NOT FOUND!!!!!!!!!!!!!");
     }
-  }, [history, isLoggedIn]);
+  }, []);
 
   const handleSignIn = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
     const userData: UserData = {usernameOrEmail, password};
-    dispatch(login(userData, history));
+    dispatch(login(userData));
   }
 
   return (
-    <div>
       <FormContainer>
         <h1>Login to HUrima</h1>
-        <br/>
-        {error && <Message variant='alert alert-danger'>{JSON.stringify(error)}</Message>}
-        {success && <Message variant='alert alert-success'>{JSON.stringify(success)}</Message>}
+        <hr/>
+        {error && <div className='alert alert-danger col-lg'>{error}</div>}
+        {success && <div className='alert alert-success col-lg'>{success}</div>}
 
         <Form onSubmit={handleSignIn}>
           <FormGroup id='usernameOrEmail' className='form-group'>
@@ -75,7 +70,7 @@ export const Login: FC = () => {
               onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
             />
           </FormGroup>
-          <hr/>
+          <br/>
 
           <div className='d-grid gap-2'>
             <Button type='submit' variant='primary'>
@@ -90,7 +85,5 @@ export const Login: FC = () => {
           </Col>
         </Row>
       </FormContainer>
-      {loading && <FullPageLoader/>}
-    </div>
   );
 };
