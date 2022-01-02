@@ -13,7 +13,7 @@ import {UserData} from "../../types/types";
 import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
 import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
 import {useLocation, useMatch} from "react-router";
-import { FormContainer } from "../../components/FormContainer/FormContainer";
+import {FormContainer} from "../../components/FormContainer/FormContainer";
 
 import './Login.css';
 
@@ -58,6 +58,7 @@ export const Login: FC = () => {
           <FormGroup id='usernameOrEmail' className='form-group'>
             <FormLabel>Username or Email</FormLabel>
             <FormControl
+              required
               placeholder='Username or Email'
               value={usernameOrEmail}
               onChange={(event: ChangeEvent<HTMLInputElement>) => setUsernameOrEmail(event.target.value)}
@@ -67,6 +68,7 @@ export const Login: FC = () => {
           <FormGroup id='password' className='form-group'>
             <FormLabel>Password</FormLabel>
             <FormControl
+              required
               placeholder='Password'
               type='password'
               value={password}
@@ -88,10 +90,7 @@ export const Login: FC = () => {
           </Col>
         </Row>
       </FormContainer>
-      {
-        loading && <FullPageLoader/>
-      }
+      {loading && <FullPageLoader/>}
     </div>
-  )
-    ;
+  );
 };
