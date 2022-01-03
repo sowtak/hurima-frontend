@@ -74,11 +74,11 @@ public class JwtTokenProvider {
 
   public boolean validateToken(String authToken) {
     try {
-      Jwts.parserBuilder()
+      Jws<Claims> claimsJws = Jwts.parserBuilder()
         .setSigningKey(jwtSecretKey)
         .build()
         .parseClaimsJws(authToken);
-      return true;
+      return !claimsJws.getBody().getExpiration().before(new Date());
     } catch (SignatureException ex) {
       log.error("Invalid JWT signature");
     } catch (MalformedJwtException ex) {

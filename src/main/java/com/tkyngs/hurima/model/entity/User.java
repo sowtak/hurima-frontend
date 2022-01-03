@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,17 +31,20 @@ public class User {
             name = "users_id_seq",
             sequenceName = "users_id_seq",
             initialValue = 4,
-            allocationSize = 3
+            allocationSize = 1
     )
     private Long id;
 
     private String email;
     private String username;
     private String password;
-    private boolean isHUstudent;
-    private String imageUrl;
     private String activationCode;
     private String passwordResetCode;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "is_active")
     private boolean isActive;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

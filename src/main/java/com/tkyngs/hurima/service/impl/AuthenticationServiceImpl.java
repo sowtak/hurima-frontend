@@ -7,6 +7,8 @@ import com.tkyngs.hurima.security.jwt.JwtTokenProvider;
 import com.tkyngs.hurima.service.AuthenticationService;
 import com.tkyngs.hurima.service.email.MailSender;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Value("${hostname}")
   private String hostname;
 
-
+  private static final Logger log = LoggerFactory.getLogger(Logger.class);
   /**
    *
    * @param user User Entity
@@ -40,6 +42,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
    */
   @Override
   public boolean registerUser(User user) {
+
+
     User userFromDb = userRepository.findByEmail(user.getEmail());
     if (userFromDb != null) {
       return false;
@@ -54,8 +58,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     String template = "registration-template";
     Map<String, Object> attributes = new HashMap<>();
     attributes.put("username", user.getUsername());
-    attributes.put("registrationUrl", "http://" + hostname + "/activate/" + user.getActivationCode());
+    attributes.put("registrationUrl", "http://" + hostname + "/registration/activate/" + user.getActivationCode());
     try {
+      log.info("Sending activation email...");
       mailSender.sendMessage(user.getEmail(), subject, template, attributes);
     } catch (MessagingException ex) {
       System.out.println("Following exception occured: " + ex);
@@ -65,16 +70,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   public boolean activateUser(String code) {
+    log.info("Activating User");
     User user = userRepository.findByActivationCode(code);
-    if (user == null) return false;
+    if (user == null) {
+      log.info("USER WITH THE ACTIVATION CODE NOT FOUND");
+      return false;
+    }
     user.setActivationCode(code);
+    user.setActive(true);
     userRepository.save(user);
+    log.info("USER ACTIVATED.");
     return true;
   }
 
   @Override
   public Map<String, String> login(String email) {
+    log.info("LOGGING USER IN");
     User user = userRepository.findByEmail(email);
+    System.out.println(user);
     String userRole = user.getRoles().iterator().next().name();
     String token = jwtTokenProvider.generateToken(email, userRole);
 

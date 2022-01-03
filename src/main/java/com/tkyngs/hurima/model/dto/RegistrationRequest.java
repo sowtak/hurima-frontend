@@ -17,7 +17,7 @@ public class RegistrationRequest {
   @NotBlank(message = "This field should not be blank")
   private String username;
 
-  @NotBlank(message = "Wrong email.")
+  @NotBlank(message = "Incorrect email.")
   @NotBlank(message = "This field should not be blank")
   private String email;
 

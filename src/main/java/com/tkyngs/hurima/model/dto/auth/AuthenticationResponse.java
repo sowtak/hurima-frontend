@@ -1,8 +1,6 @@
 package com.tkyngs.hurima.model.dto.auth;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author Sowa Takayanagi
@@ -11,10 +9,8 @@ import lombok.Setter;
  */
 
 @Data
-public class AuthResponse {
-
-    private String accessToken;
-    private String tokenType = "Bearer";
-    private String userRole;
+public class AuthenticationResponse {
     private String email;
+    private String token;
+    private String userRole;
 }

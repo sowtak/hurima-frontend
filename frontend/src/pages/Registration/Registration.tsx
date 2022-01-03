@@ -20,15 +20,12 @@ export const Registration: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const [message, setMessage] = useState('');
   const isRegistered: boolean = useSelector((state: AppStateType) => state.auth.isRegistered);
   const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
   const errors: Partial<AuthErrors> = useSelector((state: AppStateType) => state.auth.errors);
-  const {emailError, passwordError, password2Error} = errors;
+  const {usernameError, emailError, passwordError, password2Error} = errors;
 
   const dispatch = useDispatch();
-  const userData = useSelector((state: AppStateType) => state.auth);
-  let error = userData.error;
 
   useEffect(() => {
     dispatch(formReset());
@@ -69,6 +66,7 @@ export const Registration: FC = () => {
             type='text'
             placeholder='Username'
             value={username}
+            className={usernameError ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           />
         </FormGroup>
@@ -80,6 +78,7 @@ export const Registration: FC = () => {
             type='email'
             placeholder='Email'
             value={email}
+            className={emailError ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           />
         </FormGroup>
@@ -91,6 +90,7 @@ export const Registration: FC = () => {
             required
             placeholder='Password'
             value={password}
+            className={passwordError ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           />
         </FormGroup>
@@ -102,6 +102,7 @@ export const Registration: FC = () => {
             required
             placeholder='Password (Confirm)'
             value={password2}
+            className={password2Error ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
           />
         </FormGroup>

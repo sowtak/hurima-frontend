@@ -5,12 +5,15 @@
  */
 import {FC} from "react";
 import {useSelector} from "react-redux";
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 
 export const Watchlist: FC = () => {
-    const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
-    return (
-      isLoggedIn ? <h1>f</h1> : <Navigate to='/login'/>
-    );
+  return (
+    <>
+      <div>
+        <h1>Watch List</h1>
+      </div>
+    </>
+  );
 };

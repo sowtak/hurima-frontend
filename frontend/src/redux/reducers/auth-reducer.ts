@@ -21,6 +21,7 @@ export type InitialStateType = {
     userEmail: string | null
     userRole: string | null
     isRegistered: boolean
+    isActivated: boolean
     loading: boolean
     success: string
     error: string
@@ -32,6 +33,7 @@ const initialState: InitialStateType = {
     userEmail: "",
     userRole: "",
     isRegistered: false,
+    isActivated: false,
     loading: false,
     success: "",
     error: "",
@@ -49,20 +51,28 @@ const authReducer = (state: InitialStateType = initialState, action: AuthActionT
         case REGISTER_SUCCESS:
             return {...state, isRegistered: true, loading: false, errors: {}};
 
-        case LOGIN_FAILURE:
-            return {...state, error: action.payload};
+        case LOGIN_FAILURE: {
+            console.log("FAILURE")
+            return {...state, error: action.payload, loading: false};
+        }
 
-        case LOGIN_SUCCESS:
-            return {...state, userRole: action.payload};
+        case LOGIN_SUCCESS:{
+            console.log("SUCCESS")
+            return {...state, userRole: action.payload, loading: false};
+        }
 
-        case ACTIVATE_ACCOUNT_FAILURE:
-            return {...state, error: action.payload};
+        case ACTIVATE_ACCOUNT_FAILURE: {
+            console.log("Account activation failed.")
+            return {...state, error: action.payload, isActivated: false};
+        }
 
-        case ACTIVATE_ACCOUNT_SUCCESS:
-            return {...state, success: action.payload};
+        case ACTIVATE_ACCOUNT_SUCCESS: {
+            console.log("Account activation success.")
+            return {...state, success: action.payload, isActivated: true};
+        }
 
         case LOGOUT_SUCCESS:
-            return {...state, userRole: ""}
+            return {...state, userRole: ""};
 
         default:
             return state;

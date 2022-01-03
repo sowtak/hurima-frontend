@@ -12,7 +12,7 @@ export const RESET_INPUT_FORM = "RESET_INPUT_FORM";
 
 export type LoadingUserInfoActionType = { type: typeof LOADING_USER_INFO };
 export type FetchUserSuccessActionType = { type: typeof FETCH_USER_SUCCESS, payload: User };
-export type ResetInputFormActionType = { type: typeof RESET_INPUT_FORM};
+export type ResetInputFormActionType = { type: typeof RESET_INPUT_FORM };
 
 export type UserActionTypes = LoadingUserInfoActionType | FetchUserSuccessActionType | LogoutSuccessActionType
-    | ResetInputFormActionType;
+  | ResetInputFormActionType;

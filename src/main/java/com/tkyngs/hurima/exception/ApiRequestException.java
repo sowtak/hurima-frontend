@@ -2,6 +2,7 @@ package com.tkyngs.hurima.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 
 /**
  * @author Sowa Takayanagi
@@ -10,7 +11,7 @@ import org.springframework.http.HttpStatus;
  */
 
 @Getter
-public class ApiRequestException extends RuntimeException {
+public class ApiRequestException extends AuthenticationException {
   private final HttpStatus status;
 
   public ApiRequestException(String message, HttpStatus status) {

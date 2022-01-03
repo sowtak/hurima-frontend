@@ -5,58 +5,69 @@
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {UserData} from "../../types/types";
 import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
-import {useLocation, useMatch, useParams} from "react-router";
+import {useParams} from "react-router";
 import {FormContainer} from "../../components/FormContainer/FormContainer";
 
 import './Login.css';
+import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const userInfo = useSelector((state: AppStateType) => state.auth);
-  const error = userInfo.error;
-  const success = userInfo.success;
-  const loading = userInfo.loading;
+  const error = useSelector((state: AppStateType) => state.auth.error);
+  const success = useSelector((state: AppStateType) => state.auth.success);
+  const isRegistered = useSelector((state: AppStateType) => state.auth.isRegistered);
+  const isLoggedIn= useSelector((state: AppStateType) => state.user.isLoggedIn);
+  const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
 
   const {code} = useParams();
+
+  const navigate = useNavigate();
+
+  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn) navigate('/account');
 
   useEffect(() => {
     dispatch(formReset());
     if (code) {
-      console.log(code);
+      console.log(success)
+      console.log(isRegistered);
       dispatch(activateAccount(code));
-    } else {
-      console.log("CODE NOT FOUND!!!!!!!!!!!!!");
     }
   }, []);
 
   const handleSignIn = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const userData: UserData = {usernameOrEmail, password};
+    const userData: UserData = {email, password};
     dispatch(login(userData));
+  }
+
+  let pageLoading;
+  if (loading) {
+    pageLoading = (<FullPageLoader/>);
   }
 
   return (
       <FormContainer>
+        {pageLoading}
         <h1>Login to HUrima</h1>
         <hr/>
-        {error && <div className='alert alert-danger col-lg'>{error}</div>}
-        {success && <div className='alert alert-success col-lg'>{success}</div>}
-
+        {error ? <div className='alert alert-danger col-lg' role='alert'>{error}</div> : null}
+        {success ? <div className='alert alert-success col-lg' role='alert'>{success}</div> : null}
         <Form onSubmit={handleSignIn}>
-          <FormGroup id='usernameOrEmail' className='form-group'>
-            <FormLabel>Username or Email</FormLabel>
+          <FormGroup id='email' className='form-group'>
+            <FormLabel className='form-label'> Email</FormLabel>
             <FormControl
               required
-              placeholder='Username or Email'
-              value={usernameOrEmail}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setUsernameOrEmail(event.target.value)}
+              type='email'
+              placeholder='Email'
+              value={email}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
             />
           </FormGroup>
 

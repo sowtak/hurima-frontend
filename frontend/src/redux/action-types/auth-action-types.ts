@@ -18,10 +18,18 @@ export type ShowLoaderActionType = { type: typeof SHOW_LOADER };
 export type ActivateAccountFailureActionType = { type: typeof ACTIVATE_ACCOUNT_FAILURE, payload: string };
 export type ActivateAccountSuccessActionType = { type: typeof ACTIVATE_ACCOUNT_SUCCESS, payload: string };
 export type RegisterFailureActionType = { type: typeof REGISTER_FAILURE, payload: AuthErrors };
-export type RegisterSuccessActionType = { type: typeof REGISTER_SUCCESS};
+export type RegisterSuccessActionType = { type: typeof REGISTER_SUCCESS };
 export type LoginFailureActionType = { type: typeof LOGIN_FAILURE, payload: string };
 export type LoginSuccessActionType = { type: typeof LOGIN_SUCCESS, payload: string };
 export type LogoutSuccessActionType = { type: typeof LOGOUT_SUCCESS };
 
-export type AuthActionTypes = ShowLoaderActionType| ActivateAccountFailureActionType| ActivateAccountSuccessActionType|
-    LoginFailureActionType| LoginSuccessActionType| LogoutSuccessActionType| RegisterFailureActionType| RegisterSuccessActionType;
+export type AuthActionTypes =
+  ShowLoaderActionType
+  | ActivateAccountFailureActionType
+  | ActivateAccountSuccessActionType
+  |
+  LoginFailureActionType
+  | LoginSuccessActionType
+  | LogoutSuccessActionType
+  | RegisterFailureActionType
+  | RegisterSuccessActionType;

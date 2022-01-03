@@ -7,7 +7,7 @@ import {FC} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import './FormContainer.css';
 
-export const FormContainer: FC = ({children }) => {
+export const FormContainer: FC = ({children}) => {
   return (
     <Container className="center container-lg ">
       <Row md={12} className='border'>

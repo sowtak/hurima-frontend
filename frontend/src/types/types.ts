@@ -15,13 +15,14 @@ export type User = {
 };
 
 export type AuthErrors = {
+    usernameError: string
     emailError: string
     passwordError: string
     password2Error: string
 }
 
 export type UserData = {
-    usernameOrEmail: string
+    email: string
     password: string
 };
 

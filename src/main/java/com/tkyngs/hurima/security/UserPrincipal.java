@@ -17,21 +17,29 @@ import java.util.*;
 @Data
 public class UserPrincipal implements UserDetails {
 
-    private Long id;
-    private String email;
-    private String password;
+    private final Long id;
+    private final String email;
+    private final String password;
     private Map<String, Object> attributes;
     private final Collection<? extends GrantedAuthority> authorities;
 
     /**
      * Uses this app's role as GrantedAuthority
      * @param user
-     * @return
+     * @return Userinfo
      */
     public static UserPrincipal create(User user) {
         String userRole = user.getRoles().iterator().next().toString();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
-        return new UserPrincipal(authorities);
+        System.out.println(userRole);
+        System.out.println(authorities);
+        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
+    }
+
+    public static UserPrincipal create(User user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = UserPrincipal.create(user);
+        userPrincipal.setAttributes(attributes);
+        return userPrincipal;
     }
 
 

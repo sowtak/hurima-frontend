@@ -31,30 +31,30 @@ export const NavBar: FC = () => {
   let links;
   let signOut;
 
-  if (localStorage.getItem("isLoggedIn") || isLoggedIn) {
+  if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
     links = (
       <li className='nav-item'>
-        <Link to='account' className='nav-link'>
-          <span className='nav-link p-5'><i className='fas fa-sign-in-alt'/> </span>
+        <Link to='account' className='nav-link pe-3 ps-3 account'>
+          <i className='pe-3 ps-3 fas fa-user'/>Account
         </Link>
       </li>
     );
     signOut = (
-      <Link to='/' onClick={handleLogout} className='nav-link ps-5 pe-3 signout'>
-        <i className='fa-sign-out-alt'/>Sign Out
+      <Link to='/' onClick={handleLogout} className='nav-link ps-3 pe-3 signout'>
+        <i className='pe-3 ps-3 fas fa-sign-out-alt'/>Sign out
       </Link>
     );
   } else {
     links = (
       <>
         <li className='nav-item'>
-          <Link to='/login' className='nav-link ps-5 pe-3 login'>
-            <i className='fas fa-sign-in-alt'/>Log in
+          <Link to='/login' className='nav-link ps-3 pe-3 login'>
+            <i className='ps-3 fas fa-sign-in-alt'/>Log in
           </Link>
         </li>
         <li>
-          <Link to='/registration' className='nav-link signup'>
-            <i className='fa fa-user-plus'/><span>Sign up</span>
+          <Link to='/registration' className='nav-link ps-3 pe-3 signup'>
+            <i className='ps-3 fa fa-user-plus'/><span>Sign up</span>
           </Link>
         </li>
       </>
@@ -76,15 +76,15 @@ export const NavBar: FC = () => {
               <>
                 <ul className='navbar-nav ml-auto'>
                   <li className='nav-item'>
-                    <Link to='/items' className='nav-link items'>
-                      <i className='pe-5 fas fa-box m-lg-auto'/><span>Items</span>
+                    <Link to='/items' className='nav-link pe-3 ps-3 items'>
+                      <i className='ps-3 fas fa-box m-lg-auto'/>Items
                     </Link>
                   </li>
                 </ul>
                 <ul className='navbar-nav ml-auto'>
                   <li className='nav-item'>
-                    <Link to='/watchlist' className='nav-link watchlist'>
-                      <i className='pe-5 fas fa-eye m-lg-auto'/><span>Watch</span>
+                    <Link to='/watchlist' className='nav-link pe-3 ps-3 watchlist'>
+                      <i className='ps-3 fas fa-eye m-lg-auto'/>Watch
                     </Link>
                   </li>
                   {links}

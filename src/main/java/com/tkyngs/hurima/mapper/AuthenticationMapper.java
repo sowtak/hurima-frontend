@@ -1,7 +1,7 @@
 package com.tkyngs.hurima.mapper;
 
 import com.tkyngs.hurima.model.dto.RegistrationRequest;
-import com.tkyngs.hurima.model.dto.auth.AuthResponse;
+import com.tkyngs.hurima.model.dto.auth.AuthenticationResponse;
 import com.tkyngs.hurima.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,11 +29,11 @@ public class AuthenticationMapper {
     return authenticationService.activateUser(code);
   }
 
-  public AuthResponse login(String usernameOrEmail) {
-    Map<String, String> result = authenticationService.login(usernameOrEmail);
-    AuthResponse response = new AuthResponse();
+  public AuthenticationResponse login(String email) {
+    Map<String, String> result = authenticationService.login(email);
+    AuthenticationResponse response = new AuthenticationResponse();
     response.setEmail(result.get("email"));
-    response.setAccessToken(result.get("token"));
+    response.setToken(result.get("token"));
     response.setUserRole(result.get("userRole"));
     return response;
   }

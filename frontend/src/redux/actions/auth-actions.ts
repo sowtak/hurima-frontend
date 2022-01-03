@@ -5,12 +5,15 @@
  */
 import {
     ACTIVATE_ACCOUNT_FAILURE,
+    ACTIVATE_ACCOUNT_SUCCESS,
     ActivateAccountFailureActionType,
     ActivateAccountSuccessActionType,
     LOGIN_FAILURE,
     LOGIN_SUCCESS,
     LoginFailureActionType,
-    LoginSuccessActionType, LogoutSuccessActionType,
+    LoginSuccessActionType,
+    LOGOUT_SUCCESS,
+    LogoutSuccessActionType,
     REGISTER_FAILURE,
     REGISTER_SUCCESS,
     RegisterFailureActionType,
@@ -19,7 +22,7 @@ import {
     ShowLoaderActionType
 } from "../action-types/auth-action-types";
 import {AuthErrors} from "../../types/types";
-import {FORM_RESET, ResetActionType} from "./admin-action-type";
+import {FORM_RESET, ResetActionType} from "../action-types/admin-action-type";
 
 export const showLoader = (): ShowLoaderActionType => ({
     type: SHOW_LOADER
@@ -46,7 +49,7 @@ export const loginSuccess = (userRole: string): LoginSuccessActionType => ({
 });
 
 export const logoutSuccess = (): LogoutSuccessActionType => ({
-   type: "LOGOUT_SUCCESS"
+   type: LOGOUT_SUCCESS
 });
 
 export const activateAccountFailure = (error: string): ActivateAccountFailureActionType => ({
@@ -55,7 +58,7 @@ export const activateAccountFailure = (error: string): ActivateAccountFailureAct
 });
 
 export const activateAccountSuccess = (message: string): ActivateAccountSuccessActionType => ({
-    type: "ACTIVATE_ACCOUNT_SUCCESS",
+    type: ACTIVATE_ACCOUNT_SUCCESS,
     payload: message
 });
 

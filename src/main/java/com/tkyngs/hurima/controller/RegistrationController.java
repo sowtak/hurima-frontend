@@ -6,6 +6,8 @@ import com.tkyngs.hurima.exception.InputFieldException;
 import com.tkyngs.hurima.mapper.AuthenticationMapper;
 import com.tkyngs.hurima.model.dto.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,9 +24,11 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/registration")
 public class RegistrationController {
+
+  private static final Logger log = LoggerFactory.getLogger(Logger.class);
 
   private final AuthenticationMapper authenticationMapper;
 
@@ -50,6 +54,7 @@ public class RegistrationController {
 
   @GetMapping("/activate/{code}")
   public ResponseEntity<String> activateCode(@PathVariable String code) {
+    log.info("ACTIVATE ACCOUNT");
     if (!authenticationMapper.activateUser(code)) {
       throw new ApiRequestException("Activation code not found.", HttpStatus.NOT_FOUND);
     } else {

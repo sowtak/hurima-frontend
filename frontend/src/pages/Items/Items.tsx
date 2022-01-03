@@ -8,6 +8,6 @@ import {FC} from "react";
 export const Items:FC = () => {
 
     return (
-        <h1> </h1>
+        <h1> Item List </h1>
     );
 };
