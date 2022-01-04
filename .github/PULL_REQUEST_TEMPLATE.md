@@ -4,7 +4,7 @@
 
 Fixes # <!--Enter issue number -->
 
-## Type of change
+# Type of change
 
 Please delete options that are not relevant.
 
