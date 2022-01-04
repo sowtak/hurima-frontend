@@ -20,12 +20,12 @@ export const App: FC = () => {
       <main className='py-5'>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/registration" element={<Registration/>}/>
+          <Route path="/login" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Login/>}/>
+          <Route path="/registration" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Registration/>}/>
           <Route path="/registration/activate/:code" element={<Login/>}/>
           <Route path="/watchlist" element={<Watchlist/>}/>
           <Route path="/items/" element={<Items/>}/>
-          <Route path="/account" element={(isLoggedIn || localStorage.getItem("isLoggedIn")) ? <Account/> : <Navigate to='/login'/>}/>
+          <Route path="/account" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Navigate to='/login'/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </main>
