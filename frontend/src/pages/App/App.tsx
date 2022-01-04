@@ -13,14 +13,14 @@ import {useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 
 export const App: FC = () => {
-  const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   return (
     <>
       <NavBar/>
       <main className='py-5'>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Login/>}/>
+          <Route path="/login" element={isLoggedIn ? <Account/> : <Login/>}/>
           <Route path="/registration" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Registration/>}/>
           <Route path="/registration/activate/:code" element={<Login/>}/>
           <Route path="/watchlist" element={<Watchlist/>}/>
