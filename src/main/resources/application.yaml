@@ -1,9 +1,13 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   compression:
     enabled: true
 
 spring:
+  application:
+    name: hurima-api-server
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
   mail:
     host: smtp.gmail.com
     username: hurima.dev@gmail.com
