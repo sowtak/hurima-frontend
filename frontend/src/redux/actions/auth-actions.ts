@@ -8,6 +8,10 @@ import {
     ACTIVATE_ACCOUNT_SUCCESS,
     ActivateAccountFailureActionType,
     ActivateAccountSuccessActionType,
+    FORGOT_PASSWORD_FAILURE,
+    FORGOT_PASSWORD_SUCCESS,
+    ForgotPasswordFailureType,
+    ForgotPasswordSuccessType,
     LOGIN_FAILURE,
     LOGIN_SUCCESS,
     LoginFailureActionType,
@@ -47,6 +51,16 @@ export const loginSuccess = (userRole: string): LoginSuccessActionType => ({
     type: LOGIN_SUCCESS,
     payload: userRole
 });
+
+export const forgotPasswordSuccess = (message: string): ForgotPasswordSuccessType => ({
+    type: FORGOT_PASSWORD_SUCCESS,
+    payload: message
+})
+
+export const forgotPasswordFailure = (error: string): ForgotPasswordFailureType => ({
+    type: FORGOT_PASSWORD_FAILURE,
+    payload: error
+})
 
 export const logoutSuccess = (): LogoutSuccessActionType => ({
    type: LOGOUT_SUCCESS

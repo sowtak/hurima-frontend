@@ -27,7 +27,6 @@ export const Login: FC = () => {
   const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
 
   const {code} = useParams();
-
   const navigate = useNavigate();
 
   if ((localStorage.getItem("isLoggedIn")) || isLoggedIn) navigate('/account');
@@ -47,14 +46,9 @@ export const Login: FC = () => {
     dispatch(login(userData));
   }
 
-  let pageLoading;
-  if (loading) {
-    pageLoading = (<FullPageLoader/>);
-  }
-
   return (
       <FormContainer>
-        {pageLoading}
+        {loading ? <FullPageLoader/> : null}
         <h1>Login to HUrima</h1>
         <hr/>
         {error ? <div className='alert alert-danger col-lg' role='alert'>{error}</div> : null}
@@ -81,6 +75,13 @@ export const Login: FC = () => {
               onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
             />
           </FormGroup>
+
+          <Row className='py-1'>
+            <Col>
+              <Link to='/forgot-password'>Forgot password?</Link>
+            </Col>
+          </Row>
+
           <br/>
 
           <div className='d-grid gap-2'>

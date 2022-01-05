@@ -15,6 +15,7 @@ class RequestService {
   };
 
   post = (url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") => {
+    console.log("AXIOS POST");
     return createRequest("POST", url, body, isAuthRequired, contentType);
   };
 

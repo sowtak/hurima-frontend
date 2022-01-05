@@ -44,14 +44,9 @@ export const Registration: FC = () => {
     dispatch(registration(userRegistrationData));
   }
 
-  let pageLoading;
-  if (loading) {
-    pageLoading = (<FullPageLoader/>);
-  }
-
   return (
     <FormContainer>
-      {pageLoading}
+      {loading ? <FullPageLoader/> : null}
       <h1>User Registration</h1>
       <hr/>
       {isRegistered ? <div className='alert alert-success col-lg' role='alert'>

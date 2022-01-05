@@ -17,4 +17,6 @@ public interface AuthenticationService {
   boolean registerUser(User user);
 
   boolean activateUser(String code);
+
+  boolean sendPasswordResetCode(String email);
 }

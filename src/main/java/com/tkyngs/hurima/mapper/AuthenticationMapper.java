@@ -37,4 +37,5 @@ public class AuthenticationMapper {
     response.setUserRole(result.get("userRole"));
     return response;
   }
+
 }

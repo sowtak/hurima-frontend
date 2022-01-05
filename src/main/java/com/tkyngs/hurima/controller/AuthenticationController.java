@@ -4,6 +4,8 @@ import com.tkyngs.hurima.exception.ApiRequestException;
 import com.tkyngs.hurima.mapper.AuthenticationMapper;
 import com.tkyngs.hurima.model.dto.auth.AuthenticationResponse;
 import com.tkyngs.hurima.model.dto.auth.AuthenticationRequest;
+import com.tkyngs.hurima.model.dto.auth.PasswordResetRequest;
+import com.tkyngs.hurima.service.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,7 @@ public class AuthenticationController {
 
   private final AuthenticationManager authenticationManager;
   private final AuthenticationMapper authenticationMapper;
+  private final AuthenticationServiceImpl authenticationService;
 
   @PostMapping("/login")
   public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
@@ -50,5 +53,16 @@ public class AuthenticationController {
       System.out.println(e);
       throw new ApiRequestException("Email or Password is incorrect", HttpStatus.FORBIDDEN);
     }
+  }
+
+  @PostMapping("/forgot-password")
+  public ResponseEntity<String> forgotPassword(@RequestBody PasswordResetRequest request) throws RuntimeException {
+    log.info("RECEIVED REQUEST");
+    if (!authenticationService.sendPasswordResetCode(request.getEmail())) {
+      log.info("ERR");
+      throw new ApiRequestException("Email not found", HttpStatus.BAD_REQUEST);
+    }
+    log.info("RESET");
+    return ResponseEntity.ok("Password reset code is sent to your email.");
   }
 }

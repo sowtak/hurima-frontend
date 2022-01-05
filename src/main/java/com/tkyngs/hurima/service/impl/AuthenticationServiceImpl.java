@@ -42,8 +42,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
    */
   @Override
   public boolean registerUser(User user) {
-
-
     User userFromDb = userRepository.findByEmail(user.getEmail());
     if (userFromDb != null) {
       return false;
@@ -62,15 +60,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     try {
       log.info("Sending activation email...");
       mailSender.sendMessage(user.getEmail(), subject, template, attributes);
-    } catch (MessagingException ex) {
-      System.out.println("Following exception occured: " + ex);
+    } catch (MessagingException e) {
+      e.printStackTrace();
     }
     return true;
   }
 
   @Override
   public boolean activateUser(String code) {
-    log.info("Activating User");
+    log.info("ACTIVATING USER");
     User user = userRepository.findByActivationCode(code);
     if (user == null) {
       log.info("USER WITH THE ACTIVATION CODE NOT FOUND");
@@ -97,4 +95,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     response.put("userRole", userRole);
     return response;
   }
+
+  @Override
+  public boolean sendPasswordResetCode(String email) {
+    log.info("SENDING PASSWORD RESET CODE TO GIVEN EMAIL");
+    User user = userRepository.findByEmail(email);
+    if (user == null) return false;
+    user.setPasswordResetCode(UUID.randomUUID().toString());
+    userRepository.save(user);
+
+    String subject = "Password Reset";
+    String template = "password-reset-template";
+    Map<String, Object> attributes = new HashMap<>();
+    attributes.put("PasswordResetUrl", "http://" + hostname + "/reset-password" + user.getPasswordResetCode());
+    try {
+      mailSender.sendMessage(user.getEmail(), subject, template, attributes);
+      return true;
+    } catch (MessagingException e) {
+      log.info(e.toString());
+      e.printStackTrace();
+      return false;
+    }
+  }
+
 }

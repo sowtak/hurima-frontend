@@ -11,6 +11,7 @@ import {Footer} from "../../components/Footer/Footer";
 import {Account} from "../Account/Account";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
+import {ForgotPassword} from "../ForgotPassword/ForgotPassword";
 
 export const App: FC = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -21,6 +22,7 @@ export const App: FC = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={isLoggedIn ? <Account/> : <Login/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>}/>
           <Route path="/registration" element={localStorage.getItem("isLoggedIn") ? <Account/> : <Registration/>}/>
           <Route path="/registration/activate/:code" element={<Login/>}/>
           <Route path="/watchlist" element={<Watchlist/>}/>

@@ -40,12 +40,9 @@ public class User {
     private String password;
     private String activationCode;
     private String passwordResetCode;
-
-    @Column(name = "image_url")
     private String imageUrl;
-
-    @Column(name = "is_active")
     private boolean isActive;
+    private String domain;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(
