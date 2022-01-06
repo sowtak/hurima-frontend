@@ -18,9 +18,9 @@ import {Link} from "react-router-dom";
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
   const isLoggedIn: boolean = useSelector((state: AppStateType) => state.user.isLoggedIn);
-  const user = useSelector((state: AppStateType) => {
+  const username = useSelector((state: AppStateType) => {
     if (isLoggedIn) {
-      return state.user.user;
+      return state.user.user.username;
     } else return {};
   });
 
@@ -34,11 +34,11 @@ export const NavBar: FC = () => {
   if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
     links = (
       <li className='nav-item'>
-        <Link to='account' className='nav-link pe-3 ps-3 account'>
+        <Link to={`/${username}`} className='nav-link pe-3 ps-3 account'>
           <i className='pe-3 ps-3 fas fa-user'/>Account
         </Link>
       </li>
-    );
+    )
     signOut = (
       <Link to='/' onClick={handleLogout} className='nav-link ps-3 pe-3 signout'>
         <i className='pe-3 ps-3 fas fa-sign-out-alt'/>Sign out

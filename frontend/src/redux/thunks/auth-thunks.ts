@@ -23,6 +23,7 @@ export const registration = (userRegistrationData: UserRegistration) => async (d
     await RequestService.post('/registration', userRegistrationData);
     dispatch(registerSuccess());
   } catch (error: any) {
+    console.log(error);
     dispatch(registerFailure(error.response.data));
   }
 };

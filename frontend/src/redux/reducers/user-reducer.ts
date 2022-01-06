@@ -22,7 +22,7 @@ const initialState: InitialStateType = {
     successMessage: ""
 };
 
-const userReducer = (state: InitialStateType = initialState, action: UserActionTypes): InitialStateType => {
+const reducer = (state: InitialStateType = initialState, action: UserActionTypes): InitialStateType => {
 
     switch (action.type) {
         case LOADING_USER_INFO:
@@ -36,4 +36,4 @@ const userReducer = (state: InitialStateType = initialState, action: UserActionT
     }
 };
 
-export default userReducer;
+export default reducer;

@@ -40,7 +40,7 @@ const initialState: InitialStateType = {
   errors: {}
 };
 
-const authReducer = (state: InitialStateType = initialState, action: AuthActionTypes) => {
+const reducer = (state: InitialStateType = initialState, action: AuthActionTypes) => {
   switch (action.type) {
     case SHOW_LOADER:
       return {...state, loading: true, errors: {}};
@@ -62,12 +62,12 @@ const authReducer = (state: InitialStateType = initialState, action: AuthActionT
     }
 
     case LOGIN_FAILURE: {
-      console.log("FAILURE")
+      console.log("LOGIN FAILURE")
       return {...state, error: action.payload, loading: false};
     }
 
     case LOGIN_SUCCESS: {
-      console.log("SUCCESS")
+      console.log("LOGIN SUCCESS")
       return {...state, userRole: action.payload, loading: false};
     }
 
@@ -85,4 +85,4 @@ const authReducer = (state: InitialStateType = initialState, action: AuthActionT
   }
 };
 
-export default authReducer;
+export default reducer;

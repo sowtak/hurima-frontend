@@ -20,6 +20,7 @@ export const Registration: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [message, setMessage] = useState('');
   const isRegistered: boolean = useSelector((state: AppStateType) => state.auth.isRegistered);
   const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
   const errors: Partial<AuthErrors> = useSelector((state: AppStateType) => state.auth.errors);
@@ -40,8 +41,12 @@ export const Registration: FC = () => {
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const userRegistrationData: UserRegistration = {username, email, password, password2};
-    dispatch(registration(userRegistrationData));
+    if (isRegistered) {
+      setMessage("Email or Username is already taken");
+    } else {
+      const userRegistrationData: UserRegistration = {username, email, password, password2};
+      dispatch(registration(userRegistrationData));
+    }
   }
 
   return (
@@ -49,9 +54,14 @@ export const Registration: FC = () => {
       {loading ? <FullPageLoader/> : null}
       <h1>User Registration</h1>
       <hr/>
-      {isRegistered ? <div className='alert alert-success col-lg' role='alert'>
-        Activation code has been sent to your email.
-      </div> : null}
+      {isRegistered ?
+        <div className='alert alert-success col-lg' role='alert'>
+          Activation code has been sent to your email.
+        </div> : null}
+      {message ?
+        <div className='alert alert-danger col-lg' role='alert'>
+          {JSON.stringify(message)}
+        </div> : ""}
 
       <Form onSubmit={handleRegister}>
         <FormGroup id='username' className='form-group'>
@@ -64,6 +74,7 @@ export const Registration: FC = () => {
             className={usernameError ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           />
+          <div className='invalid-feedback'>{usernameError}</div>
         </FormGroup>
 
         <FormGroup id='email' className='form-group'>
@@ -73,9 +84,10 @@ export const Registration: FC = () => {
             type='email'
             placeholder='Email'
             value={email}
-            className={emailError ? 'form-control is-invalid' : 'form-control'}
+            className={emailError ? 'is-invalid' : ''}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           />
+          <div className='invalid-feedback'>{emailError}</div>
         </FormGroup>
 
         <FormGroup id='password' className='form-group'>
@@ -88,6 +100,7 @@ export const Registration: FC = () => {
             className={passwordError ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           />
+          <div className='invalid-feedback'>{passwordError}</div>
         </FormGroup>
 
         <FormGroup id='password2' className='form-group'>
@@ -100,6 +113,7 @@ export const Registration: FC = () => {
             className={password2Error ? 'form-control is-invalid' : 'form-control'}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword2(e.target.value)}
           />
+          <div className='invalid-feedback'>{password2Error}</div>
         </FormGroup>
 
         <br/>

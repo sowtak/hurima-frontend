@@ -6,15 +6,15 @@
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {AppStateType} from "../../redux/reducers/root-reducer";
+import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
-import {UserData} from "../../types/types";
-import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
+import {UserData} from "../../../types/types";
+import {activateAccount, formReset, login} from "../../../redux/thunks/auth-thunks";
 import {useParams} from "react-router";
-import {FormContainer} from "../../components/FormContainer/FormContainer";
+import {FormContainer} from "../../../components/FormContainer/FormContainer";
 
 import './Login.css';
-import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
+import {FullPageLoader} from "../../../components/FullPageLoader/FullPageLoader";
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
@@ -25,11 +25,14 @@ export const Login: FC = () => {
   const isRegistered = useSelector((state: AppStateType) => state.auth.isRegistered);
   const isLoggedIn= useSelector((state: AppStateType) => state.user.isLoggedIn);
   const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
+  const user = useSelector((state: AppStateType) => state.auth.user);
 
   const {code} = useParams();
   const navigate = useNavigate();
 
-  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn) navigate('/account');
+  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn){
+    navigate(`/${user.username}`);
+  }
 
   useEffect(() => {
     dispatch(formReset());
@@ -39,6 +42,8 @@ export const Login: FC = () => {
       dispatch(activateAccount(code));
     }
   }, []);
+
+
 
   const handleSignIn = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();

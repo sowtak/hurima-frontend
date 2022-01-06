@@ -6,9 +6,9 @@
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {Button, Col, Container, Form, FormControl, FormLabel, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
-import {forgotPassword} from "../../redux/thunks/auth-thunks";
+import {AppStateType} from "../../../redux/reducers/root-reducer";
+import {FullPageLoader} from "../../../components/FullPageLoader/FullPageLoader";
+import {forgotPassword} from "../../../redux/thunks/auth-thunks";
 
 export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
