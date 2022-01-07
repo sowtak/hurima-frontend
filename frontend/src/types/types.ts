@@ -32,3 +32,19 @@ export type UserRegistration = {
     password: string
     password2: string
 };
+
+export type Item = {
+    id: number
+    name: string
+    userEmailDomain: string
+    condition: string
+    description: string
+    price: string
+}
+
+export type AppPropsType = {
+    data: Array<Item> | any
+    searchByData: Array<{ label: string, value: string}> | any
+    setFilteredData: (value: (((previousState: Array<Item>) => Array<Item>)))=> void
+    setSearching: (value: (((previousState: boolean | any) => boolean | any) | boolean | any)) => void
+};

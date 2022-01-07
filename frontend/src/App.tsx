@@ -14,8 +14,9 @@ import {AppStateType} from "./redux/reducers/root-reducer";
 import {UserProfile} from "./pages/User/UserProfile/UserProfile";
 import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
+import {AppPropsType} from "./types/types";
 
-export const App: FC = () => {
+export const App: FC<AppPropsType> = ({data, searchByData, setFilteredData, setSearching}) => {
   //const isLoggedIn = localStorage.getItem("isLoggedIn");
   const username = useSelector((state: AppStateType) => state.auth.user.username);
 

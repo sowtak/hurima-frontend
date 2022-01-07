@@ -14,6 +14,8 @@ import {Container, Nav, Navbar} from "react-bootstrap";
 
 import './NavBar.css';
 import {Link} from "react-router-dom";
+import {SearchBar} from "../SearchBar/SearchBar";
+import {AppPropsType} from "../../types/types";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
@@ -66,10 +68,12 @@ export const NavBar: FC = () => {
   return (
     <>
       <Navbar className='navbar navbar-expand-lg navbar-dark hurima-navbar' collapseOnSelect>
-        <Container className='container-fluid hurima-logo'>
+        <div className='container container-fluid hurima-logo'>
+
           <LinkContainer to='/'>
             <img src={logo} className='pe-5' alt=""/>
           </LinkContainer>
+
           <Nav className='navbar-nav ml-auto'>
             <Navbar.Toggle aria-controls='basic-navbar-nav'/>
             <Navbar.Collapse id='basic-navbar-nav'>
@@ -94,7 +98,7 @@ export const NavBar: FC = () => {
 
             </Navbar.Collapse>
           </Nav>
-        </Container>
+        </div>
       </Navbar>
     </>
   )
