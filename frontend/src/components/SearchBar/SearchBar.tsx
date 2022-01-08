@@ -5,7 +5,7 @@
  */
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {Button, Col, Form, FormControl, FormSelect, Row} from "react-bootstrap";
-import {AppPropsType} from "../../types/types";
+import {AppPropsType, Item} from "../../types/types";
 
 
 export const SearchBar: FC<AppPropsType> = ({data, searchByData, setFilteredData, setSearching}) => {
@@ -19,8 +19,8 @@ export const SearchBar: FC<AppPropsType> = ({data, searchByData, setFilteredData
 
     if (searchQuery.trim() !== '') {
       setSearching(true);
-      const filteredData = [...data].filter((userEmailDomain: any) => {
-        let searchKey: string = '';
+      const filteredData: Array<Item> = [...data].filter((userEmailDomain: any) => {
+        let searchKey: string = 'gmail.com';
         if (searchByData && searchByData.length > 0) {
           searchKey = searchBy;
         }
@@ -43,7 +43,7 @@ export const SearchBar: FC<AppPropsType> = ({data, searchByData, setFilteredData
                           value={searchBy}
                           onChange={(event: ChangeEvent<HTMLSelectElement>) => setSearchBy(event.target.value)}
               >
-                {searchByData.map((data, index) => (
+                {searchByData.map((data: any, index: any) => (
                   <option key={index} value={data.value}>{data.label}</option>
                 ))}
               </FormSelect>

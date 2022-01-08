@@ -1,6 +1,5 @@
 package com.tkyngs.hurima.service.impl;
 
-import com.tkyngs.hurima.model.domain.Role;
 import com.tkyngs.hurima.model.entity.User;
 import com.tkyngs.hurima.repository.UserRepository;
 import com.tkyngs.hurima.security.jwt.JwtTokenProvider;
@@ -47,7 +46,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       return false;
     }
     user.setActive(false);
-    user.setRoles(Collections.singleton(Role.USER));
+    user.setRole("USER");
     user.setActivationCode(UUID.randomUUID().toString());
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepository.save(user);
@@ -86,7 +85,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     log.info("LOGGING USER IN");
     User user = userRepository.findByEmail(email);
     System.out.println(user);
-    String userRole = user.getRoles().iterator().next().name();
+    String userRole = "USER";
     String token = jwtTokenProvider.generateToken(email, userRole);
 
     Map<String, String> response = new HashMap<>();

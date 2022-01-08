@@ -74,6 +74,8 @@ export const NavBar: FC = () => {
             <img src={logo} className='pe-5' alt=""/>
           </LinkContainer>
 
+          <SearchBar data={} searchByData={} setFilteredData={} setSearching={}/>
+
           <Nav className='navbar-nav ml-auto'>
             <Navbar.Toggle aria-controls='basic-navbar-nav'/>
             <Navbar.Collapse id='basic-navbar-nav'>

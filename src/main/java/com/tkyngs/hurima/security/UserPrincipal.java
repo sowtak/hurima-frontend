@@ -29,7 +29,7 @@ public class UserPrincipal implements UserDetails {
      * @return Userinfo
      */
     public static UserPrincipal create(User user) {
-        String userRole = user.getRoles().iterator().next().toString();
+        String userRole = user.getRole();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
         System.out.println(userRole);
         System.out.println(authorities);

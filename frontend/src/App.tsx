@@ -5,7 +5,6 @@ import {NavBar} from "./components/NavBar/NavBar";
 import {NotFound} from "./pages/NotFound/NotFound";
 import {Login} from "./pages/Auth/Login/Login";
 import {Watchlist} from "./pages/Watchlist/Watchlist";
-import {Registration} from "./pages/Registration/Registration";
 import {Items} from "./pages/Items/Items";
 import {Footer} from "./components/Footer/Footer";
 import {ForgotPassword} from "./pages/Auth/ForgotPassword/ForgotPassword";
@@ -16,7 +15,7 @@ import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
 import {AppPropsType} from "./types/types";
 
-export const App: FC<AppPropsType> = ({data, searchByData, setFilteredData, setSearching}) => {
+export const App: FC = () => {
   //const isLoggedIn = localStorage.getItem("isLoggedIn");
   const username = useSelector((state: AppStateType) => state.auth.user.username);
 

@@ -1,6 +1,5 @@
 package com.tkyngs.hurima.model.dto.user;
 
-import com.tkyngs.hurima.model.domain.Role;
 import lombok.Data;
 
 import java.util.Set;
@@ -18,6 +17,6 @@ public class UserRequest {
   private String email;
   private boolean isActive;
   private String activationCode;
-  private Set<Role> roles;
+  private String role;
 
 }

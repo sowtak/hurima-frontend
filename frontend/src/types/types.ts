@@ -36,15 +36,17 @@ export type UserRegistration = {
 export type Item = {
     id: number
     name: string
-    userEmailDomain: string
+    seller: User
+    sellerEmailDomain: string
     condition: string
     description: string
     price: string
 }
 
 export type AppPropsType = {
+    loading: boolean
     data: Array<Item> | any
     searchByData: Array<{ label: string, value: string}> | any
-    setFilteredData: (value: (((previousState: Array<Item>) => Array<Item>)))=> void
+    setFilteredData: (value: (((previousState: Array<Item>) => Array<Item>) | Array<Item>))=> void
     setSearching: (value: (((previousState: boolean | any) => boolean | any) | boolean | any)) => void
 };
