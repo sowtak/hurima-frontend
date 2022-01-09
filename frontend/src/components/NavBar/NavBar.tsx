@@ -6,16 +6,17 @@
 import {FC} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/reducers/root-reducer";
-import {LinkContainer} from 'react-router-bootstrap';
 
 import logo from '../../images/icons/HUrima-logo-purple.svg';
 import {logout} from "../../redux/thunks/auth-thunks";
-import {Container, Nav, Navbar} from "react-bootstrap";
 
 import './NavBar.css';
 import {Link} from "react-router-dom";
-import {SearchBar} from "../SearchBar/SearchBar";
-import {AppPropsType} from "../../types/types";
+import {AppBar, Box, Container, Toolbar} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import {SearchIconWrapper} from "../SearchBar/SearchBarStyles";
+import {Search, StyledInputBase} from "../SearchBar/SearchBarStyles";
+import {AppRegistration, Login, Logout, RemoveRedEye} from "@mui/icons-material";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export const NavBar: FC = () => {
     )
     signOut = (
       <Link to='/' onClick={handleLogout} className='nav-link ps-3 pe-3 signout'>
-        <i className='pe-3 ps-3 fas fa-sign-out-alt'/>Sign out
+        <Logout className='pe-3 ps-3'/>Sign out
       </Link>
     );
   } else {
@@ -51,12 +52,12 @@ export const NavBar: FC = () => {
       <>
         <li className='nav-item'>
           <Link to='/login' className='nav-link ps-3 pe-3 login'>
-            <i className='ps-3 fas fa-sign-in-alt'/>Log in
+            <Login className='ps-3'/>Log in
           </Link>
         </li>
         <li>
           <Link to='/registration' className='nav-link ps-3 pe-3 signup'>
-            <i className='ps-3 fa fa-user-plus'/><span>Sign up</span>
+            <AppRegistration className='ps-3'/><span>Sign up</span>
           </Link>
         </li>
       </>
@@ -66,19 +67,27 @@ export const NavBar: FC = () => {
 
 
   return (
-    <>
-      <Navbar className='navbar navbar-expand-lg navbar-dark hurima-navbar' collapseOnSelect>
-        <div className='container container-fluid hurima-logo'>
+    <Box sx={{ flexGrow: 1}}>
+      <AppBar position='static'>
+        <Container maxWidth='xl'>
+          <Toolbar disableGutters={true}>
+            <Link to='/'>
+              <img src={logo} className='pe-5' alt=""/>
+            </Link>
 
-          <LinkContainer to='/'>
-            <img src={logo} className='pe-5' alt=""/>
-          </LinkContainer>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon/>
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder='Search...'
+                inputProps={{ 'aria-label': 'search'}}
+              />
+            </Search>
 
-          <SearchBar data={} searchByData={} setFilteredData={} setSearching={}/>
 
-          <Nav className='navbar-nav ml-auto'>
-            <Navbar.Toggle aria-controls='basic-navbar-nav'/>
-            <Navbar.Collapse id='basic-navbar-nav'>
+
+
               <>
                 <ul className='navbar-nav ml-auto'>
                   <li className='nav-item'>
@@ -90,19 +99,16 @@ export const NavBar: FC = () => {
                 <ul className='navbar-nav ml-auto'>
                   <li className='nav-item'>
                     <Link to='/watchlist' className='nav-link pe-3 ps-3 watchlist'>
-                      <i className='ps-3 fas fa-eye m-lg-auto'/>Watch
+                      <RemoveRedEye className='ps-3 m-lg-auto'/><span className='fg-white'>Watch</span>
                     </Link>
                   </li>
                   {links}
                 </ul>
                 {signOut}
               </>
-
-            </Navbar.Collapse>
-          </Nav>
-        </div>
-      </Navbar>
-    </>
-  )
-    ;
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </Box>
+  );
 };

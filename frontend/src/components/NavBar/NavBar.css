@@ -1,6 +1,10 @@
+.bg-black {
+    background-color: black;
+}
+
 .hurima-navbar {
     font-weight: bold;
-    color: white;
+    background-color: black;
 }
 
 .hurima-logo {
@@ -21,6 +25,7 @@
 
 .watchlist i {
     display: flex;
+    color: white;
 }
 
 .login i {

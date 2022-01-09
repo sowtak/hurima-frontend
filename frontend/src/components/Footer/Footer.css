@@ -5,6 +5,10 @@
     z-index: -1;
 }
 
+.footer-bg *{
+    background-color: black;
+}
+
 html {
     position: relative;
     min-height: 100%;

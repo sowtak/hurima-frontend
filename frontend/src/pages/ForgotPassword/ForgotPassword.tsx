@@ -4,13 +4,17 @@
  * @version 1.0.0
  */
 import {ChangeEvent, FC, FormEvent, useState} from "react";
-import {Button, Col, Container, Form, FormControl, FormLabel, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/reducers/root-reducer";
-import {FullPageLoader} from "../../../components/FullPageLoader/FullPageLoader";
-import {forgotPassword} from "../../../redux/thunks/auth-thunks";
+import {AppStateType} from "../../redux/reducers/root-reducer";
+import {Spinner} from "../../components/Spinner/Spinner";
+import {forgotPassword} from "../../redux/thunks/auth-thunks";
+import {useForgotPasswordStyles} from "./ForgotPasswordStyles";
+import {Alert, Button} from "@mui/material";
+import {ForgotPasswordTextField} from "./ForgotPasswordTextField";
+import {Feedback, Send} from "@mui/icons-material";
 
 export const ForgotPassword: FC = () => {
+  const classes = useForgotPasswordStyles();
   const dispatch = useDispatch();
   const error = useSelector((state: AppStateType) => state.auth.error);
   const success = useSelector((state: AppStateType) => state.auth.success);
@@ -32,16 +36,30 @@ export const ForgotPassword: FC = () => {
   }
 
   return (
-    <Container className='mt-5'>
-      {loading? <FullPageLoader/> : null}
-
+    <div className={classes.container}>
       <h1>Find Your Account</h1>
       <br/>
       <p>Please enter your email to search for your account.</p>
-      {error ? <div className='alert- alert-danger col-lg' role='alert'>{error}</div> : null}
-      {success ? <div className='alert- alert-success col-lg' role=''>{success}</div> : null}
+      {error ? <Alert severity='error'>{error}</Alert> : null}
+      {success ? <Alert severity='success'>{success}</Alert> : null}
 
-      <Form onSubmit={handleSendEmail}>
+      <form onSubmit={handleSendEmail}>
+        <div className={classes.input}>
+          <ForgotPasswordTextField
+            variant='outlined'
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+            value={email}
+            />
+        </div>
+        <Feedback>{emailValidationError}</Feedback>
+        <br/>
+        <Button className={classes.button}
+                type='submit'
+                variant='contained'
+                color='primary'
+        >
+          <Send className='send-reset-code'><span className='ps-2'>Send reset code</span></Send>
+        </Button>
         <Row>
           <Col>
             <FormLabel className='col-lg-2'>Email</FormLabel>
@@ -51,12 +69,10 @@ export const ForgotPassword: FC = () => {
                            className={emailValidationError ? 'form-control is-invalid' : ''}
                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
               />
-              <div className='invalid-feedback'>{emailValidationError}</div>
             </div>
           </Col>
         </Row>
 
-        <br/>
 
         <Row>
           <Col>
@@ -66,7 +82,7 @@ export const ForgotPassword: FC = () => {
           </Col>
         </Row>
 
-      </Form>
-    </Container>
+      </form>
+    </div>
   )
 }

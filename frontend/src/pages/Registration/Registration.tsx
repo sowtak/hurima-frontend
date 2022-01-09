@@ -11,7 +11,7 @@ import {AuthErrors, UserRegistration} from "../../types/types";
 import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FormContainer} from "../../components/FormContainer/FormContainer";
-import {FullPageLoader} from "../../components/FullPageLoader/FullPageLoader";
+import {Spinner} from "../../components/Spinner/Spinner";
 
 import './Registration.css';
 
@@ -51,7 +51,7 @@ export const Registration: FC = () => {
 
   return (
     <FormContainer>
-      {loading ? <FullPageLoader/> : null}
+      {loading ? <Spinner/> : null}
       <h1>User Registration</h1>
       <hr/>
       {isRegistered ?

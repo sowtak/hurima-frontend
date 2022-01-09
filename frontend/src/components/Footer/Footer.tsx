@@ -4,14 +4,14 @@
  * @version 1.0.0
  */
 import {FC} from "react";
-import {Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 import './Footer.css';
+import {Container} from "@mui/material";
 
 export const Footer: FC = () => {
   return (
-    <footer className="hurima-footer p-5 bg-black text-white">
+    <footer className="hurima-footer footer-bg p-5 bg-black text-white">
       <Container>
         <div className='d-flex justify-content-between'>
           <div className='footer-left'>
