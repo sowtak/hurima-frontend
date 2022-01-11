@@ -25,7 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1/registration")
+@RequestMapping("/api/v1/account/registration")
 public class RegistrationController {
 
   private static final Logger log = LoggerFactory.getLogger(Logger.class);

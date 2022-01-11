@@ -7,7 +7,7 @@ import {AuthErrors, User} from "../../types/types";
 import {
   ACTIVATE_ACCOUNT_FAILURE,
   ACTIVATE_ACCOUNT_SUCCESS,
-  AuthActionTypes, FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_SUCCESS,
+  AuthActions, FORGOT_PASSWORD_FAILURE, FORGOT_PASSWORD_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
@@ -16,7 +16,7 @@ import {
   SHOW_LOADER
 } from "../action-types/auth-action-types";
 
-export type InitialStateType = {
+export type InitialState = {
   user: Partial<User>
   userEmail: string | null
   userRole: string | null
@@ -28,7 +28,7 @@ export type InitialStateType = {
   errors: Partial<AuthErrors>
 };
 
-const initialState: InitialStateType = {
+const initialState: InitialState = {
   user: {},
   userEmail: "",
   userRole: "",
@@ -40,7 +40,7 @@ const initialState: InitialStateType = {
   errors: {}
 };
 
-const reducer = (state: InitialStateType = initialState, action: AuthActionTypes) => {
+const reducer = (state: InitialState = initialState, action: AuthActions) => {
   switch (action.type) {
     case SHOW_LOADER:
       return {...state, loading: true, errors: {}};

@@ -4,29 +4,24 @@
  * @version 1.0.0
  */
 import {styled} from "@mui/material/styles";
+import {TextField} from "@mui/material";
 
-export const useForgotPasswordStyles = styled('div')(({theme}) => ({
-  container: {
-    fontFamily: "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "& a": {
-      textDecoration: "none",
+export const ForgotPasswordContainer = styled('div')`
+  fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  & a: {
+   textDecoration: none;
+  }
+`;
+
+export const ForgotPasswordTextField = styled('div')(() =>({
+  root: {
+    '& .MuiOutlinedInput-root': {
+      width: 400,
+      height: 40,
+      borderRadius: 30,
+      border: '1px solid',
+      padding: 0,
+      paddingLeft: 15,
     }
-  },
-  error: {
-    padding: "15px 15px",
-    borderRadius: 15,
-    marginBottom: 10,
-    fontSize: 15,
-    fontWeight: 400,
-    backgroundColor: "rgb(255, 224, 224)"
-  },
-  input: {
-    marginBottom: 25
-  },
-  button: {
-    height: 50,
-    "& .button-label": {
-      fontSize: 15
-    }
-  },
-}));
+  }
+}))(TextField);

@@ -6,31 +6,27 @@
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {UserData} from "../../types/types";
-import {activateAccount, formReset, login} from "../../redux/thunks/auth-thunks";
+import {AppState} from "../../store/rootReducer";
+import {activateAccount, formReset, login} from "../../store/thunks/auth-thunks";
 import {useParams} from "react-router";
-import {useLoginStyles} from "./LoginStyles";
-import {Error} from "@mui/icons-material";
-import {Alert, Button, Typography} from "@mui/material";
-import {LoginTextField} from "./LoginTextField";
+import {LoginFormContainer, LoginFormError, LoginInputField, LoginSubmitButton} from "./LoginStyles";
+import {UserData} from "../../types/types";
 
 export const Login: FC = () => {
-  const classes = useLoginStyles();
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const error = useSelector((state: AppStateType) => state.auth.error);
-  const success = useSelector((state: AppStateType) => state.auth.success);
-  const isRegistered = useSelector((state: AppStateType) => state.auth.isRegistered);
-  const isLoggedIn = useSelector((state: AppStateType) => state.user.isLoggedIn);
-  const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
-  const user = useSelector((state: AppStateType) => state.auth.user);
+  const error = useSelector((state: AppState) => state.auth.error);
+  const success = useSelector((state: AppState) => state.auth.success);
+  const isRegistered = useSelector((state: AppState) => state.auth.isRegistered);
+  const isLoggedIn= useSelector((state: AppState) => state.user.isLoggedIn);
+  const loading: boolean = useSelector((state: AppState) => state.auth.loading);
+  const user = useSelector((state: AppState) => state.auth.user);
 
   const {code} = useParams();
   const navigate = useNavigate();
 
-  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn) {
+  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn){
     navigate(`/${user.username}`);
   }
 
@@ -43,56 +39,45 @@ export const Login: FC = () => {
     }
   }, []);
 
-  const handleSignIn = (event: FormEvent<HTMLFormElement>): void => {
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userData: UserData = {email, password};
     dispatch(login(userData));
   }
 
   return (
-    <div className={classes.container}>
-      <h1>Login to HUrima</h1>
-      <hr/>
-      {error ? <Alert severity='error'>{error}</Alert> : null}
-      {success ? <Alert severity='success'>{success}</Alert> : null}
-      <form onSubmit={handleSignIn}>
-        <div className={classes.input}>
-          <LoginTextField
-            label="Email"
-            type="email"
+    <LoginFormContainer>
+      <h1>Log in to HUrima</h1>
+      {error && <LoginFormError>Email or password is wrong.</LoginFormError>}
+
+      <form onSubmit={handleLogin}>
+        <div style={{marginBottom: 24}}>
+          <LoginInputField
+            label='Email'
+            type='email'
             variant='filled'
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+            onChange={(event: ChangeEvent<HTMLFormElement>) => setEmail(event.target.value)}
             value={email}
           />
         </div>
-        <div className={classes.input}>
-          <LoginTextField
-            label="Password"
-            type="password"
+        <div style={{marginBottom: 24}}>
+          <LoginInputField
+            label='Password'
+            type='password'
             variant='filled'
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-            value={password}
-          />
+            onChange={(event: ChangeEvent<HTMLFormElement>) => setPassword(event.target.value)}
+            />
         </div>
-        <Typography component={"span"}>
-          <Link to="/forgot-password">Forgot password?</Link>
-        </Typography>
-        <Button
-          className={classes.button}
-          type="submit"
-          variant="contained"
-          color="primary"
+        <LoginSubmitButton
+          type='submit'
+          variant='contained'
+          color='primary'
           disabled={!(email && password)}
           fullWidth
         >
           Log in
-        </Button>
+        </LoginSubmitButton>
       </form>
-
-      <Typography component={"span"}>
-        Don't have an account? <Link to="/registration">Sign up</Link>
-      </Typography>
-
-    </div>
+    </LoginFormContainer>
   );
 };

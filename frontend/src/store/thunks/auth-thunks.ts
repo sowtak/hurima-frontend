@@ -15,12 +15,12 @@ import {
   registerSuccess, reset,
   showLoader
 } from "../actions/auth-actions";
-import RequestService from "../../api/request-service";
+import RequestService from "../../api/requestService";
 
 export const registration = (userRegistrationData: UserRegistration) => async (dispatch: Dispatch) => {
   try {
     dispatch(showLoader());
-    await RequestService.post('/registration', userRegistrationData);
+    await RequestService.post('/account/registration', userRegistrationData);
     dispatch(registerSuccess());
   } catch (error: any) {
     console.log(error);
@@ -30,7 +30,7 @@ export const registration = (userRegistrationData: UserRegistration) => async (d
 
 export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
   try {
-    const response = await RequestService.get("/registration/activate/" + code);
+    const response = await RequestService.get("/account/registration/activate/" + code);
     dispatch(activateAccountSuccess(response.data));
   } catch (error: any) {
     dispatch(activateAccountFailure(error.response.data));

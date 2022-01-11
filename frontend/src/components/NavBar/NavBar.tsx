@@ -5,10 +5,10 @@
  */
 import {FC} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/reducers/root-reducer";
+import {AppState} from "../../store/rootReducer";
 
 import logo from '../../images/icons/HUrima-logo-purple.svg';
-import {logout} from "../../redux/thunks/auth-thunks";
+import {logout} from "../../store/thunks/auth-thunks";
 
 import './NavBar.css';
 import {Link} from "react-router-dom";
@@ -16,12 +16,13 @@ import {AppBar, Box, Container, Toolbar} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {SearchIconWrapper} from "../SearchBar/SearchBarStyles";
 import {Search, StyledInputBase} from "../SearchBar/SearchBarStyles";
-import {AppRegistration, Login, Logout, RemoveRedEye} from "@mui/icons-material";
+import {AppRegistration, Login, Logout, Person, RemoveRedEye} from "@mui/icons-material";
+import { Navbar } from "./NavBarStyles";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
-  const isLoggedIn: boolean = useSelector((state: AppStateType) => state.user.isLoggedIn);
-  const username = useSelector((state: AppStateType) => {
+  const isLoggedIn: boolean = useSelector((state: AppState) => state.user.isLoggedIn);
+  const username = useSelector((state: AppState) => {
     if (isLoggedIn) {
       return state.user.user.username;
     } else return {};
@@ -38,26 +39,26 @@ export const NavBar: FC = () => {
     links = (
       <li className='nav-item'>
         <Link to={`/${username}`} className='nav-link pe-3 ps-3 account'>
-          <i className='pe-3 ps-3 fas fa-user'/>Account
+          <Person/>Account
         </Link>
       </li>
     )
     signOut = (
       <Link to='/' onClick={handleLogout} className='nav-link ps-3 pe-3 signout'>
-        <Logout className='pe-3 ps-3'/>Sign out
+        <Logout/>Sign out
       </Link>
     );
   } else {
     links = (
       <>
         <li className='nav-item'>
-          <Link to='/login' className='nav-link ps-3 pe-3 login'>
+          <Link to='/login'>
             <Login className='ps-3'/>Log in
           </Link>
         </li>
         <li>
-          <Link to='/registration' className='nav-link ps-3 pe-3 signup'>
-            <AppRegistration className='ps-3'/><span>Sign up</span>
+          <Link to='/account/registration'>
+            <AppRegistration className='ps-3'/>Sign up
           </Link>
         </li>
       </>
@@ -68,7 +69,7 @@ export const NavBar: FC = () => {
 
   return (
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position='static'>
+      <Navbar>
         <Container maxWidth='xl'>
           <Toolbar disableGutters={true}>
             <Link to='/'>
@@ -108,7 +109,7 @@ export const NavBar: FC = () => {
               </>
           </Toolbar>
         </Container>
-      </AppBar>
+      </Navbar>
     </Box>
   );
 };

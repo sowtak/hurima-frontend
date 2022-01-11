@@ -37,7 +37,7 @@ class MailSenderTest {
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> request = new HttpEntity<>(payload, headers);
 
-    ResponseEntity<Void> response = this.template.postForEntity("/api/v1/registration", request, Void.class);
+    ResponseEntity<Void> response = this.template.postForEntity("/api/v1/account/registration", request, Void.class);
 
     assertEquals(200, response.getStatusCodeValue());
 

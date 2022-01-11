@@ -5,20 +5,17 @@
  */
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {Spinner} from "../../components/Spinner/Spinner";
-import {forgotPassword} from "../../redux/thunks/auth-thunks";
-import {useForgotPasswordStyles} from "./ForgotPasswordStyles";
-import {Alert, Button} from "@mui/material";
-import {ForgotPasswordTextField} from "./ForgotPasswordTextField";
+import {AppState} from "../../../store/rootReducer";
+import {forgotPassword} from "../../../store/thunks/auth-thunks";
+import {Alert, Box, Button} from "@mui/material";
+import {ForgotPasswordTextField} from "../ForgotPasswordStyles";
 import {Feedback, Send} from "@mui/icons-material";
 
-export const ForgotPassword: FC = () => {
-  const classes = useForgotPasswordStyles();
+export const ResetPassword: FC = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state: AppStateType) => state.auth.error);
-  const success = useSelector((state: AppStateType) => state.auth.success);
-  const loading = useSelector((state: AppStateType) => state.auth.loading);
+  const error = useSelector((state: AppState) => state.auth.error);
+  const success = useSelector((state: AppState) => state.auth.success);
+  const loading = useSelector((state: AppState) => state.auth.loading);
   const [email, setEmail] = useState<string>('');
   const [emailValidationError, setEmailValidationError] = useState<string>("");
 
@@ -36,7 +33,7 @@ export const ForgotPassword: FC = () => {
   }
 
   return (
-    <div className={classes.container}>
+    <Box sx={classes.container}>
       <h1>Find Your Account</h1>
       <br/>
       <p>Please enter your email to search for your account.</p>
@@ -83,6 +80,6 @@ export const ForgotPassword: FC = () => {
         </Row>
 
       </form>
-    </div>
+    </Box>
   )
 }

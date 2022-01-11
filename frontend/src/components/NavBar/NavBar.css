@@ -4,19 +4,12 @@
 
 .hurima-navbar {
     font-weight: bold;
-    background-color: black;
-}
-
-.hurima-logo {
-    margin-right: 200px;
-}
-
-.hurima-logo:hover {
-    cursor: pointer;
 }
 
 .hurima-logo-text {
-    font-weight: bold;
+    fontWeight: bold;
+    borderBottom: "0px solid #e1e8ed";
+    boxShadow: "0 0 3px #aaa";
 }
 
 .items i {

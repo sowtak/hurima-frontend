@@ -6,6 +6,6 @@
 
 export const FORM_RESET = "FORM_RESET";
 
-export type ResetActionType = {type: typeof FORM_RESET};
+export type ResetAction = {type: typeof FORM_RESET};
 
-export type AdminActionType = ResetActionType;
+export type AdminAction = ResetAction;

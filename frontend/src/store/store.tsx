@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {applyMiddleware, createStore} from "redux";
-import rootReducer from "./redux/reducers/root-reducer";
+import rootReducer from "./rootReducer";
 import thunk from "redux-thunk";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

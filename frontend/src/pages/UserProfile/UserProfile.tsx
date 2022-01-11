@@ -5,7 +5,7 @@
  */
 import {FC, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {formReset} from "../../redux/thunks/auth-thunks";
+import {formReset} from "../../store/thunks/auth-thunks";
 import {NavLink} from "react-router-dom";
 
 export const User: FC = () => {

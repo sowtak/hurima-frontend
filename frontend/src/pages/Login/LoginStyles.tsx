@@ -4,27 +4,34 @@
  * @version 1.0.0
  */
 import {styled} from "@mui/material/styles";
+import {Button, Container, TextField, Typography} from "@mui/material";
 
-export const useLoginStyles = styled('div')(({theme}) => ({
-  container: {
-    width: 400,
-    margin: "0 auto",
-  },
-  error: {
-    padding: "15px 15px",
-    borderRadius: 15,
-    marginBottom: 10,
-    fontSize: 15,
-    fontWeight: 400,
-    backgroundColor: "rgb(255, 224, 224)"
-  },
-  input: {
-    marginBottom: 25
-  },
-  button: {
-    height: 50,
-    "& .button-label": {
-      fontSize: 15
-    }
-  },
-}));
+export const LoginFormContainer = styled(Container)`
+  width: 340;
+  margin: 0 auto;
+`;
+
+export const LoginSubmitButton = styled(Button)`
+  height: 50;
+  
+  % .MuiButton-label: {
+    fontSize: 13;
+  }
+`;
+
+export const LoginFormError = styled(Typography)`
+  padding: 12 16;
+  borderRadius: 12;
+  marginBottom: 12;
+  fontSize: 15;
+  fontWeight: 400;
+  backgroundColor: rgb(255, 210, 218);
+`;
+
+export const LoginInputField = styled(TextField)`
+  height: 60;
+  width: 340;
+  border: 1px solid #f1f1e9;
+  overflow: hidden;
+  borderRadius: 4;
+`;

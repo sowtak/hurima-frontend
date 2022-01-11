@@ -6,7 +6,7 @@
 import {FC} from "react";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {AppStateType} from "../../redux/reducers/root-reducer";
+import {AppState} from "../../store/rootReducer";
 
 export const Watchlist: FC = () => {
   return (

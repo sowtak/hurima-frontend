@@ -6,14 +6,12 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk, {ThunkDispatch} from "redux-thunk";
-import {InitialStateType} from "../../../redux/reducers/auth-reducer";
+import {InitialState} from "../../../store/reducers/authReducer";
 import {Action} from "redux";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import fn = jest.fn;
 
-const mockStore = configureMockStore<InitialStateType, ThunkDispatch<InitialStateType, void, Action>>([thunk]);
+const mockStore = configureMockStore<InitialState, ThunkDispatch<InitialState, void, Action>>([thunk]);
 const mock = new MockAdapter(axios);
 const store = mockStore();
 

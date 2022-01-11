@@ -4,23 +4,23 @@
  * @version 1.0.0
  */
 import {
-    FETCH_USER_SUCCESS, FetchUserSuccessActionType,
+    FETCH_USER_SUCCESS, FetchUserSuccessAction,
     LOADING_USER_INFO,
-    LoadingUserInfoActionType,
+    LoadingUserInfoAction,
     RESET_INPUT_FORM,
-    ResetInputFormActionType
+    ResetInputFormAction
 } from "../action-types/user-action-types";
 import {User} from "../../types/types";
 
-export const resetInputForm = (): ResetInputFormActionType => ({
+export const resetInputForm = (): ResetInputFormAction => ({
     type: RESET_INPUT_FORM,
 });
 
-export const loadingUserInfo = (): LoadingUserInfoActionType => ({
+export const loadingUserInfo = (): LoadingUserInfoAction => ({
     type: LOADING_USER_INFO
 });
 
-export const fetchUserSuccess = (user: User): FetchUserSuccessActionType => ({
+export const fetchUserSuccess = (user: User): FetchUserSuccessAction => ({
     type: FETCH_USER_SUCCESS,
     payload: user
 });

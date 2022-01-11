@@ -5,15 +5,12 @@
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {formReset, registration} from "../../redux/thunks/auth-thunks";
+import {AppState} from "../../store/rootReducer";
+import {formReset, registration} from "../../store/thunks/auth-thunks";
 import {AuthErrors, UserRegistration} from "../../types/types";
-import {Button, Col, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {FormContainer} from "../../components/FormContainer/FormContainer";
 import {Spinner} from "../../components/Spinner/Spinner";
 
-import './Registration.css';
 
 export const Registration: FC = () => {
   const [username, setUsername] = useState('');
@@ -21,9 +18,9 @@ export const Registration: FC = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [message, setMessage] = useState('');
-  const isRegistered: boolean = useSelector((state: AppStateType) => state.auth.isRegistered);
-  const loading: boolean = useSelector((state: AppStateType) => state.auth.loading);
-  const errors: Partial<AuthErrors> = useSelector((state: AppStateType) => state.auth.errors);
+  const isRegistered: boolean = useSelector((state: AppState) => state.auth.isRegistered);
+  const loading: boolean = useSelector((state: AppState) => state.auth.loading);
+  const errors: Partial<AuthErrors> = useSelector((state: AppState) => state.auth.errors);
   const {usernameError, emailError, passwordError, password2Error} = errors;
 
   const dispatch = useDispatch();

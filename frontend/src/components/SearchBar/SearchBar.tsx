@@ -4,68 +4,56 @@
  * @version 1.0.0
  */
 import {ChangeEvent, FC, FormEvent, useState} from "react";
-import {Button, Col, Form, FormControl, FormSelect, Row} from "react-bootstrap";
-import {AppPropsType, Item} from "../../types/types";
+import {Grid} from "@mui/material";
+import {Autocomplete} from "@mui/lab";
+import {connect, useSelector} from "react-redux";
 
 
-export const SearchBar: FC<AppPropsType> = ({data, searchByData, setFilteredData, setSearching}) => {
+export const SearchBar: FC = (props) => {
+  const [value, setValue] = useState<string | null | never>('');
+  const searchSuggestions = useSelector(state => state.searchKey);
+  let selectedValue = null;
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchBy, setSearchBy] = useState('');
-  const [searchFor, setSearchFor] = useState('');
+  const getSearchKeyword = () => {
+    return document.querySelector('input[id="search-bar"]')?.nodeValue
+  }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
-    if (searchQuery.trim() !== '') {
-      setSearching(true);
-      const filteredData: Array<Item> = [...data].filter((userEmailDomain: any) => {
-        let searchKey: string = 'gmail.com';
-        if (searchByData && searchByData.length > 0) {
-          searchKey = searchBy;
-        }
-        return userEmailDomain[searchKey].toLowerCase().includes(searchQuery.trim().toLowerCase());
-      });
-      setFilteredData(filteredData);
-    } else {
-      setFilteredData(data);
-    }
-    setSearchFor(searchQuery);
-  };
-
+  const handleInputChange = (event: ChangeEvent, newValue: string) => {
+    selectedValue = newValue;
+    props.getSearchSuggestions(newValue);
+  }
   return (
-    <div>
-      <Row>
-        {searchByData && searchByData.length > 0 &&
-          <>
-            <Col>
-              <FormSelect className='form-control'
-                          value={searchBy}
-                          onChange={(event: ChangeEvent<HTMLSelectElement>) => setSearchBy(event.target.value)}
-              >
-                {searchByData.map((data: any, index: any) => (
-                  <option key={index} value={data.value}>{data.label}</option>
-                ))}
-              </FormSelect>
-            </Col>
-            <Col>
-              <Form onSubmit={handleSubmit}>
-                <FormControl type='search'
-                             value={searchQuery}
-                             placeholder='search'
-                             onChange={(event: ChangeEvent<HTMLInputElement>) => setSearchQuery(event.target.value)}
-                             className='search-bar'
-                />
-                <span>
-                <Button variant='outline-secondary'>
-                  <i className='fas fa-search'/>
-                </Button>
-              </span>
-              </Form>
-            </Col>
-          </>
+    <Grid container alignItems='center'>
+      <Autocomplete
+        id='search-bar'
+        value={value}
+        autoComplete={true}
+        autoHighlight={true}
+        onChange={(event, newValue) => {
+          if (typeof newValue === 'string') {
+            setValue({
+              keyword: newValue,
+            });
+          } else if (newValue && newValue.inputValue) {
+            // Create a new value from the user input
+            setValue({
+              keyword: newValue.inputValue,
+            });
+          } else {
+            setValue(newValue);
+          }
+        }}
+        onInputChange={}
+
+        renderInput={(params) => {
+
         }
-      </Row>
-    </div>
+        }
+        options={}
+        clearOnBlur
+      />
+    </Grid>
   );
 }
+
+export default connect(null, {getSearchSuggestions})(SearchBar);

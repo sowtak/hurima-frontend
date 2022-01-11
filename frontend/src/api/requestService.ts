@@ -10,21 +10,25 @@ import {API_BASE_URL_DEV} from "../utils/constants/url";
 
 class RequestService {
 
-  get = (url: string, isAuthRequired: boolean = false, contentType: string = "application/json") => {
-    return createRequest("GET", url, null, isAuthRequired, contentType);
+  async get(url: string, isAuthRequired: boolean = false, contentType: string = "application/json") {
+    const {data} = await createRequest("GET", url, null, isAuthRequired, contentType);
+    return data;
   };
 
-  post = (url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") => {
+  async post(url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") {
     console.log("AXIOS POST");
-    return createRequest("POST", url, body, isAuthRequired, contentType);
+    const {data} = await createRequest("POST", url, body, isAuthRequired, contentType);
+    return data;
   };
 
-  put = (url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") => {
-    return createRequest("PUT", url, body, isAuthRequired, contentType);
+  async put(url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") {
+    const {data} = await createRequest("PUT", url, body, isAuthRequired, contentType);
+    return data;
   };
 
-  delete = (url: string, isAuthRequired: boolean = false, contentType: string = "application/json") => {
-    return createRequest("DELETE", url, null, isAuthRequired, contentType);
+  async delete(url: string, isAuthRequired: boolean = false, contentType: string = "application/json") {
+    const {data} =  await createRequest("DELETE", url, null, isAuthRequired, contentType);
+    return data;
   };
 }
 

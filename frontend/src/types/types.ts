@@ -43,7 +43,7 @@ export type Item = {
     price: string
 }
 
-export type AppPropsType = {
+export type AppProps = {
     loading: boolean
     data: Array<Item> | any
     searchByData: Array<{ label: string, value: string}> | any

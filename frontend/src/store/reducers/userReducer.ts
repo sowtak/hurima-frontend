@@ -5,24 +5,24 @@
  */
 
 import {User} from "../../types/types";
-import {LOADING_USER_INFO, UserActionTypes} from "../action-types/user-action-types";
+import {LOADING_USER_INFO, UserActions} from "../action-types/user-action-types";
 import {LOGOUT_SUCCESS} from "../action-types/auth-action-types";
 
-export type InitialStateType = {
+export type InitialState = {
     user: Partial<User>
     isLoggedIn: boolean
     isLoaded: boolean
     successMessage: string
 };
 
-const initialState: InitialStateType = {
+const initialState: InitialState = {
     user: {},
     isLoggedIn: false,
     isLoaded: false,
     successMessage: ""
 };
 
-const reducer = (state: InitialStateType = initialState, action: UserActionTypes): InitialStateType => {
+const reducer = (state: InitialState = initialState, action: UserActions): InitialState => {
 
     switch (action.type) {
         case LOADING_USER_INFO:

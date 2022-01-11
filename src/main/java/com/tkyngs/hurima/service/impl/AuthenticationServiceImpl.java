@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     String template = "registration-template";
     Map<String, Object> attributes = new HashMap<>();
     attributes.put("username", user.getUsername());
-    attributes.put("registrationUrl", "http://" + hostname + "/registration/activate/" + user.getActivationCode());
+    attributes.put("registrationUrl", "http://" + hostname + "/account/registration/activate/" + user.getActivationCode());
     try {
       log.info("Sending activation email...");
       mailSender.sendMessage(user.getEmail(), subject, template, attributes);
