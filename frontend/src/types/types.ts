@@ -14,24 +14,12 @@ export type User = {
     roles: Array<string>
 };
 
-export type AuthErrors = {
-    usernameError: string
-    emailError: string
-    passwordError: string
-    password2Error: string
-}
 
 export type UserData = {
     email: string
     password: string
 };
 
-export type UserRegistration = {
-    email: string
-    username: string
-    password: string
-    password2: string
-};
 
 export type Item = {
     id: number

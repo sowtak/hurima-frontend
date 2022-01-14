@@ -22,15 +22,9 @@ import {
     REGISTER_SUCCESS,
     RegisterFailureAction,
     RegisterSuccessAction,
-    SHOW_LOADER,
-    ShowLoaderAction
 } from "../action-types/auth-action-types";
-import {AuthErrors} from "../../types/types";
+import {AuthErrors} from "../../service/api/types";
 import {FORM_RESET, ResetAction} from "../action-types/admin-action-type";
-
-export const showLoader = (): ShowLoaderAction => ({
-    type: SHOW_LOADER
-});
 
 export const registerFailure = (errors: AuthErrors): RegisterFailureAction => ({
     type: REGISTER_FAILURE,
@@ -76,6 +70,3 @@ export const activateAccountSuccess = (message: string): ActivateAccountSuccessA
     payload: message
 });
 
-export const reset = (): ResetAction => ({
-    type: FORM_RESET
-});

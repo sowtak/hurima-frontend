@@ -3,7 +3,8 @@
  * @since   12/25/2021 7:27 PM
  * @version 1.0.0
  */
-import {UserData, UserRegistration} from "../../types/types";
+import {RegistrationData} from "../../service/api/types";
+import {UserData} from "../../types/types";
 import {Dispatch} from "redux";
 import {
   activateAccountFailure,
@@ -12,15 +13,13 @@ import {
   loginSuccess,
   logoutSuccess,
   registerFailure,
-  registerSuccess, reset,
-  showLoader
+  registerSuccess,
 } from "../actions/auth-actions";
-import RequestService from "../../api/requestService";
+import {RegistrationService}from "../../service/api/registrationService";
+import {AuthenticationService} from "../../service/api/authenticationService";
 
-export const registration = (userRegistrationData: UserRegistration) => async (dispatch: Dispatch) => {
+export const registration = (userRegistrationData: RegistrationData) => async (dispatch: Dispatch) => {
   try {
-    dispatch(showLoader());
-    await RequestService.post('/account/registration', userRegistrationData);
     dispatch(registerSuccess());
   } catch (error: any) {
     console.log(error);
@@ -30,7 +29,7 @@ export const registration = (userRegistrationData: UserRegistration) => async (d
 
 export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
   try {
-    const response = await RequestService.get("/account/registration/activate/" + code);
+    const response = await AuthenticationService.get("/account/registration/activate/" + code);
     dispatch(activateAccountSuccess(response.data));
   } catch (error: any) {
     dispatch(activateAccountFailure(error.response.data));
@@ -39,9 +38,8 @@ export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
 
 export const login = (userData: UserData) => async (dispatch: Dispatch) => {
   try {
-    dispatch(showLoader());
     console.log("Log in")
-    const response = await RequestService.post("/auth/login", userData);
+    const response = await AuthenticationService.post("/auth/login", userData);
     localStorage.setItem("email", response.data.email);
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userRole", response.data.userRole);
@@ -58,8 +56,7 @@ export const login = (userData: UserData) => async (dispatch: Dispatch) => {
 export const forgotPassword = (email: { email: string }) => async (dispatch: Dispatch) => {
   try {
     console.log("SENDING AXIOS REQUEST");
-    dispatch(showLoader());
-    const response = await RequestService.post("/auth/forgot-password", email);
+    const response = await AuthenticationService.post("/auth/forgot-password", email);
     console.log(response);
     dispatch(forgotPasswordSuccess(response.data));
   } catch (error: any) {
@@ -77,6 +74,3 @@ export const logout = () => async (dispatch: Dispatch) => {
   dispatch(logoutSuccess());
 };
 
-export const formReset = () => async (dispatch: Dispatch) => {
-  dispatch(reset());
-};

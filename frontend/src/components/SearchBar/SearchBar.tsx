@@ -3,25 +3,20 @@
  * @since   12/28/2021 2:51 AM
  * @version 1.0.0
  */
-import {ChangeEvent, FC, FormEvent, useState} from "react";
-import {Grid} from "@mui/material";
+import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
+import {Grid, TextField} from "@mui/material";
 import {Autocomplete} from "@mui/lab";
-import {connect, useSelector} from "react-redux";
 
 
 export const SearchBar: FC = (props) => {
-  const [value, setValue] = useState<string | null | never>('');
-  const searchSuggestions = useSelector(state => state.searchKey);
-  let selectedValue = null;
+  const [value, setValue] = useState([]);
 
-  const getSearchKeyword = () => {
-    return document.querySelector('input[id="search-bar"]')?.nodeValue
-  }
+  useEffect(() => {
+    fetch("https://swapi-demo.azurewebsites.net/api/starships")
+      .then((response) => response.json())
+      .then((data) => setValue(data))
+  });
 
-  const handleInputChange = (event: ChangeEvent, newValue: string) => {
-    selectedValue = newValue;
-    props.getSearchSuggestions(newValue);
-  }
   return (
     <Grid container alignItems='center'>
       <Autocomplete
@@ -29,31 +24,14 @@ export const SearchBar: FC = (props) => {
         value={value}
         autoComplete={true}
         autoHighlight={true}
-        onChange={(event, newValue) => {
-          if (typeof newValue === 'string') {
-            setValue({
-              keyword: newValue,
-            });
-          } else if (newValue && newValue.inputValue) {
-            // Create a new value from the user input
-            setValue({
-              keyword: newValue.inputValue,
-            });
-          } else {
-            setValue(newValue);
-          }
-        }}
-        onInputChange={}
 
-        renderInput={(params) => {
+        renderInput={(params) => (
+          <TextField {...params} label="keyword" variant='outlined' />
+        )}
 
-        }
-        }
-        options={}
+        options={value}
         clearOnBlur
       />
     </Grid>
   );
 }
-
-export default connect(null, {getSearchSuggestions})(SearchBar);

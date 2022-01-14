@@ -7,7 +7,7 @@ import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../store/rootReducer";
 import {forgotPassword} from "../../../store/thunks/auth-thunks";
-import {Alert, Box, Button} from "@mui/material";
+import {Alert, Box, Button, Typography} from "@mui/material";
 import {ForgotPasswordTextField} from "../ForgotPasswordStyles";
 import {Feedback, Send} from "@mui/icons-material";
 
@@ -33,53 +33,9 @@ export const ResetPassword: FC = () => {
   }
 
   return (
-    <Box sx={classes.container}>
-      <h1>Find Your Account</h1>
-      <br/>
-      <p>Please enter your email to search for your account.</p>
-      {error ? <Alert severity='error'>{error}</Alert> : null}
-      {success ? <Alert severity='success'>{success}</Alert> : null}
-
-      <form onSubmit={handleSendEmail}>
-        <div className={classes.input}>
-          <ForgotPasswordTextField
-            variant='outlined'
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-            value={email}
-            />
-        </div>
-        <Feedback>{emailValidationError}</Feedback>
-        <br/>
-        <Button className={classes.button}
-                type='submit'
-                variant='contained'
-                color='primary'
-        >
-          <Send className='send-reset-code'><span className='ps-2'>Send reset code</span></Send>
-        </Button>
-        <Row>
-          <Col>
-            <FormLabel className='col-lg-2'>Email</FormLabel>
-            <div className='col-lg-4'>
-              <FormControl type='email'
-                           value={email}
-                           className={emailValidationError ? 'form-control is-invalid' : ''}
-                           onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-              />
-            </div>
-          </Col>
-        </Row>
-
-
-        <Row>
-          <Col>
-            <Button type='submit' variant='primary'>
-              <i className='fas fa-paper-plane send-reset-code'><span className='ps-2'>Send reset code</span></i>
-            </Button>
-          </Col>
-        </Row>
-
-      </form>
-    </Box>
-  )
+    <>
+      <Typography component={'h1'}>Reset your password</Typography>
+      
+    </>
+  );
 }

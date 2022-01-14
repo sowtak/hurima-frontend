@@ -6,30 +6,22 @@
 
 import axios, {AxiosRequestConfig, Method} from 'axios';
 
-import {API_BASE_URL_DEV} from "../utils/constants/url";
+import {API_BASE_URL_DEV} from "../../utils/constants/url";
 
-class RequestService {
+export const AuthenticationService = {
+
 
   async get(url: string, isAuthRequired: boolean = false, contentType: string = "application/json") {
     const {data} = await createRequest("GET", url, null, isAuthRequired, contentType);
     return data;
-  };
+  },
 
   async post(url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") {
     console.log("AXIOS POST");
     const {data} = await createRequest("POST", url, body, isAuthRequired, contentType);
     return data;
-  };
+  },
 
-  async put(url: string, body: any, isAuthRequired: boolean = false, contentType: string = "application/json") {
-    const {data} = await createRequest("PUT", url, body, isAuthRequired, contentType);
-    return data;
-  };
-
-  async delete(url: string, isAuthRequired: boolean = false, contentType: string = "application/json") {
-    const {data} =  await createRequest("DELETE", url, null, isAuthRequired, contentType);
-    return data;
-  };
 }
 
 const createRequest = (method: Method, url: string, body: any, isAuthRequired: boolean, contentType: string) => {
@@ -56,5 +48,3 @@ const setHeader = (isAuthRequired: boolean, contentType: string) => {
     "Content-Type": contentType
   };
 };
-
-export default new RequestService();

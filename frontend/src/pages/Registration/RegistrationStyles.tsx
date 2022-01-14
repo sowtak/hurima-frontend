@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {styled} from "@mui/material/styles";
-import {InputLabel} from "@mui/material";
+import {DialogContent, FormControl, InputLabel, Typography} from "@mui/material";
 
 export const InputContainer = styled('div')`
   marginBottom: 20;
@@ -28,4 +28,24 @@ export const InputCount = styled('div')`
 export const RegistrationInputLabel = styled(InputLabel)`
   marginTop: -5;
   fontSize: 12;
+`;
+
+export const RegistrationDialogContent = styled(DialogContent)`
+  padding: 0 30;
+  marginTop: 5;
+  width: 600;
+  minHeight: 600;
+`;
+
+export const Title = styled(Typography)`
+  fontWeight: 700;
+  fontSize: 21;
+  marginTop: 20;
+  marginBottom: 28;
+  lineHeight: 28;
+`;
+
+export const RegistrationFormControl = styled(FormControl)`
+  display: flex;
+  justifyContent: space-between;
 `;

@@ -5,15 +5,11 @@
  */
 import {FC, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {formReset} from "../../store/thunks/auth-thunks";
 import {NavLink} from "react-router-dom";
 
 export const User: FC = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(formReset());
-  })
 
   return (
     <div className='account-container container'>

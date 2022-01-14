@@ -6,12 +6,6 @@
     font-weight: bold;
 }
 
-.hurima-logo-text {
-    fontWeight: bold;
-    borderBottom: "0px solid #e1e8ed";
-    boxShadow: "0 0 3px #aaa";
-}
-
 .items i {
     display: flex;
 }

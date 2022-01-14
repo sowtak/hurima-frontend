@@ -23,28 +23,29 @@ export const App: FC = () => {
 
   return (
     <>
+      <Routes>
+
+      </Routes>
       <NavBar/>
-      <main className='py-5'>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/account">
-            <Route path="login" element={<Login/>}/>
-            <Route path="registration" element={<Registration/>}/>
-            <Route path="registration/activate/:code" element={<Login/>}/>
-            <Route path="forgot-password" element={<FindEmail/>}>
-              <Route path="send-password-reset-code" element={<PasswordReset/>}/>
-            </Route>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/account">
+          <Route path="login" element={<Login/>}/>
+          <Route path="registration" element={<Registration/>}/>
+          <Route path="registration/activate/:code" element={<Login/>}/>
+          <Route path="forgot-password" element={<FindEmail/>}>
+            <Route path="send-password-reset-code" element={<ResetPassword/>}/>
           </Route>
-          <Route path="/watchlist" element={<Watchlist/>}/>
-          <Route path="/items/" element={<Items/>}/>
-          <Route path={`/${username}`} element={<UserProfile/>}/>
-          <Route path='settings' element={<Settings/>}>
-            <Route path='profile' element={<UserProfile/>}/>
-            <Route path='notification' element={<Notification/>}/>
-          </Route>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
-      </main>
+        </Route>
+        <Route path="/watchlist" element={<Watchlist/>}/>
+        <Route path="/items/" element={<Items/>}/>
+        <Route path={`/${username}`} element={<UserProfile/>}/>
+        <Route path='settings' element={<Settings/>}>
+          <Route path='profile' element={<UserProfile/>}/>
+          <Route path='notification' element={<Notification/>}/>
+        </Route>
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
       <Footer/>
     </>
   );

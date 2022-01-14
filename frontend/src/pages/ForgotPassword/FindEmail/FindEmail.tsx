@@ -6,7 +6,7 @@
 import {ChangeEvent, FC, FormEvent, ReactElement, useState} from "react";
 import {FindEmailButton, Message, Warning} from "./FindEmailStyles";
 import {useNavigate} from "react-router-dom";
-import RequestService from "../../../api/requestService";
+import {AuthenticationService} from "../../../service/api/authenticationService";
 import {API_BASE_URL_DEV} from "../../../utils/constants/url";
 import {Typography} from "@mui/material";
 import {ForgotPasswordTextField} from "../ForgotPasswordStyles";
@@ -18,7 +18,7 @@ export const FindEmail: FC = () => {
 
   const findExistingEmail = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    RequestService.post(API_BASE_URL_DEV + "/auth/forgot-password", {email})
+    AuthenticationService.post(API_BASE_URL_DEV + "/auth/forgot-password", {email})
       .then(() => {
         setError(false);
         navigate("/account/forgot-password/send-password-reset-code", {state: email});

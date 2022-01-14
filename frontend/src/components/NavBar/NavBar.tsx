@@ -18,6 +18,7 @@ import {SearchIconWrapper} from "../SearchBar/SearchBarStyles";
 import {Search, StyledInputBase} from "../SearchBar/SearchBarStyles";
 import {AppRegistration, Login, Logout, Person, RemoveRedEye} from "@mui/icons-material";
 import { Navbar } from "./NavBarStyles";
+import {SearchBar} from "../SearchBar/SearchBar";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ export const NavBar: FC = () => {
               <img src={logo} className='pe-5' alt=""/>
             </Link>
 
+
             <Search>
               <SearchIconWrapper>
                 <SearchIcon/>
@@ -84,6 +86,7 @@ export const NavBar: FC = () => {
                 placeholder='Search...'
                 inputProps={{ 'aria-label': 'search'}}
               />
+              <SearchBar/>
             </Search>
 
 

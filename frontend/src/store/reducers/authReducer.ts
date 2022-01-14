@@ -3,7 +3,8 @@
  * @since   12/25/2021 1:54 AM
  * @version 1.0.0
  */
-import {AuthErrors, User} from "../../types/types";
+import {User} from "../../types/types";
+import {AuthErrors} from "../../service/api/types";
 import {
   ACTIVATE_ACCOUNT_FAILURE,
   ACTIVATE_ACCOUNT_SUCCESS,
@@ -13,7 +14,6 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_FAILURE,
   REGISTER_SUCCESS,
-  SHOW_LOADER
 } from "../action-types/auth-action-types";
 
 export type InitialState = {
@@ -42,9 +42,6 @@ const initialState: InitialState = {
 
 const reducer = (state: InitialState = initialState, action: AuthActions) => {
   switch (action.type) {
-    case SHOW_LOADER:
-      return {...state, loading: true, errors: {}};
-
     case REGISTER_FAILURE:
       return {...state, errors: action.payload, loading: false};
 
