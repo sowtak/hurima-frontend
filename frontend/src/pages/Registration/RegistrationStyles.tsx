@@ -4,21 +4,21 @@
  * @version 1.0.0
  */
 import {styled} from "@mui/material/styles";
-import {Container, DialogContent, FormControl, InputLabel, TextField, Typography} from "@mui/material";
+import {Button, Container, DialogContent, FormControl, InputLabel, TextField, Typography} from "@mui/material";
 import {ElementType} from "react";
 
 export const RegistrationTextField: ElementType = styled(TextField)`
-  width: 334;
-  height: 58;
-  marginBottom: 24;
+  width: 340px;
+  height: 60px;
+  paddingBottom: 24px;
   border: '1px solid #e2e2e1';
   overflow: 'hidden';
   borderRadius: 4;
 `;
 
 export const RegistrationFormContainer: ElementType = styled(Container)`
-  width: 340;
-  margin: 0 auto;
+  width: 340px;
+  margin: 0px auto;
 `;
 
 export const InputContent: ElementType = styled('div')`
@@ -59,4 +59,13 @@ export const Title: ElementType = styled(Typography)`
 export const RegistrationFormControl: ElementType = styled(FormControl)`
   display: flex;
   justifyContent: space-between;
+`;
+
+export const RegistrationSubmitButton: ElementType = styled(Button)`
+  height: 50px;
+  width: 340px;
+  
+  % .MuiButton-label: {
+    fontSize: 13;
+  }
 `;

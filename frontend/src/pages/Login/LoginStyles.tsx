@@ -8,12 +8,13 @@ import {Button, Container, TextField, Typography} from "@mui/material";
 import {ElementType} from "react";
 
 export const LoginFormContainer: ElementType = styled(Container)`
-  width: 340;
-  margin: 0 auto;
+  width: 340px;
+  margin: 0px auto;
 `;
 
 export const LoginSubmitButton: ElementType = styled(Button)`
-  height: 50;
+  height: 50px;
+  width: 340px;
   
   % .MuiButton-label: {
     fontSize: 13;
@@ -21,7 +22,7 @@ export const LoginSubmitButton: ElementType = styled(Button)`
 `;
 
 export const LoginFormError: ElementType = styled(Typography)`
-  padding: 12 16;
+  padding: 12px 16px;
   borderRadius: 12;
   marginBottom: 12;
   fontSize: 15;
@@ -30,9 +31,9 @@ export const LoginFormError: ElementType = styled(Typography)`
 `;
 
 export const LoginInputField: ElementType = styled(TextField)`
-  height: 60;
-  width: 340;
+  height: 60px;
+  width: 340px;
   border: 1px solid #f1f1e9;
   overflow: hidden;
-  borderRadius: 4;
+  borderRadius: 12px;
 `;

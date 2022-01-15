@@ -11,6 +11,7 @@ import {activateAccount, login} from "../../store/thunks/auth-thunks";
 import {useParams} from "react-router";
 import {LoginFormContainer, LoginFormError, LoginInputField, LoginSubmitButton} from "./LoginStyles";
 import {UserData} from "../../types/types";
+import {Box, Typography} from "@mui/material";
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,14 @@ export const Login: FC = () => {
   const error = useSelector((state: AppState) => state.auth.error);
   const success = useSelector((state: AppState) => state.auth.success);
   const isRegistered = useSelector((state: AppState) => state.auth.isRegistered);
-  const isLoggedIn= useSelector((state: AppState) => state.user.isLoggedIn);
+  const isLoggedIn = useSelector((state: AppState) => state.user.isLoggedIn);
   const loading: boolean = useSelector((state: AppState) => state.auth.loading);
   const user = useSelector((state: AppState) => state.auth.user);
 
   const {code} = useParams();
   const navigate = useNavigate();
 
-  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn){
+  if ((localStorage.getItem("isLoggedIn")) || isLoggedIn) {
     navigate(`/${user.username}`);
   }
 
@@ -50,7 +51,7 @@ export const Login: FC = () => {
       {error && <LoginFormError>Email or password is wrong.</LoginFormError>}
 
       <form onSubmit={handleLogin}>
-        <div style={{marginBottom: 24}}>
+        <Box sx={{marginBottom: '24px'}}>
           <LoginInputField
             label='Email'
             type='email'
@@ -58,24 +59,33 @@ export const Login: FC = () => {
             onChange={(event: ChangeEvent<HTMLFormElement>) => setEmail(event.target.value)}
             value={email}
           />
-        </div>
-        <div style={{marginBottom: 24}}>
+        </Box>
+        <Box sx={{marginBottom: '24px'}}>
           <LoginInputField
             label='Password'
             type='password'
             variant='filled'
             onChange={(event: ChangeEvent<HTMLFormElement>) => setPassword(event.target.value)}
-            />
-        </div>
+          />
+          <Link to='/account/forgot-password'>
+            <Typography sx={{paddingTop: '12px'}}>
+              Forgot password?
+            </Typography>
+          </Link>
+        </Box>
         <LoginSubmitButton
           type='submit'
           variant='contained'
           color='primary'
           disabled={!(email && password)}
-          fullWidth
         >
           Log in
         </LoginSubmitButton>
+        <Link to='/account/registration'>
+          <Typography sx={{paddingTop: '12px'}}>
+            Don't have an account?
+          </Typography>
+        </Link>
       </form>
     </LoginFormContainer>
   );

@@ -81,7 +81,6 @@ export const NavBar: FC = () => {
             <AppLogo src={logo} alt="logo"/>
           </Link>
 
-
           <SearchBar/>
 
           <Stack direction='row' spacing={4}>

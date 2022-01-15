@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
-import {Grid, IconButton, InputAdornment, TextField} from "@mui/material";
+import {Autocomplete, Grid, IconButton, InputAdornment, TextField} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {Searchbar} from "./SearchBarStyles";
 

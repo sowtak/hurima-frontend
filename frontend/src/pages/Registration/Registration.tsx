@@ -7,12 +7,14 @@ import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RegistrationData} from "../../service/api/types";
 import {
-  RegistrationFormContainer, RegistrationTextField,
+  RegistrationFormContainer, RegistrationSubmitButton, RegistrationTextField,
 } from "./RegistrationStyles";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {RegistrationService} from "../../service/api/registrationService";
+import {Box, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 const RegistrationFormSchema = yup.object().shape({
   username: yup.string().min(1, "Your name").required(),
@@ -57,30 +59,54 @@ export const Registration: FC = () => {
     <RegistrationFormContainer>
       <h1>Sign up</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RegistrationTextField
-          label='Username'
-          variant='filled'
-          onChange={(event:ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-          value={username}
-        />
-        <RegistrationTextField
-          label='Email'
-          variant='filled'
-          onChange={(event:ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-          value={email}
-        />
-        <RegistrationTextField
-          label='Password'
-          variant='filled'
-          onChange={(event:ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-          value={password}
-        />
-        <RegistrationTextField
-          label='Password (Confirmation)'
-          variant='filled'
-          onChange={(event:ChangeEvent<HTMLInputElement>) => setPassword2(event.target.value)}
-          value={password2}
-        />
+        <Box sx={{paddingBottom: '12px'}}>
+          <RegistrationTextField
+            label='Username'
+            variant='filled'
+            onChange={(event:ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+            value={username}
+          />
+        </Box>
+        <Box sx={{paddingBottom: '12px'}}>
+          <RegistrationTextField
+            label='Email'
+            variant='filled'
+            onChange={(event:ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+            value={email}
+          />
+        </Box>
+
+        <Box sx={{paddingBottom: '12px'}}>
+          <RegistrationTextField
+            label='Password'
+            variant='filled'
+            onChange={(event:ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+            value={password}
+          />
+        </Box>
+
+        <Box sx={{paddingBottom: '12px'}}>
+          <RegistrationTextField
+            label='Password (Confirmation)'
+            variant='filled'
+            onChange={(event:ChangeEvent<HTMLInputElement>) => setPassword2(event.target.value)}
+            value={password2}
+          />
+        </Box>
+        <RegistrationSubmitButton
+          type='submit'
+          variant='contained'
+          color='primary'
+          disabled={!(email && username && password && password2)}
+        >
+          Sign up
+        </RegistrationSubmitButton>
+
+        <Link to='/account/login'>
+          <Typography sx={{marginTop: '12px'}}>
+            Already have an account?
+          </Typography>
+        </Link>
       </form>
     </RegistrationFormContainer>
   );
