@@ -5,19 +5,20 @@
  */
 import {styled} from "@mui/material/styles";
 import {Button, Typography} from "@mui/material";
+import {ElementType} from "react";
 
-export const FindEmailButton = styled(Button)`
+export const FindEmailButton: ElementType = styled(Button)`
   padding: 5 18;
   marginTop: 20;
   display: block;
 `;
 
-export const Message = styled(Typography)`
+export const Message: ElementType = styled(Typography)`
   margin: 14 0;
   fontSize: 15;
 `;
 
-export const Warning = styled(Typography)`
+export const Warning: ElementType = styled(Typography)`
   fontSize: 28;
   color: #c44;
 `;

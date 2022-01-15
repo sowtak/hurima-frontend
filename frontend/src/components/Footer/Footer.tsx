@@ -6,28 +6,36 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 
-import './Footer.css';
-import {Container} from "@mui/material";
+import {Container, CssBaseline, Typography} from "@mui/material";
+import {FooterBox, FooterContainer} from "./FooterStyles";
+import {Twitter} from "@mui/icons-material";
+
+const Copyright = () => {
+  return (
+    <Typography variant='body2' color='text.secondary'>
+      Copyright © tkyngs
+      {' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  )
+}
 
 export const Footer: FC = () => {
   return (
-    <footer className="hurima-footer footer-bg p-5 bg-black text-white">
-      <Container>
-        <div className='d-flex justify-content-between'>
-          <div className='footer-left'>
-            <h3>HUrima</h3>
-          </div>
-          <div className='footer-right'>
-            <h3>Social media</h3>
+    <FooterContainer sx={{borderTop: "1px solid #869096"}}>
+      <CssBaseline/>
+      <Container component='main' sx={{mt: "8" ,mb: "2"}} maxWidth="sm">
+        <FooterBox component='footer'>
+          <Container maxWidth='sm' sx={{padding: '30px'}}>
+            <Typography variant='body1'>HUrima</Typography>
+            <Copyright/>
             <Link to='https://twitter.com/tkyngs_swe'>
-              <i className='fab fa-twitter fa-2x mr-3'/>
+              <Twitter/>
             </Link>
-          </div>
-        </div>
+          </Container>
+        </FooterBox>
       </Container>
-      <div className='mx-auto' style={{width: '200px'}}>
-        <p>©Copyright tkyngs</p>
-      </div>
-    </footer>
+    </FooterContainer>
   )
 }

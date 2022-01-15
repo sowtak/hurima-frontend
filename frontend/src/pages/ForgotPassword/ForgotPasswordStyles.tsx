@@ -13,15 +13,13 @@ export const ForgotPasswordContainer = styled('div')`
   }
 `;
 
-export const ForgotPasswordTextField = styled('div')(() =>({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      width: 400,
-      height: 40,
-      borderRadius: 30,
-      border: '1px solid',
-      padding: 0,
-      paddingLeft: 15,
+export const ForgotPasswordTextField = styled(TextField)`
+    & .MuiOutlinedInput-root: {
+      width: 400;
+      height: 40;
+      borderRadius: 30;
+      border: '1px solid';
+      padding: 0;
+      paddingLeft: 15;
     }
-  }
-}))(TextField);
+`;

@@ -7,7 +7,7 @@ import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {AppState} from "../../store/rootReducer";
-import {activateAccount, formReset, login} from "../../store/thunks/auth-thunks";
+import {activateAccount, login} from "../../store/thunks/auth-thunks";
 import {useParams} from "react-router";
 import {LoginFormContainer, LoginFormError, LoginInputField, LoginSubmitButton} from "./LoginStyles";
 import {UserData} from "../../types/types";
@@ -31,7 +31,6 @@ export const Login: FC = () => {
   }
 
   useEffect(() => {
-    dispatch(formReset());
     if (code) {
       console.log(success)
       console.log(isRegistered);

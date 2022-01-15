@@ -23,9 +23,6 @@ export const App: FC = () => {
 
   return (
     <>
-      <Routes>
-
-      </Routes>
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home/>}/>

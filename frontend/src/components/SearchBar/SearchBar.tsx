@@ -4,8 +4,9 @@
  * @version 1.0.0
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
-import {Grid, TextField} from "@mui/material";
-import {Autocomplete} from "@mui/lab";
+import {Grid, IconButton, InputAdornment, TextField} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import {Searchbar} from "./SearchBarStyles";
 
 
 export const SearchBar: FC = (props) => {
@@ -17,20 +18,21 @@ export const SearchBar: FC = (props) => {
       .then((data) => setValue(data))
   });
 
+
+
   return (
-    <Grid container alignItems='center'>
-      <Autocomplete
-        id='search-bar'
-        value={value}
-        autoComplete={true}
-        autoHighlight={true}
-
-        renderInput={(params) => (
-          <TextField {...params} label="keyword" variant='outlined' />
-        )}
-
-        options={value}
-        clearOnBlur
+    <Grid container alignItems='center' sx={{paddingLeft: "24px", paddingRight: "64px", maxWidth: '1000px'}}>
+      <Searchbar
+        label='search'
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='start'>
+              <IconButton>
+                <SearchIcon/>
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
       />
     </Grid>
   );

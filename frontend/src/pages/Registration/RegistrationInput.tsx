@@ -5,7 +5,7 @@
  */
 import {FC} from "react";
 import {
-  InputContainer, InputContent, InputCount,
+  InputContent, InputCount, RegistrationFormContainer,
   RegistrationInputLabel
 } from "./RegistrationStyles";
 import {InputLabel} from "@mui/material";
@@ -21,7 +21,7 @@ const RegistrationInput: FC<RegistrationInputProps> = ({
                                                          onChange, value, error, name
                                                        }) => {
   return (
-    <InputContainer>
+    <RegistrationFormContainer>
       <InputContent>
         <InputCount>
           <RegistrationInputLabel>
@@ -29,6 +29,6 @@ const RegistrationInput: FC<RegistrationInputProps> = ({
           </RegistrationInputLabel>
         </InputCount>
       </InputContent>
-    </InputContainer>
+    </RegistrationFormContainer>
   )
 }

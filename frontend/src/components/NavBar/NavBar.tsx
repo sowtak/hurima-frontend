@@ -10,15 +10,22 @@ import {AppState} from "../../store/rootReducer";
 import logo from '../../images/icons/HUrima-logo-purple.svg';
 import {logout} from "../../store/thunks/auth-thunks";
 
-import './NavBar.css';
 import {Link} from "react-router-dom";
-import {AppBar, Box, Container, Toolbar} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import {SearchIconWrapper} from "../SearchBar/SearchBarStyles";
-import {Search, StyledInputBase} from "../SearchBar/SearchBarStyles";
-import {AppRegistration, Login, Logout, Person, RemoveRedEye} from "@mui/icons-material";
-import { Navbar } from "./NavBarStyles";
+import {
+  AppBar,
+  Box,
+  Container,
+  IconButton,
+  InputAdornment,
+  Stack,
+  SvgIcon,
+  TextField,
+  Toolbar,
+  Typography
+} from "@mui/material";
+import {AppLogo, Navbar} from "./NavBarStyles";
 import {SearchBar} from "../SearchBar/SearchBar";
+import {Image} from "@mui/icons-material";
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();
@@ -38,81 +45,58 @@ export const NavBar: FC = () => {
 
   if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
     links = (
-      <li className='nav-item'>
-        <Link to={`/${username}`} className='nav-link pe-3 ps-3 account'>
-          <Person/>Account
+      <Stack direction='row'>
+        <Link to={`/${username}`}>
+          <Typography sx={{fontWeight: 'bold'}}>Account</Typography>
         </Link>
-      </li>
+      </Stack>
     )
     signOut = (
-      <Link to='/' onClick={handleLogout} className='nav-link ps-3 pe-3 signout'>
-        <Logout/>Sign out
-      </Link>
+      <Stack direction='row' spacing={3}>
+        <Link to='/' onClick={handleLogout}>
+          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign out</Typography>
+        </Link>
+      </Stack>
     );
   } else {
     links = (
-      <>
-        <li className='nav-item'>
-          <Link to='/login'>
-            <Login className='ps-3'/>Log in
-          </Link>
-        </li>
-        <li>
-          <Link to='/account/registration'>
-            <AppRegistration className='ps-3'/>Sign up
-          </Link>
-        </li>
-      </>
+      <Stack direction='row' spacing={3}>
+        <Link to='/account/login'>
+          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Log in</Typography>
+        </Link>
+        <Link to='/account/registration'>
+          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign up</Typography>
+        </Link>
+      </Stack>
     );
     signOut = null;
   }
 
 
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <Navbar>
-        <Container maxWidth='xl'>
-          <Toolbar disableGutters={true}>
-            <Link to='/'>
-              <img src={logo} className='pe-5' alt=""/>
+    <Box sx={{borderBottom: "1px solid #869096"}}>
+      <Navbar color='transparent' variant='dense' style={{padding: "5px 20px"}}>
+        <Toolbar disableGutters={true}>
+          <Link to='/'>
+            <AppLogo src={logo} alt="logo"/>
+          </Link>
+
+
+          <SearchBar/>
+
+          <Stack direction='row' spacing={4}>
+            <Link to='/items'>
+              <Typography sx={{fontWeight: 'bold'}}>Items</Typography>
             </Link>
-
-
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon/>
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder='Search...'
-                inputProps={{ 'aria-label': 'search'}}
-              />
-              <SearchBar/>
-            </Search>
-
-
-
-
-              <>
-                <ul className='navbar-nav ml-auto'>
-                  <li className='nav-item'>
-                    <Link to='/items' className='nav-link pe-3 ps-3 items'>
-                      <i className='ps-3 fas fa-box m-lg-auto'/>Items
-                    </Link>
-                  </li>
-                </ul>
-                <ul className='navbar-nav ml-auto'>
-                  <li className='nav-item'>
-                    <Link to='/watchlist' className='nav-link pe-3 ps-3 watchlist'>
-                      <RemoveRedEye className='ps-3 m-lg-auto'/><span className='fg-white'>Watch</span>
-                    </Link>
-                  </li>
-                  {links}
-                </ul>
-                {signOut}
-              </>
-          </Toolbar>
-        </Container>
+            <Link to='/watchlist' className='nav-link pe-3 ps-3 watchlist'>
+              <Typography sx={{fontWeight: 'bold'}}>Watch</Typography>
+            </Link>
+            {links}
+            {signOut}
+          </Stack>
+        </Toolbar>
       </Navbar>
     </Box>
-  );
+  )
+    ;
 };

@@ -15,7 +15,7 @@ export const User: FC = () => {
     <div className='account-container container'>
       <div className='row mt-5'>
         <div className='col-md-2'>
-          <h4><i className='me-2 fas fa-user-circle'/>My Account</h4>
+          <h4>My Account</h4>
           <NavLink to='/account/user/info'
                    className={({isActive}) => 'nav-link' + (isActive ? ' is-active' : '')}>
             Profile</NavLink>

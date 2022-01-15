@@ -4,13 +4,24 @@
  * @version 1.0.0
  */
 import {styled} from "@mui/material/styles";
-import {DialogContent, FormControl, InputLabel, Typography} from "@mui/material";
+import {Container, DialogContent, FormControl, InputLabel, TextField, Typography} from "@mui/material";
+import {ElementType} from "react";
 
-export const InputContainer = styled('div')`
-  marginBottom: 20;
+export const RegistrationTextField: ElementType = styled(TextField)`
+  width: 334;
+  height: 58;
+  marginBottom: 24;
+  border: '1px solid #e2e2e1';
+  overflow: 'hidden';
+  borderRadius: 4;
 `;
 
-export const InputContent = styled('div')`
+export const RegistrationFormContainer: ElementType = styled(Container)`
+  width: 340;
+  margin: 0 auto;
+`;
+
+export const InputContent: ElementType = styled('div')`
   fontSize: 3;
   float: right;
   display: flex;
@@ -18,26 +29,26 @@ export const InputContent = styled('div')`
   marginRight: 20;
 `;
 
-export const InputCount = styled('div')`
+export const InputCount: ElementType = styled('div')`
   display: inline;
   & .MuiInputLabel-formControl: {
     position: relative;
   }
 `;
 
-export const RegistrationInputLabel = styled(InputLabel)`
+export const RegistrationInputLabel: ElementType = styled(InputLabel)`
   marginTop: -5;
   fontSize: 12;
 `;
 
-export const RegistrationDialogContent = styled(DialogContent)`
+export const RegistrationDialogContent: ElementType = styled(DialogContent)`
   padding: 0 30;
   marginTop: 5;
   width: 600;
   minHeight: 600;
 `;
 
-export const Title = styled(Typography)`
+export const Title: ElementType = styled(Typography)`
   fontWeight: 700;
   fontSize: 21;
   marginTop: 20;
@@ -45,7 +56,7 @@ export const Title = styled(Typography)`
   lineHeight: 28;
 `;
 
-export const RegistrationFormControl = styled(FormControl)`
+export const RegistrationFormControl: ElementType = styled(FormControl)`
   display: flex;
   justifyContent: space-between;
 `;
