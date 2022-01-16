@@ -10,7 +10,7 @@ import {
     RESET_INPUT_FORM,
     ResetInputFormAction
 } from "../action-types/user-action-types";
-import {User} from "../../types/types";
+import {User} from "../../entity/User";
 
 export const resetInputForm = (): ResetInputFormAction => ({
     type: RESET_INPUT_FORM,

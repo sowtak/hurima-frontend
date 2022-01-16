@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {Dispatch} from "redux";
-import {fetchUserSuccess, loadingUserInfo, resetInputForm} from "../actions/user-actions";
+import {fetchUserSuccess, loadingUserInfo, resetInputForm} from "../actions/userActions";
 import {API_BASE_URL_DEV} from "../../utils/constants/url";
 import axios from "axios";
 

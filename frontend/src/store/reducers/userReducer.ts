@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 
-import {User} from "../../types/types";
+import {User} from "../../entity/User";
 import {LOADING_USER_INFO, UserActions} from "../action-types/user-action-types";
 import {LOGOUT_SUCCESS} from "../action-types/auth-action-types";
 

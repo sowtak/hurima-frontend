@@ -3,7 +3,7 @@
  * @since   12/25/2021 1:54 AM
  * @version 1.0.0
  */
-import {User} from "../../types/types";
+import {User} from "../../entity/User";
 import {AuthErrors} from "../../service/api/types";
 import {
   ACTIVATE_ACCOUNT_FAILURE,

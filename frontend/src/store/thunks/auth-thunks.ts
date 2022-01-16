@@ -14,7 +14,7 @@ import {
   logoutSuccess,
   registerFailure,
   registerSuccess,
-} from "../actions/auth-actions";
+} from "../actions/authActions";
 import {RegistrationService}from "../../service/api/registrationService";
 import {AuthenticationService} from "../../service/api/authenticationService";
 

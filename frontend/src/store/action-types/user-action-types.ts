@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {LogoutSuccessAction} from "./auth-action-types";
-import {User} from "../../types/types";
+import {User} from "../../entity/User";
 
 export const LOADING_USER_INFO = "LOADING_USER_INFO";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
