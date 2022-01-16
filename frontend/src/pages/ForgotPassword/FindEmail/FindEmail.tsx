@@ -3,13 +3,42 @@
  * @since   1/11/2022 2:02 PM
  * @version 1.0.0
  */
-import {ChangeEvent, FC, FormEvent, ReactElement, useState} from "react";
-import {FindEmailButton, Message, Warning} from "./FindEmailStyles";
+import {ChangeEvent, ElementType, FC, FormEvent, ReactElement, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {AuthenticationService} from "../../../service/api/authenticationService";
 import {API_BASE_URL_DEV} from "../../../utils/constants/url";
-import {Typography} from "@mui/material";
-import {ForgotPasswordTextField} from "../ForgotPasswordStyles";
+import {Box, Button, Container, Typography} from "@mui/material";
+import {styled} from "@mui/material/styles";
+
+
+export const FindEmailTextField: ElementType = styled('div')`
+  width: 500px;
+  margin: 0px auto;
+  fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  & a: {
+   textDecoration: none;
+  }
+`;
+
+export const FindEmailContainer: ElementType = styled(Container)`
+  width: 340px;
+  margin: 0px auto;
+`;
+
+export const FindEmailButton: ElementType = styled(Button)`
+  height: 40px;
+  width: 340px;
+`;
+
+export const Message: ElementType = styled(Typography)`
+  margin: 14px 0px;
+  fontSize: 15px;
+`;
+
+export const Warning: ElementType = styled(Typography)`
+  color: #c33;
+  fontSize: 15px;
+`;
 
 export const FindEmail: FC = () => {
   const navigate = useNavigate();
@@ -18,7 +47,7 @@ export const FindEmail: FC = () => {
 
   const findExistingEmail = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    AuthenticationService.post(API_BASE_URL_DEV + "/auth/forgot-password", {email})
+    AuthenticationService.findExistingEmail({email: email})
       .then(() => {
         setError(false);
         navigate("/account/forgot-password/send-password-reset-code", {state: email});
@@ -32,33 +61,36 @@ export const FindEmail: FC = () => {
   };
 
   return(
-    <>
-      {error ? (
-        <>
-          <Warning>We couldn't find your account with that information</Warning>
-          <Message>Please try searching with another email</Message>
-        </>
-        ): (
-          <>
-            <Typography component={'h1'}>Find your account</Typography>
-            <Message>Enter your email</Message>
-          </>
-      )}
+    <FindEmailContainer>
+      <h1>Find your email</h1>
       <form onSubmit={findExistingEmail}>
-        <ForgotPasswordTextField
-          variant='outlined'
-          onChange={handleChangeEmail}
-          type='email'
-          value={email}
+        <Box sx={{marginBottom: '24px'}}>
+          <FindEmailTextField
+            label='Your email'
+            variant='outlined'
+            onChange={handleChangeEmail}
+            type='email'
+            value={email}
           />
-        <FindEmailButton
-          type='submit'
-          variant='contained'
-          color='primary'
-        >
+        </Box>
 
-        </FindEmailButton>
+        {error &&
+          <>
+            <Warning>We couldn't find your account with that information</Warning>
+            <Message>Please try searching with another email</Message>
+          </>
+        }
+
+        <Box sx={{marginBottom: '24px'}}>
+          <FindEmailButton
+            type='submit'
+            variant='contained'
+            color='primary'
+          >
+            Find email
+          </FindEmailButton>
+        </Box>
       </form>
-    </>
+    </FindEmailContainer>
   )
 }

@@ -3,7 +3,7 @@
  * @since   12/23/2021 1:55 AM
  * @version 1.0.0
  */
-import {FC} from "react";
+import {ElementType, FC} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../store/rootReducer";
 
@@ -23,9 +23,23 @@ import {
   Toolbar,
   Typography
 } from "@mui/material";
-import {AppLogo, Navbar} from "./NavBarStyles";
 import {SearchBar} from "../SearchBar/SearchBar";
-import {Image} from "@mui/icons-material";
+import {styled} from "@mui/material/styles";
+
+
+export const AppLogo: ElementType = styled('img')`
+  paddingRight: 10;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Navbar: ElementType = styled(AppBar)`
+  height: 80;
+  display: flex;
+  position: static;
+  fontWeight: bold;
+`;
 
 export const NavBar: FC = () => {
   const dispatch = useDispatch();

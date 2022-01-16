@@ -13,9 +13,9 @@ import {AppState} from "./store/rootReducer";
 import {UserProfile} from "./pages/User/UserProfile/UserProfile";
 import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
-import {AppProps} from "./types/types";
 import {Registration} from "./pages/Registration/Registration";
 import {FindEmail} from "./pages/ForgotPassword/FindEmail/FindEmail";
+import {ForgotPassword} from "./pages/ForgotPassword/ForgotPassword";
 
 export const App: FC = () => {
   //const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -30,12 +30,12 @@ export const App: FC = () => {
           <Route path="login" element={<Login/>}/>
           <Route path="registration" element={<Registration/>}/>
           <Route path="registration/activate/:code" element={<Login/>}/>
-          <Route path="forgot-password" element={<FindEmail/>}>
-            <Route path="send-password-reset-code" element={<ResetPassword/>}/>
-          </Route>
+          <Route path="forgot-password" element={<ForgotPassword/>}/>
+          <Route path="forgot-password/find-email" element={<FindEmail/>}/>
+          <Route path="forgot-password/send-password-reset-code" element={<ResetPassword/>}/>
         </Route>
-        <Route path="/watchlist" element={<Watchlist/>}/>
-        <Route path="/items/" element={<Items/>}/>
+        <Route path="watchlist" element={<Watchlist/>}/>
+        <Route path="items" element={<Items/>}/>
         <Route path={`/${username}`} element={<UserProfile/>}/>
         <Route path='settings' element={<Settings/>}>
           <Route path='profile' element={<UserProfile/>}/>

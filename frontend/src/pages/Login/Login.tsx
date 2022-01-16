@@ -3,15 +3,47 @@
  * @since   12/27/2021 3:06 AM
  * @version 1.0.0
  */
-import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, ElementType, FC, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {AppState} from "../../store/rootReducer";
 import {activateAccount, login} from "../../store/thunks/auth-thunks";
 import {useParams} from "react-router";
-import {LoginFormContainer, LoginFormError, LoginInputField, LoginSubmitButton} from "./LoginStyles";
 import {UserData} from "../../types/types";
-import {Box, Typography} from "@mui/material";
+import {Box, Button, Container, TextField, Typography} from "@mui/material";
+import {styled} from "@mui/material/styles";
+
+
+export const LoginFormContainer: ElementType = styled(Container)`
+  width: 340px;
+  margin: 0px auto;
+`;
+
+export const LoginSubmitButton: ElementType = styled(Button)`
+  height: 50px;
+  width: 340px;
+  
+  % .MuiButton-label: {
+    fontSize: 13;
+  }
+`;
+
+export const LoginFormError: ElementType = styled(Typography)`
+  padding: 12px 16px;
+  borderRadius: 12;
+  marginBottom: 12;
+  fontSize: 15;
+  fontWeight: 400;
+  backgroundColor: rgb(255, 210, 218);
+`;
+
+export const LoginInputField: ElementType = styled(TextField)`
+  height: 60px;
+  width: 340px;
+  border: 1px solid #f1f1e9;
+  overflow: hidden;
+  borderRadius: 12px;
+`;
 
 export const Login: FC = () => {
   const dispatch = useDispatch();

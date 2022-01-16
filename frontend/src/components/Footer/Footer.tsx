@@ -3,12 +3,29 @@
  * @since   1/1/2022 2:46 PM
  * @version 1.0.0
  */
-import {FC} from "react";
+import {ElementType, FC} from "react";
 import {Link} from "react-router-dom";
 
-import {Container, CssBaseline, Typography} from "@mui/material";
-import {FooterBox, FooterContainer} from "./FooterStyles";
+import {Box, Container, CssBaseline, Typography} from "@mui/material";
 import {Twitter} from "@mui/icons-material";
+import {styled} from "@mui/material/styles";
+
+export const FooterContainer: ElementType = styled(Box)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flexDirection: column;
+  minHeight: 100vh;
+  borderTop: 1px solid #869096;
+`;
+
+export const FooterBox: ElementType = styled(Box)`
+  py: 3;
+  px: 2;
+  mt: auto;
+`;
 
 const Copyright = () => {
   return (

@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 
-import axios, {AxiosRequestConfig, Method} from 'axios';
+import axios, {AxiosRequestConfig, AxiosResponse, Method} from 'axios';
 
 import {API_BASE_URL_DEV} from "../../utils/constants/url";
 
@@ -20,6 +20,14 @@ export const AuthenticationService = {
     console.log("AXIOS POST");
     const {data} = await createRequest("POST", url, body, isAuthRequired, contentType);
     return data;
+  },
+
+  async sendPasswordResetCode(postData: { email: string }): Promise<AxiosResponse<string>> {
+    return await axios.post<string>(`${API_BASE_URL_DEV}/auth/forgot-password/send-password-reset-code`, postData);
+  },
+
+  async findExistingEmail(postData: { email: string }): Promise<AxiosResponse<string>> {
+    return await axios.post<string>(`${API_BASE_URL_DEV}/auth/forgot-password/find-email`, postData);
   },
 
 }

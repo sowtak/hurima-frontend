@@ -3,13 +3,26 @@
  * @since   1/4/2022 1:51 PM
  * @version 1.0.0
  */
-import {ChangeEvent, FC, FormEvent, useState} from "react";
+import {ChangeEvent, ElementType, FC, FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../store/rootReducer";
 import {forgotPassword} from "../../../store/thunks/auth-thunks";
-import {Alert, Box, Button, Typography} from "@mui/material";
-import {ForgotPasswordTextField} from "../ForgotPasswordStyles";
-import {Feedback, Send} from "@mui/icons-material";
+import {Button, Container, Typography} from "@mui/material";
+import {styled} from "@mui/material/styles";
+
+export const ResetPasswordContainer: ElementType = styled(Container)`
+  width: 340px;
+  margin: 0px auto;
+`;
+
+export const ResetPasswordButton = styled(Button)`
+  height: 40;
+  width: 340px;
+  
+  % .MuiButton-label: {
+    fontSize: 13;
+  }
+`;
 
 export const ResetPassword: FC = () => {
   const dispatch = useDispatch();
@@ -33,9 +46,14 @@ export const ResetPassword: FC = () => {
   }
 
   return (
-    <>
+    <ResetPasswordContainer>
       <Typography component={'h1'}>Reset your password</Typography>
-      
-    </>
+
+      <ResetPasswordButton
+        type='submit'
+      >
+        Reset
+      </ResetPasswordButton>
+    </ResetPasswordContainer>
   );
 }
