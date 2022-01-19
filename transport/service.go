@@ -11,5 +11,5 @@ import "context"
 type Service interface {
 	SendActivationCode(ctx context.Context, email string) error
 	VerifyActivationCode(ctx context.Context, email, code string, username *string) error
-	Login(ctx context.Context, email, password string) error
+	Login(ctx context.Context, email string) error
 }

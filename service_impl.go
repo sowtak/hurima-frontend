@@ -1,4 +1,4 @@
-package server
+package flema
 
 import (
 	"context"
@@ -25,4 +25,8 @@ func (s *Service) SendActivationCode(ctx context.Context, email string) error {
 
 	var code string
 	query := "INSERT INTO "
+}
+
+func (s *Service) Login(ctx context.Context, email string) error {
+
 }

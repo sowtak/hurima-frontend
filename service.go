@@ -1,4 +1,4 @@
-package server
+package flema
 
 import (
 	_ "embed"
