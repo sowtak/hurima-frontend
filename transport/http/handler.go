@@ -7,7 +7,7 @@ package http
  */
 
 import (
-	"flema/server/transport"
+	"flema/transport"
 	"github.com/go-chi/chi"
 	"github.com/go-kit/log"
 	"net/http"

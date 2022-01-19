@@ -24,9 +24,13 @@ func (s *Service) SendActivationCode(ctx context.Context, email string) error {
 	}
 
 	var code string
-	query := "INSERT INTO "
+	query := "INSERT INTO activation_codes (email) VALUES ($1) RETURNING code"
+	row := s.DB
+
+	return nil
 }
 
 func (s *Service) Login(ctx context.Context, email string) error {
 
+	return nil
 }

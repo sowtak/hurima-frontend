@@ -1,4 +1,4 @@
-module flema/server
+module flema
 
 go 1.17
 

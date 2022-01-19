@@ -1,6 +1,7 @@
 package flema
 
 import (
+	"database/sql"
 	_ "embed"
 	"html/template"
 )
@@ -15,5 +16,6 @@ import (
 var Schema string
 
 type Service struct {
+	DB                     *sql.DB
 	activationCodeLinkTmpl *template.Template
 }
