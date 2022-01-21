@@ -12,4 +12,4 @@ export type User = {
   passwordResetCode: string | null
   active: boolean
   roles: Array<string>
-};
+}

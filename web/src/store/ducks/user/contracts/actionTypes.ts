@@ -16,7 +16,7 @@ export enum UserActionType {
 
 export type SetUserDataActionType = Action<UserActionType> & {
     type: UserActionType.SET_USER_DATA,
-    payload: UserState['data'] | undefined;
+    payload: UserState['data'] | undefined
 }
 
 export type FetchLoginActionType = Action<UserActionType> & {
@@ -25,4 +25,4 @@ export type FetchLoginActionType = Action<UserActionType> & {
 }
 
 
-export type UserAction = SetUserDataActionType | FetchLoginActionType;
+export type UserAction = SetUserDataActionType | FetchLoginActionType

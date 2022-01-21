@@ -4,23 +4,23 @@
  * @version 1.0.0
  */
 
-import {User} from "../../entity/User";
-import {LOADING_USER_INFO, UserActions} from "../action-types/user-action-types";
-import {LOGOUT_SUCCESS} from "../action-types/auth-action-types";
+import {User} from "../../entity/User"
+import {LOADING_USER_INFO, UserActions} from "../action-types/user-action-types"
+import {LOGOUT_SUCCESS} from "../action-types/auth-action-types"
 
 export type InitialState = {
     user: Partial<User>
     isLoggedIn: boolean
     isLoaded: boolean
     successMessage: string
-};
+}
 
 const initialState: InitialState = {
     user: {},
     isLoggedIn: false,
     isLoaded: false,
     successMessage: ""
-};
+}
 
 const reducer = (state: InitialState = initialState, action: UserActions): InitialState => {
 
@@ -32,8 +32,8 @@ const reducer = (state: InitialState = initialState, action: UserActions): Initi
             return {...state, user: {}, isLoggedIn: false}
 
         default:
-            return state;
+            return state
     }
-};
+}
 
-export default reducer;
+export default reducer

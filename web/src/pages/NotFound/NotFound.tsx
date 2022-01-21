@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 
-import {FC} from "react";
+import {FC} from "react"
 
 export const NotFound: FC = () => {
     return (
@@ -12,4 +12,4 @@ export const NotFound: FC = () => {
             <h1>404 - Page not found...</h1>
         </div>
     )
-};
+}

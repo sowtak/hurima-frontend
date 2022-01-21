@@ -12,10 +12,8 @@ import (
  */
 
 type RegistrationProps struct {
-	Username  string
-	Email     string
-	Password  string
-	Password2 string
+	Username string
+	Email    string
 }
 
 type LoginProps struct {
@@ -49,7 +47,7 @@ func (h *handler) login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	out, err := h.svc.Login(r.Context(), req.Email)
+	res, err := h.svc.Login(r.Context(), req.Email)
 	if err != nil {
 		h.respondErr(w, err)
 		return

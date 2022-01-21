@@ -26,9 +26,9 @@ func NewSMTPSender(from, host string, port int, username, password string) *SMTP
 	}
 }
 
-func (s *SMTPSender) Send(to, subject, html, text string) error {
+func (s *SMTPSender) Send(to, subject, body, alternative string) error {
 	toAddr := mail.Address{Address: to}
-	b, err := BuildHtmlBody(s.From, toAddr, subject, html, text)
+	b, err := BuildHtmlBody(s.From, toAddr, subject, body, alternative)
 	if err != nil {
 		return err
 	}

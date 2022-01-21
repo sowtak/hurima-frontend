@@ -22,29 +22,28 @@ import {
     REGISTER_SUCCESS,
     RegisterFailureAction,
     RegisterSuccessAction,
-} from "../action-types/auth-action-types";
-import {AuthErrors} from "../../service/api/types";
-import {FORM_RESET, ResetAction} from "../action-types/admin-action-type";
+} from "../action-types/auth-action-types"
+import {AuthErrors} from "../../service/api/types"
 
 export const registerFailure = (errors: AuthErrors): RegisterFailureAction => ({
     type: REGISTER_FAILURE,
     payload: errors
-});
+})
 
 export const registerSuccess = (): RegisterSuccessAction => ({
     type: REGISTER_SUCCESS
-});
+})
 
 
-export const loginFailure = (error: string): LoginFailureAction => ({
+export const signinFailure = (error: string): LoginFailureAction => ({
     type: LOGIN_FAILURE,
     payload: error
-});
+})
 
-export const loginSuccess = (userRole: string): LoginSuccessAction => ({
+export const signinSuccess = (userRole: string): LoginSuccessAction => ({
     type: LOGIN_SUCCESS,
     payload: userRole
-});
+})
 
 export const forgotPasswordSuccess = (message: string): ForgotPasswordSuccess => ({
     type: FORGOT_PASSWORD_SUCCESS,
@@ -58,15 +57,15 @@ export const forgotPasswordFailure = (error: string): ForgotPasswordFailure => (
 
 export const logoutSuccess = (): LogoutSuccessAction => ({
    type: LOGOUT_SUCCESS
-});
+})
 
 export const activateAccountFailure = (error: string): ActivateAccountFailureAction => ({
     type: ACTIVATE_ACCOUNT_FAILURE,
     payload: error
-});
+})
 
 export const activateAccountSuccess = (message: string): ActivateAccountSuccessAction => ({
     type: ACTIVATE_ACCOUNT_SUCCESS,
     payload: message
-});
+})
 

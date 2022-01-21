@@ -3,14 +3,19 @@
  * @since   12/23/2021 1:45 AM
  * @version 1.0.0
  */
-import {FC} from "react";
+import React, {FC} from "react"
 import {NavBar} from "../../components/NavBar/NavBar";
-//import {useDispatch} from "react-redux";
+import {Footer} from "../../components/Footer/Footer";
 
 export const Home: FC = () => {
     //const dispatch = useDispatch();
 
-    return(
+    return (
+        <>
+            <NavBar/>
             <h1>flema</h1>
-    )
+            <Footer/>
+        </>
+
+)
 }

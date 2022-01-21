@@ -21,15 +21,12 @@ CREATE TABLE IF NOT EXISTS users (
     user_id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
-    password VARCHAR NOT NULL,
-    activation_code VARCHAR,
-    password_reset_code VARCHAR,
     profile_image_url VARCHAR,
     email_domain VARCHAR,
     roles VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS activation_codes (
+CREATE TABLE IF NOT EXISTS verification_codes (
     email VARCHAR NOT NULL,
     code UUID NOT NULL DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),

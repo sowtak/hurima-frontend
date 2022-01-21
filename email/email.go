@@ -12,7 +12,6 @@ import (
  * @version 1.0.0
  */
 import (
-
 	mailUtil "github.com/go-mail/mail"
 )
 
@@ -20,13 +19,13 @@ type Sender interface {
 	Send(to, subject, html, text string) error
 }
 
-func BuildHtmlBody(from, to mail.Address, subject, html, text string) ([]byte, error) {
+func BuildHtmlBody(from, to mail.Address, subject, body, alternative string) ([]byte, error) {
 	m := mailUtil.NewMessage()
 	m.SetHeader("From", from.String())
 	m.SetHeader("To", to.String())
 	m.SetHeader("Subject", subject)
-	m.SetBody("text/html", html)
-	m.AddAlternative("text/plain", text)
+	m.SetBody("text/html", body)
+	m.AddAlternative("text/plain", alternative)
 
 	buf := &bytes.Buffer{}
 	_, err := m.WriteTo(buf)

@@ -7,15 +7,13 @@ import {Login} from "./pages/Login/Login";
 import {Watchlist} from "./pages/Watchlist/Watchlist";
 import {Items} from "./pages/Items/Items";
 import {Footer} from "./components/Footer/Footer";
-import {ResetPassword} from "./pages/ForgotPassword/ResetPassword/ResetPassword";
 import {useSelector} from "react-redux";
 import {AppState} from "./store/rootReducer";
 import {UserProfile} from "./pages/User/UserProfile/UserProfile";
 import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
 import {Registration} from "./pages/Registration/Registration";
-import {FindEmail} from "./pages/ForgotPassword/FindEmail/FindEmail";
-import {ForgotPassword} from "./pages/ForgotPassword/ForgotPassword";
+import {EmailVerification} from "./pages/Login/EmailVerification";
 
 export const App: FC = () => {
     //const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -23,16 +21,13 @@ export const App: FC = () => {
 
     return (
         <>
-            <NavBar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/account">
-                    <Route path="login" element={<Login/>}/>
-                    <Route path="registration" element={<Registration/>}/>
-                    <Route path="registration/activate/:code" element={<Login/>}/>
-                    <Route path="forgot-password" element={<ForgotPassword/>}/>
-                    <Route path="forgot-password/find-email" element={<FindEmail/>}/>
-                    <Route path="forgot-password/send-password-reset-code" element={<ResetPassword/>}/>
+                    <Route path="signin" element={<Login/>}/>
+                    <Route path="signup" element={<Registration/>}/>
+                    <Route path="verify-email" element={<EmailVerification/>}/>
+                    <Route path="signup/activate/:code" element={<Login/>}/>
                 </Route>
                 <Route path="watchlist" element={<Watchlist/>}/>
                 <Route path="items" element={<Items/>}/>
@@ -43,7 +38,7 @@ export const App: FC = () => {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-            <Footer/>
+
         </>
     );
 };

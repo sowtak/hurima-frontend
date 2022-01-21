@@ -3,14 +3,14 @@
  * @since   12/23/2021 1:55 AM
  * @version 1.0.0
  */
-import {ElementType, FC} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../../store/rootReducer";
+import {ElementType, FC} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {AppState} from "../../store/rootReducer"
 
-import logo from '../../images/icons/flema-logo-purple.svg';
-import {logout} from "../../store/ducks/user/thunks";
+import logo from '../../images/icons/flema-logo-svg-25100.svg'
+import {logout} from "../../store/ducks/user/thunks"
 
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"
 import {
   AppBar,
   Box,
@@ -22,40 +22,34 @@ import {
   TextField,
   Toolbar,
   Typography
-} from "@mui/material";
-import {SearchBar} from "../SearchBar/SearchBar";
-import {styled} from "@mui/material/styles";
+} from "@mui/material"
+import {SearchBar} from "../SearchBar/SearchBar"
+import {styled} from "@mui/material/styles"
+import {AppLogo} from "../Logo";
 
 
-export const AppLogo: ElementType = styled('img')`
-  paddingRight: 10;
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 export const Navbar: ElementType = styled(AppBar)`
   height: 80;
   display: flex;
   position: static;
   fontWeight: bold;
-`;
+`
 
 export const NavBar: FC = () => {
-  const dispatch = useDispatch();
-  const isLoggedIn: boolean = useSelector((state: AppState) => state.user.isLoggedIn);
+  const dispatch = useDispatch()
+  const isLoggedIn: boolean = useSelector((state: AppState) => state.user.isLoggedIn)
   const username = useSelector((state: AppState) => {
     if (isLoggedIn) {
-      return state.user.user.username;
-    } else return {};
-  });
+      return state.user.user.username
+    } else return {}
+  })
 
   const handleLogout = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
 
-  let links;
-  let signOut;
+  let links, signOut
 
   if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
     links = (
@@ -68,22 +62,22 @@ export const NavBar: FC = () => {
     signOut = (
       <Stack direction='row' spacing={3}>
         <Link to='/' onClick={handleLogout}>
-          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign out</Typography>
+          <span><Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign out</Typography></span>
         </Link>
       </Stack>
     );
   } else {
     links = (
       <Stack direction='row' spacing={3}>
-        <Link to='/account/login'>
-          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Log in</Typography>
+        <Link to='/account/signin'>
+          <span><Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign in</Typography></span>
         </Link>
-        <Link to='/account/registration'>
-          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign up</Typography>
+        <Link to='/account/signup'>
+          <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}><span>Sign up</span></Typography>
         </Link>
       </Stack>
-    );
-    signOut = null;
+    )
+    signOut = null
   }
 
 
@@ -111,5 +105,4 @@ export const NavBar: FC = () => {
       </Navbar>
     </Box>
   )
-    ;
-};
+}

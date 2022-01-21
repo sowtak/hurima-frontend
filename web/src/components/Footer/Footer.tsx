@@ -19,13 +19,13 @@ export const FooterContainer: ElementType = styled(Box)`
   flexDirection: column;
   minHeight: 100vh;
   borderTop: 1px solid #869096;
-`;
+`
 
 export const FooterBox: ElementType = styled(Box)`
   py: 3;
   px: 2;
   mt: auto;
-`;
+`
 
 const Copyright = () => {
   return (

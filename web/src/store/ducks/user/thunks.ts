@@ -3,14 +3,14 @@
  * @since   12/25/2021 7:27 PM
  * @version 1.0.0
  */
-import {RegistrationData} from "../../../service/api/types";
+import {AuthData} from "../../../service/api/types";
 import {UserData} from "../../../types/types";
 import {Dispatch} from "redux";
 import {
     activateAccountFailure,
     activateAccountSuccess, forgotPasswordFailure, forgotPasswordSuccess,
-    loginFailure,
-    loginSuccess,
+    signinFailure,
+    signinSuccess,
     logoutSuccess,
     registerFailure,
     registerSuccess,
@@ -22,57 +22,45 @@ import {loadingUserInfo} from "../../actions/userActions";
 import {FetchLoginActionType} from "./contracts/actionTypes";
 import {LoginProps} from "../../../pages/Login/Login";
 
-export const registration = (userRegistrationData: RegistrationData) => async (dispatch: Dispatch) => {
+export const registration = (userRegistrationData: AuthData) => async (dispatch: Dispatch) => {
     try {
         dispatch(loadingUserInfo())
-        const response: AuthUser = await AuthenticationService.registration(userRegistrationData);
-        localStorage.setItem("token", response.token);
-        dispatch(setUserData(response.user));
+        const response: AuthUser = await AuthenticationService.registration(userRegistrationData)
+        localStorage.setItem("token", response.token)
+        dispatch(setUserData(response.user))
 
     } catch (error: any) {
-        console.log(error);
-        dispatch(registerFailure(error.response.data));
+        console.log(error)
+        dispatch(registerFailure(error.response.data))
     }
-};
+}
 
 export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
     try {
-        const response = await AuthenticationService.activateAccount(code);
-        dispatch(activateAccountSuccess(response.data));
+        const response = await AuthenticationService.activateAccount(code)
+        dispatch(activateAccountSuccess(response.data))
     } catch (error: any) {
-        dispatch(activateAccountFailure(error.response.data));
+        dispatch(activateAccountFailure(error.response.data))
     }
 };
 
-export const login = (payload: LoginProps) => async (dispatch: Dispatch) => {
+export const signIn = (payload: LoginProps) => async (dispatch: Dispatch) => {
     try {
         console.log("Log in")
-        const response: AuthUser = await AuthenticationService.login(payload);
-        localStorage.setItem("token", response.token);
-        dispatch(setUserData(response.user));
-        payload.navigate('/home');
+        const response: AuthUser = await AuthenticationService.signIn(payload)
+        localStorage.setItem("token", response.token)
+        dispatch(setUserData(response.user))
+        payload.navigate('/home')
     } catch (error: any) {
-        console.log("LOGIN FAILURE");
-        console.log(error);
-        dispatch(loginFailure(error.response.data));
+        console.log("LOGIN FAILURE")
+        console.log(error)
+        dispatch(signinFailure(error.response.data))
     }
-};
+}
 
-export const forgotPassword = (email: { email: string }) => async (dispatch: Dispatch) => {
-    try {
-        console.log("SENDING AXIOS REQUEST");
-        const response = await AuthenticationService.forgotPassword(email);
-        console.log(response);
-        dispatch(forgotPasswordSuccess(response.data));
-    } catch (error: any) {
-        console.log("ERROR OCCURRED");
-        console.log(error.response.data);
-        dispatch(forgotPasswordFailure(error.response.data));
-    }
-};
 
 export const logout = () => async (dispatch: Dispatch) => {
-    localStorage.removeItem("token");
-    dispatch(logoutSuccess());
-};
+    localStorage.removeItem("token")
+    dispatch(logoutSuccess())
+}
 
