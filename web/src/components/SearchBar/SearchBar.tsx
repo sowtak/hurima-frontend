@@ -34,12 +34,13 @@ export const SearchBar: FC = (props) => {
 
 
     return (
-        <form onSubmit={handleClickSearch}>
-            <Grid container alignItems='center' sx={{paddingLeft: "24px", paddingRight: "64px", maxWidth: '1000px'}}>
+        <Grid sx={{paddingLeft: "24px", paddingRight: "64px", maxWidth: '1000px', flexGrow: '1'}}>
+            <form onSubmit={handleClickSearch}>
                 <Searchbar
                     variant='outlined'
                     label='Search items'
                     value={value}
+                    fullWidth
                     onChange={(ev: ChangeEvent<HTMLFormElement>) => setValue(ev.currentTarget.value)}
                     InputProps={{
                         endAdornment: (
@@ -51,7 +52,7 @@ export const SearchBar: FC = (props) => {
                         )
                     }}
                 />
-            </Grid>
-        </form>
+            </form>
+        </Grid>
     )
 }
