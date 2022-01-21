@@ -51,12 +51,12 @@ export const authReducer = (state: InitialState = initialState, action: AuthActi
             return {...state, isRegistered: true, loading: false, errors: {}}
 
         case ACTIVATE_ACCOUNT_FAILURE: {
-            console.log("Account activation failed.")
+            console.log("Account verification failed.")
             return {...state, error: action.payload, isActivated: false}
         }
 
         case ACTIVATE_ACCOUNT_SUCCESS: {
-            console.log("Account activation success.")
+            console.log("Account verification success.")
             return {...state, success: action.payload, isActivated: true}
         }
 

@@ -1,6 +1,6 @@
 import {FC, FormEvent, useState} from "react"
 import {Box, Typography} from "@mui/material"
-import {FormButton, FormTextField, InfoWrapper} from "../../components/Form/FormStyles"
+import {FormButton, FormTextField, InfoWrapper} from "../components/FormStyles"
 import {useDispatch} from "react-redux"
 
 /**

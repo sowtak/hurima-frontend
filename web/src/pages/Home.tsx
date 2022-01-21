@@ -4,8 +4,9 @@
  * @version 1.0.0
  */
 import React, {FC} from "react"
-import {NavBar} from "../../components/NavBar/NavBar";
-import {Footer} from "../../components/Footer/Footer";
+import {NavBar} from "../components/NavBar";
+import {Footer} from "../components/Footer";
+import {Typography} from "@mui/material";
 
 export const Home: FC = () => {
     //const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const Home: FC = () => {
     return (
         <>
             <NavBar/>
-            <h1>flema</h1>
+            <Typography variant={'h4'}>flema</Typography>
             <Footer/>
         </>
 

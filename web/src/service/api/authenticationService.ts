@@ -9,17 +9,12 @@ import axios from 'axios'
 import {API_BASE_URL_DEV} from "../../utils/constants/url"
 import {ApiResponse, AuthData} from "./types"
 import {AuthUser} from "../../store/ducks/user/contracts/state"
-import {LoginProps} from "../../pages/Login/Login"
+import {LoginProps} from "../../pages/Login"
 
 export const AuthenticationService = {
 
-  async sendActivationCode(postData: AuthData): Promise<ApiResponse<string>> {
-    const {data} = await axios.post<ApiResponse<string>>(`${API_BASE_URL_DEV}/auth/registration`, postData)
-    return data
-  },
-
-  async registration(postData: AuthData): Promise<AuthUser> {
-    const {data} = await axios.post<AuthUser>(`${API_BASE_URL_DEV}/auth/registration`, postData)
+  async sendVerificationCode(postData: AuthData): Promise<ApiResponse<string>> {
+    const {data} = await axios.post<ApiResponse<string>>(`${API_BASE_URL_DEV}/auth/send-verification-code`, postData)
     return data
   },
 

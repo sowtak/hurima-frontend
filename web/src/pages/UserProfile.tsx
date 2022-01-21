@@ -31,7 +31,7 @@ export const User: FC = () => {
                                 Edit</NavLink>
                             <NavLink to='/account/'
                                      className='nav-link'>
-
+                                A
                             </NavLink>
                         </>
                     }

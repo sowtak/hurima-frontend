@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {FC} from "react"
-import {NavBar} from "../../../components/NavBar/NavBar";
+import {NavBar} from "../../../components/NavBar";
 
 export const UserProfile: FC = () => {
   return (

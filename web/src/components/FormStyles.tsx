@@ -10,14 +10,14 @@ import {Box, Button, Container, TextField,} from "@mui/material"
 
 
 export const FormContainer: ElementType = styled(Container)`
-    width: 340px;
+    width: 380px;
     margin: 0px auto;
     fontWeight: bold;
 `
 
 export const FormTextField: ElementType = styled(TextField)`
-    width: 340px;
-    height: 40px;
+    width: 380px;
+    height: 35px;
     paddingBottom: 36px;
     border: '1px solid #e2e2e1';
     overflow: 'hidden';
@@ -25,8 +25,8 @@ export const FormTextField: ElementType = styled(TextField)`
 `
 
 export const FormButton: ElementType = styled(Button)`
-    height: 40px;
-    width: 340px;
+    height: 45px;
+    width: 380px;
   
     % .MuiButton-label: {
         fontSize: 13;

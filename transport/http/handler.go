@@ -29,7 +29,7 @@ func New(svc transport.Service, origin *url.URL, logger log.Logger) http.Handler
 
 	r := chi.NewRouter()
 
-	r.Post("/api/v1/auth/registration", h.sendActivationCode)
+	r.Post("/api/v1/auth/send-verification-code", h.sendVerificationCode)
 	r.Post("/api/v1/auth/login", h.login)
 
 	return r

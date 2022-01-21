@@ -1,4 +1,4 @@
-package flema
+package main
 
 import (
 	"context"
@@ -69,5 +69,4 @@ func run(ctx context.Context, args []string) error {
 		_ = fmt.Errorf("could not ping to db: %w", err)
 	}
 
-	return <-errs
 }

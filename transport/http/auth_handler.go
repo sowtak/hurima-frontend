@@ -17,11 +17,10 @@ type RegistrationProps struct {
 }
 
 type LoginProps struct {
-	Email    string
-	Password string
+	Code string
 }
 
-func (h *handler) sendActivationCode(w http.ResponseWriter, r *http.Request) {
+func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	var req RegistrationProps
@@ -30,7 +29,7 @@ func (h *handler) sendActivationCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.svc.SendActivationCode(r.Context(), req.Email); err != nil {
+	if err := h.svc.SendVerificationCode(r.Context(), req.Email); err != nil {
 		h.respondErr(w, err)
 		return
 	}
@@ -38,7 +37,7 @@ func (h *handler) sendActivationCode(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (h *handler) login(w http.ResponseWriter, r *http.Request) {
+func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	var req LoginProps
@@ -47,7 +46,7 @@ func (h *handler) login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := h.svc.Login(r.Context(), req.Email)
+	res, err := h.svc.CheckVerificationCode(r.Context(), req.Code)
 	if err != nil {
 		h.respondErr(w, err)
 		return

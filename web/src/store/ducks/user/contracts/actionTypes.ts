@@ -5,7 +5,7 @@
  */
 import {Action} from "redux";
 import {UserState} from "./state";
-import {LoginProps} from "../../../../pages/Login/Login";
+import {LoginProps} from "../../../../pages/Login";
 
 export enum UserActionType {
     FETCH_LOGIN = 'user/FETCH_LOGIN',

@@ -18,7 +18,7 @@ $do$;
 END;
 
 CREATE TABLE IF NOT EXISTS users (
-    user_id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
     profile_image_url VARCHAR,

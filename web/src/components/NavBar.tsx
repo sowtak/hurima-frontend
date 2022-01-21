@@ -5,16 +5,16 @@
  */
 import {ElementType, FC} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {AppState} from "../../store/rootReducer"
+import {AppState} from "../store/rootReducer"
 
-import logo from '../../images/icons/flema-logo-svg-25100.svg'
-import {logout} from "../../store/ducks/user/thunks"
+import logo from '../images/icons/flema-logo-svg-25100.svg'
+import {logOut} from "../store/ducks/user/thunks"
 
-import {Link} from "react-router-dom"
-import {AppBar, Box, Stack, Toolbar, Typography} from "@mui/material"
-import {SearchBar} from "../SearchBar/SearchBar"
+import {Link, useNavigate} from "react-router-dom"
+import {AppBar, Box, Button, Stack, Toolbar, Typography} from "@mui/material"
+import {SearchBar} from "./SearchBar"
 import {styled} from "@mui/material/styles"
-import {AppLogo} from "../Logo";
+import {AppLogo} from "./Logo";
 
 
 export const Navbar: ElementType = styled(AppBar)`
@@ -26,6 +26,7 @@ export const Navbar: ElementType = styled(AppBar)`
 
 export const NavBar: FC = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const isLoggedIn: boolean = useSelector((state: AppState) => state.user.isLoggedIn)
     const username = useSelector((state: AppState) => {
         if (isLoggedIn) {
@@ -34,7 +35,7 @@ export const NavBar: FC = () => {
     })
 
     const handleLogout = () => {
-        dispatch(logout())
+        dispatch(logOut(navigate))
     }
 
     let links, signOut
@@ -80,14 +81,16 @@ export const NavBar: FC = () => {
                     <SearchBar/>
 
                     <Stack direction='row' spacing={4}>
-                        <Link to='/items'>
-                            <Typography sx={{fontWeight: 'bold'}}>Items</Typography>
-                        </Link>
-                        <Link to='/watchlist' className='nav-link pe-3 ps-3 watchlist'>
+                        <Link to='/watchlist'>
                             <Typography sx={{fontWeight: 'bold'}}>Watch</Typography>
                         </Link>
                         {links}
                         {signOut}
+                        <Link to='/list-an-item'>
+                            <Button variant={'contained'} size={'small'}>
+                                List an item
+                            </Button>
+                        </Link>
                     </Stack>
                 </Toolbar>
             </Navbar>
