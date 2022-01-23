@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from "react"
+import {ChangeEvent, FC, FormEvent, useState} from "react"
 import {Box, Typography} from "@mui/material"
 import {FormButton, FormTextField, InfoWrapper} from "../components/FormStyles"
 import {useDispatch} from "react-redux"
@@ -18,6 +18,10 @@ export const EmailVerification: FC = () => {
 
     }
 
+    const handleChange = (ev: ChangeEvent<HTMLFormElement>) => {
+        setCode(ev.currentTarget.value)
+    }
+
 
     return (
         <>
@@ -31,10 +35,10 @@ export const EmailVerification: FC = () => {
                         label='Verification code'
                         value={code}
                         autoFocus
+                        onChange={handleChange}
                     >
                         Verification code
                     </FormTextField>
-
                 </Box>
 
                 <Box sx={{marginBottom: '24px'}}>

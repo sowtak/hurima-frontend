@@ -43,27 +43,27 @@ export const NavBar: FC = () => {
     if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
         links = (
             <Stack direction='row'>
-                <Link to={`/${username}`}>
-                    <Typography sx={{fontWeight: 'bold'}}>Account</Typography>
-                </Link>
+                <Typography component={Link} to={`/@${username}`} sx={{fontWeight: 'bold'}}>
+                    Account
+                </Typography>
             </Stack>
         )
         signOut = (
             <Stack direction='row' spacing={3}>
-                <Link to='/' onClick={handleLogout}>
-                    <span><Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign out</Typography></span>
-                </Link>
+                <Typography component={Link} to={'/'} sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
+                    Sign out
+                </Typography>
             </Stack>
         );
     } else {
         links = (
             <Stack direction='row' spacing={3}>
-                <Link to='/account/signin'>
-                    <span><Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>Sign in</Typography></span>
-                </Link>
-                <Link to='/account/signup'>
-                    <Typography sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}><span>Sign up</span></Typography>
-                </Link>
+                <Typography component={Link} to={'/account/signin'} sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
+                    Sign in
+                </Typography>
+                <Typography component={Link} to={'/account/signup'} sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
+                    Sign up
+                </Typography>
             </Stack>
         )
         signOut = null
@@ -81,16 +81,14 @@ export const NavBar: FC = () => {
                     <SearchBar/>
 
                     <Stack direction='row' spacing={4}>
-                        <Link to='/watchlist'>
-                            <Typography sx={{fontWeight: 'bold'}}>Watch</Typography>
-                        </Link>
+                        <Typography component={Link} to={'/watchlist'} sx={{fontWeight: 'bold'}}>
+                            Watch
+                        </Typography>
                         {links}
                         {signOut}
-                        <Link to='/list-an-item'>
-                            <Button variant={'contained'} size={'small'}>
-                                List an item
-                            </Button>
-                        </Link>
+                        <Button component={Link} to={'/list-an-item'} variant={'contained'} size={'small'}>
+                            List an item
+                        </Button>
                     </Stack>
                 </Toolbar>
             </Navbar>

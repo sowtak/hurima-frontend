@@ -1,6 +1,9 @@
 package transport
 
-import "context"
+import (
+	"context"
+	"flema"
+)
 
 /**
  * @author  Sowa Takayanagi
@@ -8,8 +11,8 @@ import "context"
  * @version 1.0.0
  */
 
+// Service with business logic methods
 type Service interface {
 	SendVerificationCode(ctx context.Context, email string) error
-	ActivateAccount(ctx context.Context, code string) error
-	CheckVerificationCode(ctx context.Context, code string) error
+	CheckVerificationCode(ctx context.Context, code string) (flema.AuthResponse, error)
 }

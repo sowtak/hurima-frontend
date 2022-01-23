@@ -7,6 +7,7 @@ import (
 	"github.com/go-kit/kit/log"
 	"html/template"
 	"net/url"
+	"sync"
 )
 
 /**
@@ -20,11 +21,13 @@ var Schema string
 
 // Service contains business logics (like middlewares) that execute multiple layers in the app.
 type Service struct {
-	DB                       *sql.DB
-	Logger                   log.Logger
-	EmailSender              email.Sender
-	Origin                   *url.URL
-	AllowedOrigins           []string
-	ProfileImageUrlPrefix    string
-	verificationCodeLinkTmpl *template.Template
+	DB                    *sql.DB
+	Logger                log.Logger
+	EmailSender           email.Sender
+	Origin                *url.URL
+	AllowedOrigins        []string
+	ProfileImageUrlPrefix string
+
+	verificationCodeTmplOnce sync.Once
+	verificationCodeTmpl     *template.Template
 }

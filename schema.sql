@@ -21,20 +21,15 @@ CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
+    verification_code VARCHAR NOT NULL,
     profile_image_url VARCHAR,
     email_domain VARCHAR,
-    roles VARCHAR
-);
-
-CREATE TABLE IF NOT EXISTS verification_codes (
-    email VARCHAR NOT NULL,
-    code UUID NOT NULL DEFAULT gen_random_uuid(),
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    PRIMARY KEY (email, code)
+    roles VARCHAR,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE TABLE IF NOT EXISTS items (
-    item_id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+    id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES users ON DELETE CASCADE,
     seller VARCHAR,
     item_name VARCHAR NOT NULL,

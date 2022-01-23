@@ -7,7 +7,7 @@ import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react"
 import {AuthData} from "../service/api/types"
 import * as yup from "yup"
 import {Alert, Box, Typography} from "@mui/material"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {FormButton, FormContainer, FormTextField} from "../components/FormStyles"
 import {AuthenticationService} from "../service/api/authenticationService"
 import {AppLogo} from "../components/Logo";
@@ -28,6 +28,8 @@ export const Registration: FC = () => {
     const [success, setSuccess] = useState(false)
     const [failure, setFailure] = useState(false)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         setEmail("")
     }, [])
@@ -42,12 +44,14 @@ export const Registration: FC = () => {
             setInvalidEmailError(false)
         }
         setIsLoading(true)
+
         const registrationData: AuthData = {email: email}
         AuthenticationService.sendVerificationCode(registrationData)
             .then((response) => {
                 setSuccess(true)
                 setIsLoading(false)
                 console.log("SUCCESS")
+                navigate('/account/verify-email')
             }).catch((error) => {
             console.log(error.response)
             setFailure(true)

@@ -9,15 +9,13 @@ import "database/sql"
  */
 
 type User struct {
-	ID              int     `json:"id,omitempty"`
-	Email           string  `json:"email"`
+	ID              string  `json:"id,omitempty"`
+	Email           string  `json:"email,omitempty"`
 	Username        string  `json:"username"`
 	ProfileImageUrl *string `json:"profile_image_url"`
 	IsActive        bool    `json:"is_active"`
 	EmailDomain     string  `json:"email_domain"`
 	Role            string  `json:"role"`
-	ListedItem      []Item  `json:"listed_item"`
-	Watchlist       []Item  `json:"watchlist"`
 }
 
 // profileImageUrl returns
