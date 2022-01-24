@@ -75,4 +75,8 @@ func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) 
 	if resp.User.ProfileImageUrl != nil {
 		attributes.Set("user.profile_image_url", *resp.User.ProfileImageUrl)
 	}
+
+	if err == nil {
+		w.WriteHeader(http.StatusOK)
+	}
 }

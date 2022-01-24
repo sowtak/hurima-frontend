@@ -1,4 +1,4 @@
-CREATE EXTENSION  IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION  IF NOT EXISTS "pgcrypto";
 DO
 $do$
     DECLARE
@@ -21,11 +21,17 @@ CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
-    verification_code VARCHAR NOT NULL,
     profile_image_url VARCHAR,
     email_domain VARCHAR,
     roles VARCHAR,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS verification_codes (
+    email VARCHAR NOT NULL,
+    code TEXT NOT NULL DEFAULT SUBSTR(MD5(RANDOM()::TEXT), 0, 6),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    PRIMARY KEY (email, code)
 );
 
 CREATE TABLE IF NOT EXISTS items (

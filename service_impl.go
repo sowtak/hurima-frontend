@@ -12,7 +12,6 @@ import (
 	"time"
 
 	em "flema/email"
-	"github.com/google/uuid"
 )
 
 /**
@@ -42,16 +41,12 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 		return errors.New("invalid email")
 	}
 
-	query := "SELECT FROM users WHERE email = $1"
-	if row := s.DB.QueryRowContext(ctx, query, email); row.Err() != nil {
-		return errors.New("user already exists")
-	}
-
 	var err error
 
-	code := uuid.New().String()[:6]
-	query = "INSERT INTO users (email, verification_code) VALUES ($1, $2)"
-	row := s.DB.QueryRowContext(ctx, query, email, code)
+	// Generate verification code
+	var code string
+	query := "INSERT INTO verification_codes (email) VALUES ($1) RETURNING code"
+	row := s.DB.QueryRowContext(ctx, query, email)
 	if err := row.Scan(&code); err != nil {
 		return fmt.Errorf("could not insert verification code: %w", err)
 	}
@@ -109,7 +104,7 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 	return nil
 }
 
-// CheckVerificationCode validates the code entered by user
+// CheckVerificationCode validates the code entered by user, then return with default profile
 func (s *Service) CheckVerificationCode(ctx context.Context, code string) (AuthResponse, error) {
 	var resp AuthResponse
 
@@ -117,6 +112,9 @@ func (s *Service) CheckVerificationCode(ctx context.Context, code string) (AuthR
 	if !uuidRegex.MatchString(strings.ToLower(code)) {
 		return resp, errors.New("invalid code")
 	}
+
+	err := "BEGIN;" +
+		"UPDATE u"
 
 	var profileImage sql.NullString
 	query := "SELECT id, username, profile_image_url FROM users WHERE verification_code = $1"
