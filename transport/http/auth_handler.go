@@ -3,8 +3,6 @@ package http
 import (
 	"encoding/json"
 	"net/http"
-	"net/url"
-	"time"
 )
 
 /**
@@ -13,18 +11,23 @@ import (
  * @version 1.0.0
  */
 
-type AuthProps struct {
+type SendCodeProps struct {
 	Email string
 }
 
+type SendCodeResponse struct {
+	Data string `json:"data"`
+}
+
 type VerificationProps struct {
-	Code string
+	Email string
+	Code  string
 }
 
 func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
-	var req AuthProps
+	var req SendCodeProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.respondErr(w, badRequestErr)
 		return
@@ -35,7 +38,14 @@ func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNoContent)
+	resp := SendCodeResponse{
+		Data: "verification code is sent",
+	}
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		return
+	}
 }
 
 func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) {
@@ -48,8 +58,9 @@ func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) 
 	}
 
 	ctx := r.Context()
-
-	resp, err := h.svc.CheckVerificationCode(ctx, req.Code)
+	q := r.URL.Query()
+	username := emptyStr(q.Get("username"))
+	resp, err := h.svc.CheckVerificationCode(ctx, req.Email, req.Code, username)
 	if err == nil {
 		return
 	}
@@ -66,17 +77,12 @@ func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	attributes := url.Values{
-		"token":         []string{resp.Token},
-		"expires_at":    []string{resp.ExpiresAt.Format(time.RFC3339Nano)},
-		"user.id":       []string{resp.User.ID},
-		"user.username": []string{resp.User.Username},
-	}
-	if resp.User.ProfileImageUrl != nil {
-		attributes.Set("user.profile_image_url", *resp.User.ProfileImageUrl)
-	}
-
+	// send json response
 	if err == nil {
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(resp); err != nil {
+			return
+		}
 	}
 }

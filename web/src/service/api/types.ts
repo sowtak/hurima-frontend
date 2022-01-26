@@ -10,10 +10,14 @@ export interface ApiResponse<T> {
 }
 
 export type AuthErrors = {
-  usernameError: string
   emailError: string
 }
 
 export type AuthData = {
   email: string
+}
+
+export type VerificationData = {
+  email: string
+  verificationCode: string
 }

@@ -17,13 +17,13 @@ export const Searchbar: ElementType = styled(TextField)`
 `
 
 export const SearchBar: FC = (props) => {
-    const [value, setValue] = useState([])
+    const [value, setValue] = useState('')
 
     const navigate = useNavigate()
 
     const handleClickSearch = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault()
-        //navigate({pathname: '/search', state: {value: encodeURIComponent(value)}})
+        navigate('/search', {state: {value: encodeURIComponent(value)}})
     }
 
     useEffect(() => {

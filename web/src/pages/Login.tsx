@@ -69,9 +69,12 @@ export const Login: FC = () => {
         const loginData: AuthData = {email: email}
         AuthenticationService.sendVerificationCode(loginData)
             .then((response) => {
-                setSuccess(true)
-                setIsLoading(false)
-                console.log("SUCCESS")
+                if (response.status === '204') {
+                    setSuccess(true)
+                    setIsLoading(false)
+                    console.log("SUCCESS")
+                    navigate('/account/verify-email', {state: {email: email}})
+                }
             }).catch((error) => {
             console.log(error.response)
             setFailure(true)

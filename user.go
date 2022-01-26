@@ -22,11 +22,11 @@ type User struct {
 }
 
 // profileImageUrl returns user's profile image url
-func (s *Service) profileImageUrl(profileImage sql.NullString) *string {
-	if !profileImage.Valid {
+func (s *Service) profileImageUrl(profileImageUrl sql.NullString) *string {
+	if !profileImageUrl.Valid {
 		return nil
 	}
 
-	str := s.ProfileImageUrlPrefix + profileImage.String
+	str := s.ProfileImageUrlPrefix + profileImageUrl.String
 	return &str
 }

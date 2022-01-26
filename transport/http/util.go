@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 /**
@@ -43,4 +44,19 @@ func errToCode(err error) int {
 	}
 
 	return http.StatusInternalServerError
+}
+
+func emptyStr(s string) *string {
+	if s == "" {
+		return nil
+	}
+	return &s
+}
+
+func parseUrl(s string) *url.URL {
+	parsedUrl, err := url.Parse(s)
+	if err != nil {
+		return nil
+	}
+	return parsedUrl
 }

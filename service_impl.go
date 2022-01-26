@@ -21,8 +21,9 @@ import (
  */
 
 var (
-	emailRegex = regexp.MustCompile(`^[^\s@]+@[^\s@]+\.[^\s@]+$`)
-	uuidRegex  = regexp.MustCompile(`^[a-f0-9]{6}$`)
+	emailRegex    = regexp.MustCompile(`^[^\s@]+@[^\s@]+\.[^\s@]+$`)
+	uuidRegex     = regexp.MustCompile(`^[a-f0-9]{6}$`)
+	usernameRegex = regexp.MustCompile(`^[a-zA-Z0-9_-][a-zA-Z0-9_-]{0,17}$`)
 )
 
 const (
@@ -30,15 +31,17 @@ const (
 )
 
 type AuthResponse struct {
-	User      User      `json:"user"`
-	Token     string    `json:"token"`
-	ExpiresAt time.Time `json:"expires_at"`
+	UserId          string    `json:"user_id"`
+	Username        string    `json:"username"`
+	ProfileImageUrl string    `json:"profile_image_url"`
+	Token           string    `json:"token"`
+	ExpiresAt       time.Time `json:"expires_at"`
 }
 
 func (s *Service) SendVerificationCode(ctx context.Context, email string) error {
 	email = strings.TrimSpace(email)
 	if !emailRegex.MatchString(strings.ToLower(email)) {
-		return errors.New("invalid email")
+		return InvalidEmailError
 	}
 
 	var err error
@@ -46,8 +49,7 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 	// Generate verification code
 	var code string
 	query := "INSERT INTO verification_codes (email) VALUES ($1) RETURNING code"
-	row := s.DB.QueryRowContext(ctx, query, email)
-	if err := row.Scan(&code); err != nil {
+	if err := s.DB.QueryRowContext(ctx, query, email).Scan(&code); err != nil {
 		return fmt.Errorf("could not insert verification code: %w", err)
 	}
 
@@ -96,8 +98,7 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 	if err != nil {
 		return fmt.Errorf("could not execute template")
 	}
-	err = s.EmailSender.Send(email, subject, b.String(), code)
-	if err != nil {
+	if err = s.EmailSender.Send(email, subject, b.String(), code); err != nil {
 		return fmt.Errorf("could not send verification code: %w", err)
 	}
 
@@ -105,26 +106,34 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 }
 
 // CheckVerificationCode validates the code entered by user, then return with default profile
-func (s *Service) CheckVerificationCode(ctx context.Context, code string) (AuthResponse, error) {
+func (s *Service) CheckVerificationCode(ctx context.Context, email, code string, username *string) (AuthResponse, error) {
 	var resp AuthResponse
 
 	code = strings.TrimSpace(code)
-	if !uuidRegex.MatchString(strings.ToLower(code)) {
-		return resp, errors.New("invalid code")
+	//if !uuidRegex.MatchString(strings.ToLower(code)) {
+	//	return resp, errors.New("invalid code")
+	//}
+
+	// validate email
+	email = strings.TrimSpace(email)
+	if !emailRegex.MatchString(strings.ToLower(email)) {
+		return resp, InvalidEmailError
 	}
 
-	err := "BEGIN;" +
-		"UPDATE u"
+	// validate username
+	*username = strings.TrimSpace(*username)
+	if !usernameRegex.MatchString(*username) {
+		return resp, InvalidUsernameError
+	}
+	err := VerificationTx(ctx, s, email, code, *username, resp)
 
-	var profileImage sql.NullString
+	var profileImageUrl sql.NullString
 	query := "SELECT id, username, profile_image_url FROM users WHERE verification_code = $1"
-	err := s.DB.QueryRowContext(ctx, query, code).Scan(&resp.User.ID, &resp.User.Username, &profileImage)
-
-	if err != nil {
+	if err = s.DB.QueryRowContext(ctx, query, code).Scan(&resp.UserId, &resp.Username, &profileImageUrl); err != nil {
 		return resp, fmt.Errorf("could not query select user: %w", err)
 	}
 
-	resp.User.ProfileImageUrl = s.profileImageUrl(profileImage)
+	resp.ProfileImageUrl = *s.profileImageUrl(profileImageUrl)
 
 	return resp, nil
 }
@@ -133,4 +142,60 @@ func isVerificationCodeExpired(t time.Time) bool {
 	now := time.Now()
 	exp := t.Add(verificationCodeTtl)
 	return exp.Equal(now) || exp.Before(now)
+}
+
+// VerificationTx execute transaction for email verification
+func VerificationTx(ctx context.Context, s *Service, email, code, username string, resp AuthResponse) error {
+	if tx, err := s.DB.Begin(); err == nil {
+		var createdAt time.Time
+		query := "SELECT created_at FROM verification_codes WHERE email = $1 AND code = $2"
+
+		if err := tx.QueryRowContext(ctx, query, email, code).Scan(&createdAt); err == sql.ErrNoRows {
+			return errors.New("verification code is not found")
+		}
+
+		if err != nil {
+			return errors.New("could not select verification code from db")
+		}
+
+		if isVerificationCodeExpired(createdAt) {
+			return errors.New("token is expired")
+		}
+
+		var profileImageUrl sql.NullString
+		query = "SELECT id, username, profile_image_url FROM users WHERE email = $1"
+		if err = tx.QueryRowContext(ctx, query, email).Scan(&resp.UserId, &resp.Username, &profileImageUrl); err == sql.ErrNoRows {
+			if email == "" {
+				return errors.New("user not found")
+			}
+			query := "INSERT INTO users (email, username) VALUES ($1, $2) RETURNING id"
+			err := tx.QueryRowContext(ctx, query, email, username).Scan(&resp.UserId)
+			if violatesUniqueConstraint(err) {
+				if strings.Contains(err.Error(), "email") {
+					errors.New("email already taken")
+				}
+
+				if strings.Contains(err.Error(), "username") {
+					return UsernameTakenError
+				}
+			}
+
+			if err != nil {
+				return fmt.Errorf("could not insert: %w ", err)
+			}
+			resp.Username = username
+
+			return nil
+		}
+
+		if err != nil {
+			return fmt.Errorf("could not select user from verification codes")
+		}
+
+		resp.ProfileImageUrl = s.profileImageUrl(profileImageUrl)
+
+		return nil
+	}
+
+	return nil
 }

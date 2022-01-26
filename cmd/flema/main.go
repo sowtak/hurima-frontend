@@ -5,17 +5,23 @@ import (
 	"database/sql"
 	"errors"
 	"flag"
-	"flema"
-	"flema/transport"
+	"flema/email"
 	"fmt"
 	"github.com/go-kit/log"
 	"github.com/joho/godotenv"
+	"net"
+	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
 	"strconv"
 	"strings"
 	"syscall"
+	"time"
+
+	"flema"
+	"flema/transport"
+	transporthttp "flema/transport/http"
 )
 
 /**
@@ -23,6 +29,14 @@ import (
  * @since   1/17/2022 3:12 PM
  * @version 1.0.0
  */
+
+type flags struct {
+	port           int
+	originStr      string
+	dbUrl          string
+	execSchema     bool
+	allowedOrigins string
+}
 
 func env(key, fallbackValue string) string {
 	s, ok := os.LookupEnv(key)
@@ -33,8 +47,7 @@ func env(key, fallbackValue string) string {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
+	if err := godotenv.Load(); err != nil {
 		_ = fmt.Errorf("could not load .env")
 	}
 
@@ -51,49 +64,79 @@ func main() {
 
 }
 
-type flags struct {
-	port           int
-	originStr      string
-	dbUrl          string
-	execSchema     bool
-	allowedOrigins []string
-}
-
-func setUpParameters(ctx context.Context, logger log.Logger, args []string) (*flema.Service, error) {
-	// Set parameters
-	var (
-		port, _        = strconv.Atoi(env("PORT", "8000"))
-		originStr      = env("ORIGIN", fmt.Sprintf("http://localhost:%d", port))
-		dbUrl          = env("DATABASE_URL", "postgresql://root@localhost:5432/flema?sslmode=disable")
-		execSchema, _  = strconv.ParseBool(env("EXEC_SCHEMA", "false"))
-		allowedOrigins = os.Getenv("ALLOWED_ORIGINS")
-	)
-
-	f := &flags{
-		port:           port,
-		originStr:      originStr,
-		dbUrl:          dbUrl,
-		execSchema:     execSchema,
-		allowedOrigins: allowedOrigins,
+func run(ctx context.Context, logger log.Logger, args []string) error {
+	srv, err := setUp(ctx, logger, args)
+	if srv == nil {
+		return errors.New("could not set up server")
+	}
+	if err != nil {
+		return fmt.Errorf("could not set parameters: %w", err)
 	}
 
-	parseFlags(&f)
+	errs := make(chan error, 1)
+	go func() {
+		<-ctx.Done()
+		fmt.Println()
+		_ = logger.Log("message", "shutting down...")
+		ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+		defer cancel()
+		if err := srv.Shutdown(ctx); err != nil {
+			errs <- fmt.Errorf("could not shut down server: %w", err)
+		}
 
-	// ------- Setup -------
+		errs <- nil
+	}()
+	return nil
+}
+
+// setUp sets up DB, parameters used in the app and parses flags
+func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server, error) {
+
+	// Set parameter var with value from .env file
+	var (
+		port, _         = strconv.Atoi(env("PORT", "8000"))
+		originStr       = env("ORIGIN", fmt.Sprintf("http://localhost:%d", port))
+		dbUrl           = env("DATABASE_URL", "postgresql://root@localhost:5432/flema?sslmode=disable")
+		execSchema, _   = strconv.ParseBool(env("EXEC_SCHEMA", "false"))
+		allowedOrigins  = os.Getenv("ALLOWED_ORIGINS")
+		profileImageUrl = env("PROFILE_IMAGE_PREFIX", originStr+"/img/profile-images/")
+		smtpHost        = os.Getenv("SMTP_HOST")
+		smtpPort, _     = strconv.Atoi(os.Getenv("SMTP_PORT"))
+		smtpUsername    = os.Getenv("SMTP_USERNAME")
+		smtpPassword    = os.Getenv("SMTP_PASSWORD")
+	)
+
+	var svc transport.Service
+
+	fs := flag.NewFlagSet("flema", flag.ExitOnError)
+	fs.Usage = func() {
+		fs.PrintDefaults()
+		fmt.Println("\nMake sure to set TOKEN_KEY, SENDGRID_API_KEY/SMTP_USERNAME and SMTP_PASSWORD in production environment")
+	}
+	fs.IntVar(&port, "port", port, "P")
+	fs.StringVar(&allowedOrigins, "allowed-origins", allowedOrigins, "Co")
+
+	if err := fs.Parse(args); err != nil {
+		return nil, fmt.Errorf("coud not parse flags: %w", err)
+	}
+
+	//  ------------ Setup ------------
 
 	// Convert originStr from raw str to URL format
 	origin, err := url.Parse(originStr)
+
 	if err != nil || !origin.IsAbs() {
-		return &flema.Service{}, errors.New("invalid url origin")
+		return nil, errors.New("invalid url origin")
 	}
 
-	// Set port value
+	// Set host value
 	if h := origin.Hostname(); h == "localhost" || h == "127.0.0.1" {
 		if p := origin.Port(); p != strconv.Itoa(port) {
 			origin.Host = fmt.Sprintf("%s:%d", h, port)
 		}
 	}
 
+	// Set port value
 	if i, err := strconv.Atoi(origin.Port()); err == nil {
 		port = i
 	}
@@ -112,30 +155,43 @@ func setUpParameters(ctx context.Context, logger log.Logger, args []string) (*fl
 	if execSchema {
 		_, err := db.ExecContext(ctx, flema.Schema)
 		if err != nil {
-			return &flema.Service{}, fmt.Errorf("could not run schema file: %w", err)
+			return nil, fmt.Errorf("could not run schema file: %w", err)
 		}
 	}
 
-	var svc transport.Service = &flema.Service{
-		Logger:         logger,
-		DB:             db,
-		AllowedOrigins: strings.Split(allowedOrigins, ","),
+	// Set up email sender
+	var sender email.Sender
+	from := "noreply.flema.dev@gmail.com"
+	if smtpUsername != "" && smtpPassword != "" {
+		sender = email.NewSMTPSender(
+			from,
+			smtpHost,
+			smtpPort,
+			smtpUsername,
+			smtpPassword,
+		)
 	}
 
-	return svc, nil
-}
-
-func parseFlags(f *flags) {
-	fs := flag.NewFlagSet("flema", flag.ExitOnError)
-	fs.Usage = func() {
-		fs.PrintDefaults()
-		fmt.Println("\nMake sure to set TOKEN_KEY, SENDGRID_API_KEY/SMTP_USERNAME and SMTP_PASSWORD in production environment")
+	svc = &flema.Service{
+		DB:                    db,
+		Logger:                logger,
+		EmailSender:           sender,
+		AllowedOrigins:        strings.Split(allowedOrigins, ","),
+		Origin:                origin,
+		ProfileImageUrlPrefix: profileImageUrl,
 	}
-	fs.IntVar(&f.port, "port", f.port, "P")
-	fs.IntVar(&f.allowedOrigins, "allowed-origins", f.allowedOrigins, "Co")
-}
 
-func run(ctx context.Context, logger log.Logger, args []string) error {
-	var svc transport.Service = setUpParameters(ctx, logger, args)
-	return nil
+	// set up server struct
+	h := transporthttp.New(svc, origin, logger)
+	srv := &http.Server{
+		Addr:              fmt.Sprintf(":%d", port),
+		Handler:           h,
+		ReadHeaderTimeout: time.Second * 10,
+		ReadTimeout:       time.Second * 30,
+		BaseContext: func(net.Listener) context.Context {
+			return ctx
+		},
+	}
+
+	return srv, nil
 }

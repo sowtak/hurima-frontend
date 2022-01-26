@@ -2,6 +2,10 @@ import {ChangeEvent, FC, FormEvent, useState} from "react"
 import {Box, Typography} from "@mui/material"
 import {FormButton, FormTextField, InfoWrapper} from "../components/FormStyles"
 import {useDispatch} from "react-redux"
+import {useNavigate} from "react-router-dom";
+import {VerificationData} from "../service/api/types";
+import {useLocation} from "react-router";
+import {AuthenticationService} from "../service/api/authenticationService";
 
 /**
  * @author  Sowa Takayanagi
@@ -11,11 +15,35 @@ import {useDispatch} from "react-redux"
 
 export const EmailVerification: FC = () => {
     const [code, setCode] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [failure, setFailure] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location: any = useLocation()
+
+    const email: string = location.state.email
+    const username: string = location.state.username
 
     const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault()
+        setIsLoading(true)
 
+        const postData: VerificationData = {
+            email: email,
+            verificationCode: code
+        }
+        AuthenticationService.checkVerificationCode(postData)
+            .then((response) => {
+                if (response.status == '200') {
+                    setSuccess(true)
+                    setIsLoading(false)
+                    navigate('/', {})
+                }
+            }).catch(err => {
+            console.log(err)
+
+        })
     }
 
     const handleChange = (ev: ChangeEvent<HTMLFormElement>) => {

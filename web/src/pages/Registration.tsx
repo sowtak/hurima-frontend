@@ -22,7 +22,7 @@ const RegistrationFormSchema = yup.object().shape({
 })
 
 export const Registration: FC = () => {
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState<string>('')
     const [invalidEmailError, setInvalidEmailError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -48,10 +48,12 @@ export const Registration: FC = () => {
         const registrationData: AuthData = {email: email}
         AuthenticationService.sendVerificationCode(registrationData)
             .then((response) => {
-                setSuccess(true)
-                setIsLoading(false)
-                console.log("SUCCESS")
-                navigate('/account/verify-email')
+                if (response.status === '204') {
+                    setSuccess(true)
+                    setIsLoading(false)
+                    console.log("SUCCESS")
+                    navigate('/account/verify-email', {state: registrationData})
+                }
             }).catch((error) => {
             console.log(error.response)
             setFailure(true)
