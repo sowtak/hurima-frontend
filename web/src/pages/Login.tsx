@@ -66,14 +66,14 @@ export const Login: FC = () => {
             setInvalidEmailError(false)
         }
         setIsLoading(true)
-        const loginData: AuthData = {email: email}
-        AuthenticationService.sendVerificationCode(loginData)
+        const postData: AuthData = {email: email}
+        AuthenticationService.sendVerificationCode(postData)
             .then((response) => {
-                if (response.status === '204') {
+                if (response.status !== null) {
                     setSuccess(true)
                     setIsLoading(false)
                     console.log("SUCCESS")
-                    navigate('/account/verify-email', {state: {email: email}})
+                    navigate('/account/verify-email')
                 }
             }).catch((error) => {
             console.log(error.response)

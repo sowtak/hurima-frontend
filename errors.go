@@ -15,4 +15,6 @@ var (
 
 	EmailTakenError    = errors.New("email already taken")
 	UsernameTakenError = errors.New("username already taken")
+
+	UserNotFoundError = errors.New("user not found")
 )

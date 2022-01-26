@@ -9,6 +9,14 @@ export interface ApiResponse<T> {
   data: T
 }
 
+export type AuthResponse = {
+  userId: string
+  username: string
+  profileImageUrl: string
+  token: string
+  expiresAt: number
+}
+
 export type AuthErrors = {
   emailError: string
 }
@@ -18,6 +26,10 @@ export type AuthData = {
 }
 
 export type VerificationData = {
+  verificationCode: string
+}
+
+export type VerificationData2 = {
   email: string
   verificationCode: string
 }

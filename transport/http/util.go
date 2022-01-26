@@ -2,6 +2,7 @@ package http
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
@@ -18,8 +19,16 @@ var (
 	emailNotValidatedErr = errors.New("email not verified")
 )
 
-func (h *handler) respondErr(w http.ResponseWriter, err error) {
-	statusCode := errToCode(err)
+func (h *handler) Respond(w http.ResponseWriter, contentType string, status int, body interface{}) {
+	w.Header().Set("Content-Type", contentType)
+	w.WriteHeader(status)
+	if err := json.NewEncoder(w).Encode(&body); err != nil {
+		return
+	}
+}
+
+func (h *handler) RespondErr(w http.ResponseWriter, err error) {
+	statusCode := ErrToCode(err)
 	if statusCode == http.StatusInternalServerError {
 		if !errors.Is(err, context.Canceled) {
 			_ = h.logger.Log("err", err)
@@ -31,7 +40,7 @@ func (h *handler) respondErr(w http.ResponseWriter, err error) {
 	http.Error(w, err.Error(), statusCode)
 }
 
-func errToCode(err error) int {
+func ErrToCode(err error) int {
 	if err == nil {
 		return http.StatusOK
 	}
@@ -45,7 +54,7 @@ func errToCode(err error) int {
 	return http.StatusInternalServerError
 }
 
-func emptyStr(s string) *string {
+func EmptyStr(s string) *string {
 	if s == "" {
 		return nil
 	}

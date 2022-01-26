@@ -14,10 +14,10 @@ type User struct {
 	ID               string  `json:"id,omitempty"`
 	Email            string  `json:"email,omitempty"`
 	Username         string  `json:"username"`
-	VerificationCode string  `json:"verification_code"`
-	ProfileImageUrl  *string `json:"profile_image_url"`
-	IsActive         bool    `json:"is_active"`
-	EmailDomain      string  `json:"email_domain"`
+	VerificationCode string  `json:"verificationCode"`
+	ProfileImageUrl  *string `json:"profileImageUrl"`
+	IsActive         bool    `json:"isActive"`
+	EmailDomain      string  `json:"emailDomain"`
 	Role             string  `json:"role"`
 }
 

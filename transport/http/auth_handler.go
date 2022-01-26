@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"flema"
 	"net/http"
 )
 
@@ -20,21 +21,20 @@ type SendCodeResponse struct {
 }
 
 type VerificationProps struct {
-	Email string `json:"email"`
-	Code  string `json:"code"`
+	//Email string `json:"email"`
+	VerificationCode string `json:"verificationCode"`
 }
 
 func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
 
 	var req SendCodeProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		h.respondErr(w, badRequestErr)
+		h.RespondErr(w, badRequestErr)
 		return
 	}
 
 	if err := h.svc.SendVerificationCode(r.Context(), req.Email); err != nil {
-		h.respondErr(w, err)
+		h.RespondErr(w, err)
 		return
 	}
 
@@ -49,31 +49,30 @@ func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
 
 	var req VerificationProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		h.respondErr(w, badRequestErr)
+		h.RespondErr(w, badRequestErr)
 		return
 	}
 
 	ctx := r.Context()
 	q := r.URL.Query()
-	username := emptyStr(q.Get("username"))
-	resp, err := h.svc.CheckVerificationCode(ctx, req.Email, req.Code, username)
-	if err == nil {
-		return
+	username := EmptyStr(q.Get("username"))
+	resp, err := h.svc.CheckVerificationCode(ctx, req.VerificationCode, username)
+	if err == flema.UserNotFoundError {
+		h.Respond(w, "application/json", http.StatusFound, resp)
 	}
 
 	if err != nil {
-		statusCode := errToCode(err)
+		statusCode := ErrToCode(err)
 		if statusCode != http.StatusInternalServerError {
 			return
 		}
 	}
 
 	if err != nil {
-		h.respondErr(w, err)
+		h.RespondErr(w, err)
 		return
 	}
 

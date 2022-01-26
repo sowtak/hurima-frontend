@@ -34,7 +34,7 @@ export const Registration: FC = () => {
         setEmail("")
     }, [])
 
-    const onSubmit = (ev: FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = (ev: FormEvent<HTMLFormElement>): void => {
         ev.preventDefault()
         const emailValidationError = validateEmail(email)
         if (emailValidationError) {
@@ -45,22 +45,20 @@ export const Registration: FC = () => {
         }
         setIsLoading(true)
 
-        const registrationData: AuthData = {email: email}
-        AuthenticationService.sendVerificationCode(registrationData)
+        const postData: AuthData = {email: email}
+        AuthenticationService.sendVerificationCode(postData)
             .then((response) => {
-                if (response.status === '204') {
+                if (response.status !== null) {
                     setSuccess(true)
                     setIsLoading(false)
                     console.log("SUCCESS")
-                    navigate('/account/verify-email', {state: registrationData})
+                    navigate('/account/verify-email')
                 }
             }).catch((error) => {
             console.log(error.response)
             setFailure(true)
             setIsLoading(false)
             console.log("FAILURE")
-        }).finally(() => {
-            console.log("L")
         })
     }
 
@@ -70,7 +68,7 @@ export const Registration: FC = () => {
             {success ? <Alert severity={'success'}>Activation code is sent to your email</Alert> : null}
             {failure ? <Alert severity={'error'}>Failed to send verification code</Alert> : null}
             <FormContainer sx={{paddingTop: '24px', paddingBottom: '12px'}}>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSubmit}>
                     <Box component={'div'} sx={{marginBottom: '12px'}}>
                         <Link to={'/'}>
                             <AppLogo src={logo} alt={''}/>
@@ -99,7 +97,7 @@ export const Registration: FC = () => {
                         variant='contained'
                         color='primary'
                         disabled={!(email)}
-                        onClick={onSubmit}
+                        onSubmit={handleSubmit}
                     >
                         Send activation code
                     </FormButton>

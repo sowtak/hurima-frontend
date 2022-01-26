@@ -16,15 +16,6 @@ import {setUserData} from "./actionCreators";
 import {LoginProps} from "../../../pages/Login";
 import {NavigateFunction} from "react-router";
 
-export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
-    try {
-        const response = await AuthenticationService.activateAccount(code)
-        dispatch(activateAccountSuccess(response.data))
-    } catch (error: any) {
-        dispatch(activateAccountFailure(error.response.data))
-    }
-};
-
 export const signIn = (payload: LoginProps) => async (dispatch: Dispatch) => {
     try {
         console.log("Log in")

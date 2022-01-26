@@ -191,7 +191,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 	// CORS options
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{
-			"http://localhost:3000",
+			"http://localhost:3000", "http://localhost:8000",
 		},
 		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"},

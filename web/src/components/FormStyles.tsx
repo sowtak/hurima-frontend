@@ -35,7 +35,7 @@ export const FormButton: ElementType = styled(Button)`
 
 // ----- Wrapper ------
 
-export const InfoWrapper: ElementType = styled('div')`
+export const InfoWrapper: ElementType = styled('form')`
     marginTop: 30px;
     display: flex;
 `
