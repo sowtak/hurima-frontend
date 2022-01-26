@@ -59,6 +59,8 @@ export const Registration: FC = () => {
             setFailure(true)
             setIsLoading(false)
             console.log("FAILURE")
+        }).finally(() => {
+            console.log("L")
         })
     }
 

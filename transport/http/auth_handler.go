@@ -12,7 +12,7 @@ import (
  */
 
 type SendCodeProps struct {
-	Email string
+	Email string `json:"email"`
 }
 
 type SendCodeResponse struct {
@@ -20,8 +20,8 @@ type SendCodeResponse struct {
 }
 
 type VerificationProps struct {
-	Email string
-	Code  string
+	Email string `json:"email"`
+	Code  string `json:"code"`
 }
 
 func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {

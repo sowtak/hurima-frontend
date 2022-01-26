@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS verification_codes (
     email VARCHAR NOT NULL,
-    code TEXT NOT NULL DEFAULT SUBSTR(MD5(RANDOM()::TEXT), 0, 6),
+    code TEXT NOT NULL DEFAULT SUBSTR(MD5(RANDOM()::TEXT), 0, 7),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     PRIMARY KEY (email, code)
 );

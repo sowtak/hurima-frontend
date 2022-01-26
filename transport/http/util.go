@@ -3,7 +3,6 @@ package http
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net/http"
 	"net/url"
 )
@@ -23,7 +22,7 @@ func (h *handler) respondErr(w http.ResponseWriter, err error) {
 	statusCode := errToCode(err)
 	if statusCode == http.StatusInternalServerError {
 		if !errors.Is(err, context.Canceled) {
-			_ = h.logger.Log("err", fmt.Errorf("could not encode http response body: %w", err))
+			_ = h.logger.Log("err", err)
 		}
 		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return

@@ -7,8 +7,7 @@ import (
 	"flag"
 	"flema/email"
 	"fmt"
-	"github.com/go-kit/log"
-	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 	"net"
 	"net/http"
 	"net/url"
@@ -22,6 +21,8 @@ import (
 	"flema"
 	"flema/transport"
 	transporthttp "flema/transport/http"
+	"github.com/go-kit/log"
+	"github.com/joho/godotenv"
 )
 
 /**
@@ -86,7 +87,13 @@ func run(ctx context.Context, logger log.Logger, args []string) error {
 
 		errs <- nil
 	}()
-	return nil
+
+	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+		close(errs)
+		return fmt.Errorf("could not listen and serve: %w", err)
+	}
+
+	return <-errs
 }
 
 // setUp sets up DB, parameters used in the app and parses flags
@@ -145,7 +152,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 	if err != nil {
 		_ = fmt.Errorf("could not open db connection: %w", err)
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	if err = db.PingContext(ctx); err != nil {
 		_ = fmt.Errorf("could not ping to db: %w", err)
@@ -181,8 +188,20 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		ProfileImageUrlPrefix: profileImageUrl,
 	}
 
+	// CORS options
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{
+			"http://localhost:3000",
+		},
+		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"},
+		AllowCredentials: true,
+		ExposedHeaders:   []string{"Content_Length"},
+		Debug:            true,
+	})
+
 	// set up server struct
-	h := transporthttp.New(svc, origin, logger)
+	h := c.Handler(transporthttp.New(svc, origin, logger))
 	srv := &http.Server{
 		Addr:              fmt.Sprintf(":%d", port),
 		Handler:           h,

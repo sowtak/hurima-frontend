@@ -66,16 +66,16 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 		}
 	}()
 
+	// parse template
 	s.verificationCodeTmplOnce.Do(func() {
 		var txt []byte
-		txt, err = em.Templates.ReadFile("verification-code.html.tmpl")
+		txt, err = em.Templates.ReadFile("templates/verification-code.html.tmpl")
 		if err != nil {
 			err = fmt.Errorf("could not read verification code template file: %w", err)
 			return
 		}
-		tmpl := template.New("mail/verification-code.html")
+		tmpl := template.New("verification-code.html")
 		s.verificationCodeTmpl, err = tmpl.Funcs(template.FuncMap{
-			"duration": "1 hour",
 			"html": func(s string) template.HTML {
 				return template.HTML(s)
 			},
@@ -91,9 +91,9 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 
 	subject := "Activation code"
 	var b bytes.Buffer
+	// s.verificationCodeTmpl was null
 	err = s.verificationCodeTmpl.Execute(&b, map[string]interface{}{
 		"VerificationCode": code,
-		"TTL":              verificationCodeTtl,
 	})
 	if err != nil {
 		return fmt.Errorf("could not execute template")
@@ -192,7 +192,7 @@ func VerificationTx(ctx context.Context, s *Service, email, code, username strin
 			return fmt.Errorf("could not select user from verification codes")
 		}
 
-		resp.ProfileImageUrl = s.profileImageUrl(profileImageUrl)
+		resp.ProfileImageUrl = *s.profileImageUrl(profileImageUrl)
 
 		return nil
 	}

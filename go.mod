@@ -10,6 +10,7 @@ require (
 	github.com/jackc/pgerrcode v0.0.0-20201024163028-a0d42d470451
 	github.com/joho/godotenv v1.4.0
 	github.com/lib/pq v1.10.4
+	github.com/rs/cors v1.8.2
 )
 
 require (
