@@ -27,10 +27,11 @@ var (
 )
 
 const (
-	verificationCodeTtl = time.Minute * 30
+	verificationCodeTtl = time.Hour * 1
 )
 
-type AuthResponse struct {
+type AuthResponseData struct {
+	Status          string    `json:"status"`
 	UserId          string    `json:"userId"`
 	Username        string    `json:"username"`
 	ProfileImageUrl string    `json:"profileImageUrl"`
@@ -106,17 +107,17 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 }
 
 // CheckVerificationCode validates the code entered by user, then return with default profile
-func (s *Service) CheckVerificationCode(ctx context.Context, code string, username *string) (AuthResponse, error) {
-	var resp AuthResponse
+func (s *Service) CheckVerificationCode(ctx context.Context, code string, username *string) (AuthResponseData, error) {
+	var resp AuthResponseData
 
 	code = strings.TrimSpace(code)
 	if !uuidRegex.MatchString(strings.ToLower(code)) {
-		return resp, errors.New("invalid code")
+		return resp, InvalidVerificationCodeError
 	}
 	var email string
 	query := "SELECT email FROM verification_codes WHERE code = $1"
 	if err := s.DB.QueryRowContext(ctx, query, code).Scan(&email); err != nil {
-		return resp, errors.New("could not find email with given code")
+		return resp, EmailWithGivenCodeNotFoundError
 		//return resp, fmt.Errorf(code)
 	}
 
@@ -156,7 +157,7 @@ func isVerificationCodeExpired(t time.Time) bool {
 }
 
 // VerificationTx execute transaction for email verification
-func VerificationTx(ctx context.Context, s *Service, email, code string, username *string, resp AuthResponse) error {
+func VerificationTx(ctx context.Context, s *Service, email, code string, username *string, resp AuthResponseData) error {
 	if tx, err := s.DB.Begin(); err == nil {
 		var createdAt time.Time
 		query := "SELECT created_at FROM verification_codes WHERE email = $1 AND code = $2"
@@ -177,13 +178,13 @@ func VerificationTx(ctx context.Context, s *Service, email, code string, usernam
 		query = "SELECT id, username, profile_image_url FROM users WHERE email = $1"
 		if err = tx.QueryRowContext(ctx, query, email).Scan(&resp.UserId, &resp.Username, &profileImageUrl); err == sql.ErrNoRows {
 			if username == nil {
-				return errors.New("user not found")
+				return UserNotFoundError
 			}
 			query := "INSERT INTO users (email, username) VALUES ($1, $2) RETURNING id"
 			err := tx.QueryRowContext(ctx, query, email, username).Scan(&resp.UserId)
 			if violatesUniqueConstraint(err) {
 				if strings.Contains(err.Error(), "email") {
-					return errors.New("email already taken")
+					return EmailTakenError
 				}
 
 				if strings.Contains(err.Error(), "username") {

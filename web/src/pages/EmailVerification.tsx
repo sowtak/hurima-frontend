@@ -28,16 +28,26 @@ export const EmailVerification: FC = () => {
         setIsLoading(true)
         const postData: VerificationData = {verificationCode: code}
         AuthenticationService.checkVerificationCode(postData)
-            .then((response) => {
-                if (response.status !== null) {
+            .then(data => {
+                if(data.status === '302') {
                     setIsLoading(false)
                     setFailure(false)
-                    navigate('/', {})
+                    navigate('/account/create')
+                } else {
+                    console.log(data.status)
+                    setIsLoading(false)
+                    setFailure(false)
+                    navigate('/doomed')
                 }
             }).catch(err => {
-            console.log(err.response)
-            setFailure(true)
-            setIsLoading(false)
+            if (err.status === '302') {
+                setIsLoading(false)
+                setFailure(false)
+                navigate('/account/create')
+            } else {
+                setIsLoading(false)
+                setFailure(true)
+            }
             console.log(err)
         })
     }
@@ -49,7 +59,7 @@ export const EmailVerification: FC = () => {
         const postData: AuthData = {email: email}
         AuthenticationService.sendVerificationCode(postData)
             .then(response => {
-                if (response.status !== null) {
+                if (response.status === '204') {
                     console.log(response)
                     setIsLoading(false)
                     setCodeResent(true)
@@ -74,11 +84,11 @@ export const EmailVerification: FC = () => {
     return (
         <>
             {isLoading ? <Progress/> : null}
-            {failure ? <Alert severity={'error'}>Verification code is wrong</Alert> : null}
+            {failure ? <Alert severity={'error'}>Verification failed</Alert> : null}
             {resendFailure ? <Alert severity={'error'}>Could not re-send code</Alert> : null}
             {resendSuccess ? <Alert severity={'success'}>Code is sent</Alert> : null}
             <Typography component={'div'} sx={{
-                fontSize: '30px',
+                fontSize: '40px',
                 fontWeight: '700px',
                 lineHeight: '36px',
                 marginBottom: '24px',
@@ -89,6 +99,11 @@ export const EmailVerification: FC = () => {
             </Typography>
             <InfoWrapper onSubmit={handleSubmit}>
                 <Stack direction={'column'}>
+                    <Typography component={'h6'} sx={{marginBottom: '24px'}}>
+                        Email verification code is sent to your email.
+                        <br/>
+                        Please enter the code below to continue.
+                    </Typography>
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
                             variant='outlined'
@@ -115,7 +130,7 @@ export const EmailVerification: FC = () => {
 
                     <Box>
                         <Typography>
-                            If verification code is not sent to your email, try re-sending
+                            If verification code is not sent to your email, try re-sending.
                         </Typography>
                     </Box>
 

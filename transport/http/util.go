@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"flema"
 	"net/http"
 	"net/url"
 )
@@ -14,21 +15,17 @@ import (
  * @version 1.0.0
  */
 
-var (
-	badRequestErr        = errors.New("bad request")
-	emailNotValidatedErr = errors.New("email not verified")
-)
+var ()
 
 func (h *handler) Respond(w http.ResponseWriter, contentType string, status int, body interface{}) {
 	w.Header().Set("Content-Type", contentType)
-	w.WriteHeader(status)
 	if err := json.NewEncoder(w).Encode(&body); err != nil {
 		return
 	}
 }
 
-func (h *handler) RespondErr(w http.ResponseWriter, err error) {
-	statusCode := ErrToCode(err)
+func (h *handler) RespondWithError(w http.ResponseWriter, err error) {
+	statusCode := ErrorToCode(err)
 	if statusCode == http.StatusInternalServerError {
 		if !errors.Is(err, context.Canceled) {
 			_ = h.logger.Log("err", err)
@@ -40,15 +37,26 @@ func (h *handler) RespondErr(w http.ResponseWriter, err error) {
 	http.Error(w, err.Error(), statusCode)
 }
 
-func ErrToCode(err error) int {
+func ErrorToCode(err error) int {
 	if err == nil {
 		return http.StatusOK
 	}
 
 	switch {
-	case err == badRequestErr ||
-		err == emailNotValidatedErr:
+	case err == flema.BadRequestErr ||
+		err == flema.EmailNotValidatedErr:
 		return http.StatusBadRequest
+
+	case err == flema.InvalidVerificationCodeError ||
+		err == flema.InvalidUsernameError ||
+		err == flema.InvalidEmailError ||
+		err == flema.InvalidUserIdError:
+		return http.StatusUnprocessableEntity
+
+	case err == flema.UserNotFoundError ||
+		err == flema.EmailWithGivenCodeNotFoundError:
+		return http.StatusNotFound
+
 	}
 
 	return http.StatusInternalServerError

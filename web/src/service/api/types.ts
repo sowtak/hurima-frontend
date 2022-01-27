@@ -9,7 +9,7 @@ export interface ApiResponse<T> {
   data: T
 }
 
-export type AuthResponse = {
+export type AuthResponseData = {
   userId: string
   username: string
   profileImageUrl: string

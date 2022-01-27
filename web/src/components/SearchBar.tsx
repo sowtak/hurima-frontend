@@ -26,12 +26,6 @@ export const SearchBar: FC = (props) => {
         navigate('/search', {state: {value: encodeURIComponent(value)}})
     }
 
-    useEffect(() => {
-        fetch("https://swapi-demo.azurewebsites.net/api/starships")
-            .then((response) => response.json())
-            .then((data) => setValue(data))
-    })
-
 
     return (
         <Grid sx={{paddingLeft: "24px", paddingRight: "64px", maxWidth: '1000px', flexGrow: '1'}}>

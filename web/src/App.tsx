@@ -14,6 +14,7 @@ import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
 import {Registration} from "./pages/Registration";
 import {EmailVerification} from "./pages/EmailVerification";
+import {CreateAccount} from "./pages/CreateAccount";
 
 export const App: FC = () => {
     //const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -22,21 +23,21 @@ export const App: FC = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/account">
-                    <Route path="signin" element={<Login/>}/>
-                    <Route path="signup" element={<Registration/>}/>
-                    <Route path="verify-email" element={<EmailVerification/>}/>
-                    <Route path="signup/activate/:code" element={<Login/>}/>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/account'>
+                    <Route path='signin' element={<Login/>}/>
+                    <Route path='signup' element={<Registration/>}/>
+                    <Route path='verify-email' element={<EmailVerification/>}/>
+                    <Route path='create' element={<CreateAccount/>}/>
                 </Route>
-                <Route path="watchlist" element={<Watchlist/>}/>
-                <Route path="list-an-item" element={<ListItem/>}/>
+                <Route path='watchlist' element={<Watchlist/>}/>
+                <Route path='list-an-item' element={<ListItem/>}/>
                 <Route path={`/@${username}`} element={<UserProfile/>}/>
                 <Route path='settings' element={<Settings/>}>
                     <Route path='profile' element={<UserProfile/>}/>
                     <Route path='notification' element={<Notification/>}/>
                 </Route>
-                <Route path="*" element={<NotFound/>}/>
+                <Route path='*' element={<NotFound/>}/>
             </Routes>
 
         </>
