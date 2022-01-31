@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react"
-import {AuthData} from "../service/api/types"
+import {Email} from "../service/api/types"
 import * as yup from "yup"
 import {Alert, Box, Typography} from "@mui/material"
 import {Link, useNavigate} from "react-router-dom"
@@ -16,13 +16,25 @@ import logo from '../images/icons/flema-logo-svg-25100.svg'
 //import {FailureSnackbar, SuccessSnackbar} from "../../components/SnackBars";
 import {Progress} from "../components/Progress";
 import {validateEmail} from "../utils/inputValidators";
+import {fetchSignUp} from "../store/ducks/user/actionCreators";
+import {useDispatch} from "react-redux";
 
 const RegistrationFormSchema = yup.object().shape({
     email: yup.string().email("Invalid email").required("Please enter a valid email"),
 })
 
+export type RegistrationProps = {
+    username: string
+    email: string
+    password: string
+}
+
 export const Registration: FC = () => {
-    const [email, setEmail] = useState<string>('')
+    const dispatch = useDispatch()
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
     const [invalidEmailError, setInvalidEmailError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -31,35 +43,23 @@ export const Registration: FC = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        setEmail("")
-    }, [])
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setPassword2('')
+    }, [username, email, password, password2])
 
     const handleSubmit = (ev: FormEvent<HTMLFormElement>): void => {
         ev.preventDefault()
+
         const emailValidationError = validateEmail(email)
         if (emailValidationError) {
             setInvalidEmailError(true)
             return
-        } else {
-            setInvalidEmailError(false)
         }
-        setIsLoading(true)
 
-        const postData: AuthData = {email: email}
-        AuthenticationService.sendVerificationCode(postData)
-            .then((response) => {
-                if (response.status !== null) {
-                    setSuccess(true)
-                    setIsLoading(false)
-                    console.log("SUCCESS")
-                    navigate('/account/verify-email')
-                }
-            }).catch((error) => {
-            console.log(error.response)
-            setFailure(true)
-            setIsLoading(false)
-            console.log("FAILURE")
-        })
+        const postData: RegistrationProps = {username: username, email: email, password}
+        dispatch(fetchSignUp(postData))
     }
 
     return (
@@ -75,31 +75,66 @@ export const Registration: FC = () => {
                         </Link>
                     </Box>
                     <Typography variant={'h4'} component={'div'} sx={{marginBottom: '24px'}}>
-                        Sign up with email
+                        Sign up to continue
                     </Typography>
                     <Typography variant={'h6'} sx={{marginBottom: '24px', fontSize: '14px'}}>
-                        Please enter your email here and receive account verification code.
+                        Please enter your registration info here and receive account verification code.
                     </Typography>
+                    <Box sx={{marginBottom: '24px'}}>
+                        <FormTextField
+                            name='username'
+                            label='Username'
+                            type='text'
+                            variant='outlined'
+                            autoFocus
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+                            value={email}
+                        />
+                    </Box>
+                    <br/>
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
                             name='email'
                             label='Email'
                             type='email'
                             variant='outlined'
-                            autoFocus
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                             value={email}
                         />
                     </Box>
+                    <br/>
                     {invalidEmailError ? <Alert severity={'error'}>Email is invalid</Alert> : null}
+
+                    <Box sx={{marginBottom: '24px'}}>
+                        <FormTextField
+                            name='password'
+                            label='Password'
+                            type='password'
+                            variant='outlined'
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.currentTarget.value)}
+                            value={password}
+                        />
+                    </Box>
+                    <br/>
+                    <Box sx={{marginBottom: '24px'}}>
+                        <FormTextField
+                            name='password2'
+                            label='Password (Confirm)'
+                            type='password'
+                            variant='outlined'
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword2(event.currentTarget.value)}
+                            value={password}
+                        />
+                    </Box>
+                    <br/>
                     <FormButton
                         type='submit'
                         variant='contained'
                         color='primary'
-                        disabled={!(email)}
+                        disabled={!(username && email && password && password2)}
                         onSubmit={handleSubmit}
                     >
-                        Send activation code
+                        Sign up
                     </FormButton>
 
                     <Link to='/account/signin'>

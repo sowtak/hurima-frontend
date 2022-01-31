@@ -7,27 +7,33 @@
 import axios from 'axios'
 
 import {API_BASE_URL_DEV} from "../../utils/constants/url"
-import {ApiResponse, AuthData, AuthResponseData, VerificationData, VerificationData2,} from "./types"
+import {ApiResponse, Email, AuthResponseData, EmailValidityResponseData, VerificationCode, Password,} from "./types"
 import {AuthUser} from "../../store/ducks/user/contracts/state"
 import {LoginProps} from "../../pages/Login"
 
 export const AuthenticationService = {
 
-  async sendVerificationCode(postData: AuthData): Promise<ApiResponse<AuthResponseData>> {
-    const {data} = await axios.post<any>(`${API_BASE_URL_DEV}/auth/send-verification-code`, postData, {timeout: 1000* 5})
-    return data
-  },
-
-  async checkVerificationCode(postData: VerificationData): Promise<ApiResponse<AuthResponseData>> {
+  async checkVerificationCode(postData: VerificationCode): Promise<ApiResponse<AuthResponseData>> {
     console.log("CHECK")
     const {data} = await axios.post<ApiResponse<AuthResponseData>>(`${API_BASE_URL_DEV}/auth/check-verification-code`, postData, {timeout: 1000* 5})
     return data
   },
 
-  async createUser(postData: {username: string}): Promise<ApiResponse<AuthResponseData>> {
+  async checkEmailValidity(postData: Email): Promise<ApiResponse<EmailValidityResponseData>> {
+    const {data} = await axios.post<ApiResponse<EmailValidityResponseData>>(`${API_BASE_URL_DEV}/auth/check-email-validity`, postData, {timeout: 1000* 5})
+    return data
+  },
+
+  async sendPasswordResetCode(postData: Email): Promise<ApiResponse<AuthResponseData>> {
     const {data} = await axios.post<ApiResponse<AuthResponseData>>(`${API_BASE_URL_DEV}/auth/create-user`, postData)
     return data
   },
+
+  async resetPassword(postData: Password): Promise<ApiResponse<any>> {
+    const {data} = await axios.post<ApiResponse<any>>(`${API_BASE_URL_DEV}/auth/reset-password`, postData)
+    return data
+  },
+
 
 
 

@@ -4,11 +4,13 @@
  * @version 1.0.0
  */
 
-import {User} from "../../entity/User"
-import {LOADING_USER_INFO, UserActions} from "../action-types/user-action-types"
-import {LOGOUT_SUCCESS} from "../action-types/auth-action-types"
+import {User} from "../../../entity/User"
+import {UserActions, UserActionType} from "./contracts/actionTypes";
+import {AuthErrors} from "../../../service/api/types";
 
 export type InitialState = {
+    loading: boolean
+    errors: Partial<AuthErrors>
     user: Partial<User>
     isLoggedIn: boolean
     isLoaded: boolean
@@ -16,6 +18,8 @@ export type InitialState = {
 }
 
 const initialState: InitialState = {
+    loading: false,
+    errors: {},
     user: {},
     isLoggedIn: false,
     isLoaded: false,
@@ -25,11 +29,11 @@ const initialState: InitialState = {
 const reducer = (state: InitialState = initialState, action: UserActions): InitialState => {
 
     switch (action.type) {
-        case LOADING_USER_INFO:
-            return {...state, isLoaded: true}
+        case UserActionType.SHOW_LOADER:
+            return {...state, loading: true, errors: {}}
 
-        case LOGOUT_SUCCESS:
-            return {...state, user: {}, isLoggedIn: false}
+        case UserActionType.FETCH_SIGN_UP_REQUEST:
+            return {...state, }
 
         default:
             return state

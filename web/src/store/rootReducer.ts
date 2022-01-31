@@ -4,11 +4,9 @@
  * @version 1.0.0
  */
 import {combineReducers} from "redux"
-import {authReducer} from "./reducers/authReducer"
-import userReducer from "./reducers/userReducer"
+import userReducer from "./ducks/user/reducer"
 
 const rootReducer = combineReducers({
-    auth: authReducer,
     user: userReducer,
 })
 

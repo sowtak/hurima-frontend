@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
+    password VARCHAR NOT NULL UNIQUE,
     profile_image_url VARCHAR,
     email_domain VARCHAR,
     roles VARCHAR,
@@ -28,6 +29,13 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS verification_codes (
+    email VARCHAR NOT NULL,
+    code UUID NOT NULL DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    PRIMARY KEY (email, code)
+);
+
+CREATE TABLE IF NOT EXISTS password_reset_codes (
     email VARCHAR NOT NULL,
     code TEXT NOT NULL DEFAULT SUBSTR(MD5(RANDOM()::TEXT), 0, 7),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),

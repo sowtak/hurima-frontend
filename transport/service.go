@@ -13,6 +13,6 @@ import (
 
 // Service with business logic methods
 type Service interface {
-	SendVerificationCode(ctx context.Context, email string) error
+	SendVerificationCode(ctx context.Context, username, email, password string) error
 	CheckVerificationCode(ctx context.Context, code string, username *string) (flema.AuthResponseData, error)
 }

@@ -39,6 +39,7 @@ type AuthResponseData struct {
 	ExpiresAt       time.Time `json:"expiresAt"`
 }
 
+// SendVerificationCode registers user with parameter isActive with value false
 func (s *Service) SendVerificationCode(ctx context.Context, email string) error {
 	email = strings.TrimSpace(email)
 	if !emailRegex.MatchString(strings.ToLower(email)) {

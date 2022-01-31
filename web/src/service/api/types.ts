@@ -17,19 +17,22 @@ export type AuthResponseData = {
   expiresAt: number
 }
 
+export type EmailValidityResponseData = {
+  emailFound: boolean
+}
+
 export type AuthErrors = {
   emailError: string
 }
 
-export type AuthData = {
+export type Email = {
   email: string
 }
 
-export type VerificationData = {
+export type VerificationCode = {
   verificationCode: string
 }
 
-export type VerificationData2 = {
-  email: string
-  verificationCode: string
+export type Password = {
+  password: string
 }

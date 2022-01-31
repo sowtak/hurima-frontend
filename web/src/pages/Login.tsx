@@ -15,9 +15,10 @@ import {AppLogo} from "../components/Logo";
 
 import logo from '../images/icons/flema-logo-svg-25100.svg'
 import {validateEmail} from "../utils/inputValidators";
-import {AuthData} from "../service/api/types";
+import {Email} from "../service/api/types";
 import {AuthenticationService} from "../service/api/authenticationService";
 import {Progress} from "../components/Progress";
+import {fetchSignIn} from "../store/ducks/user/actionCreators";
 //import {FailureSnackbar, SuccessSnackbar} from "../../components/SnackBars";
 
 
@@ -32,6 +33,7 @@ export const LoginFormError: ElementType = styled(Typography)`
 
 export type LoginProps = {
     email: string
+    password: string
     navigate: NavigateFunction
 }
 
@@ -42,7 +44,7 @@ export const Login: FC = () => {
     const [success, setSuccess] = useState(false)
     const [failure, setFailure] = useState(false)
     const isLoggedIn = useSelector((state: AppState) => state.user.isLoggedIn)
-    const user = useSelector((state: AppState) => state.auth.user)
+    const user = useSelector((state: AppState) => state.user.user)
 
 
     const dispatch = useDispatch()
@@ -66,14 +68,15 @@ export const Login: FC = () => {
             setInvalidEmailError(false)
         }
         setIsLoading(true)
-        const postData: AuthData = {email: email}
+        const postData: Email = {email: email}
+        dispatch(fetchSignIn(postData))
         AuthenticationService.sendVerificationCode(postData)
             .then((response) => {
                 if (response.status !== null) {
                     setSuccess(true)
                     setIsLoading(false)
                     console.log("SUCCESS")
-                    navigate('/account/verify-email')
+                    navigate('/')
                 }
             }).catch((error) => {
             console.log(error.response)
@@ -110,15 +113,25 @@ export const Login: FC = () => {
                             label='Email'
                             type='email'
                             variant='outlined'
-                            autoFocus
                             value={email}
                             onChange={handleChange}
                         />
                     </Box>
+                    <br/>
+                    <Box sx={{marginBottom: '24px'}}>
+                        <FormTextField
+                            label='Password'
+                            type='password'
+                            variant='outlined'
+                            value={email}
+                            onChange={handleChange}
+                        />
+                    </Box>
+                    <br/>
 
                     {invalidEmailError ? <Alert severity={'error'}>Email is invalid</Alert> : null}
 
-                    <Box sx={{paddingBottom: '24px'}}>
+                    <Box sx={{paddingBottom: '12px'}}>
                         <FormButton
                             sx={{paddingTop: '12px'}}
                             type='submit'
@@ -126,7 +139,7 @@ export const Login: FC = () => {
                             color='primary'
                             disabled={!email}
                         >
-                            Send verification code
+                            Sign in
                         </FormButton>
                     </Box>
 

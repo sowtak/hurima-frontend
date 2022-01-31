@@ -3,7 +3,7 @@ import {Alert, Box, Stack, Typography} from "@mui/material"
 import {FormButton, FormTextField, InfoWrapper} from "../components/FormStyles"
 import {useDispatch} from "react-redux"
 import {useNavigate} from "react-router-dom";
-import {AuthData, VerificationData} from "../service/api/types";
+import {Email, VerificationCode} from "../service/api/types";
 import {AuthenticationService} from "../service/api/authenticationService";
 import {Progress} from "../components/Progress";
 
@@ -13,7 +13,7 @@ import {Progress} from "../components/Progress";
  * @version 1.0.0
  */
 
-export const EmailVerification: FC = () => {
+export const EnterPasswordResetCode: FC = () => {
     const [code, setCode] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [failure, setFailure] = useState(false)
@@ -26,7 +26,7 @@ export const EmailVerification: FC = () => {
     const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault()
         setIsLoading(true)
-        const postData: VerificationData = {verificationCode: code}
+        const postData: VerificationCode = {verificationCode: code}
         AuthenticationService.checkVerificationCode(postData)
             .then(data => {
                 if(data.status === '302') {
@@ -56,7 +56,8 @@ export const EmailVerification: FC = () => {
         setIsLoading(true)
 
         const email = ''
-        const postData: AuthData = {email: email}
+        const postData: Email = {email: email}
+        dispatch()
         AuthenticationService.sendVerificationCode(postData)
             .then(response => {
                 if (response.status === '204') {

@@ -5,7 +5,7 @@ import {NavBar} from "./components/NavBar";
 import {NotFound} from "./pages/NotFound";
 import {Login} from "./pages/Login";
 import {Watchlist} from "./pages/Watchlist";
-import {ListItem} from "./pages/ListItem";
+import {ListAnItem} from "./pages/ListAnItem";
 import {Footer} from "./components/Footer";
 import {useSelector} from "react-redux";
 import {AppState} from "./store/rootReducer";
@@ -13,12 +13,11 @@ import {UserProfile} from "./pages/User/UserProfile/UserProfile";
 import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
 import {Registration} from "./pages/Registration";
-import {EmailVerification} from "./pages/EmailVerification";
-import {CreateAccount} from "./pages/CreateAccount";
+import {EnterPasswordResetCode} from "./pages/EnterPasswordResetCode";
+import {ResetPassword} from "./pages/ResetPassword";
 
 export const App: FC = () => {
-    //const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const username = useSelector((state: AppState) => state.auth.user.username);
+    const username = useSelector((state: AppState) => state.user.user.username);
 
     return (
         <>
@@ -27,11 +26,11 @@ export const App: FC = () => {
                 <Route path='/account'>
                     <Route path='signin' element={<Login/>}/>
                     <Route path='signup' element={<Registration/>}/>
-                    <Route path='verify-email' element={<EmailVerification/>}/>
-                    <Route path='create' element={<CreateAccount/>}/>
+                    <Route path='reset-password' element={<ResetPassword/>}/>
+                    <Route path='enter-password-reset-code' element={<EnterPasswordResetCode/>}/>
                 </Route>
                 <Route path='watchlist' element={<Watchlist/>}/>
-                <Route path='list-an-item' element={<ListItem/>}/>
+                <Route path='list-an-item' element={<ListAnItem/>}/>
                 <Route path={`/@${username}`} element={<UserProfile/>}/>
                 <Route path='settings' element={<Settings/>}>
                     <Route path='profile' element={<UserProfile/>}/>

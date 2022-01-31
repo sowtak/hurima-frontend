@@ -8,12 +8,14 @@ import {NavBar} from "../components/NavBar";
 import {Typography} from "@mui/material";
 import {Footer} from "../components/Footer";
 
-export const ListItem: FC = () => {
+export const ListAnItem: FC = () => {
 
     return (
         <>
             <NavBar/>
-            <Typography variant={'h1'}> Item List </Typography>
+            <Typography variant={'h3'}>
+                List an item
+            </Typography>
             <Footer/>
         </>
     )

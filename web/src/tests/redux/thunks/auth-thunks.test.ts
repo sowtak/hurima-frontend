@@ -6,10 +6,10 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk, {ThunkDispatch} from "redux-thunk";
-import {InitialState} from "../../../store/reducers/authReducer";
 import {Action} from "redux";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
+import {InitialState} from "../../../store/ducks/user/reducer";
 
 const mockStore = configureMockStore<InitialState, ThunkDispatch<InitialState, void, Action>>([thunk]);
 const mock = new MockAdapter(axios);

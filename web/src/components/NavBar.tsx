@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {AppState} from "../store/rootReducer"
 
 import logo from '../images/icons/flema-logo-svg-25100.svg'
-import {logOut} from "../store/ducks/user/thunks"
+import {signOut} from "../store/ducks/user/actionCreators"
 
 import {Link, useNavigate} from "react-router-dom"
 import {AppBar, Box, Button, Stack, Toolbar, Typography} from "@mui/material"
@@ -35,10 +35,12 @@ export const NavBar: FC = () => {
     })
 
     const handleLogout = () => {
-        dispatch(logOut(navigate))
+        localStorage.removeItem("token")
+        dispatch(signOut())
+        navigate('/')
     }
 
-    let links, signOut
+    let links, signOutButton
 
     if (isLoggedIn || localStorage.getItem("isLoggedIn")) {
         links = (
@@ -48,7 +50,7 @@ export const NavBar: FC = () => {
                 </Typography>
             </Stack>
         )
-        signOut = (
+        signOutButton = (
             <Stack direction='row' spacing={3}>
                 <Typography component={Link} to={'/'} sx={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
                     Sign out
@@ -66,7 +68,7 @@ export const NavBar: FC = () => {
                 </Typography>
             </Stack>
         )
-        signOut = null
+        signOutButton = null
     }
 
 
@@ -85,7 +87,7 @@ export const NavBar: FC = () => {
                             Watch
                         </Typography>
                         {links}
-                        {signOut}
+                        {signOutButton}
                         <Button component={Link} to={'/list-an-item'} variant={'contained'} size={'small'}>
                             List an item
                         </Button>

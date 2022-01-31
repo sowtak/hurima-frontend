@@ -13,8 +13,11 @@ import (
  * @version 1.0.0
  */
 
-type SendCodeProps struct {
-	Email string `json:"email"`
+type RegistrationProps struct {
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Password2 string `json:"password2"`
 }
 
 type VerificationProps struct {
@@ -23,19 +26,19 @@ type VerificationProps struct {
 }
 
 type ApiResponse struct {
-	Status string `json:"status"`
-	Data   string `json:"data"`
+	Status string   `json:"status"`
+	Data   struct{} `json:"data"`
 }
 
 func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 
-	var req SendCodeProps
+	var req RegistrationProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.RespondWithError(w, flema.BadRequestErr)
 		return
 	}
 
-	if err := h.svc.SendVerificationCode(r.Context(), req.Email); err != nil {
+	if err := h.svc.SendVerificationCode(r.Context(), req.Username, req.Email, req.Password); err != nil {
 		h.RespondWithError(w, err)
 		return
 	}
@@ -44,7 +47,6 @@ func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 	resp := ApiResponse{
 		Status: strconv.Itoa(http.StatusNoContent),
-		Data:   "verification code is sent",
 	}
 	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		return

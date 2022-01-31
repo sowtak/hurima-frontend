@@ -6,7 +6,7 @@
 
 ---
 
-# Prohibited ListItem
+# Prohibited ListAnItem
 
 - Weapons of any kind
 

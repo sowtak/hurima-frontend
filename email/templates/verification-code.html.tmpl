@@ -11,21 +11,16 @@
             border: 1px solid #cdd1d5;
         }
     </style>
-    <title>flema email verification</title>
+    <title>flema account activation</title>
 </head>
 
 <body>
-    <table valign="center" class="table">
-        <tr>
-            <td style="background-color: #ffffff; padding: 40px 30px 40px 30px; text-align: center">
-                <h3>Hello <span text="{{ .username }}"></span>!  This is flema Account registration mail.</h3>
-                <p>Welcome (back) to flema!</p>
-                <p>Please enter the code below on the verification page</p>
-                <p>{{ .VerificationCode }}</p>
-                <p>
-                    <em style="font-family: sans-serif;">It expires in an hour and can only be used once.</em>
-                </p>
-       </tr>
-    </table>
+    <h3>Hello <span text="{{ .username }}"></span>!  This is flema Account registration mail.</h3>
+    <p>Welcome to flema!</p>
+    <p>Please enter the code below on the email verification page</p>
+    <p>{{ .VerificationCode }}</p>
+    <p>
+        <em style="font-family: sans-serif;">It expires in an hour and can only be used once.</em>
+    </p>
 </body>
 </html>
