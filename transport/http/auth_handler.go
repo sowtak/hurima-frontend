@@ -14,15 +14,15 @@ import (
  */
 
 type RegistrationProps struct {
-	Username  string `json:"username"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
-	Password2 string `json:"password2"`
+	Username    string `json:"username"`
+	Email       string `json:"email"`
+	Password    string `json:"password"`
+	RedirectUri string `json:"redirectUri"`
 }
 
 type VerificationProps struct {
 	//Email string `json:"email"`
-	VerificationCode string `json:"verificationCode"`
+	ActivationLink string `json:"activationLink"`
 }
 
 type ApiResponse struct {
@@ -30,7 +30,7 @@ type ApiResponse struct {
 	Data   struct{} `json:"data"`
 }
 
-func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
+func (h *handler) sendActivationLink(w http.ResponseWriter, r *http.Request) {
 
 	var req RegistrationProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -38,33 +38,22 @@ func (h *handler) sendVerificationCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.svc.SendVerificationCode(r.Context(), req.Username, req.Email, req.Password); err != nil {
+	if err := h.svc.SendActivationLink(r.Context(), req.Username, req.Email, req.Password, req.RedirectUri); err != nil {
 		h.RespondWithError(w, err)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNoContent)
-	resp := ApiResponse{
-		Status: strconv.Itoa(http.StatusNoContent),
-	}
-	if err := json.NewEncoder(w).Encode(resp); err != nil {
-		return
-	}
+	w.WriteHeader(http.StatusOK)
 }
 
-func (h *handler) checkVerificationCode(w http.ResponseWriter, r *http.Request) {
+func (h *handler) verifyActivationLink(w http.ResponseWriter, r *http.Request) {
 
-	var req VerificationProps
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		h.RespondWithError(w, flema.BadRequestErr)
-		return
-	}
-
-	ctx := r.Context()
 	q := r.URL.Query()
+	ctx := r.Context()
+	email := q.Get("email")
+	code := q.Get("verification_code")
 	username := EmptyStr(q.Get("username"))
-	resp, err := h.svc.CheckVerificationCode(ctx, req.VerificationCode, username)
+	resp, err := h.svc.VerifyActivationLink(ctx, email, code, username)
 	resp.Status = strconv.Itoa(http.StatusFound)
 	if err == flema.UserNotFoundError {
 		h.Respond(w, "application/json", http.StatusFound, resp)

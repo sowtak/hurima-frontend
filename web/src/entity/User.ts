@@ -8,8 +8,6 @@ export type User = {
   id: number
   username: string
   email: string
-  verificationCode: string | null
-  passwordResetCode: string | null
   active: boolean
   roles: Array<string>
 }

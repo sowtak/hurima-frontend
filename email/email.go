@@ -16,7 +16,7 @@ import (
 )
 
 type Sender interface {
-	Send(to, subject, html, text string) error
+	Send(to, subject, body, alternative string) error
 }
 
 func BuildHtmlBody(from, to mail.Address, subject, body, alternative string) ([]byte, error) {

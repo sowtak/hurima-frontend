@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"flag"
-	"flema/email"
 	"fmt"
 	"github.com/rs/cors"
 	"net"
@@ -14,12 +13,11 @@ import (
 	"os"
 	"os/signal"
 	"strconv"
-	"strings"
 	"syscall"
 	"time"
 
 	"flema"
-	"flema/transport"
+	"flema/email"
 	transporthttp "flema/transport/http"
 	"github.com/go-kit/log"
 	"github.com/joho/godotenv"
@@ -31,12 +29,7 @@ import (
  * @version 1.0.0
  */
 
-type flags struct {
-	port           int
-	originStr      string
-	dbUrl          string
-	execSchema     bool
-	allowedOrigins string
+type Config struct {
 }
 
 func env(key, fallbackValue string) string {
@@ -105,7 +98,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		originStr       = env("ORIGIN", fmt.Sprintf("http://localhost:%d", port))
 		dbUrl           = env("DATABASE_URL", "postgresql://root@localhost:5432/flema?sslmode=disable")
 		execSchema, _   = strconv.ParseBool(env("EXEC_SCHEMA", "false"))
-		allowedOrigins  = os.Getenv("ALLOWED_ORIGINS")
+		allowedOrigins  = []string{"http://localhost:3000", "http://localhost:8000"}
 		profileImageUrl = env("PROFILE_IMAGE_PREFIX", originStr+"/img/profile-images/")
 		smtpHost        = os.Getenv("SMTP_HOST")
 		smtpPort, _     = strconv.Atoi(os.Getenv("SMTP_PORT"))
@@ -113,7 +106,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		smtpPassword    = os.Getenv("SMTP_PASSWORD")
 	)
 
-	var svc transport.Service
+	// ------------- Set flags  -----------------
 
 	fs := flag.NewFlagSet("flema", flag.ExitOnError)
 	fs.Usage = func() {
@@ -121,7 +114,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		fmt.Println("\nMake sure to set TOKEN_KEY, SENDGRID_API_KEY/SMTP_USERNAME and SMTP_PASSWORD in production environment")
 	}
 	fs.IntVar(&port, "port", port, "P")
-	fs.StringVar(&allowedOrigins, "allowed-origins", allowedOrigins, "Co")
+	//fs.StringVar(&allowedOrigins, "allowed-origins", allowedOrigins, "Co")
 
 	if err := fs.Parse(args); err != nil {
 		return nil, fmt.Errorf("coud not parse flags: %w", err)
@@ -179,26 +172,24 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		)
 	}
 
-	svc = &flema.Service{
-		DB:                    db,
-		Logger:                logger,
-		EmailSender:           sender,
-		AllowedOrigins:        strings.Split(allowedOrigins, ","),
-		Origin:                origin,
-		ProfileImageUrlPrefix: profileImageUrl,
-	}
-
 	// CORS options
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{
-			"http://localhost:3000", "http://localhost:8000",
-		},
+		AllowedOrigins:   allowedOrigins,
 		AllowedHeaders:   []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"},
 		AllowCredentials: true,
 		ExposedHeaders:   []string{"Content_Length"},
 		Debug:            true,
 	})
+
+	var svc = &flema.Service{
+		DB:                    db,
+		Logger:                logger,
+		EmailSender:           sender,
+		Origin:                origin,
+		AllowedOrigins:        allowedOrigins,
+		ProfileImageUrlPrefix: profileImageUrl,
+	}
 
 	// set up server struct
 	h := c.Handler(transporthttp.New(svc, origin, logger))

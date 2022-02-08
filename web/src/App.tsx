@@ -8,16 +8,16 @@ import {Watchlist} from "./pages/Watchlist";
 import {ListAnItem} from "./pages/ListAnItem";
 import {Footer} from "./components/Footer";
 import {useSelector} from "react-redux";
-import {AppState} from "./store/rootReducer";
+import {RootState} from "./store/store";
 import {UserProfile} from "./pages/User/UserProfile/UserProfile";
 import {Settings} from "./pages/User/Settings";
 import {Notification} from "./pages/User/Notification/Notification";
 import {Registration} from "./pages/Registration";
-import {EnterPasswordResetCode} from "./pages/EnterPasswordResetCode";
+import {EnterResetCode} from "./pages/EnterResetCode";
 import {ResetPassword} from "./pages/ResetPassword";
 
 export const App: FC = () => {
-    const username = useSelector((state: AppState) => state.user.user.username);
+    const username = useSelector((state: RootState) => state.user.user.username);
 
     return (
         <>
@@ -27,7 +27,7 @@ export const App: FC = () => {
                     <Route path='signin' element={<Login/>}/>
                     <Route path='signup' element={<Registration/>}/>
                     <Route path='reset-password' element={<ResetPassword/>}/>
-                    <Route path='enter-password-reset-code' element={<EnterPasswordResetCode/>}/>
+                    <Route path='enter-password-reset-code' element={<EnterResetCode/>}/>
                 </Route>
                 <Route path='watchlist' element={<Watchlist/>}/>
                 <Route path='list-an-item' element={<ListAnItem/>}/>

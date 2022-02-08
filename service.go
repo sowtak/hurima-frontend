@@ -28,6 +28,6 @@ type Service struct {
 	AllowedOrigins        []string
 	ProfileImageUrlPrefix string
 
-	verificationCodeTmplOnce sync.Once
-	verificationCodeTmpl     *template.Template
+	activationLinkTmplOnce sync.Once
+	activationLinkTmpl     *template.Template
 }

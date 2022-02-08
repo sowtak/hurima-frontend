@@ -3,21 +3,20 @@
  * @since   12/28/2021 3:17 AM
  * @version 1.0.0
  */
-import {ChangeEvent, FC, FormEvent, useEffect, useState} from "react"
-import {Email} from "../service/api/types"
+import {ChangeEvent, FC, FormEvent, useState} from "react"
 import * as yup from "yup"
 import {Alert, Box, Typography} from "@mui/material"
-import {Link, useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {FormButton, FormContainer, FormTextField} from "../components/FormStyles"
-import {AuthenticationService} from "../service/api/authenticationService"
 import {AppLogo} from "../components/Logo";
 
 import logo from '../images/icons/flema-logo-svg-25100.svg'
 //import {FailureSnackbar, SuccessSnackbar} from "../../components/SnackBars";
 import {Progress} from "../components/Progress";
-import {validateEmail} from "../utils/inputValidators";
-import {fetchSignUp} from "../store/ducks/user/actionCreators";
-import {useDispatch} from "react-redux";
+import {validateUsername} from "../utils/inputValidators";
+import {signUp} from "../store/ducks/user/thunks";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store/store";
 
 const RegistrationFormSchema = yup.object().shape({
     email: yup.string().email("Invalid email").required("Please enter a valid email"),
@@ -27,103 +26,110 @@ export type RegistrationProps = {
     username: string
     email: string
     password: string
+    redirectUri: string
 }
 
 export const Registration: FC = () => {
-    const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
-    const [invalidEmailError, setInvalidEmailError] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const loading = useSelector((state: RootState) => state.user.loading)
     const [success, setSuccess] = useState(false)
     const [failure, setFailure] = useState(false)
 
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        setUsername('')
-        setEmail('')
-        setPassword('')
-        setPassword2('')
-    }, [username, email, password, password2])
+    const redirectUri = window.location.origin + '/access-callback'
 
     const handleSubmit = (ev: FormEvent<HTMLFormElement>): void => {
         ev.preventDefault()
-
-        const emailValidationError = validateEmail(email)
-        if (emailValidationError) {
-            setInvalidEmailError(true)
-            return
-        }
-
-        const postData: RegistrationProps = {username: username, email: email, password}
-        dispatch(fetchSignUp(postData))
+        dispatch(signUp({username, email, password, redirectUri}))
     }
+
+    const handleChangeUsername = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setUsername(ev.currentTarget.value)
+        }
+        if (username !== null) {
+            validateUsername(username)
+        }
+    }
+
+    const handleChangeEmail = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setEmail(ev.currentTarget.value)
+        }
+    }
+
+    const handleChangePassword = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setPassword(ev.currentTarget.value)
+        }
+    }
+    const handleChangePassword2 = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setPassword2(ev.currentTarget.value)
+        }
+    }
+
 
     return (
         <>
-            {isLoading ? <Progress/> : null}
-            {success ? <Alert severity={'success'}>Activation code is sent to your email</Alert> : null}
+            {loading ? <Progress/> : null}
+            {success ? <Alert severity={'success'}>Activation link is sent to your email</Alert> : null}
             {failure ? <Alert severity={'error'}>Failed to send verification code</Alert> : null}
+
             <FormContainer sx={{paddingTop: '24px', paddingBottom: '12px'}}>
+                <Box component={'div'} sx={{marginBottom: '12px'}}>
+                    <Link to={'/'}>
+                        <AppLogo src={logo} alt={''}/>
+                    </Link>
+                </Box>
+                <Typography variant={'h4'} component={'div'} sx={{marginBottom: '24px'}}>
+                    Sign up to continue
+                </Typography>
+                <Typography variant={'h6'} sx={{marginBottom: '24px', fontSize: '14px'}}>
+                    Please enter your registration info here and receive account verification code.
+                </Typography>
                 <form onSubmit={handleSubmit}>
-                    <Box component={'div'} sx={{marginBottom: '12px'}}>
-                        <Link to={'/'}>
-                            <AppLogo src={logo} alt={''}/>
-                        </Link>
-                    </Box>
-                    <Typography variant={'h4'} component={'div'} sx={{marginBottom: '24px'}}>
-                        Sign up to continue
-                    </Typography>
-                    <Typography variant={'h6'} sx={{marginBottom: '24px', fontSize: '14px'}}>
-                        Please enter your registration info here and receive account verification code.
-                    </Typography>
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
-                            name='username'
                             label='Username'
-                            type='text'
                             variant='outlined'
-                            autoFocus
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-                            value={email}
+                            value={username}
+                            onChange={handleChangeUsername}
                         />
                     </Box>
                     <br/>
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
-                            name='email'
                             label='Email'
                             type='email'
                             variant='outlined'
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                             value={email}
+                            onChange={handleChangeEmail}
                         />
                     </Box>
                     <br/>
-                    {invalidEmailError ? <Alert severity={'error'}>Email is invalid</Alert> : null}
 
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
-                            name='password'
                             label='Password'
                             type='password'
                             variant='outlined'
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.currentTarget.value)}
                             value={password}
+                            onChange={handleChangePassword}
                         />
                     </Box>
                     <br/>
                     <Box sx={{marginBottom: '24px'}}>
                         <FormTextField
-                            name='password2'
                             label='Password (Confirm)'
                             type='password'
                             variant='outlined'
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword2(event.currentTarget.value)}
-                            value={password}
+                            value={password2}
+                            onChange={handleChangePassword2}
                         />
                     </Box>
                     <br/>

@@ -1,55 +1,54 @@
 /**
  * @author  Sowa Takayanagi
- * @since   1/17/2022 4:36 PM
+ * @since   12/26/2021 2:40 PM
  * @version 1.0.0
  */
-import {UserState} from "./contracts/state"
+
 import {
-    SetUserDataActionType,
-    SetUserLoadingStateActionType,
-    SignOutActionType,
-    UserActionType
-} from "./contracts/actionTypes"
-import {Dispatch} from "redux";
-import {fetchSignUpFailure, ShowLoader} from "./contracts/userActions";
-import {RegistrationProps} from "../../../pages/Registration";
-import axios from "axios";
-import {API_BASE_URL_DEV} from "../../../utils/constants/url";
-import {LoginProps} from "../../../pages/Login";
-import {ApiResponse, AuthResponseData} from "../../../service/api/types";
+    sendResetCodeFailureActionType,
+    sendResetCodeSuccessActionType,
+    showLoaderActionType,
+    signInFailureActionType,
+    signInSuccessActionType,
+    signUpFailureActionType,
+    signUpSuccessActionType,
+    UserActionType,
+    VerifyResetCodeFailureActionType,
+    VerifyResetCodeSuccessActionType
+} from "./contracts/actionTypes";
 
-export const setUserData = (payload: UserState['data']): SetUserDataActionType => ({
-    type: UserActionType.SET_USER_DATA,
-    payload
+export const showLoader = (): showLoaderActionType => ({
+    type: UserActionType.SHOW_LOADER
 })
 
-export const setUserLoadingStatus = (payload: UserState['status']): SetUserLoadingStateActionType => ({
-    type: UserActionType.SET_USER_LOADING_STATE,
-    payload
+export const signUpFailure = (): signUpFailureActionType => ({
+    type: UserActionType.SIGN_UP_FAILURE
 })
 
-
-export const signOut = (): SignOutActionType => ({
-    type: UserActionType.SIGN_OUT
+export const signUpSuccess = (): signUpSuccessActionType => ({
+    type: UserActionType.SIGN_UP_SUCCESS
 })
 
-export const fetchSignUp = (postData: RegistrationProps) => async (dispatch: Dispatch) => {
-    dispatch(ShowLoader())
-    try {
-        await axios.post<ApiResponse<AuthResponseData>>(`${API_BASE_URL_DEV}/auth/send-verification-code`, postData, {timeout: 1000* 5})
-            .then(data => {
+export const signInFailure = (): signInFailureActionType => ({
+    type: UserActionType.SIGN_IN_FAILURE
+})
 
-            }).catch(err => {
-                console.log(err)
-            })
-    } catch (err) {
-        dispatch(fetchSignUpFailure())
-        console.log(err)
-    }
-}
+export const signInSuccess = (): signInSuccessActionType => ({
+    type: UserActionType.SIGN_IN_SUCCESS
+})
 
-export const fetchSignIn = (postData: LoginProps) => async (dispatch: Dispatch) => {
+export const sendResetCodeFailure = (): sendResetCodeFailureActionType => ({
+    type: UserActionType.SEND_RESET_CODE_FAILURE
+})
 
-}
+export const sendResetCodeSuccess = (): sendResetCodeSuccessActionType => ({
+    type: UserActionType.SEND_RESET_CODE_SUCCESS
+})
 
-//export const setUserLoadingStatus = (payload: UserState['status']): SetUser
+export const verifyResetCodeFailure = (): VerifyResetCodeFailureActionType => ({
+    type: UserActionType.VERIFY_RESET_CODE_FAILURE
+})
+
+export const verifyResetCodeSuccess = (): VerifyResetCodeSuccessActionType => ({
+    type: UserActionType.VERIFY_RESET_CODE_SUCCESS
+})

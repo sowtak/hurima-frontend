@@ -47,7 +47,7 @@ func ErrorToCode(err error) int {
 		err == flema.EmailNotValidatedErr:
 		return http.StatusBadRequest
 
-	case err == flema.InvalidVerificationCodeError ||
+	case err == flema.InvalidActivationLinkError ||
 		err == flema.InvalidUsernameError ||
 		err == flema.InvalidEmailError ||
 		err == flema.InvalidUserIdError:

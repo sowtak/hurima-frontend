@@ -11,14 +11,13 @@ import (
  */
 
 type User struct {
-	ID               string  `json:"id,omitempty"`
-	Email            string  `json:"email,omitempty"`
-	Username         string  `json:"username"`
-	VerificationCode string  `json:"verificationCode"`
-	ProfileImageUrl  *string `json:"profileImageUrl"`
-	IsActive         bool    `json:"isActive"`
-	EmailDomain      string  `json:"emailDomain"`
-	Role             string  `json:"role"`
+	ID              string  `json:"id,omitempty"`
+	Email           string  `json:"email,omitempty"`
+	Username        string  `json:"username"`
+	ProfileImageUrl *string `json:"profileImageUrl"`
+	IsActive        bool    `json:"isActive"`
+	EmailDomain     string  `json:"emailDomain"`
+	Role            string  `json:"role"`
 }
 
 // profileImageUrl returns user's profile image url

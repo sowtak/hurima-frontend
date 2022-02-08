@@ -10,8 +10,10 @@ import {useNavigate} from "react-router-dom";
 import {AuthenticationService} from "../service/api/authenticationService";
 import {useLocation} from "react-router";
 import {validateUsername} from "../utils/inputValidators";
+import {resetPassword, sendResetCode} from "../store/ducks/user/thunks";
+import {useDispatch} from "react-redux";
 
-type ResetPasswordProps = {
+export type ResetPasswordProps = {
     password: string
 }
 
@@ -24,23 +26,15 @@ export const ResetPassword: FC = () => {
     const [loginUri, setLoginUri] = useState<URL | null>(null)
     const [error, setError] = useState<Error | null>(null)
 
+    const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
 
     const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault()
 
-
         const postData: ResetPasswordProps = {password: password}
-        AuthenticationService.resetPassword(postData)
-            .then(data => {
-                if (data) {
-                    
-                }
-            }).catch(err => {
-
-        })
-
+        dispatch(resetPassword(postData))
     }
 
     const handlePasswordChange = (ev: ChangeEvent<HTMLInputElement>) => {

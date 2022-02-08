@@ -6,7 +6,7 @@
 import {ChangeEvent, ElementType, FC, FormEvent, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {Link, useNavigate} from "react-router-dom"
-import {AppState} from "../store/rootReducer"
+import {RootState} from "../store/store"
 import {NavigateFunction} from "react-router"
 import {Alert, Box, Typography} from "@mui/material"
 import {styled} from "@mui/material/styles"
@@ -14,12 +14,8 @@ import {FormButton, FormContainer, FormTextField} from "../components/FormStyles
 import {AppLogo} from "../components/Logo";
 
 import logo from '../images/icons/flema-logo-svg-25100.svg'
-import {validateEmail} from "../utils/inputValidators";
-import {Email} from "../service/api/types";
-import {AuthenticationService} from "../service/api/authenticationService";
 import {Progress} from "../components/Progress";
-import {fetchSignIn} from "../store/ducks/user/actionCreators";
-//import {FailureSnackbar, SuccessSnackbar} from "../../components/SnackBars";
+import {signIn} from "../store/ducks/user/thunks";
 
 
 export const LoginFormError: ElementType = styled(Typography)`
@@ -39,12 +35,13 @@ export type LoginProps = {
 
 export const Login: FC = () => {
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [invalidEmailError, setInvalidEmailError] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
     const [failure, setFailure] = useState(false)
-    const isLoggedIn = useSelector((state: AppState) => state.user.isLoggedIn)
-    const user = useSelector((state: AppState) => state.user.user)
+    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
+    const user = useSelector((state: RootState) => state.user.user)
 
 
     const dispatch = useDispatch()
@@ -54,41 +51,28 @@ export const Login: FC = () => {
         navigate(`/@${user.username}`)
     }
 
-    const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
-        setEmail(ev.currentTarget.value)
+    const handleChangeEmail = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setEmail(ev.currentTarget.value)
+        }
+    }
+
+    const handleChangePassword = (ev: ChangeEvent<HTMLInputElement>) => {
+        if (ev.currentTarget) {
+            setPassword(ev.target.value)
+        }
     }
 
     const handleLogin = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault()
-        const emailValidationError = validateEmail(email)
-        if (emailValidationError) {
-            setInvalidEmailError(true)
-            return
-        } else {
-            setInvalidEmailError(false)
-        }
-        setIsLoading(true)
-        const postData: Email = {email: email}
-        dispatch(fetchSignIn(postData))
-        AuthenticationService.sendVerificationCode(postData)
-            .then((response) => {
-                if (response.status !== null) {
-                    setSuccess(true)
-                    setIsLoading(false)
-                    console.log("SUCCESS")
-                    navigate('/')
-                }
-            }).catch((error) => {
-            console.log(error.response)
-            setFailure(true)
-            setIsLoading(false)
-            console.log("FAILURE")
-        })
+        setLoading(true)
+        dispatch(signIn({email, password, navigate}))
+        setLoading(false)
     }
 
     return (
         <>
-            {isLoading ? <Progress/> : null}
+            {loading ? <Progress/> : null}
             {success ? <Alert severity={'success'}>Verification code is sent to your email</Alert> : null}
             {failure ? <Alert severity={'error'}>Failed to send verification code</Alert>  : null}
 
@@ -114,7 +98,7 @@ export const Login: FC = () => {
                             type='email'
                             variant='outlined'
                             value={email}
-                            onChange={handleChange}
+                            onChange={handleChangeEmail}
                         />
                     </Box>
                     <br/>
@@ -123,13 +107,11 @@ export const Login: FC = () => {
                             label='Password'
                             type='password'
                             variant='outlined'
-                            value={email}
-                            onChange={handleChange}
+                            value={password}
+                            onChange={handleChangePassword}
                         />
                     </Box>
                     <br/>
-
-                    {invalidEmailError ? <Alert severity={'error'}>Email is invalid</Alert> : null}
 
                     <Box sx={{paddingBottom: '12px'}}>
                         <FormButton

@@ -7,7 +7,7 @@ package http
  */
 
 import (
-	"flema/transport"
+	"flema"
 	"github.com/go-chi/chi"
 	"github.com/go-kit/log"
 	"net/http"
@@ -15,22 +15,22 @@ import (
 )
 
 type handler struct {
-	svc    transport.Service
+	svc    flema.Service
 	origin *url.URL
 	logger log.Logger
 }
 
-func New(svc transport.Service, origin *url.URL, logger log.Logger) http.Handler {
+func New(svc *flema.Service, origin *url.URL, logger log.Logger) http.Handler {
 	h := &handler{
-		svc:    svc,
+		svc:    *svc,
 		origin: origin,
 		logger: logger,
 	}
 
 	r := chi.NewRouter()
 
-	r.Post("/api/v1/auth/send-verification-code", h.sendVerificationCode)
-	r.Post("/api/v1/auth/check-verification-code", h.checkVerificationCode)
+	r.Post("/api/v1/auth/send_activation_link", h.sendActivationLink)
+	r.Post("/api/v1/auth/verify_activation_link", h.verifyActivationLink)
 
 	return r
 }

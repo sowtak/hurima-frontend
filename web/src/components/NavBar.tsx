@@ -5,10 +5,10 @@
  */
 import {ElementType, FC} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {AppState} from "../store/rootReducer"
+import {RootState} from "../store/store"
 
 import logo from '../images/icons/flema-logo-svg-25100.svg'
-import {signOut} from "../store/ducks/user/actionCreators"
+import {signOut} from "../store/ducks/user/thunks"
 
 import {Link, useNavigate} from "react-router-dom"
 import {AppBar, Box, Button, Stack, Toolbar, Typography} from "@mui/material"
@@ -27,8 +27,8 @@ export const Navbar: ElementType = styled(AppBar)`
 export const NavBar: FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const isLoggedIn: boolean = useSelector((state: AppState) => state.user.isLoggedIn)
-    const username = useSelector((state: AppState) => {
+    const isLoggedIn: boolean = useSelector((state: RootState) => state.user.isLoggedIn)
+    const username = useSelector((state: RootState) => {
         if (isLoggedIn) {
             return state.user.user.username
         } else return {}

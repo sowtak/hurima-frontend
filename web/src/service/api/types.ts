@@ -29,8 +29,8 @@ export type Email = {
   email: string
 }
 
-export type VerificationCode = {
-  verificationCode: string
+export type ActivationLink = {
+  activationLink: string
 }
 
 export type Password = {

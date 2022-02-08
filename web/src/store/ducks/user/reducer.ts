@@ -32,8 +32,11 @@ const reducer = (state: InitialState = initialState, action: UserActions): Initi
         case UserActionType.SHOW_LOADER:
             return {...state, loading: true, errors: {}}
 
-        case UserActionType.FETCH_SIGN_UP_REQUEST:
-            return {...state, }
+        case UserActionType.SIGN_UP_SUCCESS:
+            return {...state, loading: false, }
+
+        case UserActionType.SIGN_UP_FAILURE:
+            return {...state, loading: false, }
 
         default:
             return state

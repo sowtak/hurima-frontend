@@ -3,6 +3,7 @@ package transport
 import (
 	"context"
 	"flema"
+	"net/url"
 )
 
 /**
@@ -13,6 +14,7 @@ import (
 
 // Service with business logic methods
 type Service interface {
-	SendVerificationCode(ctx context.Context, username, email, password string) error
-	CheckVerificationCode(ctx context.Context, code string, username *string) (flema.AuthResponseData, error)
+	SendActivationLink(ctx context.Context, username, email, password string) error
+	ParseRedirectUri(u string) (*url.URL, error)
+	VerifyActivationLink(ctx context.Context, email, code string, username *string) (flema.AuthResponseData, error)
 }

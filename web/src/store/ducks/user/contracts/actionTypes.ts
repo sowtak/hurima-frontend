@@ -8,15 +8,19 @@ import {UserState} from "./state";
 import {LoginProps} from "../../../../pages/Login";
 
 export enum UserActionType {
-    FETCH_SIGN_UP_REQUEST = 'user/FETCH_SIGN_UP_REQUEST',
-    FETCH_SIGN_UP_FAILURE = 'user/FETCH_SIGN_UP_FAILURE',
-    FETCH_SIGN_UP_SUCCESS = 'user/FETCH_SIGN_UP_SUCCESS',
-    FETCH_SIGN_IN = 'user/FETCH_SIGN_IN',
-    SET_USER_LOADING_STATE = "user/SET_USER_LOADING_STATE",
-    SIGN_OUT = 'user/SIGN_OUT',
-    FETCH_LOGIN = 'user/FETCH_LOGIN',
-    SET_USER_DATA = 'user/SET_USER_DATA',
-    SHOW_LOADER = 'user/SHOW_LOADER',
+    SIGN_UP_FAILURE = 'user/signUpRequest',
+    SIGN_UP_SUCCESS = 'user/signUpSuccess',
+    SIGN_IN_FAILURE = 'user/signInFailure',
+    SIGN_IN_SUCCESS = 'user/signInSuccess',
+    SEND_RESET_CODE_FAILURE = 'user/sendResetCodeFailure',
+    SEND_RESET_CODE_SUCCESS = 'user/sendResetCodeSuccess',
+    VERIFY_RESET_CODE_SUCCESS = 'user/verifyResetCodeSuccess',
+    VERIFY_RESET_CODE_FAILURE = 'user/verifyResetCodeFailure',
+    SET_USER_LOADING_STATE = "user/setUserLoadingState",
+    SIGN_OUT = 'user/signOut',
+    LOGIN = 'user/logIn',
+    SET_USER_DATA = 'user/setUserData',
+    SHOW_LOADER = 'user/showLoader',
 }
 
 export type SetUserLoadingStateActionType = Action<UserActionType> & {
@@ -24,31 +28,49 @@ export type SetUserLoadingStateActionType = Action<UserActionType> & {
     payload: UserState['status'] | undefined
 }
 
-export type ShowLoaderActionType = Action<UserActionType> & {
+export type showLoaderActionType = Action<UserActionType> & {
     type: UserActionType.SHOW_LOADER
 }
 
-export type FetchSignUpRequestActionType = Action<UserActionType> & {
-    type: UserActionType.FETCH_SIGN_UP_REQUEST,
+export type signUpFailureActionType = Action<UserActionType> & {
+    type: UserActionType.SIGN_UP_FAILURE
 }
 
-export type FetchSignUpFailureActionType = Action<UserActionType> & {
-    type: UserActionType.FETCH_SIGN_UP_FAILURE
+export type signUpSuccessActionType = Action<UserActionType> & {
+    type: UserActionType.SIGN_UP_SUCCESS
 }
 
-export type FetchSignUpSuccessActionType = Action<UserActionType> & {
-    type: UserActionType.FETCH_SIGN_UP_SUCCESS
+export type signInFailureActionType = Action<UserActionType> & {
+    type: UserActionType.SIGN_IN_FAILURE
 }
 
+export type signInSuccessActionType = Action<UserActionType> & {
+    type: UserActionType.SIGN_IN_SUCCESS
+}
 
+export type sendResetCodeFailureActionType = Action<UserActionType> & {
+    type: UserActionType.SEND_RESET_CODE_FAILURE
+}
+
+export type sendResetCodeSuccessActionType = Action<UserActionType> & {
+    type: UserActionType.SEND_RESET_CODE_SUCCESS
+}
+
+export type VerifyResetCodeFailureActionType = Action<UserActionType> & {
+    type: UserActionType.VERIFY_RESET_CODE_FAILURE
+}
+
+export type VerifyResetCodeSuccessActionType = Action<UserActionType> & {
+    type: UserActionType.VERIFY_RESET_CODE_SUCCESS
+}
 
 export type SetUserDataActionType = Action<UserActionType> & {
     type: UserActionType.SET_USER_DATA,
     payload: UserState['data'] | undefined
 }
 
-export type FetchLoginActionType = Action<UserActionType> & {
-    type: UserActionType.FETCH_LOGIN
+export type LoginActionType = Action<UserActionType> & {
+    type: UserActionType.LOGIN
     payload: LoginProps
 }
 
@@ -59,8 +81,12 @@ export type SignOutActionType = Action<UserActionType> & {
 
 export type UserActions =
     SetUserDataActionType
+    | showLoaderActionType
     | SetUserLoadingStateActionType
+    | signUpFailureActionType
+    | signUpSuccessActionType
     | SignOutActionType
-    | FetchLoginActionType
-    | FetchSignUpRequestActionType
-    | ShowLoaderActionType
+    | signInFailureActionType
+    | signInSuccessActionType
+    | VerifyResetCodeFailureActionType
+    | VerifyResetCodeSuccessActionType

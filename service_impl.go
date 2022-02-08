@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -27,7 +28,7 @@ var (
 )
 
 const (
-	verificationCodeTtl = time.Hour * 1
+	activationLinkTtl = time.Hour * 1
 )
 
 type AuthResponseData struct {
@@ -39,14 +40,17 @@ type AuthResponseData struct {
 	ExpiresAt       time.Time `json:"expiresAt"`
 }
 
-// SendVerificationCode registers user with parameter isActive with value false
-func (s *Service) SendVerificationCode(ctx context.Context, email string) error {
+// SendActivationLink sends an account activation link via email
+func (s *Service) SendActivationLink(ctx context.Context, username, email, password, redirectUri string) error {
 	email = strings.TrimSpace(email)
 	if !emailRegex.MatchString(strings.ToLower(email)) {
 		return InvalidEmailError
 	}
 
-	var err error
+	_, err := s.ParseRedirectUri(redirectUri)
+	if err != nil {
+		return err
+	}
 
 	// Generate verification code
 	var code string
@@ -68,16 +72,25 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 		}
 	}()
 
+	// prepare activation link
+	activationLink := cloneUrl(s.Origin)
+	activationLink.Path = "/api/v1/verify_activation_link"
+	q := activationLink.Query()
+	q.Set("email", email)
+	q.Set("verification_code", code)
+	q.Set("redirect_uri", redirectUri)
+	activationLink.RawQuery = q.Encode()
+
 	// parse template
-	s.verificationCodeTmplOnce.Do(func() {
+	s.activationLinkTmplOnce.Do(func() {
 		var txt []byte
-		txt, err = em.Templates.ReadFile("templates/verification-code.html.tmpl")
+		txt, err = em.Templates.ReadFile("templates/activation-link.html.tmpl")
 		if err != nil {
-			err = fmt.Errorf("could not read verification code template file: %w", err)
+			err = fmt.Errorf("could not read activation link template file: %w", err)
 			return
 		}
-		tmpl := template.New("verification-code.html")
-		s.verificationCodeTmpl, err = tmpl.Funcs(template.FuncMap{
+		tmpl := template.New("activation-link.html")
+		s.activationLinkTmpl, err = tmpl.Funcs(template.FuncMap{
 			"html": func(s string) template.HTML {
 				return template.HTML(s)
 			},
@@ -91,44 +104,62 @@ func (s *Service) SendVerificationCode(ctx context.Context, email string) error 
 		return err
 	}
 
-	subject := "Activation code"
+	subject := "Account activation link"
 	var b bytes.Buffer
-	// s.verificationCodeTmpl was null
-	err = s.verificationCodeTmpl.Execute(&b, map[string]interface{}{
-		"VerificationCode": code,
+	// s.activationLinkTmpl was null
+	err = s.activationLinkTmpl.Execute(&b, map[string]interface{}{
+		"Origin":         s.Origin,
+		"ActivationLink": code,
 	})
 	if err != nil {
 		return fmt.Errorf("could not execute template")
 	}
-	if err = s.EmailSender.Send(email, subject, b.String(), code); err != nil {
+	if err = s.EmailSender.Send(email, subject, b.String(), activationLink.String()); err != nil {
 		return fmt.Errorf("could not send verification code: %w", err)
 	}
 
 	return nil
 }
 
-// CheckVerificationCode validates the code entered by user, then return with default profile
-func (s *Service) CheckVerificationCode(ctx context.Context, code string, username *string) (AuthResponseData, error) {
+func (s *Service) ParseRedirectUri(u string) (*url.URL, error) {
+	uri, err := url.Parse(u)
+	if err != nil || !uri.IsAbs() {
+		return nil, InvalidRedirectUriError
+	}
+
+	if uri.Host == s.Origin.Host || strings.HasSuffix(uri.Host, "."+s.Origin.Host) {
+		return uri, nil
+	}
+
+	for _, origin := range s.AllowedOrigins {
+		if strings.Contains(origin, uri.Host) {
+			return uri, nil
+		}
+	}
+
+	return nil, UntrustedRedirectUri
+}
+
+// VerifyActivationLink validates the code entered by user, then return with default profile
+func (s *Service) VerifyActivationLink(ctx context.Context, email, code string, username *string) (AuthResponseData, error) {
 	var resp AuthResponseData
 
 	code = strings.TrimSpace(code)
 	if !uuidRegex.MatchString(strings.ToLower(code)) {
-		return resp, InvalidVerificationCodeError
+		return resp, InvalidActivationLinkError
 	}
-	var email string
+
 	query := "SELECT email FROM verification_codes WHERE code = $1"
 	if err := s.DB.QueryRowContext(ctx, query, code).Scan(&email); err != nil {
 		return resp, EmailWithGivenCodeNotFoundError
 		//return resp, fmt.Errorf(code)
 	}
 
-	// validate email
-	//email = strings.TrimSpace(email)
-	//if !emailRegex.MatchString(strings.ToLower(email)) {
-	//	return resp, InvalidEmailError
-	//}
+	email = strings.TrimSpace(email)
+	if !emailRegex.MatchString(strings.ToLower(email)) {
+		return resp, InvalidEmailError
+	}
 
-	// validate username
 	if username != nil {
 		*username = strings.TrimSpace(*username)
 		if !usernameRegex.MatchString(*username) {
@@ -151,9 +182,9 @@ func (s *Service) CheckVerificationCode(ctx context.Context, code string, userna
 	return resp, nil
 }
 
-func isVerificationCodeExpired(t time.Time) bool {
+func isActivationLinkExpired(t time.Time) bool {
 	now := time.Now()
-	exp := t.Add(verificationCodeTtl)
+	exp := t.Add(activationLinkTtl)
 	return exp.Equal(now) || exp.Before(now)
 }
 
@@ -171,7 +202,7 @@ func VerificationTx(ctx context.Context, s *Service, email, code string, usernam
 			return errors.New("could not select verification code from db")
 		}
 
-		if isVerificationCodeExpired(createdAt) {
+		if isActivationLinkExpired(createdAt) {
 			return errors.New("token is expired")
 		}
 

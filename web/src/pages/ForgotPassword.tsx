@@ -10,12 +10,21 @@ import {validateEmail} from "../utils/inputValidators";
 import {AuthenticationService} from "../service/api/authenticationService";
 import {Email} from "../service/api/types";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {sendResetCode} from "../store/ducks/user/thunks";
+import {NavigateFunction} from "react-router";
+
+export type SendResetCodeProps = {
+    email: string
+    navigate: NavigateFunction
+}
 
 export const ForgotPassword: FC = () => {
     const [email, setEmail] = useState('')
     const [invalidEmailError, setInvalidEmailError] = useState(false)
     const [emailFound, setEmailFound] = useState(false)
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +35,8 @@ export const ForgotPassword: FC = () => {
         } else {
             setInvalidEmailError(false)
         }
-        const postData: Email = {email: email}
+        const postData: SendResetCodeProps = {email: email, navigate: navigate}
+        dispatch(sendResetCode(postData))
         AuthenticationService.checkEmailValidity(postData)
             .then(resp => {
                 if (resp.data.emailFound) {
