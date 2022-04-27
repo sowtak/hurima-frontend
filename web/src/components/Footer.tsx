@@ -53,7 +53,7 @@ export const Footer: FC = () => {
             <Container component='main' sx={{mt: "8", mb: "2"}} maxWidth="sm">
                 <FooterBox component='footer'>
                     <Container maxWidth='sm' sx={{padding: '30px'}}>
-                        <Typography variant='body1'>flema</Typography>
+                        <Typography variant='body1'>hurima</Typography>
                         <Copyright/>
                         <SocialMediaIcons/>
                     </Container>

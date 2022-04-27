@@ -1,4 +1,4 @@
-package flema
+package hurima
 
 import "errors"
 

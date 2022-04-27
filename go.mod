@@ -1,4 +1,4 @@
-module flema
+module hurima
 
 go 1.17
 

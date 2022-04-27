@@ -1,79 +1,79 @@
-2022.03.20 01:37:15 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
-2022.03.20 01:37:15 INFO  logging to file /home/sowtak/rs/flema/.metals/metals.log
-2022.03.20 01:37:15 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/flema' for client Visual Studio Code 1.65.2.
+2022.03.20 01:37:15 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
+2022.03.20 01:37:15 INFO  logging to file /home/sowtak/rs/hurima/.metals/metals.log
+2022.03.20 01:37:15 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/hurima' for client Visual Studio Code 1.65.2.
 2022.03.20 01:37:15 INFO  Parse release: 11.0.14
 2022.03.20 01:37:23 INFO  time: initialize in 7.82s
 2022.03.20 01:37:23 WARN  Build server is not auto-connectable.
-2022.03.20 01:37:23 WARN  no build tool detected in workspace '/home/sowtak/rs/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2022.03.20 01:37:26 WARN  no build target for: /home/sowtak/rs/flema/server/server/build.sbt
-2022.03.20 01:37:43 INFO  no build target found for /home/sowtak/rs/flema/server/server/build.sbt. Using presentation compiler with project's scala-library version: 3.1.1
+2022.03.20 01:37:23 WARN  no build tool detected in workspace '/home/sowtak/rs/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt.
+2022.03.20 01:37:26 WARN  no build target for: /home/sowtak/rs/hurima/server/server/build.sbt
+2022.03.20 01:37:43 INFO  no build target found for /home/sowtak/rs/hurima/server/server/build.sbt. Using presentation compiler with project's scala-library version: 3.1.1
 2022.03.20 01:37:44 INFO  time: code lens generation in 18s
-2022.03.20 13:02:31 WARN  no build target for: /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala
+2022.03.20 13:02:31 WARN  no build target for: /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala
 2022.03.20 13:04:03 INFO  shutting down Metals
 Mar 20, 2022 1:04:03 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint getArguments
 WARNING: Unexpected params '[null]' for 'public void scala.meta.internal.metals.MetalsLanguageServer.exit()' is ignored
-2022.03.20 13:04:04 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
-2022.03.20 13:04:05 INFO  logging to file /home/sowtak/rs/flema/.metals/metals.log
-2022.03.20 13:04:05 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/flema' for client Visual Studio Code 1.65.2.
+2022.03.20 13:04:04 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
+2022.03.20 13:04:05 INFO  logging to file /home/sowtak/rs/hurima/.metals/metals.log
+2022.03.20 13:04:05 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/hurima' for client Visual Studio Code 1.65.2.
 2022.03.20 13:04:05 INFO  Parse release: 11.0.14
 2022.03.20 13:04:07 INFO  time: initialize in 2.32s
 2022.03.20 13:04:07 WARN  Build server is not auto-connectable.
-2022.03.20 13:04:07 WARN  no build tool detected in workspace '/home/sowtak/rs/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2022.03.20 13:04:09 WARN  no build target for: /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala
-2022.03.20 13:04:11 INFO  no build target found for /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
+2022.03.20 13:04:07 WARN  no build tool detected in workspace '/home/sowtak/rs/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt.
+2022.03.20 13:04:09 WARN  no build target for: /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala
+2022.03.20 13:04:11 INFO  no build target found for /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
 2022.03.20 13:04:16 INFO  shutting down Metals
 Mar 20, 2022 1:04:16 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint getArguments
 WARNING: Unexpected params '[null]' for 'public void scala.meta.internal.metals.MetalsLanguageServer.exit()' is ignored
-2022.03.20 13:04:16 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
-2022.03.20 13:04:17 INFO  logging to file /home/sowtak/rs/flema/.metals/metals.log
-2022.03.20 13:04:17 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/flema' for client Visual Studio Code 1.65.2.
+2022.03.20 13:04:16 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
+2022.03.20 13:04:17 INFO  logging to file /home/sowtak/rs/hurima/.metals/metals.log
+2022.03.20 13:04:17 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/hurima' for client Visual Studio Code 1.65.2.
 2022.03.20 13:04:17 INFO  Parse release: 11.0.14
 2022.03.20 13:04:19 INFO  time: initialize in 2.15s
 2022.03.20 13:04:19 WARN  Build server is not auto-connectable.
-2022.03.20 13:04:19 WARN  no build tool detected in workspace '/home/sowtak/rs/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2022.03.20 13:04:21 WARN  no build target for: /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala
-2022.03.20 13:04:23 INFO  no build target found for /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
+2022.03.20 13:04:19 WARN  no build tool detected in workspace '/home/sowtak/rs/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt.
+2022.03.20 13:04:21 WARN  no build target for: /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala
+2022.03.20 13:04:23 INFO  no build target found for /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
 Mar 20, 2022 1:04:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 23
 Mar 20, 2022 1:04:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 24
-2022.03.20 13:07:02 WARN  no build target for: /home/sowtak/rs/flema/server/server/test/controllers/HomeControllerSpec.scala
+2022.03.20 13:07:02 WARN  no build target for: /home/sowtak/rs/hurima/server/server/test/controllers/HomeControllerSpec.scala
 Mar 20, 2022 1:07:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 177
-2022.03.20 13:08:34 WARN  no build target for: /home/sowtak/rs/flema/server/server/test/controllers/HomeControllerSpec.scala
+2022.03.20 13:08:34 WARN  no build target for: /home/sowtak/rs/hurima/server/server/test/controllers/HomeControllerSpec.scala
 2022.03.20 17:58:08 INFO  shutting down Metals
-2022.03.21 01:42:14 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
-2022.03.21 01:42:14 INFO  logging to file /home/sowtak/rs/flema/.metals/metals.log
-2022.03.21 01:42:14 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/flema' for client Visual Studio Code 1.65.2.
+2022.03.21 01:42:14 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/rs/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
+2022.03.21 01:42:14 INFO  logging to file /home/sowtak/rs/hurima/.metals/metals.log
+2022.03.21 01:42:14 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/rs/hurima' for client Visual Studio Code 1.65.2.
 2022.03.21 01:42:14 INFO  Parse release: 11.0.14
 2022.03.21 01:42:16 INFO  time: initialize in 2.13s
 2022.03.21 01:42:17 WARN  Build server is not auto-connectable.
-2022.03.21 01:42:17 WARN  no build tool detected in workspace '/home/sowtak/rs/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2022.03.21 01:42:18 WARN  no build target for: /home/sowtak/rs/flema/server/server/app/controllers/HomeController.scala
-2022.03.21 01:42:18 WARN  no build target for: /home/sowtak/rs/flema/server/server/test/controllers/HomeControllerSpec.scala
-2022.03.21 01:42:22 INFO  no build target found for /home/sowtak/rs/flema/server/server/test/controllers/HomeControllerSpec.scala. Using presentation compiler with project's scala-library version: 3.1.1
+2022.03.21 01:42:17 WARN  no build tool detected in workspace '/home/sowtak/rs/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt.
+2022.03.21 01:42:18 WARN  no build target for: /home/sowtak/rs/hurima/server/server/app/controllers/HomeController.scala
+2022.03.21 01:42:18 WARN  no build target for: /home/sowtak/rs/hurima/server/server/test/controllers/HomeControllerSpec.scala
+2022.03.21 01:42:22 INFO  no build target found for /home/sowtak/rs/hurima/server/server/test/controllers/HomeControllerSpec.scala. Using presentation compiler with project's scala-library version: 3.1.1
 2022.03.21 01:42:24 INFO  time: code lens generation in 6.17s
 2022.03.22 05:19:47 INFO  shutting down Metals
-2022.03.22 05:30:46 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json[0m
-2022.03.22 05:30:46 INFO  logging to file /home/sowtak/scala/flema/.metals/metals.log[0m
-2022.03.22 05:30:46 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/flema' for client Visual Studio Code 1.65.2.[0m
+2022.03.22 05:30:46 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json[0m
+2022.03.22 05:30:46 INFO  logging to file /home/sowtak/scala/hurima/.metals/metals.log[0m
+2022.03.22 05:30:46 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/hurima' for client Visual Studio Code 1.65.2.[0m
 2022.03.22 05:30:46 INFO  Parse release: 11.0.14[0m
 2022.03.22 05:30:48 INFO  time: initialize in 1.96s[0m
 2022.03.22 05:30:48 WARN  Build server is not auto-connectable.[0m
-2022.03.22 05:30:48 WARN  no build tool detected in workspace '/home/sowtak/scala/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
-2022.03.22 05:30:50 WARN  no build target for: /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala[0m
-2022.03.22 05:30:53 INFO  no build target found for /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1[0m
+2022.03.22 05:30:48 WARN  no build tool detected in workspace '/home/sowtak/scala/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+2022.03.22 05:30:50 WARN  no build target for: /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala[0m
+2022.03.22 05:30:53 INFO  no build target found for /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1[0m
 2022.03.22 05:30:55 INFO  time: code lens generation in 4.42s[0m
 2022.03.26 03:21:35 INFO  shutting down Metals[0m
-2022.04.02 14:20:08 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json[0m
-2022.04.02 14:20:08 INFO  logging to file /home/sowtak/scala/flema/.metals/metals.log[0m
-2022.04.02 14:20:08 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/flema' for client Visual Studio Code 1.66.0.[0m
+2022.04.02 14:20:08 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json[0m
+2022.04.02 14:20:08 INFO  logging to file /home/sowtak/scala/hurima/.metals/metals.log[0m
+2022.04.02 14:20:08 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/hurima' for client Visual Studio Code 1.66.0.[0m
 2022.04.02 14:20:08 INFO  Parse release: 11.0.14.1[0m
 2022.04.02 14:20:11 INFO  time: initialize in 2.49s[0m
 2022.04.02 14:20:11 WARN  Build server is not auto-connectable.[0m
-2022.04.02 14:20:11 WARN  no build tool detected in workspace '/home/sowtak/scala/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
-2022.04.02 14:20:13 WARN  no build target for: /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala[0m
-2022.04.02 14:20:32 INFO  no build target found for /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1[0m
+2022.04.02 14:20:11 WARN  no build tool detected in workspace '/home/sowtak/scala/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+2022.04.02 14:20:13 WARN  no build target for: /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala[0m
+2022.04.02 14:20:32 INFO  no build target found for /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1[0m
 Apr 02, 2022 2:20:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 2
 Apr 02, 2022 2:20:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
@@ -84,79 +84,79 @@ WARNING: Unmatched cancel notification for request id 6
 2022.04.02 14:20:35 INFO  time: code lens generation in 2.32s[0m
 Apr 02, 2022 2:23:47 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
-2022.04.02 14:23:47 WARN  no build target for: /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala[0m
-2022.04.09 21:08:05 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/flema/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
-2022.04.09 21:08:06 INFO  logging to file /home/sowtak/scala/flema/.metals/metals.log
-2022.04.09 21:08:06 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/flema' for client Visual Studio Code 1.66.1.
+2022.04.02 14:23:47 WARN  no build target for: /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala[0m
+2022.04.09 21:08:05 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/sowtak/scala/hurima/.metals/lsp.trace.json or /home/sowtak/.cache/metals/lsp.trace.json
+2022.04.09 21:08:06 INFO  logging to file /home/sowtak/scala/hurima/.metals/metals.log
+2022.04.09 21:08:06 INFO  Started: Metals version 0.11.2 in workspace '/home/sowtak/scala/hurima' for client Visual Studio Code 1.66.1.
 2022.04.09 21:08:06 INFO  Parse release: 11.0.14.1
 2022.04.09 21:08:08 INFO  time: initialize in 2.06s
 2022.04.09 21:08:09 WARN  Build server is not auto-connectable.
-2022.04.09 21:08:09 WARN  no build tool detected in workspace '/home/sowtak/scala/flema'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2022.04.09 21:08:10 WARN  no build target for: /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala
-2022.04.09 21:08:13 INFO  no build target found for /home/sowtak/scala/flema/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
+2022.04.09 21:08:09 WARN  no build tool detected in workspace '/home/sowtak/scala/hurima'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt.
+2022.04.09 21:08:10 WARN  no build target for: /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala
+2022.04.09 21:08:13 INFO  no build target found for /home/sowtak/scala/hurima/server/server/app/controllers/HomeController.scala. Using presentation compiler with project's scala-library version: 3.1.1
 2022.04.09 21:08:16 INFO  time: code lens generation in 5.87s
-2022.04.09 21:11:44 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:11:48 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:12:31 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:12:33 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:12:34 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:14:32 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:14:33 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:14:35 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:14:44 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:14:53 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:15:05 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:15:08 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:15:13 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:15:44 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:15:50 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:15:53 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:15:55 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:15:59 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:02 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:05 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:10 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:13 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:18 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:19 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:22 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:28 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:31 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:34 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:35 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:38 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:42 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:16:44 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
+2022.04.09 21:11:44 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:11:48 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:12:31 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:12:33 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:12:34 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:14:32 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:14:33 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:14:35 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:14:44 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:14:53 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:15:05 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:15:08 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:15:13 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:15:44 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:15:50 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:15:53 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:15:55 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:15:59 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:02 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:05 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:10 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:13 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:18 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:19 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:22 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:28 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:31 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:34 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:35 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:38 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:42 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:16:44 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
 Apr 09, 2022 9:30:54 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
-2022.04.09 21:31:38 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:31:43 WARN  no build target for: /home/sowtak/scala/flema/server/server/src/main/scala/Main.scala
-2022.04.09 21:35:34 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:35:39 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:35:45 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:35:47 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.09 21:35:49 WARN  no build target for: /home/sowtak/scala/flema/server/server/build.sbt
-2022.04.10 20:41:44 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:03 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:04 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:06 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:08 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:11 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:12 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:15 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:29 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:31 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:37 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:39 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:42 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:43:44 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:44:00 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:44:09 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:44:10 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:44:14 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:44:18 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.10 20:46:17 WARN  no build target for: /home/sowtak/scala/flema/server/build.sbt
-2022.04.11 01:34:15 WARN  no build target for: /home/sowtak/scala/flema/server/tests/src/test/scala/sowtak/tests/ServerTestSuite.scala
-2022.04.11 01:34:22 WARN  no build target for: /home/sowtak/scala/flema/server/core/src/main/scala/sowtak/Main.scala
-2022.04.11 10:55:00 WARN  no build target for: /home/sowtak/scala/flema/server/core/src/main/scala/sowtak/Main.scala
-2022.04.11 11:01:53 WARN  no build target for: /home/sowtak/scala/flema/server/core/src/main/scala/sowtak/Main.scala
+2022.04.09 21:31:38 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:31:43 WARN  no build target for: /home/sowtak/scala/hurima/server/server/src/main/scala/Main.scala
+2022.04.09 21:35:34 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:35:39 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:35:45 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:35:47 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.09 21:35:49 WARN  no build target for: /home/sowtak/scala/hurima/server/server/build.sbt
+2022.04.10 20:41:44 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:03 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:04 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:06 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:08 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:11 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:12 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:15 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:29 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:31 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:37 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:39 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:42 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:43:44 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:44:00 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:44:09 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:44:10 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:44:14 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:44:18 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.10 20:46:17 WARN  no build target for: /home/sowtak/scala/hurima/server/build.sbt
+2022.04.11 01:34:15 WARN  no build target for: /home/sowtak/scala/hurima/server/tests/src/test/scala/sowtak/tests/ServerTestSuite.scala
+2022.04.11 01:34:22 WARN  no build target for: /home/sowtak/scala/hurima/server/core/src/main/scala/sowtak/Main.scala
+2022.04.11 10:55:00 WARN  no build target for: /home/sowtak/scala/hurima/server/core/src/main/scala/sowtak/Main.scala
+2022.04.11 11:01:53 WARN  no build target for: /home/sowtak/scala/hurima/server/core/src/main/scala/sowtak/Main.scala

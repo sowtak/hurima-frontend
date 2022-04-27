@@ -14,7 +14,7 @@ export const Home: FC = () => {
     return (
         <>
             <NavBar/>
-            <Typography variant={'h4'}>flema</Typography>
+            <Typography variant={'h4'}>hurima</Typography>
             <Footer/>
         </>
 

@@ -1,4 +1,4 @@
-# flema
+# hurima
 
 - Flea market for users with the same email domain. (mainly for university students)
 

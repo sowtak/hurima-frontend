@@ -13,7 +13,7 @@ import {styled} from "@mui/material/styles"
 import {FormButton, FormContainer, FormTextField} from "../components/FormStyles"
 import {AppLogo} from "../components/Logo";
 
-import logo from '../images/icons/flema-logo-svg-25100.svg'
+import logo from '../images/icons/hurima-logo-svg-25100.svg'
 import {Progress} from "../components/Progress";
 import {signIn} from "../store/ducks/user/thunks";
 
@@ -83,7 +83,7 @@ export const Login: FC = () => {
                     </Link>
                 </Box>
                 <Typography variant={'h4'} component={'div'} sx={{marginBottom: '24px'}}>
-                    Sign in to flema
+                    Sign in to hurima
                 </Typography>
 
 

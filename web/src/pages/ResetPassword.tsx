@@ -51,7 +51,7 @@ export const ResetPassword: FC = () => {
     return (
         <FormContainer>
             <Typography component={'h2'} sx={{marginBottom: '24px'}}>
-                Welcome to flema!
+                Welcome to hurima!
             </Typography>
             <form onSubmit={handleSubmit}>
 

@@ -1,12 +1,12 @@
 services:
   # DB
-  flema:
+  hurima:
     image: postgres
-    container_name: flema
-    hostname: flema
+    container_name: hurima
+    hostname: hurima
     restart: always
     environment:
-      PGDATABASE: 'flema'
+      PGDATABASE: 'hurima'
       PGUSER: 'root'
       PGPASSWORD: 'password'
     ports:
@@ -14,31 +14,31 @@ services:
     expose:
       - "5432"
     volumes:
-      - flema-volume:/var/lib/postgres
+      - hurima-volume:/var/lib/postgres
     networks:
-      - flema-api-server-network
+      - hurima-api-server-network
 
     # API
-  flema-api-server:
+  hurima-api-server:
     build:
       context: ./src
       args:
-        JAR_FILE: flema-0.0.1-SNAPSHOT.jar
+        JAR_FILE: hurima-0.0.1-SNAPSHOT.jar
       dockerfile: ../Dockerfile
-    image: flema-api-server
-    container_name: flema-api-server
-    hostname: flema-api-server
+    image: hurima-api-server
+    container_name: hurima-api-server
+    hostname: hurima-api-server
     ports:
       - "8000:8000"
     networks:
-      - flema-api-server-network
+      - hurima-api-server-network
     environment:
       - SERVER_PORT=8000
       - SPRING_PROFILES_ACTIVE=docker
 
 volumes:
-  flema-volume:
+  hurima-volume:
 
 networks:
-  flema-api-server-network:
+  hurima-api-server-network:
     driver: bridge

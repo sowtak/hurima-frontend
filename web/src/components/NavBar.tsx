@@ -7,7 +7,7 @@ import {ElementType, FC} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {RootState} from "../store/store"
 
-import logo from '../images/icons/flema-logo-svg-25100.svg'
+import logo from '../images/icons/hurima-logo-svg-25100.svg'
 import {signOut} from "../store/ducks/user/thunks"
 
 import {Link, useNavigate} from "react-router-dom"

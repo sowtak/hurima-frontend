@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"flema"
+	"hurima"
 	"net/http"
 	"net/url"
 )
@@ -43,18 +43,18 @@ func ErrorToCode(err error) int {
 	}
 
 	switch {
-	case err == flema.BadRequestErr ||
-		err == flema.EmailNotValidatedErr:
+	case err == hurima.BadRequestErr ||
+		err == hurima.EmailNotValidatedErr:
 		return http.StatusBadRequest
 
-	case err == flema.InvalidActivationLinkError ||
-		err == flema.InvalidUsernameError ||
-		err == flema.InvalidEmailError ||
-		err == flema.InvalidUserIdError:
+	case err == hurima.InvalidActivationLinkError ||
+		err == hurima.InvalidUsernameError ||
+		err == hurima.InvalidEmailError ||
+		err == hurima.InvalidUserIdError:
 		return http.StatusUnprocessableEntity
 
-	case err == flema.UserNotFoundError ||
-		err == flema.EmailWithGivenCodeNotFoundError:
+	case err == hurima.UserNotFoundError ||
+		err == hurima.EmailWithGivenCodeNotFoundError:
 		return http.StatusNotFound
 
 	}

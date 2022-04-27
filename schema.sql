@@ -2,7 +2,7 @@ CREATE EXTENSION  IF NOT EXISTS "pgcrypto";
 DO
 $do$
     DECLARE
-        _db TEXT := 'flema';
+        _db TEXT := 'hurima';
         _user TEXT := 'root';
         _password TEXT := 'password';
     BEGIN

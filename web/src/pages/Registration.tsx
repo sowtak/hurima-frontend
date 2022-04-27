@@ -10,7 +10,7 @@ import {Link} from "react-router-dom"
 import {FormButton, FormContainer, FormTextField} from "../components/FormStyles"
 import {AppLogo} from "../components/Logo";
 
-import logo from '../images/icons/flema-logo-svg-25100.svg'
+import logo from '../images/icons/hurima-logo-svg-25100.svg'
 //import {FailureSnackbar, SuccessSnackbar} from "../../components/SnackBars";
 import {Progress} from "../components/Progress";
 import {validateUsername} from "../utils/inputValidators";

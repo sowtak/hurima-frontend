@@ -7,7 +7,7 @@ package http
  */
 
 import (
-	"flema"
+	"hurima"
 	"github.com/go-chi/chi"
 	"github.com/go-kit/log"
 	"net/http"
@@ -15,12 +15,12 @@ import (
 )
 
 type handler struct {
-	svc    flema.Service
+	svc    hurima.Service
 	origin *url.URL
 	logger log.Logger
 }
 
-func New(svc *flema.Service, origin *url.URL, logger log.Logger) http.Handler {
+func New(svc *hurima.Service, origin *url.URL, logger log.Logger) http.Handler {
 	h := &handler{
 		svc:    *svc,
 		origin: origin,
