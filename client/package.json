@@ -1,0 +1,77 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@hookform/resolvers": "^2.8.5",
+    "@mui/core": "^5.0.0-alpha.54",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/lab": "^5.0.0-alpha.63",
+    "@mui/material": "^5.2.7",
+    "@mui/styles": "^5.2.3",
+    "@mui/system": "^5.2.6",
+    "@reduxjs/toolkit": "^1.7.1",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.15",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.21",
+    "@types/redux-mock-store": "^1.0.3",
+    "@types/yup": "^0.29.13",
+    "axios": "^0.24.0",
+    "axios-mock-adapter": "^1.20.0",
+    "graphql": "^16.2.0",
+    "i18next": "^21.6.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.22.5",
+    "react-i18next": "^11.15.1",
+    "react-list": "^0.8.16",
+    "react-redux": "^7.2.6",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "^5.0.0",
+    "redux": "^4.1.2",
+    "redux-mock-store": "^1.5.4",
+    "redux-thunk": "^2.4.1",
+    "sockjs-client": "^1.5.2",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.5.4",
+    "web-vitals": "^2.1.2",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.2"
+  }
+}
