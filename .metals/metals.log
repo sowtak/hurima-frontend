@@ -265,3 +265,15 @@ INFO: Unsupported notification method: $/setTrace
 2022.05.03 10:28:21 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
 2022.05.03 10:29:06 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
 2022.05.03 10:38:11 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:41:41 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/main/scala/example/Hello.scala
+2022.05.03 10:43:57 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/example/HelloSpec.scala
+2022.05.03 10:44:26 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:30 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:37 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:44 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:49 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:53 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:55 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:57 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:44:59 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:45:29 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt

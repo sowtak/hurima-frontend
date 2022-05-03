@@ -3,6 +3,7 @@ val catsVersion = "2.7.0"
 val catsTaglessVersion = "0.14.0"
 val catsEffectVersion = "3.3.11"
 val scalaTestVersion = "3.2.11"
+val scalaCheckVersion = "1.13.4"
 
 lazy val common = Seq(
   organization := "net.sowtak",
@@ -26,7 +27,8 @@ lazy val root = (project in file("."))
         "org.scalatest" %% "scalatest" % scalaTestVersion,
         "org.typelevel" %% "cats-core" % catsVersion,
         "org.typelevel" %% "cats-tagless-core" % catsTaglessVersion,
-        "org.typelevel" %% "cats-effect" % catsEffectVersion
+        "org.typelevel" %% "cats-effect" % catsEffectVersion,
+        "org.scalacheck" %% "scalacheck" % scalaCheckVersion % Test
       )
   )
 
