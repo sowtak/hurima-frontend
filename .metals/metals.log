@@ -277,3 +277,229 @@ INFO: Unsupported notification method: $/setTrace
 2022.05.03 10:44:57 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
 2022.05.03 10:44:59 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
 2022.05.03 10:45:29 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/build.sbt
+2022.05.03 10:54:52 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:01 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:07 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:09 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+May 03, 2022 10:55:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+java.util.concurrent.CompletionException: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:331)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:346)
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:704)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2088)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1(CancelTokens.scala:40)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1$adapted(CancelTokens.scala:38)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at scala.meta.internal.mtags.ScalaToplevelMtags.fail(ScalaToplevelMtags.scala:358)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.newIdentifier(ScalaToplevelMtags.scala:343)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:245)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:118)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:50)
+	at scala.meta.internal.mtags.MtagsIndexer.index(MtagsIndexer.scala:19)
+	at scala.meta.internal.mtags.MtagsIndexer.index$(MtagsIndexer.scala:18)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.index(ScalaToplevelMtags.scala:40)
+	at scala.meta.internal.mtags.Mtags$.allToplevels(Mtags.scala:96)
+	at scala.meta.internal.metals.DefinitionProvider.fromMtags(DefinitionProvider.scala:269)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$3(DefinitionProvider.scala:202)
+	at scala.Option.orElse(Option.scala:477)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$1(DefinitionProvider.scala:202)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.DefinitionProvider.positionOccurrence(DefinitionProvider.scala:197)
+	at scala.meta.internal.metals.DocumentHighlightProvider.$anonfun$documentHighlight$1(DocumentHighlightProvider.scala:33)
+	at scala.collection.immutable.List.map(List.scala:246)
+	at scala.meta.internal.metals.DocumentHighlightProvider.documentHighlight(DocumentHighlightProvider.scala:29)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$documentHighlights$1(MetalsLanguageServer.scala:1467)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:678)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+May 03, 2022 10:55:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+java.util.concurrent.CompletionException: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:331)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:346)
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:704)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2088)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1(CancelTokens.scala:40)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1$adapted(CancelTokens.scala:38)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at scala.meta.internal.mtags.ScalaToplevelMtags.fail(ScalaToplevelMtags.scala:358)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.newIdentifier(ScalaToplevelMtags.scala:343)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:245)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:118)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:50)
+	at scala.meta.internal.mtags.MtagsIndexer.index(MtagsIndexer.scala:19)
+	at scala.meta.internal.mtags.MtagsIndexer.index$(MtagsIndexer.scala:18)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.index(ScalaToplevelMtags.scala:40)
+	at scala.meta.internal.mtags.Mtags$.allToplevels(Mtags.scala:96)
+	at scala.meta.internal.metals.DefinitionProvider.fromMtags(DefinitionProvider.scala:269)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$3(DefinitionProvider.scala:202)
+	at scala.Option.orElse(Option.scala:477)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$1(DefinitionProvider.scala:202)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.DefinitionProvider.positionOccurrence(DefinitionProvider.scala:197)
+	at scala.meta.internal.metals.DocumentHighlightProvider.$anonfun$documentHighlight$1(DocumentHighlightProvider.scala:33)
+	at scala.collection.immutable.List.map(List.scala:246)
+	at scala.meta.internal.metals.DocumentHighlightProvider.documentHighlight(DocumentHighlightProvider.scala:29)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$documentHighlights$1(MetalsLanguageServer.scala:1467)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:678)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+May 03, 2022 10:55:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+java.util.concurrent.CompletionException: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:331)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:346)
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:704)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2088)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1(CancelTokens.scala:40)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1$adapted(CancelTokens.scala:38)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at scala.meta.internal.mtags.ScalaToplevelMtags.fail(ScalaToplevelMtags.scala:358)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.newIdentifier(ScalaToplevelMtags.scala:343)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:245)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:118)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:50)
+	at scala.meta.internal.mtags.MtagsIndexer.index(MtagsIndexer.scala:19)
+	at scala.meta.internal.mtags.MtagsIndexer.index$(MtagsIndexer.scala:18)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.index(ScalaToplevelMtags.scala:40)
+	at scala.meta.internal.mtags.Mtags$.allToplevels(Mtags.scala:96)
+	at scala.meta.internal.metals.DefinitionProvider.fromMtags(DefinitionProvider.scala:269)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$3(DefinitionProvider.scala:202)
+	at scala.Option.orElse(Option.scala:477)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$1(DefinitionProvider.scala:202)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.DefinitionProvider.positionOccurrence(DefinitionProvider.scala:197)
+	at scala.meta.internal.metals.DocumentHighlightProvider.$anonfun$documentHighlight$1(DocumentHighlightProvider.scala:33)
+	at scala.collection.immutable.List.map(List.scala:246)
+	at scala.meta.internal.metals.DocumentHighlightProvider.documentHighlight(DocumentHighlightProvider.scala:29)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$documentHighlights$1(MetalsLanguageServer.scala:1467)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:678)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+May 03, 2022 10:55:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+java.util.concurrent.CompletionException: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:331)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:346)
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:704)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2088)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1(CancelTokens.scala:40)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1$adapted(CancelTokens.scala:38)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: file:///home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala:3: error: expected identifier; obtained eof
+class 
+      ^
+class 
+      ^
+	at scala.meta.internal.mtags.ScalaToplevelMtags.fail(ScalaToplevelMtags.scala:358)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.newIdentifier(ScalaToplevelMtags.scala:343)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:245)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:118)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:50)
+	at scala.meta.internal.mtags.MtagsIndexer.index(MtagsIndexer.scala:19)
+	at scala.meta.internal.mtags.MtagsIndexer.index$(MtagsIndexer.scala:18)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.index(ScalaToplevelMtags.scala:40)
+	at scala.meta.internal.mtags.Mtags$.allToplevels(Mtags.scala:96)
+	at scala.meta.internal.metals.DefinitionProvider.fromMtags(DefinitionProvider.scala:269)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$3(DefinitionProvider.scala:202)
+	at scala.Option.orElse(Option.scala:477)
+	at scala.meta.internal.metals.DefinitionProvider.$anonfun$positionOccurrence$1(DefinitionProvider.scala:202)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.DefinitionProvider.positionOccurrence(DefinitionProvider.scala:197)
+	at scala.meta.internal.metals.DocumentHighlightProvider.$anonfun$documentHighlight$1(DocumentHighlightProvider.scala:33)
+	at scala.collection.immutable.List.map(List.scala:246)
+	at scala.meta.internal.metals.DocumentHighlightProvider.documentHighlight(DocumentHighlightProvider.scala:29)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$documentHighlights$1(MetalsLanguageServer.scala:1467)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$apply$2(CancelTokens.scala:26)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:678)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+2022.05.03 10:55:12 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:14 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:18 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:19 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:30 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:32 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:38 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:55:45 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:09 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:17 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:19 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:34 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:47 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:49 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:52 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:56:58 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:57:00 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
+2022.05.03 10:57:04 WARN  no build target for: /home/sowtak/IdeaProjects/hurima/server/src/test/scala/service/Email.scala
