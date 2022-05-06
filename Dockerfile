@@ -4,7 +4,7 @@ VOLUME /tmp
 
 ARG JAR_FILE
 
-COPY target/${JAR_FILE} hurima-api-server.jar
+COPY target/${JAR_FILE} fleabay-api-server.jar
 
 RUN apk add --no-cache openssl
 
@@ -13,4 +13,4 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-CMD ./dockerize -wait tcp://hurima:5432 -timeout 15m java -Djava.security.egd=file:/dev/./urandom -jar /hurima-api-server.jar
+CMD ./dockerize -wait tcp://fleabay:5432 -timeout 15m java -Djava.security.egd=file:/dev/./urandom -jar /fleabay-api-server.jar

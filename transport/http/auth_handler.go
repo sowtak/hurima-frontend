@@ -2,7 +2,7 @@ package http
 
 import (
 	"encoding/json"
-	"hurima"
+	"fleabay"
 	"net/http"
 	"strconv"
 )
@@ -34,7 +34,7 @@ func (h *handler) sendActivationLink(w http.ResponseWriter, r *http.Request) {
 
 	var req RegistrationProps
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		h.RespondWithError(w, hurima.BadRequestErr)
+		h.RespondWithError(w, fleabay.BadRequestErr)
 		return
 	}
 
@@ -55,7 +55,7 @@ func (h *handler) verifyActivationLink(w http.ResponseWriter, r *http.Request) {
 	username := EmptyStr(q.Get("username"))
 	resp, err := h.svc.VerifyActivationLink(ctx, email, code, username)
 	resp.Status = strconv.Itoa(http.StatusFound)
-	if err == hurima.UserNotFoundError {
+	if err == fleabay.UserNotFoundError {
 		h.Respond(w, "application/json", http.StatusFound, resp)
 	}
 

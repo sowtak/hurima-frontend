@@ -20,7 +20,7 @@ type SMTPSender struct {
 
 func NewSMTPSender(from, host string, port int, username, password string) *SMTPSender {
 	return &SMTPSender{
-		From: mail.Address{Name: "hurima", Address: from},
+		From: mail.Address{Name: "fleabay", Address: from},
 		Addr: fmt.Sprintf("%s:%d", host, port),
 		Auth: smtp.PlainAuth("", username, password, host),
 	}

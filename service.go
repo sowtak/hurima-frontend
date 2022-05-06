@@ -1,4 +1,4 @@
-package hurima
+package fleabay
 
 import (
 	"bytes"
@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	em "hurima/email"
+	em "fleabay/email"
 )
 
 /**

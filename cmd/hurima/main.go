@@ -16,9 +16,9 @@ import (
 	"syscall"
 	"time"
 
-	"hurima"
-	"hurima/email"
-	transporthttp "hurima/transport/http"
+	"fleabay"
+	"fleabay/email"
+	transporthttp "fleabay/transport/http"
 	"github.com/go-kit/log"
 	"github.com/joho/godotenv"
 )
@@ -96,7 +96,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 	var (
 		port, _         = strconv.Atoi(env("PORT", "8000"))
 		originStr       = env("ORIGIN", fmt.Sprintf("http://localhost:%d", port))
-		dbUrl           = env("DATABASE_URL", "postgresql://root@localhost:5432/hurima?sslmode=disable")
+		dbUrl           = env("DATABASE_URL", "postgresql://root@localhost:5432/fleabay?sslmode=disable")
 		execSchema, _   = strconv.ParseBool(env("EXEC_SCHEMA", "false"))
 		allowedOrigins  = []string{"http://localhost:3000", "http://localhost:8000"}
 		profileImageUrl = env("PROFILE_IMAGE_PREFIX", originStr+"/img/profile-images/")
@@ -108,7 +108,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 
 	// ------------- Set flags  -----------------
 
-	fs := flag.NewFlagSet("hurima", flag.ExitOnError)
+	fs := flag.NewFlagSet("fleabay", flag.ExitOnError)
 	fs.Usage = func() {
 		fs.PrintDefaults()
 		fmt.Println("\nMake sure to set TOKEN_KEY, SENDGRID_API_KEY/SMTP_USERNAME and SMTP_PASSWORD in production environment")
@@ -153,7 +153,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 
 	// Run schema.sql
 	if execSchema {
-		_, err := db.ExecContext(ctx, hurima.Schema)
+		_, err := db.ExecContext(ctx, fleabay.Schema)
 		if err != nil {
 			return nil, fmt.Errorf("could not run schema file: %w", err)
 		}
@@ -161,7 +161,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 
 	// Set up email sender
 	var sender email.Sender
-	from := "noreply.hurima.dev@gmail.com"
+	from := "fleabay.dev@gmail.com"
 	if smtpUsername != "" && smtpPassword != "" {
 		sender = email.NewSMTPSender(
 			from,
@@ -182,7 +182,7 @@ func setUp(ctx context.Context, logger log.Logger, args []string) (*http.Server,
 		Debug:            true,
 	})
 
-	var svc = &hurima.Service{
+	var svc = &fleabay.Service{
 		DB:                    db,
 		Logger:                logger,
 		EmailSender:           sender,

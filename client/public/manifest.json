@@ -1,6 +1,6 @@
 {
-  "short_name": "hurima",
-  "name": "hurima",
+  "short_name": "fleabay",
+  "name": "fleabay",
   "description": "An online flea market app",
   "start_url": "/",
   "scope": "/",

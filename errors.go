@@ -1,4 +1,4 @@
-package hurima
+package fleabay
 
 import "errors"
 

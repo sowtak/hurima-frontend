@@ -1,4 +1,4 @@
-package hurima
+package fleabay
 
 import (
 	"github.com/jackc/pgerrcode"

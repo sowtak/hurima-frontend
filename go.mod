@@ -1,4 +1,4 @@
-module hurima
+module fleabay
 
 go 1.18
 

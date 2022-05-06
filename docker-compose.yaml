@@ -1,44 +1,44 @@
 services:
   # DB
-  hurima:
+  fleabay:
     image: postgres
-    container_name: hurima
-    hostname: hurima
+    container_name: fleabay
+    hostname: fleabay
     restart: always
     environment:
-      PGDATABASE: 'hurima'
-      PGUSER: 'root'
-      PGPASSWORD: 'password'
+      PGDATABASE: "fleabay"
+      PGUSER: "root"
+      PGPASSWORD: "password"
     ports:
       - "5432:5432"
     expose:
       - "5432"
     volumes:
-      - hurima-volume:/var/lib/postgres
+      - fleabay-volume:/var/lib/postgres
     networks:
-      - hurima-api-server-network
+      - fleabay-api-server-network
 
     # API
-  hurima-api-server:
+  fleabay-api-server:
     build:
       context: ./src
       args:
-        JAR_FILE: hurima-0.0.1-SNAPSHOT.jar
+        JAR_FILE: fleabay-0.0.1-SNAPSHOT.jar
       dockerfile: ../Dockerfile
-    image: hurima-api-server
-    container_name: hurima-api-server
-    hostname: hurima-api-server
+    image: fleabay-api-server
+    container_name: fleabay-api-server
+    hostname: fleabay-api-server
     ports:
       - "8000:8000"
     networks:
-      - hurima-api-server-network
+      - fleabay-api-server-network
     environment:
       - SERVER_PORT=8000
       - SPRING_PROFILES_ACTIVE=docker
 
 volumes:
-  hurima-volume:
+  fleabay-volume:
 
 networks:
-  hurima-api-server-network:
+  fleabay-api-server-network:
     driver: bridge

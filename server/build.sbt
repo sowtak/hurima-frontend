@@ -1,12 +1,9 @@
+import scala.Console.in
+
 val scalaVersionValue = "2.13.8"
-val catsVersion = "2.7.0"
-val catsTaglessVersion = "0.14.0"
-val catsEffectVersion = "3.3.11"
-val scalaTestVersion = "3.2.11"
-val scalaCheckVersion = "1.13.4"
 
 lazy val common = Seq(
-  organization := "net.sowtak",
+  organization := "io.github.sowtak",
   scalaVersion := scalaVersionValue,
   scalacOptions ++= Seq(
     "-Ymacro-annotations",
@@ -19,17 +16,22 @@ lazy val common = Seq(
 )
 
 lazy val root = (project in file("."))
-  //.dependsOn(macros)
+  .settings(common: _*)
+  // .dependsOn(macros)
   .settings(
     name := "server",
     version := "0.1.0",
     libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest" % scalaTestVersion,
-        "org.typelevel" %% "cats-core" % catsVersion,
-        "org.typelevel" %% "cats-tagless-core" % catsTaglessVersion,
-        "org.typelevel" %% "cats-effect" % catsEffectVersion,
-        "org.scalacheck" %% "scalacheck" % scalaCheckVersion % Test
-      )
+      "ch.qos.logback" % "logback-classic" % "1.2.10",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
+      "com.typesafe" % "config" % "1.4.2",
+      "org.scalatest" %% "scalatest" % "3.2.11",
+      "org.scalatest" %% "scalatest" % "3.2.11" % "test", 
+      "dev.zio" %% "zio" % "2.0.0-RC6",
+      "dev.zio" %% "zio-streams" % "2.0.0-RC6",
+      "com.sun.mail" % "javax.mail" % "1.6.2"
+    ),
+    resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"
   )
 
 
