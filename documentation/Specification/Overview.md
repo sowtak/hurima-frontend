@@ -1,2 +1,0 @@
-- All users can buy items on the item list.
-    - Only HU members can post their item(s)
