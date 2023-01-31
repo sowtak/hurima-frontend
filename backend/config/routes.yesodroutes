@@ -2,13 +2,14 @@
 -- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
 
 /static StaticR Static appStatic
-/auth   AuthR   Auth   getAuth
 
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
 / HomeR GET POST
 
-/comments CommentR POST
+/greet/#{Text} GreetR GET
 
-/profile ProfileR GET
+/login LoginR POST
+
+/comments CommentR POST

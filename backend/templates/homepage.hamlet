@@ -2,7 +2,7 @@
     <div .container>
         <div .row>
             <h1 .header>
-                Yesod—a modern framework for blazing fast websites
+                Yesod—a modern framework for cheaky developers
             <h2>
                 Fast, stable & spiced with great community
             <a href="http://www.yesodweb.com/book/" .btn.btn-info.btn-lg>
@@ -16,6 +16,8 @@
             <div .col-lg-12>
                 <div .page-header>
                     <h1 #start>Starting
+
+                    <a href=@{GreetR}>Greetings!
 
                     <p>
                         Now that you have a working project you should use the
@@ -35,10 +37,7 @@
                             <tt>config/routes.yesodroutes
 
                         <li .list-group-item>
-                            We can link to other handlers, like the <a href="@{ProfileR}">Profile</a>.
-                            Try it out as an anonymous user and see the access denied.
-                            Then, try to <a href="@{AuthR LoginR}">login</a> with the dummy authentication added
-                            while in development.
+                            We can link to other handlers, like the <a href="@{CommentR}">Comment</a>.
 
                         <li .list-group-item>
                             The HTML you are seeing now is actually composed by a number of <em>widgets</em>, #
@@ -121,8 +120,6 @@
                        Your comments will appear here. You can also open the
                        console log to see the raw response from the server.
                    <ul ##{commentListId}>
-                       $forall comment <- allComments
-                           <li>#{commentMessage $ entityVal comment}
 
     <hr>
 

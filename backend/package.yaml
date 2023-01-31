@@ -6,7 +6,6 @@ dependencies:
 - base >=4.9.1.0 && <5
 - yesod >=1.6 && <1.7
 - yesod-core >=1.6 && <1.7
-- yesod-auth >=1.6 && <1.7
 - yesod-static >=1.6 && <1.7
 - yesod-form >=1.6 && <1.8
 - classy-prelude >=1.5 && <1.6
@@ -14,9 +13,6 @@ dependencies:
 - classy-prelude-yesod >=1.5 && <1.6
 - bytestring >=0.10 && <0.12
 - text >=0.11 && <2.0
-- persistent >=2.9 && <2.14
-- persistent-postgresql >=2.13 && <2.14
-- persistent-template >=2.5 && <2.14
 - template-haskell
 - shakespeare >=2.0 && <2.1
 - hjsmin >=0.1 && <0.3

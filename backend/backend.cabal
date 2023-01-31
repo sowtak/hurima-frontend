@@ -24,11 +24,10 @@ library
       Foundation
       Handler.Comment
       Handler.Common
+      Handler.Greet
       Handler.Home
-      Handler.Profile
       Import
       Import.NoFoundation
-      Model
       Settings
       Settings.StaticFiles
   other-modules:
@@ -55,9 +54,6 @@ library
     , http-conduit ==2.3.*
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
-    , persistent >=2.9 && <2.14
-    , persistent-postgresql ==2.13.*
-    , persistent-template >=2.5 && <2.14
     , safe
     , shakespeare ==2.0.*
     , template-haskell
@@ -71,7 +67,6 @@ library
     , warp >=3.0 && <3.4
     , yaml ==0.11.*
     , yesod ==1.6.*
-    , yesod-auth ==1.6.*
     , yesod-core ==1.6.*
     , yesod-form >=1.6 && <1.8
     , yesod-static ==1.6.*
@@ -111,9 +106,6 @@ executable backend
     , http-conduit ==2.3.*
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
-    , persistent >=2.9 && <2.14
-    , persistent-postgresql ==2.13.*
-    , persistent-template >=2.5 && <2.14
     , safe
     , shakespeare ==2.0.*
     , template-haskell
@@ -127,7 +119,6 @@ executable backend
     , warp >=3.0 && <3.4
     , yaml ==0.11.*
     , yesod ==1.6.*
-    , yesod-auth ==1.6.*
     , yesod-core ==1.6.*
     , yesod-form >=1.6 && <1.8
     , yesod-static ==1.6.*
@@ -139,10 +130,8 @@ test-suite backend-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Handler.CommentSpec
       Handler.CommonSpec
       Handler.HomeSpec
-      Handler.ProfileSpec
       TestImport
       Paths_backend
   hs-source-dirs:
@@ -170,9 +159,6 @@ test-suite backend-test
     , http-conduit ==2.3.*
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
-    , persistent >=2.9 && <2.14
-    , persistent-postgresql ==2.13.*
-    , persistent-template >=2.5 && <2.14
     , safe
     , shakespeare ==2.0.*
     , template-haskell
@@ -186,7 +172,6 @@ test-suite backend-test
     , warp >=3.0 && <3.4
     , yaml ==0.11.*
     , yesod ==1.6.*
-    , yesod-auth ==1.6.*
     , yesod-core ==1.6.*
     , yesod-form >=1.6 && <1.8
     , yesod-static ==1.6.*
