@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { router } from './App';
+import { BasicLayout, router } from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router';
 import { ErrorPage } from './routes/error-page';
@@ -11,7 +11,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <RouterProvider
       router={router}
       fallbackElement={<ErrorPage/>}
-    />
+        />
+    <BasicLayout/>
   </React.StrictMode>
 );
 
