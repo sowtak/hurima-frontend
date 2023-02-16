@@ -5,15 +5,11 @@ import logo from '../../assets/icons/hurima-logo-transparent.png'
 export const Logo = () => {
     return (
         <Link to='/'>
-            <LogoWrapper src={logo} alt='hurima'/>
+            <LogoImg src={logo} alt='hurima'/>
         </Link>
     )
 }
 
-const LogoWrapper = styled.img`
-    height: auto;
-    width: auto;
-    max-height: 72px;
-    max-width: 250px;
-    padding-left: 50px;
+const LogoImg = styled.img`
+    width: 175px;
 `

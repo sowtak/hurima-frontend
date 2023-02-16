@@ -13,8 +13,10 @@ import Register from './routes/register'
 export const BasicLayout = () => {
   return (
     <>
-      <Navbar/>
-      <Outlet/>
+      <header>
+        <Navbar/>
+      </header>
+      <Outlet />
       <Footer/>
     </>
   )
@@ -23,11 +25,15 @@ export const BasicLayout = () => {
 
 export const router = createBrowserRouter([
   {
+    path: "/",
     element: <BasicLayout />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        element: (
+          <>
+            <Home />
+            <Outlet />
+          </>),
         children: [
           {
             path: "register",
@@ -47,7 +53,5 @@ export const router = createBrowserRouter([
   }, 
 ])
 
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 

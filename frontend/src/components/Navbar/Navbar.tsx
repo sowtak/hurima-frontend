@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Logo } from "./Logo";
+import SlideDrawer from "./SlideDrawer";
 
 
 const Navbar: React.FC = () => {
@@ -8,7 +9,9 @@ const Navbar: React.FC = () => {
         <NavbarContainer>
             <div className="nav-center">
                 <div className="nav-header">
-                    <Logo/>
+                    <Logo />
+                    <SlideDrawer />
+                    <NavLink to='about'>About</NavLink>
                 </div>
             </div>
         </NavbarContainer>
@@ -18,6 +21,14 @@ const Navbar: React.FC = () => {
 const NavbarContainer = styled.nav`
     height: 5rem;
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 `
 
 export default Navbar;
