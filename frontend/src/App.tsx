@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import About from './routes/about';
 import Contact from './routes/contact';
 import Home from './routes/home';
-import Register from './routes/register'
+import Register from './routes/register';
 
 
 export const BasicLayout = () => {

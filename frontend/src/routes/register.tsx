@@ -1,89 +1,23 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import { GoogleLogin } from "@react-oauth/google"
 
-interface Props {}
+const Register = () => {
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-}
+  const responseMessage = () => {
+    console.log("success");
+  }
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-`;
-
-const Button = styled.button`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-`;
-
-const Register: React.FC<Props> = (props) => {
-  const [formData, setFormData] = useState<FormData>({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(formData);
-  };
+  const errorMessage = () => {
+    console.log("error");
+  }
 
   return (
-    <FormContainer>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <Input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Email:
-          <Input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <Input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </label>
-        <Button type="submit">Submit</Button>
-      </form>
-    </FormContainer>
-  );
-};
+      <div>
+        <h2>Sign in with Google</h2>
+        <br></br>
+        <br></br>
+        <GoogleLogin onSuccess={responseMessage} onError={errorMessage}/>
+      </div>
+  )
+}
 
-export default Register;
+export default Register
