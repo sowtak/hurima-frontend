@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import logo from '../../assets/icons/logo.png'
+import logo from '../../assets/icons/hurima-logo-compressed.png'
 
 export const Logo = () => {
     return (

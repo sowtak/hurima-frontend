@@ -20,7 +20,6 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <h1>Welcome to our e-commerce store</h1>
       <ProductList>
         {products.map(product => (
           <Product key={product.id}>

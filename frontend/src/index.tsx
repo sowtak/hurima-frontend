@@ -5,15 +5,17 @@ import { BasicLayout, router } from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router';
 import { ErrorPage } from './routes/error-page';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider
-      router={router}
-      fallbackElement={<ErrorPage/>}
-        />
-    <BasicLayout/>
-  </React.StrictMode>
+  <GoogleOAuthProvider clientId=''>
+    <React.StrictMode>
+      <RouterProvider
+        router={router}
+        fallbackElement={<ErrorPage/>}
+      />
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,8 +9,8 @@ interface ContactType {
     favorite: boolean
 }
 
-export default function Contact() {
-  const contact = {
+export const Contact = () => {
+  const contact: ContactType = {
     first: "Your",
     last: "Name",
     avatar: "https://placekitten.com/g/200/200",
@@ -22,10 +22,7 @@ export default function Contact() {
   return (
     <div id="contact">
       <div>
-        <img
-          key={contact.avatar}
-          src={contact.avatar}
-        />
+        <img key={contact.avatar} src={contact.avatar} alt="contact"/>
       </div>
 
       <div>
@@ -41,10 +38,7 @@ export default function Contact() {
 
         {contact.twitter && (
           <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
-            >
+            <a href={`https://twitter.com/${contact.twitter}`}>
               {contact.twitter}
             </a>
           </p>
@@ -71,3 +65,4 @@ export default function Contact() {
   );
 }
 
+export default Contact;
