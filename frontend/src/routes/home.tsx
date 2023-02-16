@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+  id: number
+  name: string
+  price: number
+  image: string
 }
 
 const Home: React.FC = () => {
