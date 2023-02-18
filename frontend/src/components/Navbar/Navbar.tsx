@@ -12,6 +12,8 @@ const Navbar: React.FC = () => {
                     <Logo />
                     <SlideDrawer />
                     <NavLink to='about'>About</NavLink>
+                    <NavLink to='register'>Register</NavLink>
+                    <NavLink to='login'>Login</NavLink>
                 </div>
             </div>
         </NavbarContainer>

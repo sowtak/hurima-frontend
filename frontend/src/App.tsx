@@ -7,7 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import About from './routes/about';
 import Contact from './routes/contact';
 import Home from './routes/home';
+import LoginForm from './routes/login';
 import Profile from './routes/profile';
+import RegistrationForm from './routes/register';
 import Register from './routes/register';
 
 
@@ -38,7 +40,11 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "register",
-            element: <Register />,
+            element: <RegistrationForm />,
+          },
+          {
+            path: "login",
+            element: <LoginForm/>,
           },
           {
             path: "about",

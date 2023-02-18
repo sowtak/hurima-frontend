@@ -21,7 +21,6 @@ const Profile = () => {
     const login = useGoogleLogin({
         onSuccess: (codeResponse: TokenResponse) => setUser(codeResponse) as void,
         onError: (error) => console.log('login failed:', error),
-        
     })
 
     useEffect(

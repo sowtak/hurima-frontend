@@ -2,7 +2,10 @@
 -- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
 
 /static StaticR Static appStatic
-/auth   AuthR   Auth   getAuth
+
+/register postAuthRegisterR POST
+/api/v1/auth/email-login postAuthEmailLoginR POST
+/api/v1/auth/google-login postAuthGoogleLoginR POST
 
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
