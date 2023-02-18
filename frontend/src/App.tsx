@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import About from './routes/about';
 import Contact from './routes/contact';
 import Home from './routes/home';
+import Profile from './routes/profile';
 import Register from './routes/register';
 
 
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
           {
             path: "contact",
             element: <Contact/>
+          },
+          {
+            path: "profile",
+            element: <Profile/>
           }
         ]
       },
