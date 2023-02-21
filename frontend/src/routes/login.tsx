@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_BASE_URL_DEV } from '../utils/constants';
 import { useNavigate } from 'react-router';
 import { FormContainer } from '../components/FormContainer';
-import { Alert, Button, Divider, LinearProgress, TextField } from '@mui/material';
+import { Alert, Button, LinearProgress, TextField } from '@mui/material';
 import { GoogleLogin, TokenResponse } from '@react-oauth/google';
 import FormFieldDivider from '../components/FormFieldDivider';
 
