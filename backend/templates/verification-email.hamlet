@@ -1,5 +1,0 @@
-<p>Hello,</p>
-<p>Thank you for registering for Hurima! To activate your account, please click on the following link:</p>
-<p>
-    <a href="#{verificationUrl}">Activate Account</a>
-</p>
