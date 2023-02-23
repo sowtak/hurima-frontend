@@ -9,8 +9,6 @@ import Contact from './routes/contact';
 import Home from './routes/home';
 import LoginForm from './routes/login';
 import Profile from './routes/profile';
-import RegistrationForm from './routes/register';
-import Register from './routes/register';
 
 
 export const BasicLayout = () => {
@@ -38,10 +36,6 @@ export const router = createBrowserRouter([
             <Outlet />
           </>),
         children: [
-          {
-            path: "register",
-            element: <RegistrationForm />,
-          },
           {
             path: "login",
             element: <LoginForm/>,

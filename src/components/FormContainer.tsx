@@ -1,4 +1,4 @@
-import { Avatar, Box, createTheme, Grid, ThemeProvider, Typography } from "@mui/material"
+import { Avatar, Box, createTheme, Grid, Icon, Paper, ThemeProvider, Typography } from "@mui/material"
 import { ReactNode } from "react"
 import { Logo } from "./Navbar/Logo"
 
@@ -22,10 +22,11 @@ export const FormContainer = (props: FormContainerProps) => {
                         flexDirection: 'column',
                         alighItems: 'center',
                     }}>
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <Logo/>
-                    </Avatar>
-                    <Typography>
+                        <Typography
+                            align="center"
+                            variant='h4'
+                        >
+
                         {formName}
                     </Typography>
                 </Box>

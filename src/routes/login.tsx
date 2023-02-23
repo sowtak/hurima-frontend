@@ -3,9 +3,10 @@ import axios from 'axios';
 import { API_BASE_URL_DEV } from '../utils/constants';
 import { useNavigate } from 'react-router';
 import { FormContainer } from '../components/FormContainer';
-import { Alert, Button, LinearProgress, TextField } from '@mui/material';
+import { Alert, Button, LinearProgress, Snackbar, TextField } from '@mui/material';
 import { GoogleLogin, TokenResponse } from '@react-oauth/google';
 import FormFieldDivider from '../components/FormFieldDivider';
+import { isValidEmail } from '../utils/email-validity-checker';
 
 type LoginFormData = {
   email: string;
@@ -23,10 +24,12 @@ interface IUserInfoResponse {
 }
 
 const RegistrationForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const [emailIsValid, setEmailIsValid] = useState<boolean>(false)
   const [googleLoginError, setGoogleLoginError] = useState<boolean>(false)
   const [sendTokenToServerError, setSendTokenToServerError] = useState<boolean>(false) 
   const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>(null)
@@ -44,6 +47,13 @@ const RegistrationForm = () => {
 
   const sendAuthToken = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setOpen(true)
+    if (!isValidEmail(formData.email)) {
+      setEmailIsValid(false)
+      return
+    }
+    setOpen(false)
+    setEmailIsValid(true)
     setIsLoading(true);
     try {
       const response = await axios.post(API_BASE_URL_DEV + '/auth/email-login', formData);
@@ -72,7 +82,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-      {isLoading ? <LinearProgress/> : null}
+      {isLoading && <LinearProgress/>}
       <FormContainer formName='Login to Hurima'>
         <form onSubmit={sendAuthToken}>
           <TextField
@@ -82,8 +92,15 @@ const RegistrationForm = () => {
             onChange={handleFieldChange("email")}
             margin="dense"
           />
+          {emailIsValid &&
+            <Snackbar open={open}>
+              <Alert severity='error'>
+                Invalid Email
+              </Alert>
+            </Snackbar>
+          }
           <Button variant="contained" fullWidth >
-            Sign in with Email Magic Link
+            Sign in with Email Verification Link
           </Button>
           <FormFieldDivider/>
           <GoogleLogin
