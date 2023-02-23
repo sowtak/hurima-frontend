@@ -28,8 +28,7 @@ const RegistrationForm = () => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
   });
-  const [open, setOpen] = useState<boolean>(false)
-  const [emailIsValid, setEmailIsValid] = useState<boolean>(false)
+  const [emailIsInvalid, setEmailIsInvalid] = useState<boolean>(false)
   const [googleLoginError, setGoogleLoginError] = useState<boolean>(false)
   const [sendTokenToServerError, setSendTokenToServerError] = useState<boolean>(false) 
   const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>(null)
@@ -45,16 +44,15 @@ const RegistrationForm = () => {
     }));
   };
 
+
   const sendAuthToken = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setOpen(true)
     if (!isValidEmail(formData.email)) {
-      setEmailIsValid(false)
+      setEmailIsInvalid(true)
       return
     }
-    setOpen(false)
-    setEmailIsValid(true)
-    setIsLoading(true);
+    console.log("error")
+    setEmailIsInvalid(false)
     try {
       const response = await axios.post(API_BASE_URL_DEV + '/auth/email-login', formData);
       if (response.status === 200) {
@@ -92,14 +90,16 @@ const RegistrationForm = () => {
             onChange={handleFieldChange("email")}
             margin="dense"
           />
-          {emailIsValid &&
-            <Snackbar open={open}>
-              <Alert severity='error'>
-                Invalid Email
-              </Alert>
-            </Snackbar>
+          {emailIsInvalid &&
+            <>
+              <Alert
+                severity='error'
+              >
+              Invalid Email
+            </Alert>
+            </>
           }
-          <Button variant="contained" fullWidth >
+          <Button variant="contained" fullWidth type='submit'>
             Sign in with Email Verification Link
           </Button>
           <FormFieldDivider/>
@@ -115,6 +115,13 @@ const RegistrationForm = () => {
             {"Failed to log in"}
           </Alert>
         )}
+          {sendTokenToServerError && (
+        <Snackbar open={sendTokenToServerError} autoHideDuration={6000} onClose={() => setSendTokenToServerError(false)}>
+          <Alert severity="error" onClose={() => setSendTokenToServerError(false)}>
+            {"Failed to send token to server"}
+          </Alert>
+        </Snackbar>
+      )}
       </FormContainer>
     </>
   );

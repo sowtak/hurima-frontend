@@ -1,6 +1,5 @@
-import { Avatar, Box, createTheme, Grid, Icon, Paper, ThemeProvider, Typography } from "@mui/material"
+import { Box, createTheme, Grid, ThemeProvider, Typography } from "@mui/material"
 import { ReactNode } from "react"
-import { Logo } from "./Navbar/Logo"
 
 const theme = createTheme()
 
