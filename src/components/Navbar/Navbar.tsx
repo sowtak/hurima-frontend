@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { RootState } from "../../store";
 import { Logo } from "./Logo";
 import SlideDrawer from "./SlideDrawer";
 
 
 const Navbar: React.FC = () => {
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+
     return (
         <NavbarContainer>
             <div className="nav-center">
@@ -12,7 +16,11 @@ const Navbar: React.FC = () => {
                     <Logo />
                     <SlideDrawer />
                     <NavLink to='about'>About</NavLink>
-                    <NavLink to='login'>Login</NavLink>
+                    {isAuthenticated ? (
+                        <NavLink to='login'>Login</NavLink>
+                    ) : (
+                        <NavLink to='profile'>Profile</NavLink>
+                    )}
                 </div>
             </div>
         </NavbarContainer>
