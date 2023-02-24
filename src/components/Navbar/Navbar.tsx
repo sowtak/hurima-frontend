@@ -7,6 +7,7 @@ import SlideDrawer from "./SlideDrawer";
 
 
 const Navbar: React.FC = () => {
+    //const isDevMode = 
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
 
     return (

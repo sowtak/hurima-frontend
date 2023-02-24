@@ -25,3 +25,7 @@ yarn-error.log*
 
 .vscode/
 amplify/
+
+.env
+.env.local
+.env.production
