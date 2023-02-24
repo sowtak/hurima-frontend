@@ -84,23 +84,21 @@ const RegistrationForm = () => {
       <FormContainer formName='Login to Hurima'>
         <form onSubmit={sendAuthToken}>
           <TextField
+            sx={{width: 350, height: 80}}
             label="Email"
-            fullWidth
             value={formData.email}
+            error={emailIsInvalid}
+            helperText={emailIsInvalid ? 'Please enter a valid email address' : ''}
+            variant="outlined"
             onChange={handleFieldChange("email")}
             margin="dense"
           />
-          {emailIsInvalid &&
-            <>
-              <Alert
-                severity='error'
-              >
-              Invalid Email
-            </Alert>
-            </>
-          }
-          <Button variant="contained" fullWidth type='submit'>
-            Sign in with Email Verification Link
+          <Button
+            sx={{width: 350, height: 50}}
+            variant="contained"
+            fullWidth type='submit'
+          >
+              Send Email Verification Link
           </Button>
           <FormFieldDivider/>
           <GoogleLogin

@@ -18,9 +18,9 @@ const Navbar: React.FC = () => {
                     <SlideDrawer />
                     <NavLink to='about'>About</NavLink>
                     {isAuthenticated ? (
-                        <NavLink to='login'>Login</NavLink>
-                    ) : (
                         <NavLink to='profile'>Profile</NavLink>
+                    ) : (
+                        <NavLink to='login'>Login</NavLink>
                     )}
                 </div>
             </div>
