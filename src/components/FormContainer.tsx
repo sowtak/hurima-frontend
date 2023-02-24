@@ -12,8 +12,8 @@ export const FormContainer = (props: FormContainerProps) => {
     const {formName, children} = props
     return (
         <ThemeProvider theme={theme}>
-            <Grid container justifyContent={'center'}>
-                <Grid item xs={12} sm={8} md={6} lg={4}>
+            <Grid container justifyContent='center' alignContent='center'>
+                <Grid item xs={12} sm={5}>
                     <Box
                         sx={{
                         marginTop: 8,

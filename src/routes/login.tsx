@@ -84,7 +84,7 @@ const RegistrationForm = () => {
       <FormContainer formName='Login to Hurima'>
         <form onSubmit={sendAuthToken}>
           <TextField
-            sx={{width: 350, height: 80}}
+            sx={{width: 340, height: 80, textAlign: 'center'}}
             label="Email"
             value={formData.email}
             error={emailIsInvalid}
@@ -94,7 +94,7 @@ const RegistrationForm = () => {
             margin="dense"
           />
           <Button
-            sx={{width: 350, height: 50}}
+            sx={{width: 340, height: 50, marginLeft: 'auto', marginRight: 'auto'}}
             variant="contained"
             fullWidth type='submit'
           >
