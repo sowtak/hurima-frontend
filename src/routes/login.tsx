@@ -84,7 +84,8 @@ const RegistrationForm = () => {
       <FormContainer formName='Login to Hurima'>
         <form onSubmit={sendAuthToken}>
           <TextField
-            sx={{width: 340, height: 80, textAlign: 'center'}}
+            fullWidth
+            sx={{marginBottom: 3}}
             label="Email"
             value={formData.email}
             error={emailIsInvalid}
@@ -94,9 +95,10 @@ const RegistrationForm = () => {
             margin="dense"
           />
           <Button
-            sx={{width: 340, height: 50, marginLeft: 'auto', marginRight: 'auto'}}
+            sx={{marginBottom: 2}}
             variant="contained"
-            fullWidth type='submit'
+            fullWidth
+            type='submit'
           >
               Send Email Verification Link
           </Button>
