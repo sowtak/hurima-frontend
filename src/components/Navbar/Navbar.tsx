@@ -33,6 +33,7 @@ const NavbarContainer = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid #ccc;
 
     .nav-center {
         width: 90vw;
