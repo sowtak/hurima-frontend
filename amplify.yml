@@ -2,13 +2,11 @@ frontend:
   phases:
     preBuild:
       commands: 
-        - npm install env-cmd
         - npm ci
+        - npm install react-scripts
     build:
       commands:
-        - echo "I am running on $BUILD_ENV"
-        - npm run build:$BUILD_ENV
-  artifacts:
+        - npm run build 
     baseDirectory: build
     files:
       - '**/*'
