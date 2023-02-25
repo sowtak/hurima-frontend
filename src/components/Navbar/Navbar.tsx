@@ -1,5 +1,5 @@
-import { Link } from "@mui/material";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { RootState } from "../../store";
 import { Logo } from "./Logo";
@@ -20,13 +20,13 @@ const Navbar: React.FC = () => {
                             <SlideDrawer />
                         </ul>
                         <ul>
-                            <Link href='about' underline="none" color={'black'}>About</Link>
+                            <NavLink to='about' style={{textDecoration: 'none'}} color={'black'}>About</NavLink>
                         </ul>
                         <ul>
                             {isAuthenticated ? (
-                                <Link href='profile' underline="none" color={"black"}>Profile</Link>
+                                <NavLink to='profile' style={{textDecoration: 'none'}} color={"black"}>Profile</NavLink>
                             ) : (
-                                <Link href='login' underline="none" color={"black"}>Log in</Link>
+                                <NavLink to='login' style={{textDecoration: 'none'}} color={"black"}>Log in</NavLink>
                             )}
                         </ul>
                     </ul>
