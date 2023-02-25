@@ -1,5 +1,6 @@
+import { API_BASE_URL_DEV } from './../src/utils/constants';
 const AWS = require('aws-sdk')
-const ses = AWS.SES({
+const ses = new AWS.SES({
   accessKeyId: 'key',
   secretAccessKey: 'secret_key',
   region: 'ap-northeast-1' // replace with your AWS region
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('Express + TypeScript Server');
 });
 
-app.post('/api/v1/auth/local-email-login', async (req, res) => {
+app.post(API_BASE_URL_DEV + '/auth/local-email-login', async (req, res) => {
   const { email } = req.body
   const now = new Date()
   const expiresAt = new Date(now.getTime() + 2 * 60 * 60 * 1000)
