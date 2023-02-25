@@ -10,6 +10,8 @@ frontend:
     baseDirectory: build
     files:
       - '**/*'
+  artifacts:
+    baseDirectory: public
   customHeaders:
     - pattern: '/*'
       headers:
