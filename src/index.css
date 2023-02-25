@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'Averta';
-  src: url(./assets/fonts/AvertaDemo-Regular.otf);
+  src: url(./assets/fonts/AvertaDemo-Regular.otf) format('truetype');
 }
 
 body {
