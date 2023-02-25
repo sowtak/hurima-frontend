@@ -11,7 +11,12 @@ frontend:
     files:
       - '**/*'
   artifacts:
-    baseDirectory: public
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
   customHeaders:
     - pattern: '/*'
       headers:
