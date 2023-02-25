@@ -1,5 +1,5 @@
+import { Link } from "@mui/material";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { RootState } from "../../store";
 import { Logo } from "./Logo";
@@ -15,13 +15,21 @@ const Navbar: React.FC = () => {
             <div className="nav-center">
                 <div className="nav-header">
                     <Logo />
-                    <SlideDrawer />
-                    <NavLink to='about'>About</NavLink>
-                    {isAuthenticated ? (
-                        <NavLink to='profile'>Profile</NavLink>
-                    ) : (
-                        <NavLink to='login'>Login</NavLink>
-                    )}
+                    <ul>
+                        <ul>
+                            <SlideDrawer />
+                        </ul>
+                        <ul>
+                            <Link href='about' underline="none" color={'black'}>About</Link>
+                        </ul>
+                        <ul>
+                            {isAuthenticated ? (
+                                <Link href='profile' underline="none" color={"black"}>Profile</Link>
+                            ) : (
+                                <Link href='login' underline="none" color={"black"}>Log in</Link>
+                            )}
+                        </ul>
+                    </ul>
                 </div>
             </div>
         </NavbarContainer>
@@ -45,6 +53,10 @@ const NavbarContainer = styled.nav`
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    ul {
+        display: inline-block;
     }
 `
 

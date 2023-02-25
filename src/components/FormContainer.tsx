@@ -22,6 +22,7 @@ export const FormContainer = (props: FormContainerProps) => {
                         alighItems: 'center',
                     }}>
                         <Typography
+                            fontFamily={'Averta'}
                             marginBottom={3}
                             align="center"
                             variant='h4'

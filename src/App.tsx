@@ -27,33 +27,31 @@ export const BasicLayout = () => {
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <BasicLayout />,
+    element: <>
+      <BasicLayout />
+    </>,
     children: [
       {
-        element: (
-          <>
-            <Home />
-            <Outlet />
-          </>),
-        children: [
-          {
-            path: "login",
-            element: <LoginForm/>,
-          },
-          {
-            path: "about",
-            element: <About />
-          },
-          {
-            path: "contact",
-            element: <Contact/>
-          },
-          {
-            path: "profile",
-            element: <Profile/>
-          }
-        ]
+        path: "/",
+        element: <Home/>
       },
+      {
+        path: "login",
+        element: <LoginForm/>,
+      },
+      {
+        path: "about",
+        element: <About />
+      },
+      {
+        path: "contact",
+        element: <Contact/>
+      },
+      {
+        path: "profile",
+        element: <Profile/>
+      }
+      
     ]
   }, 
 ])

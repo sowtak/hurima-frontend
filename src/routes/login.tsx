@@ -23,7 +23,7 @@ interface IUserInfoResponse {
     locale: string;
 }
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
@@ -95,12 +95,12 @@ const RegistrationForm = () => {
             margin="dense"
           />
           <Button
-            sx={{marginBottom: 2}}
+            sx={{ marginBottom: 2, textTransform: 'unset !important'} }
             variant="contained"
             fullWidth
             type='submit'
           >
-              Send Email Verification Link
+              Send email verification link
           </Button>
           <FormFieldDivider/>
           <GoogleLogin
@@ -127,4 +127,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;
