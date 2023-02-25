@@ -7,7 +7,7 @@ import SlideDrawer from "./SlideDrawer";
 
 
 const Navbar: React.FC = () => {
-    //const isDevMode = 
+    const envi = process.env.NODE_ENV
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
 
     return (
@@ -29,6 +29,13 @@ const Navbar: React.FC = () => {
                                 <NavLink to='login' style={{textDecoration: 'none'}} color={"black"}>Log in</NavLink>
                             )}
                         </ul>
+                        {envi === 'development' ? (
+                            <ul>
+                                <NavLink to='local-login' style={{textDecoration: 'none'}} color={"black"}>Local log in</NavLink>
+                            </ul>) : (
+                                null
+                            )
+                        }
                     </ul>
                 </div>
             </div>

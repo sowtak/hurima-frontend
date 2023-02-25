@@ -29,3 +29,5 @@ amplify/
 .env
 .env.local
 .env.production
+.env.dev 
+.env.test
