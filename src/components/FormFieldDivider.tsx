@@ -1,12 +1,7 @@
-import { Divider } from "@mui/material"
+import { Divider } from "@mui/material";
 
 const FormFieldDivider = () => {
-    return (
-        <Divider sx={{ padding: "19px 0 20px 0" }}>
-            or
-        </Divider>
+  return <Divider sx={{ padding: "19px 0 20px 0" }}>or</Divider>;
+};
 
-    )
-}
-
-export default FormFieldDivider
+export default FormFieldDivider;

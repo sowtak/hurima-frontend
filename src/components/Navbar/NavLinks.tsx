@@ -1,12 +1,5 @@
-const NavLinks: React.FC<{className: string,}> = ({
-    className,
-}) => {
-    return (
-        <>
-        </>
-    )
-}
+const NavLinks: React.FC<{ className: string }> = ({ className }) => {
+  return <></>;
+};
 
-            
-
-export default NavLinks
+export default NavLinks;

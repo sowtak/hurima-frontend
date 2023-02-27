@@ -1,39 +1,35 @@
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 const Footer = () => {
   return (
     <FooterContainer>
       <nav className='footer-nav'>
-      <ul>
         <ul>
-          <NavLink to={'privacy-policy'} color='black'>
-            Privacy policy
-          </NavLink>
+          <ul>
+            <NavLink to={"privacy-policy"} color='black'>
+              Privacy policy
+            </NavLink>
+          </ul>
+          <ul>
+            <NavLink to={"terms-of-service"} color='black'>
+              Terms of Service
+            </NavLink>
+          </ul>
         </ul>
-        <ul>
-          <NavLink to={'terms-of-service'} color='black'>
-            Terms of Service
-          </NavLink>
-        </ul>
-      </ul>
-
       </nav>
 
       <div className='footer-content'>
-            <h5>
-              &copy; {new Date().getFullYear()}
-              <span> Hurima </span>
-            </h5>
-            <h5>
-              {'  '}All rights reserved
+        <h5>
+          &copy; {new Date().getFullYear()}
+          <span> Hurima </span>
         </h5>
+        <h5>{"  "}All rights reserved</h5>
       </div>
     </FooterContainer>
-  )
-}
+  );
+};
 
 const FooterContainer = styled.footer`
-
   position: relative;
   width: 100%;
   bottom: 0;
@@ -62,7 +58,6 @@ const FooterContainer = styled.footer`
     flex: 1;
     text-align: center;
   }
-  
-`
+`;
 
-export default Footer
+export default Footer;

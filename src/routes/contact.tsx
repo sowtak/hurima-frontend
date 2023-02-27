@@ -1,12 +1,12 @@
 import { Form } from "react-router-dom";
 
 interface ContactType {
-    first: string
-    last: string
-    avatar: string
-    twitter: string
-    notes: string
-    favorite: boolean
+  first: string;
+  last: string;
+  avatar: string;
+  twitter: string;
+  notes: string;
+  favorite: boolean;
 }
 
 export const Contact = () => {
@@ -20,9 +20,9 @@ export const Contact = () => {
   };
 
   return (
-    <div id="contact">
+    <div id='contact'>
       <div>
-        <img key={contact.avatar} src={contact.avatar} alt="contact"/>
+        <img key={contact.avatar} src={contact.avatar} alt='contact' />
       </div>
 
       <div>
@@ -47,22 +47,22 @@ export const Contact = () => {
         {contact.notes && <p>{contact.notes}</p>}
 
         <div>
-          <Form action="edit">
-            <button type="submit">Edit</button>
+          <Form action='edit'>
+            <button type='submit'>Edit</button>
           </Form>
           <Form
-            method="post"
-            action="destroy"
+            method='post'
+            action='destroy'
             onSubmit={(event) => {
-                event.preventDefault();
+              event.preventDefault();
             }}
           >
-            <button type="submit">Delete</button>
+            <button type='submit'>Delete</button>
           </Form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Contact;
