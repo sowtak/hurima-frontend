@@ -1,27 +1,48 @@
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 const Footer = () => {
   return (
-    <Wrapper>
-      <h5>
-        &copy; {new Date().getFullYear()}
-        <span> Hurima </span>
-      </h5>
-      <h5>{'  '}All rights reserved</h5>
-    </Wrapper>
+    <FooterContainer>
+      <nav className='footer-nav'>
+      <ul>
+        <ul>
+          <NavLink to={'privacy-policy'} color='black'>
+            Privacy policy
+          </NavLink>
+        </ul>
+        <ul>
+          <NavLink to={'terms-of-service'} color='black'>
+            Terms of Service
+          </NavLink>
+        </ul>
+      </ul>
+
+      </nav>
+
+      <div className='footer-content'>
+            <h5>
+              &copy; {new Date().getFullYear()}
+              <span> Hurima </span>
+            </h5>
+            <h5>
+              {'  '}All rights reserved
+        </h5>
+      </div>
+    </FooterContainer>
   )
 }
 
-const Wrapper = styled.footer`
-  height: 5rem;
-  position: absolute;
-  bottom: 0;
+const FooterContainer = styled.footer`
+
+  position: relative;
   width: 100%;
+  bottom: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background: var(--clr-black);
-  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+
   span {
     color: var(--clr-primary-5);
   }
@@ -32,9 +53,16 @@ const Wrapper = styled.footer`
     text-transform: none;
     line-height: 1.25;
   }
-  @media (min-width: 776px) {
-    flex-direction: row;
+
+  .footer-nav {
+    flex: 1;
   }
+
+  .footer-content {
+    flex: 1;
+    text-align: center;
+  }
+  
 `
 
 export default Footer

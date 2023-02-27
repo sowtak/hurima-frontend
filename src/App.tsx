@@ -9,7 +9,9 @@ import Contact from './routes/contact';
 import Home from './routes/home';
 import LocalLoginForm from './routes/local-login';
 import LoginForm from './routes/login';
+import PrivacyPolicy from './routes/privacy-policy';
 import Profile from './routes/profile';
+import TermsOfService from './routes/terms-of-service';
 
 
 export const BasicLayout = () => {
@@ -55,6 +57,14 @@ export const router = createBrowserRouter([
       {
         path: "local-login",
         element: <LocalLoginForm/>
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy/>
+      },
+      {
+        path: "terms-of-service",
+        element: <TermsOfService/>,
       }
       
     ]
