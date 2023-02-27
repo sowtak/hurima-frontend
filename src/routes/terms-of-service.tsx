@@ -2,7 +2,7 @@ import React from 'react';
 
 const TermsOfService: React.FC = () => {
   return (
-    <div>
+    <div className='section-center'>
       <h1>Terms of Service</h1>
       <p>These terms govern your use of the Hurima toy e-commerce app.</p>
       <h2>1. User Accounts</h2>

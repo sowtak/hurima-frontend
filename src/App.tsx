@@ -19,7 +19,9 @@ export const BasicLayout = () => {
       <header>
         <Navbar />
       </header>
-      <Outlet />
+      <body>
+        <Outlet />
+      </body>
       <Footer />
     </>
   );

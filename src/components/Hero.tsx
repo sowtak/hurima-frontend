@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 const Hero = () => {
   return (
-    <HeroWrapper className='section-center'>
+    <section className='section-center'>
       <article>
         <HeroMessage />
       </article>
-    </HeroWrapper>
+    </section>
   );
 };
 
@@ -28,8 +28,4 @@ const HeroMessage = () => {
     </>
   );
 };
-
-const HeroWrapper = styled.section`
-  min-height: 60vh;
-`;
 export default Hero;

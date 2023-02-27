@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <PrivacyPolicyContainer>
+    <PrivacyPolicyContainer className='section-center'>
       <h1>Hurima Privacy Policy</h1>
       <p>
         At Hurima, we take your privacy seriously. This privacy policy explains

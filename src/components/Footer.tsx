@@ -30,9 +30,10 @@ const Footer = () => {
 };
 
 const FooterContainer = styled.footer`
-  position: static;
+  position: relative;
+  border-top: 1px solid #ccc;
   width: 100%;
-  bottom: 0;
+  bottom: -12;
   display: flex;
   justify-content: space-between;
   align-items: center;
