@@ -19,7 +19,7 @@ export const FormContainer = (props: FormContainerProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Grid container justifyContent={"center"} spacing={3}>
-        <Grid item xs={12} sm={6} md={4} lg={3} sx={{minHeight: '89vh'}}>
+        <Grid item xs={12} sm={6} md={4} lg={3} sx={{ minHeight: "89vh" }}>
           <Box
             sx={{
               marginTop: 8,
