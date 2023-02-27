@@ -80,6 +80,7 @@ const PrivacyPolicy: React.FC = () => {
 };
 
 const PrivacyPolicyContainer = styled.div`
+  padding-bottom: 30px;
   @media only screen and (max-width: 600px) {
     .privacy-policy-container {
       max-width: 100%;

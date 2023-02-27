@@ -30,13 +30,12 @@ const Footer = () => {
 };
 
 const FooterContainer = styled.footer`
-  position: relative;
+  position: static;
   width: 100%;
   bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   background-color: #f5f5f5;
 
   span {
