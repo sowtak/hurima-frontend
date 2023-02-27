@@ -21,15 +21,6 @@ const Navbar: React.FC = () => {
               <SlideDrawer />
             </ul>
             <ul>
-              <NavLink
-                to='about'
-                style={{ textDecoration: "none" }}
-                color={"black"}
-              >
-                About
-              </NavLink>
-            </ul>
-            <ul>
               {isAuthenticated ? (
                 <NavLink
                   to='profile'

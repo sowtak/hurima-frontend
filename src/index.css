@@ -34,7 +34,7 @@ button {
 }
 
 .section-center {
-  min-height: 86vh;
+  min-height: 84vh;
   width: 90vw;
   margin: 0 auto;
   max-width: var(--max-width);

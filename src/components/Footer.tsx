@@ -6,6 +6,14 @@ const Footer = () => {
       <nav className='footer-nav'>
         <ul>
           <ul>
+            <NavLink
+              to='about'
+              color={"black"}
+            >
+              About
+            </NavLink>
+          </ul>
+          <ul>
             <NavLink to={"privacy-policy"} color='black'>
               Privacy policy
             </NavLink>
@@ -33,15 +41,19 @@ const FooterContainer = styled.footer`
   position: relative;
   border-top: 1px solid #ccc;
   width: 100%;
-  bottom: -12;
-  display: flex;
   justify-content: space-between;
+  display: flex;
   align-items: center;
   background-color: #f5f5f5;
 
   span {
     color: var(--clr-primary-5);
   }
+
+  ul {
+    display: flex;
+  }
+
   h5 {
     color: var(--clr-white);
     margin: 0.1rem;
