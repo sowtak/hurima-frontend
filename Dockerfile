@@ -1,7 +1,7 @@
 ARG VARIANT="18-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
-RUN sudo apt-get install unzip \
+RUN sudo apt-get install -y unzip curl\
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && sudo ./aws/install

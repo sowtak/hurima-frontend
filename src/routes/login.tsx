@@ -1,16 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { API_BASE_URL_DEV } from "../utils/constants";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { FormContainer } from "../components/FormContainer";
-import {
-  Alert,
-  Button,
-  LinearProgress,
-  Snackbar,
-  TextField,
-} from "@mui/material";
-import { GoogleLogin, TokenResponse } from "@react-oauth/google";
+import { Button, FormControl, FormErrorMessage, Input, Progress, Alert, AlertIcon, CloseButton } from "@chakra-ui/react";
 import FormFieldDivider from "../components/FormFieldDivider";
 import { isValidEmail } from "../utils/email-validity-checker";
 
@@ -38,9 +31,6 @@ const LoginForm = () => {
   const [googleLoginError, setGoogleLoginError] = useState<boolean>(false);
   const [sendTokenToServerError, setSendTokenToServerError] =
     useState<boolean>(false);
-  const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>(
-    null
-  );
 
   const navigate = useNavigate();
 
@@ -59,7 +49,6 @@ const LoginForm = () => {
       setEmailIsInvalid(true);
       return;
     }
-    console.log("error");
     setEmailIsInvalid(false);
     try {
       const response = await axios.post(
@@ -75,17 +64,6 @@ const LoginForm = () => {
     setIsLoading(false);
   };
 
-  // Send auth_token to server.
-  const handleGoogleLoginSuccess = async (response: any) => {
-    const idToken = response.tokenId;
-    try {
-      const res = await axios.post(API_BASE_URL_DEV + "/auth/google-login", {
-        idToken,
-      });
-    } catch (error) {
-      setGoogleLoginError(true);
-    }
-  };
 
   const handleSendTokenError = (): void => {
     setSendTokenToServerError(true); // OAuth2 login successful but some error afterwards
@@ -93,54 +71,41 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading && <LinearProgress />}
+      {isLoading && <Progress size="xs" isIndeterminate />}
       <FormContainer formName='Login to Hurima'>
         <form onSubmit={sendAuthToken}>
-          <TextField
-            fullWidth
-            sx={{ marginBottom: 3 }}
-            label='Email'
-            value={formData.email}
-            error={emailIsInvalid}
-            helperText={
-              emailIsInvalid ? "Please enter a valid email address" : ""
-            }
-            variant='outlined'
-            onChange={handleFieldChange("email")}
-            margin='dense'
-          />
+          <FormControl isInvalid={emailIsInvalid} marginBottom={3}>
+            <Input
+              placeholder='Email'
+              value={formData.email}
+              variant='outlined'
+              onChange={handleFieldChange("email")}
+              margin='dense'
+            />
+            <FormErrorMessage>Please enter a valid email address</FormErrorMessage>
+          </FormControl>
           <Button
-            sx={{ marginBottom: 2, textTransform: "unset !important" }}
+            marginBottom={2}
             variant='contained'
-            fullWidth
             type='submit'
           >
             Send email verification link
           </Button>
           <FormFieldDivider />
-          <GoogleLogin
-            text='signin_with'
-            onSuccess={handleGoogleLoginSuccess}
-            onError={() => setGoogleLoginError(true)}
-            state_cookie_domain={"single_host_origin"}
-          />
         </form>
         {googleLoginError && (
-          <Alert severity='error'>{"Failed to log in"}</Alert>
+          <Alert status='error'>
+            <AlertIcon />
+            Failed to log in
+          </Alert>
         )}
         {sendTokenToServerError && (
-          <Snackbar
-            open={sendTokenToServerError}
-            autoHideDuration={6000}
-            onClose={() => setSendTokenToServerError(false)}
+          <Alert
+            status='error'
+            onAbort={() => setSendTokenToServerError(false)}
           >
-            <Alert
-              severity='error'
-              onClose={() => setSendTokenToServerError(false)}
-            >
-              {"Failed to send token to server"}
-            </Alert>
-          </Snackbar>
+            Failed to send token to server
+          </Alert>
         )}
       </FormContainer>
     </>

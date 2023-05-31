@@ -1,75 +1,38 @@
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+
 const Footer = () => {
   return (
-    <FooterContainer>
-      <nav className='footer-nav'>
-        <ul>
-          <ul>
-            <NavLink
-              to='about'
-              color={"black"}
-            >
-              About
+    <Box borderTop="1px solid #ccc" bgColor="#f5f5f5">
+      <Flex justify="space-between" alignItems="center" p={4}>
+        <Flex as="nav" className="footer-nav">
+          <Flex as="ul">
+            <NavLink to="about" color="black">
+              <Text>About</Text>
             </NavLink>
-          </ul>
-          <ul>
-            <NavLink to={"privacy-policy"} color='black'>
-              Privacy policy
+          </Flex>
+          <Flex as="ul">
+            <NavLink to="privacy-policy" color="black">
+              <Text>Privacy policy</Text>
             </NavLink>
-          </ul>
-          <ul>
-            <NavLink to={"terms-of-service"} color='black'>
-              Terms of Service
+          </Flex>
+          <Flex as="ul">
+            <NavLink to="terms-of-service" color="black">
+              <Text>Terms of Service</Text>
             </NavLink>
-          </ul>
-        </ul>
-      </nav>
+          </Flex>
+        </Flex>
 
-      <div className='footer-content'>
-        <h5>
-          &copy; {new Date().getFullYear()}
-          <span> Hurima </span>
-        </h5>
-        <h5>{"  "}All rights reserved</h5>
-      </div>
-    </FooterContainer>
+        <Flex className="footer-content" alignItems="center">
+          <Text>
+            &copy; {new Date().getFullYear()} <Box color="blue.500">Hurima</Box>
+          </Text>
+          <Text>All rights reserved</Text>
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 
-const FooterContainer = styled.footer`
-  position: relative;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  background-color: #f5f5f5;
-
-  span {
-    color: var(--clr-primary-5);
-  }
-
-  ul {
-    display: flex;
-  }
-
-  h5 {
-    color: var(--clr-white);
-    margin: 0.1rem;
-    font-weight: 400;
-    text-transform: none;
-    line-height: 1.25;
-  }
-
-  .footer-nav {
-    flex: 1;
-  }
-
-  .footer-content {
-    flex: 1;
-    text-align: center;
-  }
-`;
-
 export default Footer;
+

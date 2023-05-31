@@ -7,7 +7,6 @@ import reportWebVitals from "./reportWebVitals";
 import About from "./routes/about";
 import Contact from "./routes/contact";
 import Home from "./routes/home";
-import LocalLoginForm from "./routes/local-login";
 import LoginForm from "./routes/login";
 import PrivacyPolicy from "./routes/privacy-policy";
 import Profile from "./routes/profile";
@@ -55,10 +54,6 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-      },
-      {
-        path: "local-login",
-        element: <LocalLoginForm />,
       },
       {
         path: "privacy-policy",

@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import logo from "../../assets/icons/hurima-logo-transparent.png";
+import { Image } from "@chakra-ui/react"
 
 export const Logo = () => {
   return (
     <Link to='/'>
-      <LogoImg src={logo} alt='hurima' />
+      <Image width="175px" src={logo} alt='hurima' />
     </Link>
   );
 };
-
-const LogoImg = styled.img`
-  width: 175px;
-`;

@@ -1,13 +1,7 @@
-import {
-  Box,
-  createTheme,
-  Grid,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, extendTheme, ChakraProvider, Text, GridItem } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-const theme = createTheme();
+const theme = extendTheme();
 
 type FormContainerProps = {
   formName: string;
@@ -17,29 +11,17 @@ type FormContainerProps = {
 export const FormContainer = (props: FormContainerProps) => {
   const { formName, children } = props;
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container justifyContent={"center"} spacing={3}>
-        <Grid item xs={12} sm={6} md={4} lg={3} sx={{ minHeight: "89vh" }}>
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alighItems: "center",
-            }}
-          >
-            <Typography
-              fontFamily={"Averta"}
-              marginBottom={3}
-              align='center'
-              variant='h4'
-            >
+    <ChakraProvider theme={theme}>
+      <Grid justifyContent="center" gap={3}>
+        <GridItem colSpan={{ base :12, sm: 6,  md: 4, lg: 3,}} minH="89vh">
+          <Box mt={8} display="flex" flexDirection="column" alignItems="center">
+            <Text fontFamily="Averta" mb={3} textAlign="center" fontSize="2xl">
               {formName}
-            </Typography>
+            </Text>
           </Box>
           {children}
-        </Grid>
+        </GridItem>
       </Grid>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 };

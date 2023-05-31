@@ -1,7 +1,7 @@
-import { Divider } from "@mui/material";
+import { Divider } from "@chakra-ui/react";
 
 const FormFieldDivider = () => {
-  return <Divider sx={{ padding: "19px 0 20px 0" }}>or</Divider>;
+  return <Divider py={3}>or</Divider>;
 };
 
 export default FormFieldDivider;
