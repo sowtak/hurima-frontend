@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { RootState } from "../../store";
 import { Logo } from "./Logo";
 import SlideDrawer from "./SlideDrawer";
@@ -12,45 +12,36 @@ const Navbar = () => {
   );
 
   return (
-    <Box as="nav" h="5rem" borderBottom="1px solid #ccc">
-      <Flex
-        align="center"
-        justify="center"
-        w="90vw"
-        mx="auto"
-        maxW="var(--max-width)"
-        className="nav-center"
-      >
-        <Flex align="center" justify="space-between" className="nav-header">
-          <Logo />
-          <Flex as="ul">
-            <SlideDrawer />
-            <Box as="ul">
-              {isAuthenticated ? (
-                <NavLink to="profile" style={{ textDecoration: "none" }} color="black">
-                  Profile
-                </NavLink>
-              ) : (
-                <NavLink to="login" style={{ textDecoration: "none" }} color="black">
-                  Log in
-                </NavLink>
-              )}
-            </Box>
-            {envi === "development" && (
-              <Box as="ul">
-                <NavLink
-                  to="local-login"
-                  style={{ textDecoration: "none" }}
-                  color="black"
-                >
-                  Local log in
-                </NavLink>
-              </Box>
+    <Flex
+      as="nav"
+      borderBottom="1px solid #ccc"
+      align="center"
+      justify="center"
+      w="90vw"
+      mx="auto"
+      maxW="var(--max-width)"
+      className="nav-center"
+    >
+      <Flex align="center" justify="space-between" className="nav-header">
+        <Logo />
+        <Flex as="ul">
+          <SlideDrawer />
+          <Box as="ul">
+            {isAuthenticated ? (
+              <NavLink to="profile" style={{ textDecoration: "none" }} color="black">
+                Profile
+              </NavLink>
+            ) : (
+              <NavLink to="login" style={{ textDecoration: "none" }} color="black">
+                <Button colorScheme="purple" size="md" variant="solid">
+                  Sign in
+                </Button>
+              </NavLink>
             )}
-          </Flex>
+          </Box>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
