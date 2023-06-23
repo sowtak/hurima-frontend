@@ -1,33 +1,16 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Box borderTop="1px solid #ccc" bgColor="#f5f5f5">
-      <Flex justify="space-between" alignItems="center" p={4}>
-        <Flex as="nav" className="footer-nav">
-          <Flex as="ul">
-            <NavLink to="about" color="black">
-              <Text>About</Text>
-            </NavLink>
-          </Flex>
-          <Flex as="ul">
-            <NavLink to="privacy-policy" color="black">
-              <Text>Privacy policy</Text>
-            </NavLink>
-          </Flex>
-          <Flex as="ul">
-            <NavLink to="terms-of-service" color="black">
-              <Text>Terms of Service</Text>
-            </NavLink>
-          </Flex>
-        </Flex>
-
+    <Box borderTop="1px solid #ccc" bgColor="#f5f5f5" as="footer">
+      <Flex justify="center" alignItems="center" p={4}>
         <Flex className="footer-content" alignItems="center">
-          <Text>
-            &copy; {new Date().getFullYear()} <Box color="blue.500">Hurima</Box>
-          </Text>
-          <Text>All rights reserved</Text>
+          <VStack>
+            <Text>
+              &copy; {new Date().getFullYear()} <Box>Hurima</Box>
+            </Text>
+            <Text>All rights reserved</Text>
+          </VStack>
         </Flex>
       </Flex>
     </Box>

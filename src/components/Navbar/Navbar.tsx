@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Spacer, Stack } from "@chakra-ui/react";
 import { RootState } from "../../store";
 import { Logo } from "./Logo";
-import SlideDrawer from "./SlideDrawer";
+import SlideDrawer from "../drawers/SlideDrawer";
+import { SignInButton } from "../buttons/SignInButton";
+import ProfileIcon from "../icons/ProfileIcon";
 
 const Navbar = () => {
   const envi = process.env.NODE_ENV;
@@ -12,36 +13,23 @@ const Navbar = () => {
   );
 
   return (
-    <Flex
+    <Stack
       as="nav"
       borderBottom="1px solid #ccc"
-      align="center"
-      justify="center"
-      w="90vw"
+      justifyContent="space-between"
+      w="100%"
       mx="auto"
-      maxW="var(--max-width)"
-      className="nav-center"
     >
-      <Flex align="center" justify="space-between" className="nav-header">
+      <Flex align="center">
         <Logo />
-        <Flex as="ul">
+        <Spacer/>
+        <Flex align="center" ml={4} gap="4">
+          <SignInButton />
+          <ProfileIcon />
           <SlideDrawer />
-          <Box as="ul">
-            {isAuthenticated ? (
-              <NavLink to="profile" style={{ textDecoration: "none" }} color="black">
-                Profile
-              </NavLink>
-            ) : (
-              <NavLink to="login" style={{ textDecoration: "none" }} color="black">
-                <Button colorScheme="purple" size="md" variant="solid">
-                  Sign in
-                </Button>
-              </NavLink>
-            )}
-          </Box>
         </Flex>
       </Flex>
-    </Flex>
+    </Stack>
   );
 };
 

@@ -10,6 +10,7 @@ export const Logo = () => {
         bgClip="text"
         fontSize="6xl"
         fontWeight="extrabold"
+        marginLeft={6}
       >
         Hurima
       </Text>
